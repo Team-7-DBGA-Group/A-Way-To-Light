@@ -14,6 +14,12 @@ public class BasicEnemy : Enemy
 
     // States
     private FollowingTargetState _followingTargetState;
+    private EnemyAttackingState _enemyAttackingState;
+
+    public override void Attack()
+    {
+        Debug.Log("Attacking");
+    }
 
     private void Awake()
     {
@@ -24,12 +30,23 @@ public class BasicEnemy : Enemy
 
         FSM = new FSMSystem();
         _followingTargetState = new FollowingTargetState(_target, _agent);
+        _enemyAttackingState = new EnemyAttackingState(this);
         FSM.AddState(_followingTargetState);
+        FSM.AddState(_enemyAttackingState);
     }
 
 
     private void Update()
     {
+        if(Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
+        {
+            FSM.GoToState(_enemyAttackingState);
+        }
+        else if (Vector3.Distance(_target.position, this.transform.position) >= AttackRange && FSM.CurrentState != _followingTargetState)
+        {
+            FSM.GoToState(_followingTargetState);
+        }
+
         FSM.CurrentState.OnUpdate();
     }
 }

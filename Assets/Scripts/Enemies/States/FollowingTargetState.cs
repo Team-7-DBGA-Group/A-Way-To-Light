@@ -21,7 +21,7 @@ public class FollowingTargetState : FSMState
         base.OnEnter();
         if (_target == null)
             return;
-
+        _agent.isStopped = false;
         _agent.SetDestination(_target.position);
     }
 
@@ -32,5 +32,10 @@ public class FollowingTargetState : FSMState
             return;
 
         _agent.SetDestination(_target.position);
+    }
+
+    public override void OnExit()
+    {
+        _agent.isStopped = true;
     }
 }
