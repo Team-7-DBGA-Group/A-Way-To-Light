@@ -10,20 +10,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float PlayerRunMultiplier = 1.25f;
     [SerializeField]
-    private float RotationSpeed = 5f;
-
-    public Transform ForwardPlayer { get; set; }
+    private float TurnSmoothTime = 0.1f;
+    [SerializeField]
+    private Transform CameraTransform = null;
 
     private float _horizontalInput;
     private float _verticalInput;
-    private float _ySpeed;
-    private Rigidbody _playerRB;
-    
+    private CharacterController _characterController;
+    private float _turnSmoothVelocity;
+
     // Start is called before the first frame update
     void Start()
     {
-        _playerRB = GetComponent<Rigidbody>();
-        ForwardPlayer = transform;
+        _characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -31,38 +30,22 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
-        _ySpeed += Physics.gravity.y * Time.deltaTime;
-        if (!Input.anyKey)
-        {
-            _playerRB.velocity = Vector3.zero;
-        }
-        
-        if (Input.GetKey(KeyCode.W))
-        {
-            if (Input.GetKey(KeyCode.LeftShift))
-                _playerRB.velocity = ForwardPlayer.forward * PlayerSpeed * PlayerRunMultiplier;
-            else
-                _playerRB.velocity = ForwardPlayer.forward * PlayerSpeed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _playerRB.velocity = -ForwardPlayer.right * PlayerSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _playerRB.velocity = -ForwardPlayer.forward * PlayerSpeed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _playerRB.velocity = ForwardPlayer.right * PlayerSpeed;
-        }
-        
-    }
+        Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
 
-    public void RotatePlayer()
-    {
-        Vector3 inputDir = ForwardPlayer.forward * _verticalInput + ForwardPlayer.right * _horizontalInput;
-        if (inputDir != Vector3.zero)
-            ForwardPlayer.forward = Vector3.Slerp(ForwardPlayer.forward, inputDir, Time.deltaTime * RotationSpeed);
+        if(direction.magnitude >= 0.1)
+        {
+            //Calcolo rotazione player tenendo conto di dove sta guardando la camera
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + CameraTransform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            //Calcolo direzione player
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+
+            //Movimento del Player
+            //_characterController.Move(direction * angle * Time.deltaTime);
+
+            _characterController.Move(moveDir.normalized * PlayerSpeed * Time.deltaTime);
+        }
     }
 }
