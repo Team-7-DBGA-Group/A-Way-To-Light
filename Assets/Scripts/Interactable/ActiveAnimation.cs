@@ -5,15 +5,15 @@ using UnityEngine;
 public class ActiveAnimation : MonoBehaviour, Iinteractable
 {
     private Animator animator;
-    [SerializeField]private string NomeAnim = "Nome animazione";
+    [Header("Inserire nome dello stato dell'animator da attivare")]
+    [Tooltip("Attenzione alle maiuscole")][SerializeField]private string NomeStato = "Nome stato";
     private void Start()
     {
-        
         animator = GetComponent<Animator>();
     }
     public void PlayThis()
     {
-        animator.Play(NomeAnim);
+        animator.Play(NomeStato);
     }
 
     public void Interact()
