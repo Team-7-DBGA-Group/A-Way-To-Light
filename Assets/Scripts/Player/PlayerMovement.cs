@@ -57,10 +57,15 @@ public class PlayerMovement : MonoBehaviour
         _verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
 
-        
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+            _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * _gravityValue);
+
+        _velocity.y += _gravityValue * Time.deltaTime;
+        _characterController.Move(_velocity * Time.deltaTime);
+
         if (direction.magnitude >= 0.1)
         {
-            
+
             //Calcolo rotazione player tenendo conto di dove sta guardando la camera
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + CameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
@@ -77,10 +82,6 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * _gravityValue);
-
-        _velocity.y += _gravityValue * Time.deltaTime;
-        _characterController.Move(_velocity * Time.deltaTime);
+        
     }
 }
