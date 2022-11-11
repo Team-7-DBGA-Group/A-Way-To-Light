@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 1411405858}
   - component: {fileID: 1411405857}
   - component: {fileID: 1411405856}
+  - component: {fileID: 1411405860}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -154,7 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c838b9cd47084db4f9116f07257b59d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LightIntensity: 20
+  WantedLight: 30
+  LightSpeed: 0.01
 --- !u!114 &1411405857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +254,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!65 &1411405860
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411405855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 7.1358094}
+  m_Center: {x: 0, y: 1.324583e-14, z: 3.0679066}
 --- !u!1 &1440913091
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,8 +397,6 @@ GameObject:
   - component: {fileID: 1664895393}
   - component: {fileID: 1664895392}
   - component: {fileID: 1664895391}
-  - component: {fileID: 1664895390}
-  - component: {fileID: 1664895389}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -391,38 +404,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1664895389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664895388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 188807743288cb04bb418eba22139560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &1664895390
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664895388}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 834ad6e84e50b0b49b5fe479f80908fe, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!65 &1664895391
 BoxCollider:
   m_ObjectHideFlags: 0

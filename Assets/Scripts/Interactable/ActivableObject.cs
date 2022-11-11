@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActivableObject : MonoBehaviour, Iinteractable
 {
-    ParticleSystem Particle;
+    private ParticleSystem Particle;
     private void Start()
     {
         

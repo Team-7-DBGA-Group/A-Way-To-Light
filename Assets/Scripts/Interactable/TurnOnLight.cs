@@ -4,29 +4,46 @@ using UnityEngine;
 
 public class TurnOnLight : MonoBehaviour, Iinteractable
 {
-    public float LightIntensity;
+    [Header("Valore della luce da impostare")]
+    [SerializeField] private float WantedLight = 0;
+    private float LightIntensity;
+    [Header("Piu' basso e' il valore,piu' veloce si illuminera'")]
+    [SerializeField]private float LightSpeed = 0;
     Light GameLight;
+    
+    
     private void Start()
     {
-
+        LightIntensity = 0f;
         GameLight = GetComponent<Light>();
+        
     }
     public void TurnOn()
     {
-        GameLight.intensity = LightIntensity;
+        StartCoroutine(LightIncrease());
     }
 
     public void Interact()
     {
         TurnOn();
     }
-
-    private void Update()
+    
+    public void Update()
     {
-        if (Input.GetKey(KeyCode.K))
+        if(Input.GetKeyDown(KeyCode.K))
         {
             Interact();
         }
+    }
+    IEnumerator LightIncrease()
+    {
+        for (int ripetizione = 1; ripetizione <= WantedLight; ripetizione++)
+        {
+            LightIntensity++;
+            GameLight.intensity = LightIntensity;
+            yield return new WaitForSeconds(LightSpeed);
+        }
+        
 
     }
 }
