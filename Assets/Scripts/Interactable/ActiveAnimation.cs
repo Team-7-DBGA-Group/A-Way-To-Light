@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveAnimation : MonoBehaviour, Iinteractable
+public class ActiveAnimation : MonoBehaviour, IInteractable
 {
-    private Animator animator;
-    [Header("Inserire nome dello stato dell'animator da attivare")]
-    [Tooltip("Attenzione alle maiuscole")][SerializeField]private string NomeStato = "Nome stato";
+    
+    [Header("Animations Settings")]
+    [Tooltip("Stato Animazione con Maiuscole!")]
+    [SerializeField]
+    private string nomeStato = "Nome stato";
+
+    private Animator _animator;
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
     public void PlayThis()
     {
-        animator.Play(NomeStato);
+        _animator.Play(nomeStato);
     }
 
     public void Interact()
@@ -27,7 +31,6 @@ public class ActiveAnimation : MonoBehaviour, Iinteractable
         {
             Interact();
         }
-
     }
 }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableObject : MonoBehaviour, Iinteractable
+public class DestroyableObject : MonoBehaviour, IInteractable
 {
     public void DestroyThis()
     {
@@ -20,6 +20,5 @@ public class DestroyableObject : MonoBehaviour, Iinteractable
         {
             Interact();
         }
-
     }
 }

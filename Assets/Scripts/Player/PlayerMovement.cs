@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField]
-    private float PlayerSpeed = 5f;
+    private PlayerAim playerAim;
+
+    [Header("Movement settings")]
     [SerializeField]
-    private float PlayerRunMultiplier = 1.25f;
+    private float playerSpeed = 5f;
     [SerializeField]
-    private float TurnSmoothTime = 0.1f;
+    private float playerRunMultiplier = 1.25f;
     [SerializeField]
-    private Transform CameraTransform = null;
+    private float turnSmoothTime = 0.1f;
+    [SerializeField]
+    private Transform cameraTransform = null;
 
     [Header("Jump settings")]
     [SerializeField]
@@ -19,12 +22,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask groundMask = new LayerMask();
     [SerializeField]
-    private float _gravityValue = -9.81f;
+    private float gravityValue = -9.81f;
     [SerializeField]
-    private float _groundDistance = 0.2f;
-
+    private float groundDistance = 0.2f;
     [SerializeField]
-    private PlayerAim playerAim;
+    private float jumpHeight = 2.0f;
 
     private CharacterController _characterController;
 
@@ -34,8 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 _velocity;
     private bool _isGrounded;
-    private float jumpHeight = 2.0f;
-
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _isGrounded = Physics.CheckSphere(groundCheck.position, _groundDistance, groundMask);
+        _isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (_isGrounded && _velocity.y < 0)
             _velocity.y = -2f;
@@ -60,26 +61,26 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
 
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
-            _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * _gravityValue);
+            _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
 
-        _velocity.y += _gravityValue * Time.deltaTime;
+        _velocity.y += gravityValue * Time.deltaTime;
         _characterController.Move(_velocity * Time.deltaTime);
 
         if (direction.magnitude >= 0.1 && !playerAim.IsAiming)
         {
-            //Calcolo rotazione player tenendo conto di dove sta guardando la camera
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + CameraTransform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
+            // Calcolo rotazione player tenendo conto di dove sta guardando la camera
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            //Calcolo direzione player
+            // Calcolo direzione player
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            //Movimento del Player
+            // Movimento del Player
             if (Input.GetKey(KeyCode.LeftShift))
-                _characterController.Move(moveDir.normalized * PlayerSpeed * Time.deltaTime * PlayerRunMultiplier);
+                _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime * playerRunMultiplier);
             else
-                _characterController.Move(moveDir.normalized * PlayerSpeed * Time.deltaTime);
+                _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
 
         }
 

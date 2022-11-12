@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivableObject : MonoBehaviour, Iinteractable
+public class ActivableObject : MonoBehaviour, IInteractable
 {
-    private ParticleSystem Particle;
+    private ParticleSystem _particle;
+
     private void Start()
     {
-        
-        Particle = GetComponent<ParticleSystem>();
-        Particle.Stop();
+        _particle = GetComponent<ParticleSystem>();
+        _particle.Stop();
     }
     public void PlayThis()
     {
-        Particle.Play();
+        _particle.Play();
     }
 
     public void Interact()
@@ -27,6 +25,5 @@ public class ActivableObject : MonoBehaviour, Iinteractable
         {
             Interact();
         }
-
     }
 }

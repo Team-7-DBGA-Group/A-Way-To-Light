@@ -2,21 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnOnLight : MonoBehaviour, Iinteractable
+public class TurnOnLight : MonoBehaviour, IInteractable
 {
-    [Header("Valore della luce da impostare")]
-    [SerializeField] private float WantedLight = 0;
-    private float LightIntensity;
-    [Header("Piu' basso e' il valore,piu' veloce si illuminera'")]
-    [SerializeField]private float LightSpeed = 0;
-    Light GameLight;
-    
-    
+    [Header("Light Settings")]
+    [Tooltip("Valore della luce che si vuole avere")]
+    [SerializeField] 
+    private float wantedLight = 0;
+   
+    [Tooltip("Piu' basso e' il valore, piu' veloce si illuminera'")]
+    [SerializeField]
+    private float lightSpeed = 0;
+
+    private Light _gameLight;
+    private float _lightIntensity;
+
     private void Start()
     {
-        LightIntensity = 0f;
-        GameLight = GetComponent<Light>();
-        
+        _lightIntensity = 0f;
+
+        _gameLight = GetComponent<Light>();
+        _gameLight.intensity = _lightIntensity;
     }
     public void TurnOn()
     {
@@ -37,14 +42,12 @@ public class TurnOnLight : MonoBehaviour, Iinteractable
     }
     IEnumerator LightIncrease()
     {
-        for (int ripetizione = 1; ripetizione <= WantedLight; ripetizione++)
+        for (int ripetizione = 1; ripetizione <= wantedLight; ripetizione++)
         {
-            LightIntensity++;
-            GameLight.intensity = LightIntensity;
-            yield return new WaitForSeconds(LightSpeed);
+            _lightIntensity++;
+            _gameLight.intensity = _lightIntensity;
+            yield return new WaitForSeconds(lightSpeed);
         }
-        
-
     }
 }
 
