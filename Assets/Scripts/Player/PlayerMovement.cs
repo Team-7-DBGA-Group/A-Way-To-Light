@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField]
     private float PlayerSpeed = 5f;
     [SerializeField]
@@ -23,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private float _gravityValue = -9.81f;
     [SerializeField]
     private float _groundDistance = 0.2f;
+
+    [SerializeField]
+    private PlayerAimController playerAim;
 
     private CharacterController _characterController;
 
@@ -63,9 +65,8 @@ public class PlayerMovement : MonoBehaviour
         _velocity.y += _gravityValue * Time.deltaTime;
         _characterController.Move(_velocity * Time.deltaTime);
 
-        if (direction.magnitude >= 0.1)
+        if (direction.magnitude >= 0.1 && !playerAim.IsAiming)
         {
-
             //Calcolo rotazione player tenendo conto di dove sta guardando la camera
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + CameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);

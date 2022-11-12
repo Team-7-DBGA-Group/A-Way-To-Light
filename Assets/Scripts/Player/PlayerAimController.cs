@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAimController : MonoBehaviour
 {
+    public bool IsAiming { get; private set; }
+
     [SerializeField]
     private GameObject PlayerCamera;
     [SerializeField]
@@ -18,8 +20,6 @@ public class PlayerAimController : MonoBehaviour
     private float _horizontalInput;
     private float _verticalInput;
 
-    private bool _isAiming = false;
-
     private void Start()
     {
         PlayerCamera.SetActive(true);
@@ -28,17 +28,12 @@ public class PlayerAimController : MonoBehaviour
 
     private void Update()
     {
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _verticalInput = Input.GetAxis("Vertical");
-        Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
-
-
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             PlayerCamera.SetActive(false);
             AimCamera.SetActive(true);
 
-           _isAiming = true;
+            IsAiming = true;
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -46,13 +41,13 @@ public class PlayerAimController : MonoBehaviour
             PlayerCamera.SetActive(true);
             AimCamera.SetActive(false);
 
-            _isAiming = false;
+            IsAiming = false;
         }
 
-        if(_isAiming)
+        if(IsAiming)
         {
             //Calcolo rotazione player tenendo conto di dove sta guardando la camera
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + MainCameraTransform.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(Vector3.zero.x, Vector3.zero.z) * Mathf.Rad2Deg + MainCameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
