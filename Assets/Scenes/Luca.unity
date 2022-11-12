@@ -220,6 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 74680853}
   AimCamera: {fileID: 920620975}
+  MainCameraTransform: {fileID: 1636740882}
+  TurnSmoothTime: 0.1
 --- !u!1 &74680853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1229,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 653162742}
-  m_LocalRotation: {x: 0.092109255, y: 0.000000017660533, z: -0.0000000016336432, w: 0.99574894}
+  m_LocalRotation: {x: 0.092109255, y: -0.000000017660536, z: 0.0000000016336436, w: 0.99574894}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

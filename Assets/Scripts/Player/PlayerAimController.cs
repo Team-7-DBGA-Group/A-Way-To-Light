@@ -8,7 +8,17 @@ public class PlayerAimController : MonoBehaviour
     private GameObject PlayerCamera;
     [SerializeField]
     private GameObject AimCamera;
+    [SerializeField]
+    private Transform MainCameraTransform = null;
 
+    [SerializeField]
+    private float TurnSmoothTime = 0.1f;
+
+    private float _turnSmoothVelocity;
+    private float _horizontalInput;
+    private float _verticalInput;
+
+    private bool _isAiming = false;
 
     private void Start()
     {
@@ -18,16 +28,33 @@ public class PlayerAimController : MonoBehaviour
 
     private void Update()
     {
-        
+        _horizontalInput = Input.GetAxis("Horizontal");
+        _verticalInput = Input.GetAxis("Vertical");
+        Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
+
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             PlayerCamera.SetActive(false);
             AimCamera.SetActive(true);
+
+           _isAiming = true;
         }
+
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
             PlayerCamera.SetActive(true);
             AimCamera.SetActive(false);
+
+            _isAiming = false;
+        }
+
+        if(_isAiming)
+        {
+            //Calcolo rotazione player tenendo conto di dove sta guardando la camera
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + MainCameraTransform.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
     }
 }
