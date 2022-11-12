@@ -4,7 +4,7 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using System.Diagnostics;
 
-namespace CustomLog
+namespace Utils
 {
     public static class CustomLog
     {
