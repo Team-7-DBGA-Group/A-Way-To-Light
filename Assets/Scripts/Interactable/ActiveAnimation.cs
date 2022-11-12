@@ -24,13 +24,5 @@ public class ActiveAnimation : MonoBehaviour, IInteractable
     {
         PlayThis();
     }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.K))
-        {
-            Interact();
-        }
-    }
 }
 

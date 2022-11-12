@@ -13,12 +13,4 @@ public class DestroyableObject : MonoBehaviour, IInteractable
     {
         DestroyThis();
     }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.K))
-        {
-            Interact();
-        }
-    }
 }

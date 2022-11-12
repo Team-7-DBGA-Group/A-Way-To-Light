@@ -32,14 +32,7 @@ public class TurnOnLight : MonoBehaviour, IInteractable
     {
         TurnOn();
     }
-    
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            Interact();
-        }
-    }
+
     IEnumerator LightIncrease()
     {
         for (int ripetizione = 1; ripetizione <= wantedLight; ripetizione++)

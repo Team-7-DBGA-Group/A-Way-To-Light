@@ -18,12 +18,4 @@ public class ActivableObject : MonoBehaviour, IInteractable
     {
         PlayThis();
     }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.K))
-        {
-            Interact();
-        }
-    }
 }
