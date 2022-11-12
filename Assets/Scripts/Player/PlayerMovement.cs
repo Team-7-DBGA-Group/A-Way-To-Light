@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float _groundDistance = 0.2f;
 
     [SerializeField]
-    private PlayerAimController playerAim;
+    private PlayerAim playerAim;
 
     private CharacterController _characterController;
 
