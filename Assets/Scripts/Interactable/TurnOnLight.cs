@@ -23,17 +23,18 @@ public class TurnOnLight : MonoBehaviour, IInteractable
         _gameLight = GetComponent<Light>();
         _gameLight.intensity = _lightIntensity;
     }
-    public void TurnOn()
-    {
-        StartCoroutine(LightIncrease());
-    }
 
     public void Interact()
     {
         TurnOn();
     }
 
-    IEnumerator LightIncrease()
+    private void TurnOn()
+    {
+        StartCoroutine(LightIncrease());
+    }
+
+    private IEnumerator LightIncrease()
     {
         for (int ripetizione = 1; ripetizione <= wantedLight; ripetizione++)
         {

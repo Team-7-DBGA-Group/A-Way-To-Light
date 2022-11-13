@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class DestroyableObject : MonoBehaviour, IInteractable
 {
-    public void DestroyThis()
-    {
-        Destroy(gameObject);
-    }
-
     public void Interact()
     {
         DestroyThis();
+    }
+
+    private void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 }

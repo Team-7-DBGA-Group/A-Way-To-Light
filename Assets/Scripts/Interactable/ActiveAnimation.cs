@@ -11,18 +11,20 @@ public class ActiveAnimation : MonoBehaviour, IInteractable
     private string nomeStato = "Nome stato";
 
     private Animator _animator;
-    private void Start()
-    {
-        _animator = GetComponent<Animator>();
-    }
-    public void PlayThis()
-    {
-        _animator.Play(nomeStato);
-    }
 
     public void Interact()
     {
         PlayThis();
+    }
+
+    private void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    private void PlayThis()
+    {
+        _animator.Play(nomeStato);
     }
 }
 
