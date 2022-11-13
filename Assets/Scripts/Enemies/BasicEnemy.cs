@@ -10,6 +10,14 @@ public class BasicEnemy : Enemy
     [SerializeField]
     private float stunDuration = 1.5f;
 
+    [Header("References")]
+    [SerializeField]
+    private MeshRenderer eyesRenderer;
+    [SerializeField]
+    private Material glowMat;
+    [SerializeField]
+    private Material blackMat;
+
     private Transform _target = null;
     private NavMeshAgent _agent = null;
 
@@ -18,6 +26,8 @@ public class BasicEnemy : Enemy
     private EnemyAttackingState _enemyAttackingState;
 
     private bool _isStunned = false;
+
+    private Animator _animator;
 
     public override void Attack()
     {
@@ -30,6 +40,14 @@ public class BasicEnemy : Enemy
 
     public override void Interact()
     {
+        if (!IsAlive)
+        {
+            IsAlive = true;
+            _animator.SetTrigger("Rise");
+            eyesRenderer.material = glowMat;
+            return;
+        }
+
         // Stun
         if (_isStunned)
             return;
@@ -42,17 +60,23 @@ public class BasicEnemy : Enemy
         _target = FindObjectOfType<Player>().transform;
 
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
 
         FSM = new FSMSystem();
         _followingTargetState = new FollowingTargetState(_target, _agent);
         _enemyAttackingState = new EnemyAttackingState(this);
         FSM.AddState(_followingTargetState);
         FSM.AddState(_enemyAttackingState);
+
+        eyesRenderer.material = blackMat;
     }
 
 
     private void Update()
     {
+        if (!IsAlive)
+            return;
+
         if(Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
         {
             FSM.GoToState(_enemyAttackingState);

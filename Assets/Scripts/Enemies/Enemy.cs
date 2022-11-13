@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour, IInteractable
     private float attackRange = 2.0f;
     
     protected bool CanAttack = true;
+    protected bool IsAlive = false;
 
     // State Machine
     protected FSMSystem FSM;
