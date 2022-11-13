@@ -5,10 +5,6 @@ using UnityEngine.AI;
 
 public class BasicEnemy : Enemy
 {
-    [Header("DELETE THIS - TESTING ONLY")]
-    [SerializeField]
-    private Transform target;
-
     private Transform _target = null;
     private NavMeshAgent _agent = null;
 
@@ -23,8 +19,7 @@ public class BasicEnemy : Enemy
 
     private void Awake()
     {
-        // Delete this - Get player in another way
-        _target = target;
+        _target = FindObjectOfType<Player>().transform;
 
         _agent = GetComponent<NavMeshAgent>();
 
