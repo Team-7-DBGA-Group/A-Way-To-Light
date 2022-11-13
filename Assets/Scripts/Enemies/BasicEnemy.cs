@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Utils;
 
 public class BasicEnemy : Enemy
 {
+    [Header("Basic Enemy Settings")]
+    [SerializeField]
+    private float stunDuration = 1.5f;
+
     private Transform _target = null;
     private NavMeshAgent _agent = null;
 
@@ -12,14 +17,24 @@ public class BasicEnemy : Enemy
     private FollowingTargetState _followingTargetState;
     private EnemyAttackingState _enemyAttackingState;
 
+    private bool _isStunned = false;
+
     public override void Attack()
     {
-        Debug.Log("Attacking");
+        if (!CanAttack)
+            return;
+        
+        CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
+        StartCoroutine(COStartAttackCooldown());
     }
 
     public override void Interact()
     {
-        Debug.Log("Light Interaction Enemy");
+        // Stun
+        if (_isStunned)
+            return;
+
+        StartCoroutine(COWaitStun());
     }
 
     private void Awake()
@@ -48,5 +63,14 @@ public class BasicEnemy : Enemy
         }
 
         FSM.CurrentState.OnUpdate();
+    }
+
+    private IEnumerator COWaitStun()
+    {
+        _isStunned = true;
+        _agent.isStopped = true;
+        yield return new WaitForSeconds(stunDuration);
+        _agent.isStopped = false;
+        _isStunned = false;
     }
 }

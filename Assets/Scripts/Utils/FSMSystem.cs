@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 /// <summary>
 /// FSM 	: Finite State Machine System Class
@@ -59,7 +60,7 @@ public class FSMSystem : MonoBehaviour
     /// </summary>
     public void AddState(FSMState inState)
     {
-        Debug.Log("State added to machine: " + inState);
+        CustomLog.Log(CustomLog.CustomLogType.AI,"State added to machine: " + inState);
 
         // Check for Null reference before deleting
         if (inState == null)

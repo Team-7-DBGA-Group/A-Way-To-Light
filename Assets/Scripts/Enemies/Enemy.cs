@@ -8,7 +8,11 @@ public abstract class Enemy : MonoBehaviour, IInteractable
 
     [Header("Enemy Settings")]
     [SerializeField]
-    private float attackRange = 1.0f;
+    protected float AttackCooldown = 2.0f;
+    [SerializeField]
+    private float attackRange = 2.0f;
+    
+    protected bool CanAttack = true;
 
     // State Machine
     protected FSMSystem FSM;
@@ -16,4 +20,11 @@ public abstract class Enemy : MonoBehaviour, IInteractable
     public abstract void Attack();
 
     public abstract void Interact();
+
+    protected IEnumerator COStartAttackCooldown()
+    {
+        CanAttack = false;
+        yield return new WaitForSeconds(AttackCooldown);
+        CanAttack = true;
+    }
 }

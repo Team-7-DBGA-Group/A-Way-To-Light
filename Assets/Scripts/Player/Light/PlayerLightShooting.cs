@@ -61,13 +61,13 @@ public class PlayerLightShooting : MonoBehaviour
         shot.StartMovingToDirection((targetPoint - shotSpawnPostion.position).normalized * 10);
 
         // Charge Cooldown
-        StartCoroutine(StartChargesCooldownTimer());
+        StartCoroutine(COStartChargesCooldownTimer());
 
         // Between Shot Cooldown
-        StartCoroutine(StartBetweenShotCooldown());
+        StartCoroutine(COStartBetweenShotCooldown());
     }
 
-    private IEnumerator StartChargesCooldownTimer()
+    private IEnumerator COStartChargesCooldownTimer()
     {
         Charges--;
         yield return new WaitForSeconds(chargesCooldown);
@@ -76,7 +76,7 @@ public class PlayerLightShooting : MonoBehaviour
             Charges = maxLightCharges;
     }
 
-    private IEnumerator StartBetweenShotCooldown()
+    private IEnumerator COStartBetweenShotCooldown()
     {
         _canShoot = false;
         yield return new WaitForSeconds(betweenShotCooldown);

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using Utils;
 
 /// <summary>
 /// FSM 	: Finite State Machine System Class
@@ -14,13 +15,13 @@ public abstract class FSMState
     // This method is called before the state is made the current state
     public virtual void OnEnter()
     {
-        Debug.Log("Enter State " + this);
+        CustomLog.Log(CustomLog.CustomLogType.AI, "Enter State " + this);
     }
 
     // Overloaded OnEnter Method w/ user data
     public virtual void OnEnter(object userData)
     {
-        Debug.Log("Enter State " + this);
+        CustomLog.Log(CustomLog.CustomLogType.AI, "Enter State " + this);
     }
 
     // This method is used to determine if the current state is the correct state to be in
