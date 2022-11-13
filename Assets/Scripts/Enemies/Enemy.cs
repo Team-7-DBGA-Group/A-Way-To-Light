@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IInteractable
 {
     public float AttackRange { get => attackRange; }
 
@@ -14,4 +14,6 @@ public abstract class Enemy : MonoBehaviour
     protected FSMSystem FSM;
 
     public abstract void Attack();
+
+    public abstract void Interact();
 }

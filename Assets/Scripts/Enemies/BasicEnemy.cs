@@ -17,6 +17,11 @@ public class BasicEnemy : Enemy
         Debug.Log("Attacking");
     }
 
+    public override void Interact()
+    {
+        Debug.Log("Light Interaction Enemy");
+    }
+
     private void Awake()
     {
         _target = FindObjectOfType<Player>().transform;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerLightShooting : MonoBehaviour
 {
+    public int Charges { get; private set; }
+
     [Header("References")]
     [SerializeField]
     private GameObject lightShotPrefab;
@@ -16,15 +18,24 @@ public class PlayerLightShooting : MonoBehaviour
 
     [Header("Shot Settings")]
     [SerializeField]
-    private float cooldown = 2.0f;
+    private int maxLightCharges = 3;
+    [SerializeField]
+    private float chargesCooldown = 2.0f;
+    [SerializeField]
+    private float betweenShotCooldown = 0.5f;
     [SerializeField]
     private int rayUnity = 1000;
 
     private bool _canShoot = true;
 
+    private void Awake()
+    {
+        Charges = maxLightCharges;
+    }
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && playerAim.IsAiming && _canShoot)
+        if (Input.GetKey(KeyCode.Mouse0) && playerAim.IsAiming && Charges > 0 && _canShoot)
         {
             Shot();
         }
@@ -49,14 +60,26 @@ public class PlayerLightShooting : MonoBehaviour
         // Move
         shot.StartMovingToDirection((targetPoint - shotSpawnPostion.position).normalized * 10);
 
-        // Cooldown
-        StartCoroutine(StartCooldownTimer());
+        // Charge Cooldown
+        StartCoroutine(StartChargesCooldownTimer());
+
+        // Between Shot Cooldown
+        StartCoroutine(StartBetweenShotCooldown());
     }
 
-    private IEnumerator StartCooldownTimer()
+    private IEnumerator StartChargesCooldownTimer()
+    {
+        Charges--;
+        yield return new WaitForSeconds(chargesCooldown);
+        Charges++;
+        if (Charges > maxLightCharges)
+            Charges = maxLightCharges;
+    }
+
+    private IEnumerator StartBetweenShotCooldown()
     {
         _canShoot = false;
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(betweenShotCooldown);
         _canShoot = true;
     }
 }
