@@ -41,8 +41,13 @@ public class LightShot : MonoBehaviour
         IInteractable interactableObj = null;
         if(other.gameObject.TryGetComponent(out interactableObj))
         {
+            IInteractable[] interactables = other.gameObject.GetComponents<IInteractable>();
+
             CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Light Shot interacted with " + other.gameObject.name);
-            interactableObj.Interact();
+            
+            foreach (IInteractable interactable in interactables)
+                interactable.Interact();
+            
 
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
