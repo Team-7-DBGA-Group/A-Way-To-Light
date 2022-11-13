@@ -13,6 +13,12 @@ public class ActivableObjects : MonoBehaviour, IInteractable
         ActiveObjects();
     }
 
+    private void Start()
+    {
+        foreach (GameObject obj in objects)
+            obj.SetActive(false);
+    }
+
     private void ActiveObjects()
     {
         if(objects.Count <= 0)
