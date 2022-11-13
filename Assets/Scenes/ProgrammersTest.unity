@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.002729889, g: 0.043051314, b: 0.12467352, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027826934, g: 0.043289505, b: 0.12506655, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3604,7 +3604,6 @@ GameObject:
   m_Component:
   - component: {fileID: 820606040376853716}
   - component: {fileID: 820606040376853717}
-  - component: {fileID: 820606040376853718}
   - component: {fileID: 820606040376853720}
   - component: {fileID: 820606040376853719}
   - component: {fileID: 820606040376853721}
@@ -3834,19 +3833,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!65 &820606040376853718
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11453011524296302}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.66077805, y: 1.6358273, z: 0.70072675}
-  m_Center: {x: -0.006873429, y: 0.81791353, z: 0.01178956}
 --- !u!114 &820606040376853719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3916,6 +3902,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440034629343901119}
+  - component: {fileID: 1440034629343901120}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -3998,6 +3985,19 @@ Transform:
   m_Father: {fileID: 6163555596982018578}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.000009334667, y: 0, z: 0}
+--- !u!65 &1440034629343901120
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971028361687601751}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.95840716, y: 1.4244577, z: 0.9635687}
+  m_Center: {x: -0.0058688074, y: 0.8732397, z: 0.004032016}
 --- !u!1 &1472288866948902652
 GameObject:
   m_ObjectHideFlags: 0

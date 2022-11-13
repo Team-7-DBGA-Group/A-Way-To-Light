@@ -54,6 +54,21 @@ public class LightShot : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+        else if(other.gameObject.GetComponentInParent<IInteractable>() != null)
+        {
+            IInteractable[] interactables = other.gameObject.GetComponentsInParent<IInteractable>();
+
+            CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Light Shot interacted with " + other.gameObject.name);
+
+            foreach (IInteractable interactable in interactables)
+                interactable.Interact();
+
+
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
+
+            Destroy(this.gameObject);
+        }
         else if(other != null && !other.gameObject.tag.Equals("Player") && other != this.gameObject.GetComponent<Collider>())
         {
             Vector3 hitPoint = other.ClosestPoint(transform.position);

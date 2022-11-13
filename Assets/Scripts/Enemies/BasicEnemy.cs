@@ -42,6 +42,7 @@ public class BasicEnemy : Enemy
     {
         if (!IsAlive)
         {
+            _agent.enabled = true;
             IsAlive = true;
             _animator.SetTrigger("Rise");
             eyesRenderer.material = glowMat;
@@ -61,6 +62,8 @@ public class BasicEnemy : Enemy
 
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+
+        _agent.enabled = false;
 
         FSM = new FSMSystem();
         _followingTargetState = new FollowingTargetState(_target, _agent);
