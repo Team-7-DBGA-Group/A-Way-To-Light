@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool IsGrounded { get; private set; }
+
     [Header("References")]
     [SerializeField]
     private PlayerAim playerAim;
@@ -39,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     private float _turnSmoothVelocity;
 
     private Vector3 _velocity;
-    public bool IsGrounded { get; private set; }
   
     // Start is called before the first frame update
     void Start()
@@ -71,18 +72,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
             _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
-
-        //if (Input.GetKeyDown(KeyCode.Space) && playerClimb.IsClimbing)
-        //{
-        //    direction = Vector3.back;
-        //    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCameraTransform.eulerAngles.y;
-        //    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
-        //    transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        //    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-
-        //    _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
-        //    Debug.Log("staccati");
-        //}
 
         if (!playerClimb.IsClimbing)
         {
