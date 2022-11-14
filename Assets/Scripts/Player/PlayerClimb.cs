@@ -67,20 +67,24 @@ public class PlayerClimb : MonoBehaviour
                     _characterController.Move(Vector3.down * climbingSpeed * Time.deltaTime);
                 }
 
-                _hat.transform.localPosition = new Vector3(0, 0.6f, - 0.3f);
-                _hat.transform.localRotation = Quaternion.Euler(320, 0, 0);
+                if (_hasHat)
+                {
+                    _hat.transform.localPosition = new Vector3(0, 0.6f, -0.3f);
+                    _hat.transform.localRotation = Quaternion.Euler(320, 0, 0);
+                }
             }
             else
             {
-                _hat.transform.localPosition = new Vector3(0, 0.7851901f, 0);
-                _hat.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                if (_hasHat)
+                {
+                    _hat.transform.localPosition = new Vector3(0, 0.7851901f, 0);
+                    _hat.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                }
                 if (WasClimbing)
                 {
                     _canClimb = false;
                     _lastClimbCheckPos = climbCheck.position;
-                    Debug.Log(_lastClimbCheckPos);
                     _mustFloat = true;
-                    
                 }
                 else
                 IsClimbing = false;
