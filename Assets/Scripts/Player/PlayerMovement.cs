@@ -5,6 +5,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private PlayerAim playerAim;
+    [SerializeField]
+    private PlayerClimb playerClimb;
 
     [Header("Movement settings")]
     [SerializeField]
@@ -22,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask groundMask = new LayerMask();
     [SerializeField]
+    private LayerMask climbGroundMask = new LayerMask();
+    [SerializeField]
     private float gravityValue = -9.81f;
     [SerializeField]
     private float groundDistance = 0.2f;
@@ -35,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private float _turnSmoothVelocity;
 
     private Vector3 _velocity;
-    private bool _isGrounded;
+    public bool IsGrounded { get; private set; }
   
     // Start is called before the first frame update
     void Start()
@@ -51,22 +55,42 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        IsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (!IsGrounded)
+            IsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, climbGroundMask);
 
-        if (_isGrounded && _velocity.y < 0)
+        if (IsGrounded)
+            playerClimb.WasClimbing = false;
+
+        if (IsGrounded && _velocity.y < 0)
             _velocity.y = -2f;
 
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
 
-        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
             _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
 
-        _velocity.y += gravityValue * Time.deltaTime;
-        _characterController.Move(_velocity * Time.deltaTime);
+        //if (Input.GetKeyDown(KeyCode.Space) && playerClimb.IsClimbing)
+        //{
+        //    direction = Vector3.back;
+        //    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCameraTransform.eulerAngles.y;
+        //    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
+        //    transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        //    Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-        if (direction.magnitude >= 0.1 && !playerAim.IsAiming)
+        //    _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
+        //    Debug.Log("staccati");
+        //}
+
+        if (!playerClimb.IsClimbing)
+        {
+            _velocity.y += gravityValue * Time.deltaTime;
+            _characterController.Move(_velocity * Time.deltaTime);
+        }
+
+        if (direction.magnitude >= 0.1 && !playerAim.IsAiming && !playerClimb.IsClimbing)
         {
             // Calcolo rotazione player tenendo conto di dove sta guardando la camera
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCameraTransform.eulerAngles.y;
@@ -83,7 +107,5 @@ public class PlayerMovement : MonoBehaviour
                 _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
 
         }
-
-        
     }
 }

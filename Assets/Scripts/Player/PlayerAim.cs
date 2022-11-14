@@ -17,6 +17,8 @@ public class PlayerAim : MonoBehaviour
     private GameObject aimCamera;
     [SerializeField]
     private Transform mainCameraTransform = null;
+    [SerializeField]
+    private PlayerClimb playerClimb;
 
     [Header("Aim Camera Settings")]
     [SerializeField]
@@ -32,13 +34,16 @@ public class PlayerAim : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (!playerClimb.IsClimbing)
         {
-            playerCamera.SetActive(false);
-            aimCamera.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                playerCamera.SetActive(false);
+                aimCamera.SetActive(true);
 
-            IsAiming = true;
-            OnAimActive?.Invoke();
+                IsAiming = true;
+                OnAimActive?.Invoke();
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
