@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerLightShooting : MonoBehaviour
 {
+    public event Action OnShot;
+
     public int Charges { get; private set; }
 
     [Header("References")]
@@ -65,6 +67,8 @@ public class PlayerLightShooting : MonoBehaviour
 
         // Between Shot Cooldown
         StartCoroutine(COStartBetweenShotCooldown());
+
+        OnShot?.Invoke();
     }
 
     private IEnumerator COStartChargesCooldownTimer()
