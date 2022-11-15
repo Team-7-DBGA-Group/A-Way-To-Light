@@ -37,14 +37,21 @@ public class PlayerClimb : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         _isTouchingClimbableWall = Physics.CheckSphere(climbCheck.position, climbDistance, climbableGroundCheck);
         if (_canClimb)
         {
             if (_isTouchingClimbableWall && !playerMovementInstance.IsGrounded)
             {
+                RaycastHit raycastHit;
+                if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity, climbableGroundCheck))
+                {
+                    transform.rotation = Quaternion.LookRotation(-raycastHit.normal);
+                }
+                
                 IsClimbing = true;
                 WasClimbing = true;
+                
                 if (Input.GetKey(KeyCode.W))
                 {
                     _characterController.Move(Vector3.up * climbingSpeed * Time.deltaTime);
