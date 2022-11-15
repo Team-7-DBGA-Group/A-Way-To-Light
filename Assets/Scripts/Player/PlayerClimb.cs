@@ -7,13 +7,14 @@ public class PlayerClimb : MonoBehaviour
     public bool WasClimbing { get; set; }
     public bool IsClimbing { get; private set; }
 
-    [Header("Climbing Settings")]
+    [Header("References")]
     [SerializeField]
     private PlayerMovement playerMovementInstance = null;
     [SerializeField]
     private Transform climbCheck = null;
     [SerializeField]
     private Transform groundCheck = null;
+    [Header("Climbing Settings")]
     [SerializeField]
     private LayerMask climbableGroundCheck = new LayerMask();
     [SerializeField]
