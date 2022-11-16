@@ -4,8 +4,9 @@ using UnityEngine;
 using System;
 public class PlayerLightShooting : MonoBehaviour
 {
-    public event Action OnShot;
-
+    public static event Action OnShot;
+    public static event Action OnChargeCooldownFinished;
+    public static event Action<int> OnChargesInitialized;
     public int Charges { get; private set; }
 
     [Header("References")]
@@ -35,6 +36,11 @@ public class PlayerLightShooting : MonoBehaviour
         Charges = maxLightCharges;
     }
 
+    private void Start()
+    {
+        OnChargesInitialized(Charges);
+    }
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Mouse0) && playerAim.IsAiming && Charges > 0 && _canShoot)
@@ -49,7 +55,7 @@ public class PlayerLightShooting : MonoBehaviour
         LightShot shot = shotObj.GetComponent<LightShot>();
 
         // Create a ray from the camera going through the middle of your screen
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         // Check if it hits something, if not get the point in "rayUnit" amount of unit on the ray
@@ -76,6 +82,7 @@ public class PlayerLightShooting : MonoBehaviour
         Charges--;
         yield return new WaitForSeconds(chargesCooldown);
         Charges++;
+        OnChargeCooldownFinished?.Invoke();
         if (Charges > maxLightCharges)
             Charges = maxLightCharges;
     }

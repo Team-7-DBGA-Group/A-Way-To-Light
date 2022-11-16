@@ -11,8 +11,6 @@ public class PlayerAnimations : MonoBehaviour
     [SerializeField]
     private PlayerMovement playerMovement;
     [SerializeField]
-    private PlayerLightShooting playerLightShooting;
-    [SerializeField]
     private PlayerClimb playerClimb;
 
     private CharacterController _characterController;
@@ -24,7 +22,7 @@ public class PlayerAnimations : MonoBehaviour
 
     private void OnEnable()
     {
-        playerLightShooting.OnShot += () => { animator.SetTrigger("Shot"); };
+        PlayerLightShooting.OnShot += () => { animator.SetTrigger("Shot"); };
     }
 
     private void LateUpdate()
