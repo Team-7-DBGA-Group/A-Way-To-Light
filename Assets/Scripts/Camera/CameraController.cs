@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private PlayerAim playerAim;
@@ -38,6 +38,7 @@ public class CameraManager : MonoBehaviour
         }
         else if (playerClimb.IsClimbing)
         {
+            playerClimbCamera.transform.localPosition = FindObjectOfType<Player>().transform.worldToLocalMatrix.MultiplyVector(transform.forward);
             playerAimCamera.SetActive(false);
             playerClimbCamera.SetActive(true);
             playerMovementCamera.SetActive(false);
