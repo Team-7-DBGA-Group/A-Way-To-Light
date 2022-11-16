@@ -12,10 +12,6 @@ public class PlayerAim : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    private GameObject playerCamera;
-    [SerializeField]
-    private GameObject aimCamera;
-    [SerializeField]
     private Transform mainCameraTransform = null;
     [SerializeField]
     private PlayerClimb playerClimb;
@@ -26,31 +22,17 @@ public class PlayerAim : MonoBehaviour
 
     private float _turnSmoothVelocity;
 
-    private void Start()
-    {
-        playerCamera.SetActive(true);
-        aimCamera.SetActive(false);
-    }
 
     private void Update()
     {
-        if (!playerClimb.IsClimbing)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !playerClimb.IsClimbing)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                playerCamera.SetActive(false);
-                aimCamera.SetActive(true);
-
-                IsAiming = true;
-                OnAimActive?.Invoke();
-            }
+            IsAiming = true;
+            OnAimActive?.Invoke();
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            playerCamera.SetActive(true);
-            aimCamera.SetActive(false);
-
             IsAiming = false;
             OnAimInactive?.Invoke();
         }
