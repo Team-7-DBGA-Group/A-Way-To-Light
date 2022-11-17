@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00279223, g: 0.043268234, b: 0.12503438, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027302778, g: 0.043037318, b: 0.12470252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1336,7 +1336,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727870829}
-  m_LocalRotation: {x: -0.01160997, y: 0.0000000010753265, z: 1.2485348e-11, w: 0.99993265}
+  m_LocalRotation: {x: -0.01160997, y: -0.0000000010753264, z: -1.2485346e-11, w: 0.99993265}
   m_LocalPosition: {x: 0.5, y: 0.62, z: -7.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1426,7 +1426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792706188}
-  m_LocalRotation: {x: -0.011609968, y: 5.376632e-10, z: 6.2426735e-12, w: 0.99993265}
+  m_LocalRotation: {x: -0.011609967, y: -5.376631e-10, z: -6.242672e-12, w: 0.99993265}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2551,7 +2551,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195748569}
-  m_LocalRotation: {x: 0.006580208, y: -0.000000017210207, z: 1.132492e-10, w: 0.99997836}
+  m_LocalRotation: {x: 0.006580208, y: -0.00000001721021, z: 1.1324922e-10, w: 0.99997836}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2930,7 +2930,7 @@ GameObject:
   - component: {fileID: 1324757888}
   - component: {fileID: 1324757891}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: EnemyUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4216,8 +4216,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  enemyUI: {fileID: 1324757886}
   AttackCooldown: 2
   attackRange: 2
+  combatRange: 13
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
   stunDuration: 1.5
   eyesRenderer: {fileID: 523043540483951436}
   glowMat: {fileID: 2100000, guid: b4ca731d83e26b24bb69d5c89406b59a, type: 2}

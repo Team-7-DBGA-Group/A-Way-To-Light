@@ -44,7 +44,7 @@ public abstract class Actor : MonoBehaviour
             CurrentHealth = MaxHealth;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         CurrentHealth = MaxHealth;
         OnHealthInitialized?.Invoke(MaxHealth);

@@ -10,7 +10,7 @@ public class BasicEnemy : Enemy
     [SerializeField]
     private float stunDuration = 1.5f;
 
-    [Header("References")]
+    [Header("Basic Enemy References")]
     [SerializeField]
     private MeshRenderer eyesRenderer;
     [SerializeField]
@@ -18,7 +18,7 @@ public class BasicEnemy : Enemy
     [SerializeField]
     private Material blackMat;
 
-    private Transform _target = null;
+    private Transform _target;
     private NavMeshAgent _agent = null;
 
     // States
@@ -56,10 +56,11 @@ public class BasicEnemy : Enemy
         StartCoroutine(COWaitStun());
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        _target = FindObjectOfType<Player>().transform;
+        base.Awake();
 
+        _target = FindObjectOfType<Player>().transform;
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
 
@@ -74,13 +75,19 @@ public class BasicEnemy : Enemy
         eyesRenderer.material = blackMat;
     }
 
-
-    private void Update()
+    protected override void Start()
     {
+        base.Start();
+    }
+
+
+    protected override void Update()
+    {
+        base.Update();
         if (!IsAlive)
             return;
 
-        if(Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
+        if (Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
         {
             FSM.GoToState(_enemyAttackingState);
         }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1843215964123967174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: handSlotLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5565046492859151888}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: KayKit Animated Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 1219194888189311161}
   - component: {fileID: 1219194888189311162}
   - component: {fileID: 1219194888189311106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fe16ac1e4950547bc087fd2bd046e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 3
 --- !u!114 &1219194888189311167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,8 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a797156b33539c64fa49fdad5e67ffed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  aimCamera: {fileID: 0}
   mainCameraTransform: {fileID: 0}
   playerClimb: {fileID: 1219194888189311162}
   turnSmoothTime: 0.1
@@ -256,7 +255,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1219194888189311107}
   playerMovement: {fileID: 1219194888189311167}
-  playerLightShooting: {fileID: 1219194888189311161}
   playerClimb: {fileID: 1219194888189311162}
 --- !u!1 &1219194888323405134
 GameObject:
@@ -269,7 +267,7 @@ GameObject:
   - component: {fileID: 1219194888323405133}
   - component: {fileID: 1219194888323405139}
   - component: {fileID: 1219194888323405132}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: character_mageHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +351,7 @@ GameObject:
   - component: {fileID: 1219194888446863342}
   - component: {fileID: 1219194888446863340}
   - component: {fileID: 1219194888446863341}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: character_mageArnLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,7 +436,7 @@ GameObject:
   - component: {fileID: 1219194888458370833}
   - component: {fileID: 1219194888458370839}
   - component: {fileID: 1219194888458370832}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: character_mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -526,7 +524,7 @@ GameObject:
   - component: {fileID: 1219194888482986651}
   - component: {fileID: 1219194888482986649}
   - component: {fileID: 1219194888482986650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: character_mageHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +610,7 @@ GameObject:
   - component: {fileID: 1219194888554003293}
   - component: {fileID: 1219194888554003235}
   - component: {fileID: 1219194888554003292}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: character_mageArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +695,7 @@ GameObject:
   - component: {fileID: 1219194888693363138}
   - component: {fileID: 1219194888693363136}
   - component: {fileID: 1219194888693363137}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: character_mageHat
   m_TagString: Hat
   m_Icon: {fileID: 0}
@@ -780,7 +778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1219194889027475336}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +811,7 @@ GameObject:
   - component: {fileID: 1219194889242264433}
   - component: {fileID: 1219194889242264439}
   - component: {fileID: 1219194889242264432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,7 +892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1219194889443717507}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LightShotSpawnPos
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -926,7 +924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1219194889636509136}
   - component: {fileID: 1219194889636509143}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ClimbCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +970,7 @@ GameObject:
   - component: {fileID: 1219194889663363605}
   - component: {fileID: 1219194889663363611}
   - component: {fileID: 1219194889663363604}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1055,7 +1053,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1219194889999642636}
   - component: {fileID: 1219194889999642643}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 814688335637324221}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1134,7 +1132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1408158963787821685}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: armLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1167,7 +1165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2372954179579739144}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1199,7 +1197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4503676633306901374}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: armRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1232,7 +1230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709373469705573626}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: handSlotRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,5 +11,7 @@ public class EnemyCustomEditor : Editor
         Enemy enemy = (Enemy)target;
         Handles.color = Color.red;
         Handles.DrawWireArc(enemy.transform.position, Vector3.up, Vector3.forward, 360, enemy.AttackRange);
+        Handles.color = new Color32(134, 52, 235, 255);
+        Handles.DrawWireArc(enemy.transform.position, Vector3.up, Vector3.forward, 360, enemy.CombatRange);
     }
 }
