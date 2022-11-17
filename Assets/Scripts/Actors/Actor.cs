@@ -23,7 +23,7 @@ public abstract class Actor : MonoBehaviour
         if(damage<=0)
             return;
         CurrentHealth -= damage;
-        OnHealthDamaged(damage);
+        OnHealthInitialized?.Invoke(damage);
         if (CurrentHealth <= 0)
             Die();
     }
@@ -39,7 +39,7 @@ public abstract class Actor : MonoBehaviour
         if (healAmount <= 0)
             return;
         CurrentHealth += healAmount;
-        OnHealthHealed(healAmount);
+        OnHealthInitialized?.Invoke(healAmount);
         if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
     }
@@ -47,6 +47,6 @@ public abstract class Actor : MonoBehaviour
     private void Start()
     {
         CurrentHealth = MaxHealth;
-        OnHealthInitialized(MaxHealth);
+        OnHealthInitialized?.Invoke(MaxHealth);
     }
 }
