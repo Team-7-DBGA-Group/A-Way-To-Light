@@ -47,6 +47,10 @@ public class PlayerClimb : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity, climbableGroundCheck))
                 {
+                    //Debug.Log(raycastHit.transform.localPosition.x);
+                    //Debug.Log(raycastHit.point);
+                    //Debug.Log(raycastHit.normal);
+                    //Debug.Log(raycastHit.)
                     transform.rotation = Quaternion.LookRotation(-raycastHit.normal);
                 }
                 
