@@ -35,6 +35,7 @@ public class BasicEnemy : Enemy
             return;
         
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
+        _target.GetComponent<Actor>().TakeDamage(1);
         StartCoroutine(COStartAttackCooldown());
     }
 
