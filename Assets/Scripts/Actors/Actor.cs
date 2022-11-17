@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public abstract class Actor : MonoBehaviour
 {
+    public event Action<int> OnHealthDamaged;
+    public event Action<int> OnHealthHealed;
+    public event Action<int> OnHealthInitialized;
+
     public int MaxHealth { get { return maxHealth; } protected set { maxHealth = value; } }
     public int CurrentHealth { get; protected set; }
     
     [Header("Health settings")]
     [SerializeField]
-    private int maxHealth = 0;
+    private int maxHealth = 3;
 
     public abstract void Die();
 
@@ -18,6 +23,7 @@ public abstract class Actor : MonoBehaviour
         if(damage<=0)
             return;
         CurrentHealth -= damage;
+        OnHealthDamaged(damage);
         if (CurrentHealth <= 0)
             Die();
     }
@@ -25,6 +31,7 @@ public abstract class Actor : MonoBehaviour
     public void ResetHealth()
     {
         CurrentHealth = MaxHealth;
+        OnHealthHealed(MaxHealth);
     }
 
     public void Heal(int healAmount)
@@ -32,6 +39,7 @@ public abstract class Actor : MonoBehaviour
         if (healAmount <= 0)
             return;
         CurrentHealth += healAmount;
+        OnHealthHealed(healAmount);
         if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
     }
@@ -39,5 +47,6 @@ public abstract class Actor : MonoBehaviour
     private void Start()
     {
         CurrentHealth = MaxHealth;
+        OnHealthInitialized(MaxHealth);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IInteractable
+public abstract class Enemy : Actor, IInteractable
 {
     public float AttackRange { get => attackRange; }
 

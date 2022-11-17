@@ -100,4 +100,10 @@ public class BasicEnemy : Enemy
         _agent.isStopped = false;
         _isStunned = false;
     }
+
+    public override void Die()
+    {
+        CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
+        Destroy(gameObject);
+    }
 }
