@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     public int Durability { get => durability; }
 
     [SerializeField]
-    private int damage = 0;
+    private int damage = 1;
     [SerializeField]
     private int durability = 3;
 }

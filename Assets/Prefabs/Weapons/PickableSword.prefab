@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5924477494464737242
+--- !u!1 &4071157936622741020
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5924477494464737241}
-  - component: {fileID: 5924477494464737246}
-  - component: {fileID: 5924477494464737247}
-  - component: {fileID: 5924477494464737240}
-  - component: {fileID: -9176084233887790619}
+  - component: {fileID: 3689706203855289510}
+  - component: {fileID: 332038952650699523}
+  - component: {fileID: 2557856447207999433}
+  - component: {fileID: 332038952650699521}
+  - component: {fileID: 332038952650699520}
   m_Layer: 0
-  m_Name: WieldableWeapon
+  m_Name: PickableSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5924477494464737241
+--- !u!4 &3689706203855289510
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924477494464737242}
+  m_GameObject: {fileID: 4071157936622741020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.52, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5924477494464737246
+--- !u!33 &332038952650699523
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924477494464737242}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5924477494464737247
+  m_GameObject: {fileID: 4071157936622741020}
+  m_Mesh: {fileID: -4011559898636106432, guid: 989f911acc6cd234dbd2e6c698a3f114, type: 3}
+--- !u!23 &2557856447207999433
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924477494464737242}
+  m_GameObject: {fileID: 4071157936622741020}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 6694312389017904013, guid: 989f911acc6cd234dbd2e6c698a3f114, type: 3}
+  - {fileID: 1957042476528048658, guid: 989f911acc6cd234dbd2e6c698a3f114, type: 3}
+  - {fileID: 963798294112862009, guid: 989f911acc6cd234dbd2e6c698a3f114, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,30 +87,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5924477494464737240
+--- !u!65 &332038952650699521
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924477494464737242}
+  m_GameObject: {fileID: 4071157936622741020}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-9176084233887790619
+  m_Size: {x: 0.39373133, y: 1.2791002, z: 0.12671795}
+  m_Center: {x: 0.0000127106905, y: 0.46924365, z: 0.000000022351742}
+--- !u!114 &332038952650699520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5924477494464737242}
+  m_GameObject: {fileID: 4071157936622741020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ca359f27def844e9343dd7a1af5abd, type: 3}
+  m_Script: {fileID: 11500000, guid: 858926858481743499026c3ec046a0e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  durability: 3
+  wieldableWeaponPrefab: {fileID: 197196925727653622, guid: fa343b764bcdf844a916e9822a490aff, type: 3}

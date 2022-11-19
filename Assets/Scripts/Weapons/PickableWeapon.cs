@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PickableWeapon : MonoBehaviour
 {
+    // Maybe better to move this logic to player side,
+    // because we need an "equip" logic.
+    // OR GetComponent<Player>().Equip(Weapon);
+    // Maybe having a PlayerEquip script is good, idk.
+
     [SerializeField]
     private GameObject wieldableWeaponPrefab = null;
 
@@ -16,7 +21,9 @@ public class PickableWeapon : MonoBehaviour
             if (_weaponSlot == null)
                 return;
 
-            Instantiate(wieldableWeaponPrefab,  _weaponSlot.transform.position, _weaponSlot.transform.rotation, _weaponSlot.transform.parent);
+            GameObject weaponObj = Instantiate(wieldableWeaponPrefab,  _weaponSlot.transform);
+            weaponObj.transform.localRotation = wieldableWeaponPrefab.transform.localRotation;
+
             Destroy(gameObject);
         }
     }
