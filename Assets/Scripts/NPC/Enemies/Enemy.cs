@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : Actor, IInteractable
+public abstract class Enemy : NPC
 {
     public float AttackRange { get => attackRange; }
     public float CombatRange { get => combatRange; }
@@ -22,14 +22,11 @@ public abstract class Enemy : Actor, IInteractable
     private LayerMask playerLayer = new LayerMask();
     
     protected bool CanAttack = true;
-    protected bool IsAlive = false;
 
     // State Machine
     protected FSMSystem FSM;
 
     public abstract void Attack();
-
-    public abstract void Interact();
 
     protected IEnumerator COStartAttackCooldown()
     {
@@ -38,8 +35,9 @@ public abstract class Enemy : Actor, IInteractable
         CanAttack = true;
     }
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         // ...
     }
 

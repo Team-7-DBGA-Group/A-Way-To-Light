@@ -10,14 +10,6 @@ public class BasicEnemy : Enemy
     [SerializeField]
     private float stunDuration = 1.5f;
 
-    [Header("Basic Enemy References")]
-    [SerializeField]
-    private MeshRenderer eyesRenderer;
-    [SerializeField]
-    private Material glowMat;
-    [SerializeField]
-    private Material blackMat;
-
     private Transform _target;
     private NavMeshAgent _agent = null;
 
@@ -27,15 +19,13 @@ public class BasicEnemy : Enemy
 
     private bool _isStunned = false;
 
-    private Animator _animator;
-
     public override void Attack()
     {
         if (!CanAttack)
             return;
         
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
-        //_target.GetComponent<Actor>().TakeDamage(1);
+        _target.GetComponent<Actor>().TakeDamage(1);
         StartCoroutine(COStartAttackCooldown());
     }
 
@@ -44,9 +34,7 @@ public class BasicEnemy : Enemy
         if (!IsAlive)
         {
             _agent.enabled = true;
-            IsAlive = true;
-            _animator.SetTrigger("Rise");
-            eyesRenderer.material = glowMat;
+            Rise();
             return;
         }
 
@@ -63,7 +51,7 @@ public class BasicEnemy : Enemy
 
         _target = FindObjectOfType<Player>().transform;
         _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
 
         _agent.enabled = false;
 
@@ -72,8 +60,6 @@ public class BasicEnemy : Enemy
         _enemyAttackingState = new EnemyAttackingState(this);
         FSM.AddState(_followingTargetState);
         FSM.AddState(_enemyAttackingState);
-
-        eyesRenderer.material = blackMat;
     }
 
     protected override void Start()
