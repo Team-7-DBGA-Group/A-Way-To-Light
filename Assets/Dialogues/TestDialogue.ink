@@ -13,5 +13,5 @@ Impossibile that you don't know where we are!
 -> END
 
 === 3dots(sentence) ===
-You're one of few words, uh?
+You're not much of a talker, uh?
 -> END
