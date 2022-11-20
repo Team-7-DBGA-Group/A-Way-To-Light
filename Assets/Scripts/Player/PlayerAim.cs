@@ -13,19 +13,29 @@ public class PlayerAim : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private Transform mainCameraTransform = null;
-    [SerializeField]
-    private PlayerClimb playerClimb;
 
     [Header("Aim Camera Settings")]
     [SerializeField]
     private float turnSmoothTime = 0.1f;
 
     private float _turnSmoothVelocity;
+    private bool _canAim = true;
 
+    private void OnEnable()
+    {
+        PlayerClimb.OnClimbingEnter += () => { _canAim = false; };
+        PlayerClimb.OnClimbingExit += () => { _canAim = true; };
+
+        DialogueManager.OnDialogueEnter += () => { _canAim = false; };
+        DialogueManager.OnDialogueExit += () => { _canAim = true; };
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) && !playerClimb.IsClimbing)
+        if (!_canAim)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             IsAiming = true;
             OnAimActive?.Invoke();

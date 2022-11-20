@@ -21,7 +21,8 @@ public class UILightCharge : MonoBehaviour
     private int blinkNumber = 2;
 
     private Color32 _defaultColor = Color.white;
-    private bool _isBlinking = false;
+
+    public void SetEnable(bool enable) => iconImage.enabled = enable;
 
     public void Off()
     {
@@ -35,9 +36,6 @@ public class UILightCharge : MonoBehaviour
 
     public void On()
     {
-        /*if (_isBlinking)
-            return;*/
-
         if (IsOn)
             return;
 
@@ -53,8 +51,6 @@ public class UILightCharge : MonoBehaviour
 
     private IEnumerator COBlinkAnimation()
     {
-        _isBlinking = true;
-
         iconImage.color = _defaultColor;
 
         for(int i = 0; i < blinkNumber; ++i)
@@ -66,7 +62,5 @@ public class UILightCharge : MonoBehaviour
         }
 
         iconImage.color = _defaultColor;
-
-        _isBlinking = false;
     }
 }

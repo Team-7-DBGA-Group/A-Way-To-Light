@@ -41,9 +41,10 @@ public class PlayerMovement : MonoBehaviour
     private float _turnSmoothVelocity;
 
     private Vector3 _velocity;
+
+    private bool _canMove = true;
   
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -53,9 +54,17 @@ public class PlayerMovement : MonoBehaviour
         _characterController.center = new Vector3(0, correctHeight, 0);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
+        DialogueManager.OnDialogueEnter += () => { _canMove = false; _characterController.Move(Vector3.zero); };
+        DialogueManager.OnDialogueExit += () => { _canMove = true; };
+    }
+
+    private void Update()
+    {
+        if (!_canMove)
+            return;
+
         IsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (!IsGrounded)
             IsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, climbGroundMask);

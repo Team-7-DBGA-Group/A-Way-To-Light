@@ -19,6 +19,12 @@ public class BasicEnemy : Enemy
 
     private bool _isStunned = false;
 
+    public override void Rise()
+    {
+        base.Rise();
+        EnemyManager.Instance.RegisterInCombatEnemy(this.GetHashCode(), this);
+    }
+
     public override void Attack()
     {
         if (!CanAttack)
@@ -98,6 +104,7 @@ public class BasicEnemy : Enemy
     public override void Die()
     {
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
+        EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
         Destroy(gameObject);
     }
 }

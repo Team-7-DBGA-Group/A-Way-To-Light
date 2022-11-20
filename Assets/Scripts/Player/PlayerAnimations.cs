@@ -32,4 +32,5 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetBool("IsClimbing", playerClimb.IsClimbing);
         animator.SetFloat("MovementY", Input.GetAxis("Vertical"));
     }
+
 }

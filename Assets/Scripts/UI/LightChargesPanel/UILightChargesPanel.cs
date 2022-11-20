@@ -14,6 +14,17 @@ public class UILightChargesPanel : MonoBehaviour
     private Stack<UILightCharge> _activeCharges = new Stack<UILightCharge>();
     private Stack<UILightCharge> _cooldownCharges = new Stack<UILightCharge>();
 
+    public void SetEnable(bool enable)
+    {
+        if (!_isInit)
+            return;
+
+        foreach (UILightCharge charge in _activeCharges)
+            charge.SetEnable(enable);
+        foreach (UILightCharge charge in _cooldownCharges)
+            charge.SetEnable(enable);
+    }
+
     public void InitializePanel(int amount)
     {
         if (_isInit)

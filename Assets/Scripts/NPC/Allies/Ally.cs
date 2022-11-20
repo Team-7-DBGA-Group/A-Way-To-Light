@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Ally : NPC
 {
+    [Header("Ally References")]
+    [SerializeField]
+    private DialogueTrigger dialogueTrigger;
+
     public override void Die()
     {
         // It can't die...
@@ -15,5 +19,12 @@ public class Ally : NPC
         if (IsAlive)
             return;
         Rise();
+        dialogueTrigger.enabled = true;
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        dialogueTrigger.enabled = false;
     }
 }

@@ -14,6 +14,17 @@ public class UIHealthPanel : MonoBehaviour
     private Stack<UIHeart> _activeHearts = new Stack<UIHeart>();
     private Stack<UIHeart> _lostHearts = new Stack<UIHeart>();
 
+    public void SetEnable(bool enable)
+    {
+        if (!_isInit)
+            return;
+
+        foreach (UIHeart heart in _activeHearts)
+            heart.SetEnable(enable);
+        foreach (UIHeart heart in _lostHearts)
+            heart.SetEnable(enable);
+    }
+
     public void InitializePanel(int amount)
     {
         if (_isInit)

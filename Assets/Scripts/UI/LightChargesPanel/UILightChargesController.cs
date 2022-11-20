@@ -13,6 +13,8 @@ public class UILightChargesController : MonoBehaviour
         PlayerLightShooting.OnChargesInitialized += uiLightChargesPanel.InitializePanel;
         PlayerLightShooting.OnShot += uiLightChargesPanel.DisableCharge;
         PlayerLightShooting.OnChargeCooldownFinished += uiLightChargesPanel.ActiveCharge;
+        DialogueManager.OnDialogueEnter += () => { uiLightChargesPanel.SetEnable(false); };
+        DialogueManager.OnDialogueExit += () => { uiLightChargesPanel.SetEnable(true); };
     }
 
     private void OnDisable()

@@ -18,7 +18,7 @@ public abstract class NPC : Actor, IInteractable
 
     public abstract void Interact();
 
-    public void Rise()
+    public virtual void Rise()
     {
         if (IsAlive)
             return;

@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerClimb : MonoBehaviour
 {
+    public static event Action OnClimbingEnter;
+    public static event Action OnClimbingExit;
+
     public bool WasClimbing { get; set; }
     public bool IsClimbing { get; private set; }
 
@@ -29,6 +33,8 @@ public class PlayerClimb : MonoBehaviour
     private CharacterController _characterController;
     private Vector3 _lastClimbCheckPos;
 
+    private bool _eventFlag = false;
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -47,13 +53,17 @@ public class PlayerClimb : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity, climbableGroundCheck))
                 {
-                    //Debug.Log(raycastHit.transform.localPosition.x);
-                    //Debug.Log(raycastHit.point);
-                    //Debug.Log(raycastHit.normal);
-                    //Debug.Log(raycastHit.)
                     transform.rotation = Quaternion.LookRotation(-raycastHit.normal);
                 }
                 
+                if(_eventFlag == false)
+                {
+                    // Event Enter
+                    OnClimbingEnter?.Invoke();
+                    _eventFlag = true;
+                }
+
+
                 IsClimbing = true;
                 WasClimbing = true;
                 
@@ -75,7 +85,16 @@ public class PlayerClimb : MonoBehaviour
                     _mustFloat = true;
                 }
                 else
+                {
                     IsClimbing = false;
+                    if (_eventFlag == true)
+                    {
+                        // Event Exit
+                        OnClimbingExit?.Invoke();
+                        _eventFlag = false;
+                    }
+                }
+                    
             }
         }
 

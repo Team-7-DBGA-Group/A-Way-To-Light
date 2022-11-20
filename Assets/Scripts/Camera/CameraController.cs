@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerAim playerAim;
-    [SerializeField]
-    private PlayerClimb playerClimb;
-    [SerializeField]
-    private PlayerMovement playerMovement;
-
+    [Header("Cameras References")]
     [SerializeField]
     private GameObject playerAimCamera;
     [SerializeField]
     private GameObject playerClimbCamera;
     [SerializeField]
     private GameObject playerMovementCamera;
-    // Ha più senso? 
-    // [SerializeField]
-    // private GameObject[] Cameras;
+    [SerializeField]
+    private GameObject playerDialogueCamera;
 
     private void Start()
     {
@@ -28,26 +21,39 @@ public class CameraController : MonoBehaviour
         playerMovementCamera.SetActive(true);
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (playerAim.IsAiming)
+        DialogueManager.OnDialogueEnter += () => 
+        {
+            playerDialogueCamera.SetActive(true); 
+            playerMovementCamera.SetActive(false); 
+        };
+        DialogueManager.OnDialogueExit += () => 
+        {
+            playerDialogueCamera.SetActive(false); 
+            playerMovementCamera.SetActive(true); 
+        };
+        PlayerAim.OnAimActive += () =>
         {
             playerAimCamera.SetActive(true);
             playerClimbCamera.SetActive(false);
             playerMovementCamera.SetActive(false);
-        }
-        else if (playerClimb.IsClimbing)
-        {
-            playerClimbCamera.transform.localPosition = FindObjectOfType<Player>().transform.worldToLocalMatrix.MultiplyVector(transform.forward);
-            playerAimCamera.SetActive(false);
-            playerClimbCamera.SetActive(true);
-            playerMovementCamera.SetActive(false);
-        }
-        else
+        };
+        PlayerAim.OnAimInactive += () =>
         {
             playerAimCamera.SetActive(false);
+            playerMovementCamera.SetActive(true);
+        };
+        PlayerClimb.OnClimbingEnter += () =>
+        {
+             playerAimCamera.SetActive(false);
+             playerClimbCamera.SetActive(true);
+             playerMovementCamera.SetActive(false);
+        };
+        PlayerClimb.OnClimbingExit += () =>
+        {
             playerClimbCamera.SetActive(false);
             playerMovementCamera.SetActive(true);
-        }
+        };
     }
 }
