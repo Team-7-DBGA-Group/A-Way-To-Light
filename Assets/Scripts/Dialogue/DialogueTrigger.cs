@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DialogueTrigger : MonoBehaviour
 {
+    public event Action OnDialogueTriggered;
+
     [Header("Visual Cue")]
     [SerializeField] 
     private GameObject visualCue;
@@ -31,6 +34,7 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F)) 
             {
+                OnDialogueTriggered?.Invoke();
                 DialogueManager.Instance.EnterDialogueMode(inkJSON);
                 _playerObj.transform.LookAt(transform, Vector3.up);
                 transform.LookAt(_playerObj.transform, Vector3.up);

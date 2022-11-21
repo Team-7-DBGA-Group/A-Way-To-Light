@@ -10,6 +10,7 @@ public class DialogueManager : Singleton<DialogueManager>
 {
     public static event Action OnDialogueEnter;
     public static event Action OnDialogueExit;
+    public static event Action<int> OnChoiceChosen;
     public bool IsDialoguePlaying { get; private set; }
 
     [Header("Dialogue UI")]
@@ -44,6 +45,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         _currentStory.ChooseChoiceIndex(choiceIndex);
         DisplayChoices(); // Fast Reset
+        OnChoiceChosen?.Invoke(choiceIndex);
         ContinueStory();
     }
 
@@ -76,7 +78,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     }
 
-    private void ExitDialogueMode()
+    public void ExitDialogueMode()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
