@@ -7,6 +7,11 @@ public class DialogueTrigger : MonoBehaviour
 {
     public event Action OnDialogueTriggered;
 
+    [Header("Dialogue Object")]
+    [Tooltip("Object for LookAt")]
+    [SerializeField]
+    private GameObject dialogueObj;
+
     [Header("Visual Cue")]
     [SerializeField] 
     private GameObject visualCue;
@@ -37,7 +42,11 @@ public class DialogueTrigger : MonoBehaviour
                 OnDialogueTriggered?.Invoke();
                 DialogueManager.Instance.EnterDialogueMode(inkJSON);
                 _playerObj.transform.LookAt(transform, Vector3.up);
-                transform.LookAt(_playerObj.transform, Vector3.up);
+
+                if(dialogueObj != null)
+                    dialogueObj.transform.LookAt(_playerObj.transform, Vector3.up);
+                else
+                    transform.LookAt(_playerObj.transform, Vector3.up);
             }
         }
         else 

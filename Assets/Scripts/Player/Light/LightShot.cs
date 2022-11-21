@@ -48,7 +48,6 @@ public class LightShot : MonoBehaviour
             foreach (IInteractable interactable in interactables)
                 interactable.Interact();
             
-
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
 
@@ -56,13 +55,15 @@ public class LightShot : MonoBehaviour
         }
         else if(other.gameObject.GetComponentInParent<IInteractable>() != null)
         {
+            if (other.gameObject.GetComponent<DialogueTrigger>())
+                return;
+
             IInteractable[] interactables = other.gameObject.GetComponentsInParent<IInteractable>();
 
             CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Light Shot interacted with " + other.gameObject.name);
 
             foreach (IInteractable interactable in interactables)
                 interactable.Interact();
-
 
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
@@ -74,6 +75,7 @@ public class LightShot : MonoBehaviour
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
 
+            
             Destroy(this.gameObject);
         }
     }
