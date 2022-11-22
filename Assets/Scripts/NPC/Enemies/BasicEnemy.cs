@@ -84,7 +84,6 @@ public class BasicEnemy : Enemy
         if (!IsAlive)
             return;
 
-        Debug.Log("MovementVelocity "+ _agent.velocity.magnitude / 10);
         Animator.SetFloat("MovementVelocity", _agent.velocity.magnitude / 10);
 
         if (Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
