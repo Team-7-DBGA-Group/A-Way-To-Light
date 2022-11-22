@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0027219376, g: 0.043104038, b: 0.12469016, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027181783, g: 0.042948984, b: 0.12449001, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1585,7 +1585,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618327743}
-  m_LocalRotation: {x: -0.079976514, y: -0.06363634, z: 0.0013187156, w: 0.99476254}
+  m_LocalRotation: {x: -0.07997652, y: -0.06363634, z: 0.0013187138, w: 0.99476254}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3430,7 +3430,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195748569}
-  m_LocalRotation: {x: -0.043789037, y: -0.06354642, z: 0.0036294311, w: 0.9970112}
+  m_LocalRotation: {x: -0.04378903, y: -0.06354639, z: 0.0036294274, w: 0.9970112}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5729,10 +5729,10 @@ MonoBehaviour:
   AttackCooldown: 2
   attackRange: 2
   combatRange: 13
+  StunDuration: 1.5
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
-  stunDuration: 1.5
 --- !u!195 &820606040376853720
 NavMeshAgent:
   m_ObjectHideFlags: 0

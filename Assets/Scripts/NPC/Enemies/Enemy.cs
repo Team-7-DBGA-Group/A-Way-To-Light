@@ -19,20 +19,30 @@ public abstract class Enemy : NPC
     [SerializeField]
     private float combatRange = 4.0f;
     [SerializeField]
+    protected float StunDuration = 1.5f;
+    [SerializeField]
     private LayerMask playerLayer = new LayerMask();
     
     protected bool CanAttack = true;
+    protected bool IsStunned = false;
 
     // State Machine
     protected FSMSystem FSM;
 
     public abstract void Attack();
-
-    protected IEnumerator COStartAttackCooldown()
+    public override void Interact()
     {
-        CanAttack = false;
-        yield return new WaitForSeconds(AttackCooldown);
-        CanAttack = true;
+        if (!IsAlive)
+        {
+            Rise();
+            return;
+        }
+
+        // Stun
+        if (IsStunned)
+            return;
+
+        StartCoroutine(COWaitStun());
     }
 
     protected override void Awake()
@@ -61,5 +71,18 @@ public abstract class Enemy : NPC
         {
             enemyUI.SetActive(false);
         }
+    }
+    protected IEnumerator COStartAttackCooldown()
+    {
+        CanAttack = false;
+        yield return new WaitForSeconds(AttackCooldown);
+        CanAttack = true;
+    }
+
+    protected IEnumerator COWaitStun()
+    {
+        IsStunned = true;
+        yield return new WaitForSeconds(StunDuration);
+        IsStunned = false;
     }
 }

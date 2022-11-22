@@ -6,10 +6,6 @@ using Utils;
 
 public class BasicEnemy : Enemy
 {
-    [Header("Basic Enemy Settings")]
-    [SerializeField]
-    private float stunDuration = 1.5f;
-
     private Transform _target;
     private NavMeshAgent _agent = null;
 
@@ -17,11 +13,10 @@ public class BasicEnemy : Enemy
     private FollowingTargetState _followingTargetState;
     private EnemyAttackingState _enemyAttackingState;
 
-    private bool _isStunned = false;
-
     public override void Rise()
     {
         base.Rise();
+        _agent.enabled = true;
         EnemyManager.Instance.RegisterInCombatEnemy(this.GetHashCode(), this);
     }
 
@@ -29,7 +24,7 @@ public class BasicEnemy : Enemy
     {
         if (!CanAttack)
             return;
-        if (_isStunned)
+        if (IsStunned)
             return;
 
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
@@ -37,22 +32,6 @@ public class BasicEnemy : Enemy
         Animator.SetTrigger("Attack");
         //_target.GetComponent<Actor>().TakeDamage(1);
         StartCoroutine(COStartAttackCooldown());
-    }
-
-    public override void Interact()
-    {
-        if (!IsAlive)
-        {
-            _agent.enabled = true;
-            Rise();
-            return;
-        }
-
-        // Stun
-        if (_isStunned)
-            return;
-
-        StartCoroutine(COWaitStun());
     }
 
     protected override void Awake()
@@ -77,35 +56,35 @@ public class BasicEnemy : Enemy
         base.Start();
     }
 
-
     protected override void Update()
     {
         base.Update();
         if (!IsAlive)
             return;
 
+        // Stop Movement if stunned
+        if (FSM.CurrentState == _followingTargetState)
+        {
+            if (IsStunned)
+                _agent.isStopped = true;
+            else
+                _agent.isStopped = false;
+        }
+         
         Animator.SetFloat("MovementVelocity", _agent.velocity.magnitude / 10);
 
         if (Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
-        {
+        { 
+            _agent.isStopped = true;
             FSM.GoToState(_enemyAttackingState);
         }
         else if (Vector3.Distance(_target.position, this.transform.position) >= AttackRange && FSM.CurrentState != _followingTargetState)
         {
-          
+            _agent.isStopped = false;
             FSM.GoToState(_followingTargetState);
         }
 
         FSM.CurrentState.OnUpdate();
-    }
-
-    private IEnumerator COWaitStun()
-    {
-        _isStunned = true;
-        _agent.isStopped = true;
-        yield return new WaitForSeconds(stunDuration);
-        _agent.isStopped = false;
-        _isStunned = false;
     }
 
     public override void Die()
