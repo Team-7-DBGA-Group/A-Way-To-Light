@@ -29,8 +29,10 @@ public class BasicEnemy : Enemy
     {
         if (!CanAttack)
             return;
-        
+
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
+
+        Animator.SetTrigger("Attack");
         _target.GetComponent<Actor>().TakeDamage(1);
         StartCoroutine(COStartAttackCooldown());
     }
@@ -57,13 +59,13 @@ public class BasicEnemy : Enemy
 
         _target = FindObjectOfType<Player>().transform;
         _agent = GetComponent<NavMeshAgent>();
-        Animator = GetComponent<Animator>();
 
         _agent.enabled = false;
 
         FSM = new FSMSystem();
         _followingTargetState = new FollowingTargetState(_target, _agent);
         _enemyAttackingState = new EnemyAttackingState(this);
+        
         FSM.AddState(_followingTargetState);
         FSM.AddState(_enemyAttackingState);
     }
@@ -80,12 +82,16 @@ public class BasicEnemy : Enemy
         if (!IsAlive)
             return;
 
+        Debug.Log("MovementVelocity "+ _agent.velocity.magnitude / 10);
+        Animator.SetFloat("MovementVelocity", _agent.velocity.magnitude / 10);
+
         if (Vector3.Distance(_target.position, this.transform.position) <= AttackRange && FSM.CurrentState != _enemyAttackingState)
         {
             FSM.GoToState(_enemyAttackingState);
         }
         else if (Vector3.Distance(_target.position, this.transform.position) >= AttackRange && FSM.CurrentState != _followingTargetState)
         {
+          
             FSM.GoToState(_followingTargetState);
         }
 
