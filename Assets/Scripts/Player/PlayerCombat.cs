@@ -21,10 +21,18 @@ public class PlayerCombat : MonoBehaviour
 
     private bool _canAttack = true;
 
+    public void AnimationFinished()
+    {
+        playerMovement.CanMove = true;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !playerAim.IsAiming && !playerClimb.IsClimbing && playerMovement.IsGrounded && _canAttack /* && IsWeaponEquip */)
+        {
+            playerMovement.CanMove = false;
             Attack();
+        }
     }
 
     private void Attack()

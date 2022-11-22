@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public bool IsGrounded { get; private set; }
+    public bool CanMove { get; set; }
 
     [Header("References")]
     [SerializeField]
@@ -42,10 +43,10 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 _velocity;
 
-    private bool _canMove = true;
-  
     private void Start()
     {
+        CanMove = true;
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -56,13 +57,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueManager.OnDialogueEnter += () => { _canMove = false; _characterController.Move(Vector3.zero); };
-        DialogueManager.OnDialogueExit += () => { _canMove = true; };
+        DialogueManager.OnDialogueEnter += () => { CanMove = false; _characterController.Move(Vector3.zero); };
+        DialogueManager.OnDialogueExit += () => { CanMove = true; };
     }
 
     private void Update()
     {
-        if (!_canMove)
+        if (!CanMove)
             return;
 
         IsGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
