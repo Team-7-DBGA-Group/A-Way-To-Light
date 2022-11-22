@@ -29,6 +29,8 @@ public class BasicEnemy : Enemy
     {
         if (!CanAttack)
             return;
+        if (_isStunned)
+            return;
 
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
 
