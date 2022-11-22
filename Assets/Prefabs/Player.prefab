@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 1219194888189311161}
   - component: {fileID: 1219194888189311162}
   - component: {fileID: 1219194888189311106}
+  - component: {fileID: 6903259585359736531}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -213,7 +214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCameraTransform: {fileID: 0}
-  playerClimb: {fileID: 1219194888189311162}
   turnSmoothTime: 0.1
 --- !u!114 &1219194888189311161
 MonoBehaviour:
@@ -270,6 +270,22 @@ MonoBehaviour:
   animator: {fileID: 1219194888189311107}
   playerMovement: {fileID: 1219194888189311167}
   playerClimb: {fileID: 1219194888189311162}
+--- !u!114 &6903259585359736531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219194888189311163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7e5052d6e1d6146aa342e087444fdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAim: {fileID: 1219194888189311160}
+  playerClimb: {fileID: 1219194888189311162}
+  playerMovement: {fileID: 1219194888189311167}
+  attackCooldown: 0
 --- !u!1 &1219194888323405134
 GameObject:
   m_ObjectHideFlags: 0

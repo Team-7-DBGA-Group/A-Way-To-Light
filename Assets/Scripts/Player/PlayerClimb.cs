@@ -52,9 +52,7 @@ public class PlayerClimb : MonoBehaviour
             {
                 RaycastHit raycastHit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity, climbableGroundCheck))
-                {
                     transform.rotation = Quaternion.LookRotation(-raycastHit.normal);
-                }
                 
                 if(_eventFlag == false)
                 {
@@ -68,13 +66,9 @@ public class PlayerClimb : MonoBehaviour
                 WasClimbing = true;
                 
                 if (Input.GetKey(KeyCode.W))
-                {
                     _characterController.Move(Vector3.up * climbingSpeed * Time.deltaTime);
-                }
                 if (Input.GetKey(KeyCode.S))
-                {
                     _characterController.Move(Vector3.down * climbingSpeed * Time.deltaTime);
-                }
             }
             else
             {

@@ -23,6 +23,7 @@ public class PlayerAnimations : MonoBehaviour
     private void OnEnable()
     {
         PlayerLightShooting.OnShot += () => { animator.SetTrigger("Shot"); };
+        PlayerCombat.OnAttack += () => { animator.SetTrigger("Attack"); };
     }
 
     private void LateUpdate()
