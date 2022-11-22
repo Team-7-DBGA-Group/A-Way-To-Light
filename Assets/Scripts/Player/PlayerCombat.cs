@@ -28,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !playerAim.IsAiming && !playerClimb.IsClimbing && playerMovement.IsGrounded && _canAttack /* && IsWeaponEquip */)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !playerAim.IsAiming && !playerClimb.IsClimbing && playerMovement.IsGrounded && _canAttack /* && IsWeaponEquip */ && !DialogueManager.Instance.IsDialoguePlaying)
         {
             playerMovement.CanMove = false;
             Attack();
