@@ -23,6 +23,8 @@ public abstract class Actor : MonoBehaviour
     private float knockbackDuration = 0.5f;
     [SerializeField]
     private float knockbackSpeed = 5f;
+    [SerializeField]
+    private float knockbackRaycastLength = 1.5f;
 
     public abstract void Die();
 
@@ -66,6 +68,8 @@ public abstract class Actor : MonoBehaviour
     private void Knockback()
     {
         OnKnockbackEnter?.Invoke();
+        _lastAttacker.transform.LookAt(transform);
+        transform.LookAt(_lastAttacker.transform);
         StartCoroutine(COKnockback());
     }
     
@@ -79,10 +83,22 @@ public abstract class Actor : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_lastAttacker != null)
+        {
+            RaycastHit hit; 
+            Debug.DrawRay(transform.position + new Vector3(0,1.0f,0), _lastAttacker.transform.forward * knockbackRaycastLength, Color.yellow);
+            if (Physics.Raycast(transform.position + new Vector3(0, 1.0f, 0), _lastAttacker.transform.forward, out hit, knockbackRaycastLength))
+            {
+                // Interrupt knockback's slide
+                _onKnockback = false;
+            }
+        }
+
         if (!_onKnockback)
             return;
 
         // Attacker -forward as direction
         transform.Translate(transform.worldToLocalMatrix.MultiplyVector(_lastAttacker.transform.forward) * knockbackSpeed * Time.deltaTime);
+       
     }
 }
