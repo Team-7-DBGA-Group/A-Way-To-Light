@@ -30,7 +30,7 @@ public class BasicEnemy : Enemy
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
 
         Animator.SetTrigger("Attack");
-        _target.GetComponent<Actor>().TakeDamage(0);
+        _target.GetComponent<Actor>().TakeDamage(0, this.gameObject);
         StartCoroutine(COStartAttackCooldown());
     }
 

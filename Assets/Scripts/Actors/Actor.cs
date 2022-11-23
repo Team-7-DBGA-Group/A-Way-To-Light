@@ -27,13 +27,15 @@ public abstract class Actor : MonoBehaviour
     public abstract void Die();
 
     private bool _onKnockback = false;
+    private GameObject _lastAttacker = null;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, GameObject attacker)
     {
         //if(damage<=0)
         //    return;
         CurrentHealth -= damage;
         OnHealthDamaged?.Invoke(damage);
+        _lastAttacker = attacker;
         Knockback();
         if (CurrentHealth <= 0)
             Die();
@@ -81,6 +83,6 @@ public abstract class Actor : MonoBehaviour
             return;
 
         // Attacker -forward as direction
-        transform.Translate(transform.worldToLocalMatrix.MultiplyVector(-transform.forward) * knockbackSpeed * Time.deltaTime);
+        transform.Translate(transform.worldToLocalMatrix.MultiplyVector(_lastAttacker.transform.forward) * knockbackSpeed * Time.deltaTime);
     }
 }
