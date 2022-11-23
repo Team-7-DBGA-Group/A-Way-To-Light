@@ -26,6 +26,8 @@ public class BasicEnemy : Enemy
             return;
         if (IsStunned)
             return;
+        if (_target.GetComponent<PlayerClimb>().IsClimbing)
+            return;
 
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
 
