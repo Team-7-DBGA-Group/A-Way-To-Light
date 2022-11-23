@@ -69,7 +69,7 @@ public abstract class Actor : MonoBehaviour
     {
         OnKnockbackEnter?.Invoke();
         _lastAttacker.transform.LookAt(transform);
-        transform.LookAt(_lastAttacker.transform);
+        transform.LookAt(new Vector3(_lastAttacker.transform.position.x, transform.position.y, _lastAttacker.transform.position.z));
         StartCoroutine(COKnockback());
     }
     
