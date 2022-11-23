@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
+    private Player player;
+    [SerializeField]
     private PlayerAim playerAim;
     [SerializeField]
     private PlayerClimb playerClimb;
@@ -59,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     {
         DialogueManager.OnDialogueEnter += () => { CanMove = false; _characterController.Move(Vector3.zero); };
         DialogueManager.OnDialogueExit += () => { CanMove = true; };
+        player.OnKnockbackEnter += () => { CanMove = false; };
+        player.OnKnockbackExit += () => { CanMove = true; };
     }
 
     private void Update()

@@ -57,6 +57,12 @@ public abstract class Enemy : NPC
         enemyUI.SetActive(false);
     }
 
+    protected virtual void OnEnable()
+    {
+        this.OnKnockbackEnter += () => { IsStunned = true; };
+        this.OnKnockbackExit += () => { IsStunned = false; };
+    }
+
     protected virtual void Update()
     {
         if (!IsAlive)

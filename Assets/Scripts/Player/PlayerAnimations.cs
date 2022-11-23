@@ -26,7 +26,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         PlayerLightShooting.OnShot += () => { animator.SetTrigger("Shot"); };
         PlayerCombat.OnAttack += () => { animator.SetTrigger("Attack"); };
-        player.OnKnockback += () => { animator.SetTrigger("Hit"); };
+        player.OnKnockbackEnter += () => { animator.SetTrigger("Hit"); };
     }
 
     private void LateUpdate()

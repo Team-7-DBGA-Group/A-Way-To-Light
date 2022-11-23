@@ -8,8 +8,8 @@ public abstract class Actor : MonoBehaviour
     public event Action<int> OnHealthDamaged;
     public event Action<int> OnHealthHealed;
     public event Action<int> OnHealthInitialized;
-    public event Action OnKnockback;
-
+    public event Action OnKnockbackEnter;
+    public event Action OnKnockbackExit;
 
     public int MaxHealth { get { return maxHealth; } protected set { maxHealth = value; } }
     public int CurrentHealth { get; protected set; }
@@ -63,7 +63,7 @@ public abstract class Actor : MonoBehaviour
 
     private void Knockback()
     {
-        OnKnockback?.Invoke();
+        OnKnockbackEnter?.Invoke();
         StartCoroutine(COKnockback());
     }
     
@@ -72,6 +72,7 @@ public abstract class Actor : MonoBehaviour
         _onKnockback = true;
         yield return new WaitForSeconds(knockbackDuration);
         _onKnockback = false;
+        OnKnockbackExit?.Invoke();
     }
 
     private void FixedUpdate()
@@ -79,6 +80,7 @@ public abstract class Actor : MonoBehaviour
         if (!_onKnockback)
             return;
 
+        // Attacker -forward as direction
         transform.Translate(transform.worldToLocalMatrix.MultiplyVector(-transform.forward) * knockbackSpeed * Time.deltaTime);
     }
 }

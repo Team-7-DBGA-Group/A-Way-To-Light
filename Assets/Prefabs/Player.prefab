@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  knockbackDuration: 0.5
+  knockbackSpeed: 5
 --- !u!114 &1219194888189311167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e692a614d12adaa438369cb350a28b03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1219194888189311166}
   playerAim: {fileID: 1219194888189311160}
   playerClimb: {fileID: 1219194888189311162}
   playerSpeed: 5
@@ -270,6 +273,7 @@ MonoBehaviour:
   animator: {fileID: 1219194888189311107}
   playerMovement: {fileID: 1219194888189311167}
   playerClimb: {fileID: 1219194888189311162}
+  player: {fileID: 0}
 --- !u!114 &6903259585359736531
 MonoBehaviour:
   m_ObjectHideFlags: 0
