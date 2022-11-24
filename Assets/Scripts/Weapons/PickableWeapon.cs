@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PickableWeapon : MonoBehaviour
 {
-    // Maybe better to move this logic to player side,
-    // because we need an "equip" logic.
-    // OR GetComponent<Player>().Equip(Weapon);
-    // Maybe having a PlayerEquip script is good, idk.
     public int Damage { get => damage; }
     public int Durability { get => durability; }
 

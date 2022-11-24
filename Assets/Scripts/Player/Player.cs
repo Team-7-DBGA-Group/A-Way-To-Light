@@ -6,34 +6,25 @@ using Utils;
 
 public class Player : Actor
 {
-    public bool IsWeaponEquip { get => currentEquipWeapon != null; }
+    public bool IsWeaponEquip { get => _currentEquipWeapon != null; }
     
-    Weapon currentEquipWeapon = null; 
+    private Weapon _currentEquipWeapon = null; 
 
     public void Equip(Weapon w) 
     {
-        currentEquipWeapon = w;
+        _currentEquipWeapon = w;
     }
 
     public void Unequip()
     {
         if (!IsWeaponEquip)
             return;
-        GameObject pickableObj = Instantiate(currentEquipWeapon.PickablePrefab, gameObject.transform.position +(-gameObject.transform.forward * 1.2f) + new Vector3(0, 0.07f, 0), Quaternion.identity);
-        pickableObj.transform.rotation = currentEquipWeapon.PickablePrefab.transform.rotation;
-        pickableObj.GetComponent<PickableWeapon>().PassData(currentEquipWeapon);
+        GameObject pickableObj = Instantiate(_currentEquipWeapon.PickablePrefab, gameObject.transform.position +(-gameObject.transform.forward * 1.2f) + new Vector3(0, 0.07f, 0), Quaternion.identity);
+        pickableObj.transform.rotation = _currentEquipWeapon.PickablePrefab.transform.rotation;
+        pickableObj.GetComponent<PickableWeapon>().PassData(_currentEquipWeapon);
 
-        Destroy(currentEquipWeapon.gameObject);
-        currentEquipWeapon = null;
-
-    }
-
-    public void FixedUpdate()
-    {
-        if(Input.GetKey(KeyCode.K))
-        {
-            Unequip();
-        }
+        Destroy(_currentEquipWeapon.gameObject);
+        _currentEquipWeapon = null;
     }
 
     public override void Die()
