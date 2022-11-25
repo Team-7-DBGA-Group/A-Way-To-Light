@@ -23,11 +23,20 @@ public class PlayerAim : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerClimb.OnClimbingEnter += () => { _canAim = false; };
-        PlayerClimb.OnClimbingExit += () => { _canAim = true; };
+        PlayerClimb.OnClimbingEnter += DisableAim;
+        PlayerClimb.OnClimbingExit += EnableAim;
 
-        DialogueManager.OnDialogueEnter += () => { _canAim = false; };
-        DialogueManager.OnDialogueExit += () => { _canAim = true; };
+        DialogueManager.OnDialogueEnter += DisableAim;
+        DialogueManager.OnDialogueExit += EnableAim;
+    }
+
+    private void OnDisable()
+    {
+        PlayerClimb.OnClimbingEnter -= DisableAim;
+        PlayerClimb.OnClimbingExit -= EnableAim;
+
+        DialogueManager.OnDialogueEnter -= DisableAim;
+        DialogueManager.OnDialogueExit -= EnableAim;
     }
 
     private void Update()
@@ -55,4 +64,7 @@ public class PlayerAim : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
     }
+
+    private void DisableAim() => _canAim = false;
+    private void EnableAim() => _canAim = true;
 }

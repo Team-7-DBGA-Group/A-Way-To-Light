@@ -13,8 +13,8 @@ public class UILightChargesController : MonoBehaviour
         PlayerLightShooting.OnChargesInitialized += uiLightChargesPanel.InitializePanel;
         PlayerLightShooting.OnShot += uiLightChargesPanel.DisableCharge;
         PlayerLightShooting.OnChargeCooldownFinished += uiLightChargesPanel.ActiveCharge;
-        DialogueManager.OnDialogueEnter += () => { uiLightChargesPanel.SetEnable(false); };
-        DialogueManager.OnDialogueExit += () => { uiLightChargesPanel.SetEnable(true); };
+        DialogueManager.OnDialogueEnter += HidePanel;
+        DialogueManager.OnDialogueExit += ShowPanel;
     }
 
     private void OnDisable()
@@ -22,5 +22,10 @@ public class UILightChargesController : MonoBehaviour
         PlayerLightShooting.OnChargesInitialized -= uiLightChargesPanel.InitializePanel;
         PlayerLightShooting.OnShot -= uiLightChargesPanel.DisableCharge;
         PlayerLightShooting.OnChargeCooldownFinished -= uiLightChargesPanel.ActiveCharge;
+        DialogueManager.OnDialogueEnter -= HidePanel;
+        DialogueManager.OnDialogueExit -= ShowPanel;
     }
+
+    private void ShowPanel() => uiLightChargesPanel.SetEnable(true);
+    private void HidePanel() => uiLightChargesPanel.SetEnable(false);
 }

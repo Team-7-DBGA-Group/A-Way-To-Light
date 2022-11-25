@@ -15,9 +15,18 @@ public class Campfire : MonoBehaviour
 
     private void OnEnable()
     {
-        dialogueTrigger.OnDialogueTriggered += () => { DialogueManager.OnChoiceChosen += HandleChoice; };
-        DialogueManager.OnDialogueExit += () => { DialogueManager.OnChoiceChosen -= HandleChoice; };
+        dialogueTrigger.OnDialogueTriggered += DialogueTriggered;
+        DialogueManager.OnDialogueExit += DialogueExit;
     }
+
+    private void OnDisable()
+    {
+        dialogueTrigger.OnDialogueTriggered -= DialogueTriggered;
+        DialogueManager.OnDialogueExit -= DialogueExit;
+    }
+
+    private void DialogueTriggered() => DialogueManager.OnChoiceChosen += HandleChoice;
+    private void DialogueExit() => DialogueManager.OnChoiceChosen -= HandleChoice;
 
     private void HandleChoice(int index)
     {

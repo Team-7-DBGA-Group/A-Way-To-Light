@@ -18,8 +18,8 @@ public class UIHealthController : MonoBehaviour
         actor.OnHealthInitialized += healthPanel.InitializePanel;
         actor.OnHealthDamaged += UpdateDamageHealth;
         actor.OnHealthHealed += UpdateHealHealth;
-        DialogueManager.OnDialogueEnter += () => { healthPanel.SetEnable(false); };
-        DialogueManager.OnDialogueExit += () => { healthPanel.SetEnable(true); };
+        DialogueManager.OnDialogueEnter += HidePanel;
+        DialogueManager.OnDialogueExit += ShowPanel;
     }
 
     private void OnDisable()
@@ -27,7 +27,12 @@ public class UIHealthController : MonoBehaviour
         actor.OnHealthInitialized -= healthPanel.InitializePanel;
         actor.OnHealthDamaged -= UpdateDamageHealth;
         actor.OnHealthHealed -= UpdateHealHealth;
+        DialogueManager.OnDialogueEnter -= HidePanel;
+        DialogueManager.OnDialogueExit -= ShowPanel;
     }
+
+    private void ShowPanel() => healthPanel.SetEnable(true);
+    private void HidePanel() => healthPanel.SetEnable(false);
 
     private void UpdateHealHealth(int amount)
     {

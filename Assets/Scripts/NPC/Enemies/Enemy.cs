@@ -69,8 +69,14 @@ public abstract class Enemy : NPC
 
     protected virtual void OnEnable()
     {
-        this.OnKnockbackEnter += () => { IsStunned = true; Animator.SetTrigger("Hit"); };
-        this.OnKnockbackExit += () => { IsStunned = false; };
+        this.OnKnockbackEnter += HandleKnockbackEnter;
+        this.OnKnockbackExit += HandleKnockbackExit;
+    }
+
+    protected virtual void OnDisable()
+    {
+        this.OnKnockbackEnter -= HandleKnockbackEnter;
+        this.OnKnockbackExit -= HandleKnockbackExit;
     }
 
     protected virtual void Update()
@@ -112,4 +118,12 @@ public abstract class Enemy : NPC
         GameObject weaponObj = Instantiate(wieldableWeaponPrefab, _weaponSlot.transform);
         weaponObj.transform.localRotation = wieldableWeaponPrefab.transform.localRotation;
     }
+
+    private void HandleKnockbackEnter()
+    {
+        IsStunned = true;
+        Animator.SetTrigger("Hit");
+    }
+
+    private void HandleKnockbackExit() => IsStunned = false;
 }

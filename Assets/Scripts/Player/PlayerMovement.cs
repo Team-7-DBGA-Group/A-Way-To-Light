@@ -59,10 +59,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueManager.OnDialogueEnter += () => { CanMove = false; _characterController.Move(Vector3.zero); };
-        DialogueManager.OnDialogueExit += () => { CanMove = true; };
-        player.OnKnockbackEnter += () => { CanMove = false; };
-        player.OnKnockbackExit += () => { CanMove = true; };
+        DialogueManager.OnDialogueEnter += StopMovement;
+        DialogueManager.OnDialogueExit += BeginMovement;
+        player.OnKnockbackEnter += StopMovement;
+        player.OnKnockbackExit += BeginMovement;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.OnDialogueEnter -= StopMovement;
+        DialogueManager.OnDialogueExit -= BeginMovement;
+        player.OnKnockbackEnter -= StopMovement;
+        player.OnKnockbackExit -= BeginMovement;
     }
 
     private void Update()
@@ -111,4 +119,12 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    private void StopMovement()
+    {
+        CanMove = false; 
+        _characterController.Move(Vector3.zero);
+    }
+
+    private void BeginMovement() => CanMove = true;
 }

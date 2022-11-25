@@ -24,9 +24,16 @@ public class PlayerAnimations : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerLightShooting.OnShot += () => { animator.SetTrigger("Shot"); };
-        PlayerCombat.OnAttack += () => { animator.SetTrigger("Attack"); };
-        player.OnKnockbackEnter += () => { animator.SetTrigger("Hit"); };
+        PlayerLightShooting.OnShot += PlayShotAnimation;
+        PlayerCombat.OnAttack += PlayAttackAnimation;
+        player.OnKnockbackEnter += PlayHitAnimation;
+    }
+
+    private void OnDisable()
+    {
+        PlayerLightShooting.OnShot -= PlayShotAnimation;
+        PlayerCombat.OnAttack -= PlayAttackAnimation;
+        player.OnKnockbackEnter -= PlayHitAnimation;
     }
 
     private void LateUpdate()
@@ -37,4 +44,7 @@ public class PlayerAnimations : MonoBehaviour
         animator.SetFloat("MovementY", Input.GetAxis("Vertical"));
     }
 
+    private void PlayAttackAnimation() => animator.SetTrigger("Attack");
+    private void PlayHitAnimation() => animator.SetTrigger("Hit");
+    private void PlayShotAnimation() => animator.SetTrigger("Shot");
 }

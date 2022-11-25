@@ -24,14 +24,14 @@ public class UIHeart : MonoBehaviour
 
     public void Fill()
     {
-        fill.enabled = true;
-        IsEmpty = true;
+        fill.color = new Color32(221, 30, 30, 255);
+        IsEmpty = false;
     }
 
     public void Empty()
     {
-        fill.enabled = false;
-        IsEmpty = false;
+        fill.color = new Color32(221, 30, 30, 0);
+        IsEmpty = true;
     }
 
     private void Start()

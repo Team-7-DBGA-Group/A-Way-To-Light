@@ -23,37 +23,59 @@ public class CameraController : MonoBehaviour
 
     private void OnEnable()
     {
-        DialogueManager.OnDialogueEnter += () => 
-        {
-            playerDialogueCamera.SetActive(true); 
-            playerMovementCamera.SetActive(false); 
-        };
-        DialogueManager.OnDialogueExit += () => 
-        {
-            playerDialogueCamera.SetActive(false); 
-            playerMovementCamera.SetActive(true); 
-        };
-        PlayerAim.OnAimActive += () =>
-        {
-            playerAimCamera.SetActive(true);
-            playerClimbCamera.SetActive(false);
-            playerMovementCamera.SetActive(false);
-        };
-        PlayerAim.OnAimInactive += () =>
-        {
-            playerAimCamera.SetActive(false);
-            playerMovementCamera.SetActive(true);
-        };
-        PlayerClimb.OnClimbingEnter += () =>
-        {
-             playerAimCamera.SetActive(false);
-             playerClimbCamera.SetActive(true);
-             playerMovementCamera.SetActive(false);
-        };
-        PlayerClimb.OnClimbingExit += () =>
-        {
-            playerClimbCamera.SetActive(false);
-            playerMovementCamera.SetActive(true);
-        };
+        DialogueManager.OnDialogueEnter += DialogueEnterCameras;
+        DialogueManager.OnDialogueExit += DialogueExitCameras;
+        PlayerAim.OnAimActive += AimActiveCameras;
+        PlayerAim.OnAimInactive += AimInactiveCameras;
+        PlayerClimb.OnClimbingEnter += ClimbingEnterCameras;
+        PlayerClimb.OnClimbingExit += ClimbingExitCameras;
+    }
+
+    private void OnDisable()
+    {
+        DialogueManager.OnDialogueEnter -= DialogueEnterCameras;
+        DialogueManager.OnDialogueExit -= DialogueExitCameras;
+        PlayerAim.OnAimActive -= AimActiveCameras;
+        PlayerAim.OnAimInactive -= AimInactiveCameras;
+        PlayerClimb.OnClimbingEnter -= ClimbingEnterCameras;
+        PlayerClimb.OnClimbingExit -= ClimbingExitCameras;
+    }
+
+    private void DialogueEnterCameras()
+    {
+        playerDialogueCamera.SetActive(true);
+        playerMovementCamera.SetActive(false);
+    }
+
+    private void DialogueExitCameras()
+    {
+        playerDialogueCamera.SetActive(false);
+        playerMovementCamera.SetActive(true);
+    }
+
+    private void AimActiveCameras()
+    {
+        playerAimCamera.SetActive(true);
+        playerClimbCamera.SetActive(false);
+        playerMovementCamera.SetActive(false);
+    }
+
+    private void AimInactiveCameras()
+    {
+        playerAimCamera.SetActive(false);
+        playerMovementCamera.SetActive(true);
+    }
+
+    private void ClimbingEnterCameras()
+    {
+        playerAimCamera.SetActive(false);
+        playerClimbCamera.SetActive(true);
+        playerMovementCamera.SetActive(false);
+    }
+
+    private void ClimbingExitCameras()
+    {
+        playerClimbCamera.SetActive(false);
+        playerMovementCamera.SetActive(true);
     }
 }
