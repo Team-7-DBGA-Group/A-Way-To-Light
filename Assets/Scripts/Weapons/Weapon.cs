@@ -22,5 +22,14 @@ public class Weapon : MonoBehaviour
         durability = p.Durability;
     }
 
+    public void RemoveDurability(int amount)
+    {
+        if (amount <= 0)
+            return;
 
+        durability -= amount;
+
+        if (durability <= 0)
+            Destroy(gameObject);
+    }
 }

@@ -29,6 +29,8 @@ public class Player : Actor
 
     public void DealDamage()
     {
+        if (_currentEquipWeapon == null)
+            return;
         WeaponDamageDealer wDamageDealer = _currentEquipWeapon.GetComponentInChildren<WeaponDamageDealer>();
         if (wDamageDealer)
         {
@@ -38,6 +40,8 @@ public class Player : Actor
 
     public void StopDealingDamage()
     {
+        if (_currentEquipWeapon == null)
+            return;
         WeaponDamageDealer wDamageDealer = _currentEquipWeapon.GetComponentInChildren<WeaponDamageDealer>();
         if (wDamageDealer)
         {

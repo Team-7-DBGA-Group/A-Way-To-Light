@@ -10,11 +10,13 @@ public class WeaponDamageDealer : MonoBehaviour
     private LayerMask hitLayerMask;
 
     private bool _canDealDamage = false;
+    private bool _doOnce = false;
     private List<GameObject> _damageHits = new List<GameObject>();
 
     public void StartDealDamage()
     {
         _canDealDamage = true;
+        _doOnce = true;
         _damageHits.Clear();
     }
 
@@ -45,6 +47,12 @@ public class WeaponDamageDealer : MonoBehaviour
 
                 actor.TakeDamage(GetComponentInParent<Weapon>().Damage, 
                     GetComponentInParent<Weapon>().GetComponentInParent<Actor>().transform.gameObject);
+
+                if (_doOnce)
+                {
+                    GetComponentInParent<Weapon>().RemoveDurability(1);
+                    _doOnce = false;
+                }
 
                 _damageHits.Add(hit.transform.gameObject);
             }
