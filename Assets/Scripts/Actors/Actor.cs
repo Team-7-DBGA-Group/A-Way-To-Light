@@ -18,7 +18,7 @@ public abstract class Actor : MonoBehaviour
     [SerializeField]
     private int maxHealth = 3;
 
-    [Header("On hit knockback settings")]
+    [Header("Knockback settings")]
     [SerializeField]
     private float knockbackDuration = 0.5f;
     [SerializeField]

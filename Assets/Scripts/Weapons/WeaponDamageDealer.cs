@@ -36,21 +36,20 @@ public class WeaponDamageDealer : MonoBehaviour
         {
             if (!_damageHits.Contains(hit.transform.gameObject))
             {
-                Actor actor = (Actor)hit.transform.gameObject.GetComponent(typeof(Actor));
-                
-                if (actor == null)
+                Actor actor = null;
+                if (!hit.transform.gameObject.TryGetComponent(out actor))
                     return;
 
-                if (actor.GetComponentInChildren(typeof(NPC)))
-                    if (!actor.GetComponentInChildren<NPC>().IsAlive)
+                if (actor is NPC && !((NPC)actor).IsAlive)
                         return;
 
-                actor.TakeDamage(GetComponentInParent<Weapon>().Damage, 
-                    GetComponentInParent<Weapon>().GetComponentInParent<Actor>().transform.gameObject);
+                Weapon weapon = null;
+                weapon = GetComponentInParent<Weapon>();
+                actor.TakeDamage(weapon.Damage, weapon.GetComponentInParent<Actor>().transform.gameObject);
 
                 if (_doOnce)
                 {
-                    GetComponentInParent<Weapon>().RemoveDurability(1);
+                    weapon.RemoveDurability(1);
                     _doOnce = false;
                 }
 
