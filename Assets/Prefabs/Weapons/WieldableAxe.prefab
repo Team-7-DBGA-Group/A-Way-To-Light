@@ -111,7 +111,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7018870502596926752, guid: 18d127b91a9981342868f4a50d3400fb, type: 3}
       propertyPath: weaponLenght
-      value: 0.8
+      value: 0.63
+      objectReference: {fileID: 0}
+    - target: {fileID: -7018870502596926752, guid: 18d127b91a9981342868f4a50d3400fb, type: 3}
+      propertyPath: hitLayerMask.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2540192456555734349, guid: 18d127b91a9981342868f4a50d3400fb, type: 3}
       propertyPath: m_RootOrder
@@ -119,11 +123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540192456555734349, guid: 18d127b91a9981342868f4a50d3400fb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.011
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 2540192456555734349, guid: 18d127b91a9981342868f4a50d3400fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.636
+      value: 0.763
       objectReference: {fileID: 0}
     - target: {fileID: 2540192456555734349, guid: 18d127b91a9981342868f4a50d3400fb, type: 3}
       propertyPath: m_LocalPosition.z

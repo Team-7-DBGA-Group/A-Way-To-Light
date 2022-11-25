@@ -21,4 +21,6 @@ public class Weapon : MonoBehaviour
         damage = p.Damage;
         durability = p.Durability;
     }
+
+
 }

@@ -7,7 +7,7 @@ public class WeaponDamageDealer : MonoBehaviour
     [SerializeField]
     private float weaponLenght;
     [SerializeField]
-    private LayerMask enemyLayerMask;
+    private LayerMask hitLayerMask;
 
     private bool _canDealDamage = false;
     private List<GameObject> _damageHits = new List<GameObject>();
@@ -30,12 +30,22 @@ public class WeaponDamageDealer : MonoBehaviour
 
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLenght, enemyLayerMask))
+        if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLenght, hitLayerMask))
         {
             if (!_damageHits.Contains(hit.transform.gameObject))
             {
-                //Damage logic
-                Debug.Log("Hit damage");
+                Actor actor = (Actor)hit.transform.gameObject.GetComponent(typeof(Actor));
+                
+                if (actor == null)
+                    return;
+
+                if (actor.GetComponentInChildren(typeof(NPC)))
+                    if (!actor.GetComponentInChildren<NPC>().IsAlive)
+                        return;
+
+                actor.TakeDamage(GetComponentInParent<Weapon>().Damage, 
+                    GetComponentInParent<Weapon>().GetComponentInParent<Actor>().transform.gameObject);
+
                 _damageHits.Add(hit.transform.gameObject);
             }
         }

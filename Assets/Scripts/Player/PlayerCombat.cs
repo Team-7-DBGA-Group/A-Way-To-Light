@@ -14,6 +14,8 @@ public class PlayerCombat : MonoBehaviour
     private PlayerClimb playerClimb;
     [SerializeField]
     private PlayerMovement playerMovement;
+    [SerializeField]
+    private Player player;
 
     [Header("Attack Settings")]
     [SerializeField]
@@ -32,8 +34,8 @@ public class PlayerCombat : MonoBehaviour
             !playerAim.IsAiming &&
             !playerClimb.IsClimbing &&
             playerMovement.IsGrounded &&
-            _canAttack
-            /* && IsWeaponEquip */ 
+            _canAttack 
+            && player.IsWeaponEquip 
             && !DialogueManager.Instance.IsDialoguePlaying)
         {
             playerMovement.CanMove = false;
@@ -43,11 +45,11 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
-        StartCoroutine(COStartBetweenShotCooldown());
+        StartCoroutine(COStartBetweenAttackCooldown());
         OnAttack?.Invoke();
     }
 
-    private IEnumerator COStartBetweenShotCooldown()
+    private IEnumerator COStartBetweenAttackCooldown()
     {
         _canAttack = false;
         yield return new WaitForSeconds(attackCooldown);

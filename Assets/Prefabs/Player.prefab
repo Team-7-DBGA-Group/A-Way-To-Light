@@ -175,6 +175,7 @@ MonoBehaviour:
   maxHealth: 3
   knockbackDuration: 0.5
   knockbackSpeed: 5
+  knockbackRaycastLength: 1.5
 --- !u!114 &1219194888189311167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +290,7 @@ MonoBehaviour:
   playerAim: {fileID: 1219194888189311160}
   playerClimb: {fileID: 1219194888189311162}
   playerMovement: {fileID: 1219194888189311167}
+  player: {fileID: 1219194888189311166}
   attackCooldown: 2
 --- !u!1 &1219194888323405134
 GameObject:

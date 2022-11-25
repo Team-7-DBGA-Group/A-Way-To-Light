@@ -33,11 +33,12 @@ public abstract class Actor : MonoBehaviour
 
     public void TakeDamage(int damage, GameObject attacker)
     {
-        //if(damage<=0)
-        //    return;
+        if (damage <= 0)
+            return;
+
         CurrentHealth -= damage;
         OnHealthDamaged?.Invoke(damage);
-        _lastAttacker = attacker;
+        _lastAttacker =  attacker;
         Knockback();
         if (CurrentHealth <= 0)
             Die();
@@ -63,6 +64,7 @@ public abstract class Actor : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
         OnHealthInitialized?.Invoke(MaxHealth);
+        _lastAttacker = this.gameObject;
     }
 
     private void Knockback()
