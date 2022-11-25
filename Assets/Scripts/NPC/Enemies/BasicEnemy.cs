@@ -29,6 +29,8 @@ public class BasicEnemy : Enemy
         if (_target.GetComponent<PlayerClimb>().IsClimbing)
             return;
 
+        GetComponentInChildren<WeaponDamageDealer>().StartDealDamage();
+
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
 
         Animator.SetTrigger("Attack");

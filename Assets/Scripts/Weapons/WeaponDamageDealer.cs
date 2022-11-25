@@ -41,7 +41,7 @@ public class WeaponDamageDealer : MonoBehaviour
                     return;
 
                 if (actor is NPC && !((NPC)actor).IsAlive)
-                        return;
+                    return;
 
                 Weapon weapon = null;
                 weapon = GetComponentInParent<Weapon>();

@@ -11,6 +11,10 @@ public abstract class Enemy : NPC
     [SerializeField]
     private GameObject enemyUI = null;
 
+    [Header("Enemy Weapon")]
+    [SerializeField]
+    private GameObject wieldableWeaponPrefab = null;
+
     [Header("Enemy Settings")]
     [SerializeField]
     protected float AttackCooldown = 2.0f;
@@ -22,7 +26,7 @@ public abstract class Enemy : NPC
     protected float StunDuration = 1.5f;
     [SerializeField]
     private LayerMask playerLayer = new LayerMask();
-    
+
     protected bool CanAttack = true;
     protected bool IsStunned = false;
 
@@ -45,6 +49,12 @@ public abstract class Enemy : NPC
         StartCoroutine(COWaitStun());
     }
 
+    public override void Rise()
+    {
+        base.Rise();
+        SpawnWeapon();
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -59,7 +69,7 @@ public abstract class Enemy : NPC
 
     protected virtual void OnEnable()
     {
-        this.OnKnockbackEnter += () => { IsStunned = true; };
+        this.OnKnockbackEnter += () => { IsStunned = true; Animator.SetTrigger("Hit"); };
         this.OnKnockbackExit += () => { IsStunned = false; };
     }
 
@@ -90,5 +100,16 @@ public abstract class Enemy : NPC
         IsStunned = true;
         yield return new WaitForSeconds(StunDuration);
         IsStunned = false;
+    }
+
+    private void SpawnWeapon()
+    {
+        WeaponSlot _weaponSlot = gameObject.GetComponentInChildren<WeaponSlot>();
+
+        if (_weaponSlot == null)
+            return;
+
+        GameObject weaponObj = Instantiate(wieldableWeaponPrefab, _weaponSlot.transform);
+        weaponObj.transform.localRotation = wieldableWeaponPrefab.transform.localRotation;
     }
 }

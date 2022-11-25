@@ -100,7 +100,8 @@ public abstract class Actor : MonoBehaviour
             return;
 
         // Attacker -forward as direction
-        transform.Translate(transform.worldToLocalMatrix.MultiplyVector(_lastAttacker.transform.forward) * knockbackSpeed * Time.deltaTime);
+        if(_lastAttacker != null)
+            transform.Translate(transform.worldToLocalMatrix.MultiplyVector(_lastAttacker.transform.forward) * knockbackSpeed * Time.deltaTime);
        
     }
 }

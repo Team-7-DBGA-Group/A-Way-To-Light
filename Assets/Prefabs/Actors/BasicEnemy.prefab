@@ -546,6 +546,7 @@ MonoBehaviour:
   GlowMat: {fileID: 2100000, guid: 861b49b3bb1165448a2d36b95f10c152, type: 2}
   BlackMat: {fileID: -1580535799172915004, guid: e12400ac28b661e49aaf55ee2cb5c936, type: 3}
   enemyUI: {fileID: 4046261832137500544}
+  wieldableWeaponPrefab: {fileID: 197196925727653622, guid: 073a81212b750c94f82aed503a093d7e, type: 3}
   AttackCooldown: 2
   attackRange: 2
   combatRange: 13
@@ -762,6 +763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2976135805511078918}
+  - component: {fileID: 3533506869122412864}
   m_Layer: 8
   m_Name: handSlotRight
   m_TagString: Untagged
@@ -784,6 +786,18 @@ Transform:
   m_Father: {fileID: 2167690334976355202}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 67.53677, y: 5.3294296, z: -82.80112}
+--- !u!114 &3533506869122412864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861604052553648188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb40ff33af060c848bb9f2486bf7efce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4902084866095475119
 GameObject:
   m_ObjectHideFlags: 0
