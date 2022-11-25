@@ -28,6 +28,8 @@ public class PlayerLightShooting : MonoBehaviour
     private float betweenShotCooldown = 0.5f;
     [SerializeField]
     private int rayUnity = 1000;
+    [SerializeField]
+    private LayerMask rayLayer;
 
     private bool _canShoot = true;
 
@@ -60,10 +62,12 @@ public class PlayerLightShooting : MonoBehaviour
 
         // Check if it hits something, if not get the point in "rayUnit" amount of unit on the ray
         Vector3 targetPoint = Vector3.zero;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, rayLayer))
             targetPoint = hit.point;
         else
             targetPoint = ray.GetPoint(rayUnity);
+
+
 
         // Move
         shot.StartMovingToDirection((targetPoint - shotSpawnPostion.position).normalized * 10);
