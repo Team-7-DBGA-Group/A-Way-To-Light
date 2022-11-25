@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponDamageDealer : MonoBehaviour
 {
     [SerializeField]
-    private float weaponLenght;
+    private float weaponLength;
     [SerializeField]
     private LayerMask hitLayerMask;
 
@@ -32,7 +32,7 @@ public class WeaponDamageDealer : MonoBehaviour
 
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLenght, hitLayerMask))
+        if(Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, hitLayerMask))
         {
             if (!_damageHits.Contains(hit.transform.gameObject))
             {
@@ -61,6 +61,6 @@ public class WeaponDamageDealer : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLenght);
+        Gizmos.DrawLine(transform.position, transform.position - transform.up * weaponLength);
     }
 }
