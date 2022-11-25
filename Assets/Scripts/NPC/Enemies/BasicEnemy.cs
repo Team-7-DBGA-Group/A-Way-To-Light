@@ -34,7 +34,6 @@ public class BasicEnemy : Enemy
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
 
         Animator.SetTrigger("Attack");
-        //_target.GetComponent<Actor>().TakeDamage(0, gameObject);
         StartCoroutine(COStartAttackCooldown());
     }
 
@@ -96,5 +95,10 @@ public class BasicEnemy : Enemy
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
         EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
         Destroy(gameObject);
+    }
+
+    public void StopDealingDamage()
+    {
+        GetComponentInChildren<WeaponDamageDealer>().EndDealDamage();
     }
 }
