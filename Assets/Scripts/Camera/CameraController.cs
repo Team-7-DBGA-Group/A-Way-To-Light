@@ -13,12 +13,17 @@ public class CameraController : MonoBehaviour
     private GameObject playerMovementCamera;
     [SerializeField]
     private GameObject playerDialogueCamera;
+    [SerializeField]
+    private GameObject playerCombatCamera;
+
+    private bool _onCombat = false;
 
     private void Start()
     {
         playerAimCamera.SetActive(false);
         playerClimbCamera.SetActive(false);
         playerMovementCamera.SetActive(true);
+        playerCombatCamera.SetActive(false);
     }
 
     private void OnEnable()
@@ -29,6 +34,8 @@ public class CameraController : MonoBehaviour
         PlayerAim.OnAimInactive += AimInactiveCameras;
         PlayerClimb.OnClimbingEnter += ClimbingEnterCameras;
         PlayerClimb.OnClimbingExit += ClimbingExitCameras;
+        EnemyManager.OnCombatEnter += CombatEnterCameras;
+        EnemyManager.OnCombatExit += CombatExitCameras;
     }
 
     private void OnDisable()
@@ -39,6 +46,26 @@ public class CameraController : MonoBehaviour
         PlayerAim.OnAimInactive -= AimInactiveCameras;
         PlayerClimb.OnClimbingEnter -= ClimbingEnterCameras;
         PlayerClimb.OnClimbingExit -= ClimbingExitCameras;
+        EnemyManager.OnCombatEnter -= CombatEnterCameras;
+        EnemyManager.OnCombatExit -= CombatExitCameras;
+    }
+
+    private void CombatEnterCameras()
+    {
+        _onCombat = true;
+        playerCombatCamera.SetActive(true);
+        playerAimCamera.SetActive(false);
+        playerClimbCamera.SetActive(false);
+        playerMovementCamera.SetActive(false);
+    }
+
+    private void CombatExitCameras()
+    {
+        _onCombat = false;
+        playerCombatCamera.SetActive(false);
+        playerMovementCamera.SetActive(true);
+        playerClimbCamera.SetActive(false);
+        playerAimCamera.SetActive(false);
     }
 
     private void DialogueEnterCameras()
@@ -63,7 +90,8 @@ public class CameraController : MonoBehaviour
     private void AimInactiveCameras()
     {
         playerAimCamera.SetActive(false);
-        playerMovementCamera.SetActive(true);
+        if(!_onCombat)
+            playerMovementCamera.SetActive(true);
     }
 
     private void ClimbingEnterCameras()
@@ -76,6 +104,7 @@ public class CameraController : MonoBehaviour
     private void ClimbingExitCameras()
     {
         playerClimbCamera.SetActive(false);
-        playerMovementCamera.SetActive(true);
+        if (!_onCombat)
+            playerMovementCamera.SetActive(true);
     }
 }
