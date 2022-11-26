@@ -67,6 +67,6 @@ public class Player : Actor
 
     private void Update()
     {
-        Debug.DrawRay(transform.position + (-gameObject.transform.forward * 1.6f) + new Vector3(0,1f,0), Vector3.down * 10.0f, Color.red);
+        Debug.DrawRay(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0,1f,0), Vector3.down * 10.0f, Color.red);
     }
 }
