@@ -8,6 +8,10 @@ public class Player : Actor
 {
     public bool IsWeaponEquip { get => _currentEquipWeapon != null; }
 
+    [Header("Player Settings")]
+    [SerializeField]
+    private float dropRayDistance = 1.6f;
+
     private Weapon _currentEquipWeapon = null;
 
     public void Equip(Weapon w)
@@ -19,9 +23,15 @@ public class Player : Actor
     {
         if (!IsWeaponEquip)
             return;
-        GameObject pickableObj = Instantiate(_currentEquipWeapon.PickablePrefab, gameObject.transform.position + (-gameObject.transform.forward * 1.2f) + new Vector3(0, 0.07f, 0), Quaternion.identity);
-        pickableObj.transform.rotation = _currentEquipWeapon.PickablePrefab.transform.rotation;
-        pickableObj.GetComponent<PickableWeapon>().PassData(_currentEquipWeapon);
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            GameObject pickableObj = Instantiate(_currentEquipWeapon.PickablePrefab, hit.point, Quaternion.identity);
+            pickableObj.transform.forward = hit.collider.gameObject.transform.up;
+            pickableObj.transform.position += new Vector3(0, 0.07f, 0);
+            pickableObj.GetComponent<PickableWeapon>().PassData(_currentEquipWeapon);
+        }
 
         Destroy(_currentEquipWeapon.gameObject);
         _currentEquipWeapon = null;
@@ -53,5 +63,10 @@ public class Player : Actor
     {
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Game Over!");
         Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position + (-gameObject.transform.forward * 1.6f) + new Vector3(0,1f,0), Vector3.down * 10.0f, Color.red);
     }
 }
