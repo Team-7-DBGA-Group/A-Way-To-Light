@@ -34,6 +34,8 @@ public abstract class Enemy : NPC
     protected bool CanAttack = true;
     protected bool IsStunned = false;
 
+    private Vector3[] _directions = new Vector3[4];
+
     // State Machine
     protected FSMSystem FSM;
 
@@ -94,17 +96,16 @@ public abstract class Enemy : NPC
         if (!IsAlive)
             return;
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, combatRange, playerLayer);
-        if(hitColliders.Length > 0)
-        {
-            enemyUI.SetActive(true);
-        }
-        else
-        {
-            enemyUI.SetActive(false);
-        }
+        UpdateRaysDirections();
 
-        Debug.DrawRay(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down * 10.0f, Color.red);
+        ShowHealth();
+
+        // Draw Ray
+        foreach (Vector3 direction in _directions)
+        {
+            Debug.DrawRay(transform.position + (direction * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down * 10.0f, Color.red);
+            Debug.DrawRay(transform.position + new Vector3(0, 1f, 0), direction * dropRayDistance, Color.cyan);
+        }
     }
     protected IEnumerator COStartAttackCooldown()
     {
@@ -145,12 +146,46 @@ public abstract class Enemy : NPC
             return;
 
         Weapon weapon = wieldableWeaponPrefab.GetComponent<Weapon>();
+
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        foreach (Vector3 direction in _directions)
         {
-            GameObject pickableObj = Instantiate(weapon.PickablePrefab, hit.point, Quaternion.identity);
-            pickableObj.transform.forward = hit.collider.gameObject.transform.up;
-            pickableObj.transform.position += new Vector3(0, 0.07f, 0);
+            if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), direction, out hit, dropRayDistance))
+            {
+                Debug.Log("Hit with " + hit.collider.gameObject.name);
+                continue;
+            }
+            if (Physics.Raycast(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                GameObject pickableObj = Instantiate(weapon.PickablePrefab, hit.point, Quaternion.identity);
+                pickableObj.transform.forward = hit.collider.gameObject.transform.up;
+                pickableObj.transform.position += new Vector3(0, 0.07f, 0);
+                break;
+            }
+        }
+
+    }
+    private void UpdateRaysDirections()
+    {
+        if (!canDropWeapon)
+            return;
+
+        _directions[0] = -transform.forward;
+        _directions[1] = -transform.right;
+        _directions[2] = transform.right;
+        _directions[3] = transform.forward;
+    }
+
+    private void ShowHealth()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, combatRange, playerLayer);
+        if (hitColliders.Length > 0)
+        {
+            enemyUI.SetActive(true);
+        }
+        else
+        {
+            enemyUI.SetActive(false);
         }
     }
 }
