@@ -35,6 +35,15 @@ public class BasicEnemy : Enemy
         StartCoroutine(COStartAttackCooldown());
     }
 
+    public override void Die()
+    {
+        base.Die();
+        CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
+        EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
+        Destroy(gameObject);
+    }
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -86,13 +95,6 @@ public class BasicEnemy : Enemy
         }
 
         FSM.CurrentState.OnUpdate();
-    }
-
-    public override void Die()
-    {
-        CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
-        EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
-        Destroy(gameObject);
     }
 
     public void StopDealingDamage()

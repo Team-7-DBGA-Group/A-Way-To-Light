@@ -13,6 +13,10 @@ public abstract class Enemy : NPC
 
     [Header("Enemy Weapon")]
     [SerializeField]
+    private bool canDropWeapon = false;
+    [SerializeField]
+    private float dropRayDistance = 1.6f;
+    [SerializeField]
     private GameObject wieldableWeaponPrefab = null;
 
     [Header("Enemy Settings")]
@@ -48,6 +52,12 @@ public abstract class Enemy : NPC
 
         StartCoroutine(COWaitStun());
     }
+
+    public override void Die()
+    {
+        DropWeapon();
+    }
+
 
     public override void Rise()
     {
@@ -93,6 +103,8 @@ public abstract class Enemy : NPC
         {
             enemyUI.SetActive(false);
         }
+
+        Debug.DrawRay(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down * 10.0f, Color.red);
     }
     protected IEnumerator COStartAttackCooldown()
     {
@@ -126,4 +138,19 @@ public abstract class Enemy : NPC
     }
 
     private void HandleKnockbackExit() => IsStunned = false;
+
+    private void DropWeapon()
+    {
+        if (!canDropWeapon)
+            return;
+
+        Weapon weapon = wieldableWeaponPrefab.GetComponent<Weapon>();
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        {
+            GameObject pickableObj = Instantiate(weapon.PickablePrefab, hit.point, Quaternion.identity);
+            pickableObj.transform.forward = hit.collider.gameObject.transform.up;
+            pickableObj.transform.position += new Vector3(0, 0.07f, 0);
+        }
+    }
 }
