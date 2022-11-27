@@ -67,8 +67,6 @@ public class PlayerLightShooting : MonoBehaviour
         else
             targetPoint = ray.GetPoint(rayUnity);
 
-
-
         // Move
         shot.StartMovingToDirection((targetPoint - shotSpawnPostion.position).normalized * 10);
 

@@ -74,7 +74,6 @@ public class LightShot : MonoBehaviour
         {
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
-
             
             Destroy(this.gameObject);
         }
