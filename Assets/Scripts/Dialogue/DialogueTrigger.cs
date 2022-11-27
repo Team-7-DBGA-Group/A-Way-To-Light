@@ -23,15 +23,32 @@ public class DialogueTrigger : MonoBehaviour
     private bool _playerInRange;
     private GameObject _playerObj;
 
+    private bool _canTriggerDialogue = true;
+
+    public void EnableTriggerDialogue() => _canTriggerDialogue = true;
+    public void DisableTriggerDialogue() => _canTriggerDialogue = false;
+
     private void Awake() 
     {
         _playerInRange = false;
         visualCue.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        EnemyManager.OnCombatEnter += DisableTriggerDialogue;
+        EnemyManager.OnCombatExit += EnableTriggerDialogue;
+    }
+
+    private void OnDisable()
+    {
+        EnemyManager.OnCombatEnter -= DisableTriggerDialogue;
+        EnemyManager.OnCombatExit -= EnableTriggerDialogue;
+    }
+
     private void Update() 
     {
-        if (EnemyManager.Instance.CurrentEnemiesInCombat > 0)
+        if (!_canTriggerDialogue)
             return;
 
         if (_playerInRange && !DialogueManager.Instance.IsDialoguePlaying) 
