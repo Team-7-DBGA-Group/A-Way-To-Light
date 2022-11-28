@@ -24,11 +24,33 @@ public class FieldOfView : MonoBehaviour
     private float searchDelay = 0.2f;
 
     private GameObject _actorToFollow;
+    private Coroutine _COAim;
+
+    private void OnEnable()
+    {
+        EnemyManager.OnCombatEnter += OnStartAim;
+        EnemyManager.OnCombatExit += OnStopAim;
+    }
+
+    private void OnDisable()
+    {
+        EnemyManager.OnCombatEnter -= OnStartAim;
+        EnemyManager.OnCombatExit -= OnStopAim;
+    }
+
+    private void OnStartAim()
+    {
+        _COAim = StartCoroutine(COFovRoutine(searchDelay));
+    }
+
+    private void OnStopAim()
+    {
+        StopCoroutine(_COAim);
+    }
 
     private void Start()
     {
-        CanSeeActor = false;
-        StartCoroutine(COFovRoutine(searchDelay));    
+        CanSeeActor = false;    
     }
 
     private IEnumerator COFovRoutine(float delay)
