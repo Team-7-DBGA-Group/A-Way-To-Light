@@ -27,6 +27,7 @@ public class FieldOfView : MonoBehaviour
 
     private void Start()
     {
+        CanSeeActor = false;
         StartCoroutine(COFovRoutine(searchDelay));    
     }
 
@@ -57,7 +58,11 @@ public class FieldOfView : MonoBehaviour
                     float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstaclesMask))
-                        CanSeeActor = true;
+                    {
+                        NPC npc = _actorToFollow.GetComponentInParent(typeof(NPC)) as NPC;
+                        if(npc != null && npc.IsAlive)
+                            CanSeeActor = true;
+                    }
                     else
                     {
                         _actorToFollow = null;

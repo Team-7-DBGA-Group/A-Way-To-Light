@@ -22,10 +22,16 @@ public class PlayerCombat : MonoBehaviour
     private float attackCooldown = 3f;
 
     private bool _canAttack = true;
+    private FieldOfView _fov;
 
     public void AnimationFinished()
     {
         playerMovement.CanMove = true;
+    }
+
+    private void Start()
+    {
+        _fov = GetComponent<FieldOfView>();
     }
 
     private void Update()
@@ -39,6 +45,8 @@ public class PlayerCombat : MonoBehaviour
             && !DialogueManager.Instance.IsDialoguePlaying)
         {
             playerMovement.CanMove = false;
+            if (_fov.CanSeeActor)
+                transform.LookAt(_fov.ActorToFollow.transform);
             Attack();
         }
     }
