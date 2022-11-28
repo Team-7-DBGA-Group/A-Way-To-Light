@@ -8,7 +8,7 @@ public class FieldOfView : MonoBehaviour
     public bool CanSeeActor { get; private set; }
     public float Radius { get => radius; }
     public float Angle { get => angle; }
-    public GameObject ActorToFollow { get => actorToFollow; }
+    public GameObject ActorToFollow { get => _actorToFollow; }
 
     [Header("FOV Settings")]
     [SerializeField]
@@ -23,11 +23,7 @@ public class FieldOfView : MonoBehaviour
     [SerializeField]
     private float searchDelay = 0.2f;
 
-    [Header("References")]
-    [SerializeField]
-    private GameObject actorToFollow;
-
-    //private GameObject[] actors;
+    private GameObject _actorToFollow;
 
     private void Start()
     {
@@ -46,10 +42,7 @@ public class FieldOfView : MonoBehaviour
     private void FOVCheck()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
-        //for(int i = 0; i < rangeChecks.Length; i++)
-        //{
-
-        //}
+        
 
         if (rangeChecks.Length != 0)
         {
@@ -60,19 +53,29 @@ public class FieldOfView : MonoBehaviour
 
                 if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
                 {
-                    
+                    _actorToFollow = rangeChecks[i].gameObject;
                     float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstaclesMask))
                         CanSeeActor = true;
                     else
+                    {
+                        _actorToFollow = null;
                         CanSeeActor = false;
+                    }
+                    break;
                 }
                 else
+                {
+                    _actorToFollow = null;
                     CanSeeActor = false;
+                }
             }
         }
         else if (CanSeeActor)
+        {
+            _actorToFollow = null;
             CanSeeActor = false;
+        }
     }
 }
