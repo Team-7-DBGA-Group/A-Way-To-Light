@@ -34,6 +34,7 @@ public class PlayerClimb : MonoBehaviour
     private Vector3 _lastClimbCheckPos;
 
     private bool _eventFlag = false;
+    private Vector3 _lastNormal;
 
     private void Start()
     {
@@ -53,6 +54,7 @@ public class PlayerClimb : MonoBehaviour
                 RaycastHit raycastHit;
                 if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out raycastHit, Mathf.Infinity, climbableGroundCheck))
                     transform.rotation = Quaternion.LookRotation(-raycastHit.normal);
+                    
                 
                 if(_eventFlag == false)
                 {
@@ -96,10 +98,15 @@ public class PlayerClimb : MonoBehaviour
         {
             if (!playerMovementInstance.IsGrounded)
             {
-                if (groundCheck.transform.position.y <= _lastClimbCheckPos.y)
+                RaycastHit hit;
+                if (!Physics.Raycast(groundCheck.position, groundCheck.forward, out hit, 10f, climbableGroundCheck))
                 {
-                    transform.Translate(transform.up * 2 * Time.deltaTime);
+                    WasClimbing = false;
+                    _mustFloat = false;
+                    _canClimb = true;
                 }
+                if (groundCheck.transform.position.y <= _lastClimbCheckPos.y)
+                    transform.Translate(transform.up * 2 * Time.deltaTime);
                 transform.Translate(transform.worldToLocalMatrix.MultiplyVector(transform.forward) * 1 * Time.deltaTime);
             }
             else
