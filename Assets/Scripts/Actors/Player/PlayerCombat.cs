@@ -36,8 +36,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && 
-            !playerAim.IsAiming &&
+        if (!playerAim.IsAiming &&
+            InputManager.Instance.GetFirePressed() && 
             !playerClimb.IsClimbing &&
             playerMovement.IsGrounded &&
             _canAttack 

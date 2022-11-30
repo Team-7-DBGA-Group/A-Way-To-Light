@@ -88,11 +88,11 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded && _velocity.y < 0)
             _velocity.y = -2f;
 
-        _horizontalInput = Input.GetAxis("Horizontal");
-        _verticalInput = Input.GetAxis("Vertical");
+        _horizontalInput = InputManager.Instance.MoveDirectionPlayer.x; //Input.GetAxis("Horizontal");
+        _verticalInput = InputManager.Instance.MoveDirectionPlayer.y; //Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(_horizontalInput, 0f, _verticalInput).normalized;
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
+        if (InputManager.Instance.GetJumpPressed() && IsGrounded)
             _velocity.y = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
 
         if (!playerClimb.IsClimbing)
@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
             // Movimento del Player
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (InputManager.Instance.IsRunningPressed)
                 _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime * playerRunMultiplier);
             else
                 _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime);

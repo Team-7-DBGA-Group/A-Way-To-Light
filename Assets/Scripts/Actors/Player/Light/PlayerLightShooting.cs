@@ -45,7 +45,7 @@ public class PlayerLightShooting : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && playerAim.IsAiming && Charges > 0 && _canShoot)
+        if (InputManager.Instance.GetFirePressed() && playerAim.IsAiming && Charges > 0 && _canShoot)
         {
             Shot();
         }

@@ -44,13 +44,13 @@ public class PlayerAim : MonoBehaviour
         if (!_canAim)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (InputManager.Instance.IsAimPressedDown)
         {
             IsAiming = true;
             OnAimActive?.Invoke();
         }
 
-        if (Input.GetKeyUp(KeyCode.Mouse1))
+        if (InputManager.Instance.IsAimPressedUp)
         {
             IsAiming = false;
             OnAimInactive?.Invoke();

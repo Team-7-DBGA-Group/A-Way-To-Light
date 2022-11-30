@@ -70,7 +70,7 @@ public class DialogueManager : Singleton<DialogueManager>
         if (!IsDialoguePlaying) return;
 
         // Continue to next line
-        if (Input.GetKeyDown(KeyCode.K))
+        if (InputManager.Instance.GetContinueDialoguePressed())
         {
             if (_canShowNextLine)
                 ContinueStory();

@@ -54,7 +54,7 @@ public class DialogueTrigger : MonoBehaviour
         if (_playerInRange && !DialogueManager.Instance.IsDialoguePlaying) 
         {
             visualCue.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.F)) 
+            if (InputManager.Instance.GetInteractPressed()) 
             {
                 OnDialogueTriggered?.Invoke();
                 DialogueManager.Instance.EnterDialogueMode(inkJSON);
