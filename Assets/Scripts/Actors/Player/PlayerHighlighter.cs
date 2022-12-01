@@ -19,7 +19,11 @@ public class PlayerHighlighter : MonoBehaviour
         if(_lastOutlines.Count > 0)
         {
             foreach (Outline outline in _lastOutlines)
-                outline.enabled = false;
+            {
+                if(outline != null)
+                    outline.enabled = false;
+            }
+                
             _lastOutlines.Clear();
         }
 
