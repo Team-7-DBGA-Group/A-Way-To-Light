@@ -45,7 +45,7 @@ public class PlayerCombat : MonoBehaviour
             && !DialogueManager.Instance.IsDialoguePlaying)
         {
             playerMovement.CanMove = false;
-            if (_fov && _fov.CanSeeActor)
+            if (_fov && _fov.CanSeeActor && _fov.ActorToFollow != null)
                 transform.LookAt(_fov.ActorToFollow.transform);
             Attack();
         }
