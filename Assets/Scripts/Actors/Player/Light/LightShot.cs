@@ -39,21 +39,21 @@ public class LightShot : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IInteractable interactableObj = null;
-        if(other.gameObject.TryGetComponent(out interactableObj))
+        if (other.gameObject.TryGetComponent(out interactableObj))
         {
             IInteractable[] interactables = other.gameObject.GetComponents<IInteractable>();
 
             CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Light Shot interacted with " + other.gameObject.name);
-            
+
             foreach (IInteractable interactable in interactables)
                 interactable.Interact();
-            
+
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
 
             Destroy(this.gameObject);
         }
-        else if(other.gameObject.GetComponentInParent<IInteractable>() != null)
+        else if (other.gameObject.GetComponentInParent<IInteractable>() != null)
         {
             if (other.gameObject.GetComponent<DialogueTrigger>())
                 return;
@@ -70,7 +70,7 @@ public class LightShot : MonoBehaviour
 
             Destroy(this.gameObject);
         }
-        else if(other != null && !other.gameObject.tag.Equals("Player") && other != this.gameObject.GetComponent<Collider>())
+        else if (other != null && !other.gameObject.tag.Equals("Player") && other != this.gameObject.GetComponent<Collider>() && !other.gameObject.tag.Equals("DialogueTrigger"))
         {
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
