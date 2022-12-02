@@ -5,12 +5,14 @@ using System;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public event Action OnDialogueTriggered;
+    public event Action<GameObject> OnDialogueTriggered;
 
     [Header("Dialogue Object")]
     [Tooltip("Object for LookAt")]
     [SerializeField]
     private GameObject dialogueObj;
+    [SerializeField]
+    private bool shouldPlayerLookDialogueObj = true;
 
     [Header("Visual Cue")]
     [SerializeField] 
@@ -56,9 +58,11 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(true);
             if (InputManager.Instance.GetInteractPressed()) 
             {
-                OnDialogueTriggered?.Invoke();
+                OnDialogueTriggered?.Invoke(_playerObj);
                 DialogueManager.Instance.EnterDialogueMode(inkJSON);
-                _playerObj.transform.LookAt(transform, Vector3.up);
+
+                if(shouldPlayerLookDialogueObj)
+                    _playerObj.transform.LookAt(transform, Vector3.up);
 
                 if(dialogueObj != null)
                     dialogueObj.transform.LookAt(_playerObj.transform, Vector3.up);

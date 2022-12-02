@@ -52,6 +52,8 @@ public class UIHealthPanel : MonoBehaviour
     {
         if (!_isInit)
             return;
+        if (_lostHearts.Count <= 0)
+            return;
 
         UIHeart heart = _lostHearts.Pop();
         heart.Fill();
