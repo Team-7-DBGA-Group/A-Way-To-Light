@@ -106,4 +106,18 @@ public class BasicEnemy : Enemy
     {
         GetComponentInChildren<WeaponDamageDealer>().StartDealDamage();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("DeathZone"))
+        {
+            StartCoroutine(CODie());
+        }
+    }
+
+    IEnumerator CODie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Die();
+    }
 }
