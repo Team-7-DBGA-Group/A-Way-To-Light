@@ -95,4 +95,18 @@ public class Player : Actor
         _directions[2] = transform.right;
         _directions[3] = transform.forward;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("DeathZone"))
+        {
+            StartCoroutine(CODie());
+        }
+    }
+
+    IEnumerator CODie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Die();
+    }
 }
