@@ -98,7 +98,7 @@ public class Player : Actor
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("DeathZone"))
+        if (other.gameObject.CompareTag("DeathZone"))
         {
             StartCoroutine(CODie());
         }
