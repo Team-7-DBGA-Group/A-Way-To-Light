@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0026660387, g: 0.0427918, b: 0.12441749, a: 1}
+  m_IndirectSpecularColor: {r: 0.0026985968, g: 0.043044984, b: 0.12459092, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3857,9 +3857,10 @@ GameObject:
   - component: {fileID: 963707079}
   - component: {fileID: 963707078}
   - component: {fileID: 963707077}
+  - component: {fileID: 963707081}
   m_Layer: 6
   m_Name: Lake
-  m_TagString: DeathZone
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3943,6 +3944,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963707081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963707076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02b79e409d13be24baf0b7d87242d74d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathDelay: 1
 --- !u!1 &982049110
 GameObject:
   m_ObjectHideFlags: 0

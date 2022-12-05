@@ -20,6 +20,11 @@ public class BasicEnemy : Enemy
         EnemyManager.Instance.RegisterInCombatEnemy(this.GetHashCode(), this);
     }
 
+    public void StopMovement()
+    {
+        _agent.isStopped = true;
+    }
+
     public override void Attack()
     {
         if (!CanAttack)
@@ -105,19 +110,5 @@ public class BasicEnemy : Enemy
     public void DealDamage()
     {
         GetComponentInChildren<WeaponDamageDealer>().StartDealDamage();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("DeathZone"))
-        {
-            StartCoroutine(CODie());
-        }
-    }
-
-    IEnumerator CODie()
-    {
-        yield return new WaitForSeconds(1.0f);
-        Die();
     }
 }

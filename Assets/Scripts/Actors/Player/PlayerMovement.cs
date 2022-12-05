@@ -44,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
     private float _turnSmoothVelocity;
 
     private Vector3 _velocity;
+    public void StopMovement()
+    {
+        CanMove = false;
+        _characterController.Move(Vector3.zero);
+    }
 
     private void Start()
     {
@@ -118,12 +123,6 @@ public class PlayerMovement : MonoBehaviour
                 _characterController.Move(moveDir.normalized * playerSpeed * Time.deltaTime);
 
         }
-    }
-
-    private void StopMovement()
-    {
-        CanMove = false; 
-        _characterController.Move(Vector3.zero);
     }
 
     private void BeginMovement() => CanMove = true;
