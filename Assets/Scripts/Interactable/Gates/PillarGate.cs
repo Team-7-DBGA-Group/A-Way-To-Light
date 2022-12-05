@@ -8,12 +8,8 @@ public class PillarGate : Gate
     [SerializeField]
     private Animator animator = null;
 
-    [Header("Settings")]
-    [SerializeField]
-    private string stateName = "";
-
     protected override void GateOpenedAction()
     {
-        animator.Play(stateName);
+        animator.SetTrigger("Open");
     }
 }

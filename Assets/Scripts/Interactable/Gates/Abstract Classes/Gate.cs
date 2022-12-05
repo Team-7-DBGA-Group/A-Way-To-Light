@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Gate : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField]
     private List<GateKey> gateKeys = new List<GateKey>();
 
