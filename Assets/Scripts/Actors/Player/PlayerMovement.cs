@@ -4,6 +4,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public bool IsGrounded { get; private set; }
     public bool CanMove { get; set; }
+    public float PlayerSpeed { get => playerSpeed; set { playerSpeed = value; } }
+    public float JumpHeight { get => jumpHeight; set { jumpHeight = value; } }
 
     [Header("References")]
     [SerializeField]
