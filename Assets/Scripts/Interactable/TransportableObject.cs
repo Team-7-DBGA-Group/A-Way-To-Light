@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TransportableObject : MonoBehaviour, IInteractable
 {
-    public bool OnTransport { get; private set; }
+    public bool IsTransporting { get; private set; }
 
     [SerializeField]
     private List<Transform> waypoints = new List<Transform>();
@@ -32,16 +32,16 @@ public class TransportableObject : MonoBehaviour, IInteractable
         _canObjectMove = true;
     }
 
-    public void setTransport(GameObject player)
+    public void SetTransport(GameObject player)
     {
         _playerRef = player;
-        OnTransport = true;
+        IsTransporting = true;
     }
 
-    public void exitTransport()
+    public void ExitTransport()
     {
         _playerRef = null;
-        OnTransport = false;
+        IsTransporting = false;
     }
 
     private void Start()

@@ -132,6 +132,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.transform.CompareTag("Transport"))
-            hit.transform.gameObject.GetComponent<TransportableObject>().setTransport(this.gameObject);
+            hit.transform.gameObject.GetComponent<TransportableObject>().SetTransport(this.gameObject);
     }
 }
