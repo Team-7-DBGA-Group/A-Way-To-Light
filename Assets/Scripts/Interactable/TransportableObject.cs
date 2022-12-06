@@ -14,12 +14,12 @@ public class TransportableObject : MonoBehaviour, IInteractable
     private float objectSpeed = 2f; 
 
     private GameObject _playerRef;
-    private PlayerMovement _playerMovementRef;
     private int _waypointIndex;
     private bool _canObjectMove = false;
 
     public void Interact()
     {
+
         if (_canObjectMove)
             return;
 
@@ -38,12 +38,11 @@ public class TransportableObject : MonoBehaviour, IInteractable
         IsTransporting = true;
     }
 
-    public void ExitTransport()
+    public void StopTransport()
     {
         _playerRef = null;
         IsTransporting = false;
     }
-
     private void Start()
     {
         _waypointIndex = 0;
@@ -60,15 +59,14 @@ public class TransportableObject : MonoBehaviour, IInteractable
         
         if(Vector3.Distance(transform.position, waypoints[_waypointIndex].position) < 0.1f)
         {
-            transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
-            
-            if(_playerRef != null)
+            if (_playerRef != null)
             {
                 _playerRef.GetComponent<PlayerMovement>().CanMove = true;
                 _playerRef.transform.parent = null;
                 _playerRef = null;
             }
 
+            transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
             _canObjectMove = false;
         }
     }
