@@ -7,20 +7,18 @@ public class TransportableObject : MonoBehaviour
 {
     [SerializeField]
     private bool _onTransport = false;
-    [SerializeField]
-    
     // Start is called before the first frame update
     // LUCA TI MOLLO L'OSSO NON RICONOSCE LA COLLISIONE CON LA BARCA, LE HO PROVATE TUTTE
     private void Update()
     {
         if(_onTransport)
         {
-            _player.transform.SetParent(gameObject.transform);
+            //_player.transform.SetParent(gameObject.transform);
         }
         
         else
         {
-            _player.transform.SetParent(null);
+           // _player.transform.SetParent(null);
         }
 
     }
