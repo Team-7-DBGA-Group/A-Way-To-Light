@@ -11,7 +11,9 @@ public class TransportableObject : MonoBehaviour, IInteractable
     private List<Transform> waypoints = new List<Transform>();
 
     [SerializeField]
-    private float objectSpeed = 2f; 
+    private float objectSpeed = 2f;
+    [SerializeField]
+    private bool lookAtWaypoints = true;
 
     private GameObject _playerRef;
     private int _waypointIndex;
@@ -47,7 +49,8 @@ public class TransportableObject : MonoBehaviour, IInteractable
     {
         _waypointIndex = 0;
         transform.position = waypoints[_waypointIndex].position;
-        transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
+        if (lookAtWaypoints)
+            transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
     }
 
     private void Update()
@@ -65,8 +68,8 @@ public class TransportableObject : MonoBehaviour, IInteractable
                 _playerRef.transform.parent = null;
                 _playerRef = null;
             }
-
-            transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
+            if(lookAtWaypoints)
+                transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
             _canObjectMove = false;
         }
     }
