@@ -13,10 +13,11 @@ public class DeathZone : MonoBehaviour
         Actor actor = null;
         if(other.gameObject.TryGetComponent(out actor))
         {
-            actor.GetComponent<PlayerMovement>().PlayerSpeed = 0.6f;
-            actor.GetComponent<PlayerMovement>().JumpHeight = 0.4f;
+            PlayerMovement playerMovement = actor.GetComponent<PlayerMovement>();
+            playerMovement.PlayerSpeed = 0.6f;
+            playerMovement.JumpHeight = 0.4f;
+
             StartCoroutine(COLateDie(actor));
-            
         }
     }
     private IEnumerator COLateDie(Actor actor)
