@@ -15,6 +15,8 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField]
     private PlayerMovement playerMovement;
     [SerializeField]
+    private FieldOfView fov;
+    [SerializeField]
     private Player player;
 
     [Header("Attack Settings")]
@@ -22,31 +24,25 @@ public class PlayerCombat : MonoBehaviour
     private float attackCooldown = 3f;
 
     private bool _canAttack = true;
-    private FieldOfView _fov = null;
 
     public void AnimationFinished()
     {
         playerMovement.CanMove = true;
     }
 
-    private void Start()
-    {
-        TryGetComponent<FieldOfView>(out _fov);
-    }
-
     private void Update()
     {
         if (!playerAim.IsAiming &&
-            InputManager.Instance.GetFirePressed() && 
             !playerClimb.IsClimbing &&
             playerMovement.IsGrounded &&
             _canAttack 
             && player.IsWeaponEquip 
-            && !DialogueManager.Instance.IsDialoguePlaying)
+            && !DialogueManager.Instance.IsDialoguePlaying
+            && InputManager.Instance.GetFirePressed())
         {
             playerMovement.CanMove = false;
-            if (_fov && _fov.CanSeeActor && _fov.ActorToFollow != null)
-                transform.LookAt(_fov.ActorToFollow.transform);
+            if (fov && fov.CanSeeActor && fov.ActorToFollow != null)
+                transform.LookAt(fov.ActorToFollow.transform);
             Attack();
         }
     }

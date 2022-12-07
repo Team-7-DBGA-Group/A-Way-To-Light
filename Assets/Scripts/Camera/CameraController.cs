@@ -24,6 +24,7 @@ public class CameraController : MonoBehaviour
         playerClimbCamera.SetActive(false);
         playerMovementCamera.SetActive(true);
         playerCombatCamera.SetActive(false);
+        playerDialogueCamera.SetActive(false);
     }
 
     private void OnEnable()
