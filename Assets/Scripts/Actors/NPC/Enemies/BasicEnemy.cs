@@ -91,6 +91,9 @@ public class BasicEnemy : Enemy
         if (!IsAlive)
             return;
 
+        if (_target == null)
+            return;
+
         // Stop Movement if stunned
         if (FSM.CurrentState == _followingTargetState)
         {
