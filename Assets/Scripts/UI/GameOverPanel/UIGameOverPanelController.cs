@@ -38,7 +38,6 @@ public class UIGameOverPanelController : MonoBehaviour
 
     private void CallSceneReset()
     {
-        // Call Reset Method from Game Manager
-        Debug.Log("Reset HERE");
+        GameManager.Instance.ResetGameScene();
     }
 }
