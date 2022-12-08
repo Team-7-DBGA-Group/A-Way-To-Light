@@ -13,6 +13,8 @@ public class UIGameOverPanel : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    public void InvokePanelCloseEvent() => OnPanelClose?.Invoke();
+
     public void Open()
     {
         if (IsOpen)
@@ -22,24 +24,17 @@ public class UIGameOverPanel : MonoBehaviour
         animator.SetTrigger("Open");
     }
 
-    private void Close()
+    public void Close()
     {
         if (!IsOpen)
             return;
 
         IsOpen = false;
         animator.SetTrigger("Close");
-        StartCoroutine(COInvokePanelCloseEvent());
     }
 
     private void Start()
     {
         IsOpen = false;
-    }
-
-    private IEnumerator COInvokePanelCloseEvent()
-    {
-        yield return new WaitForSeconds(1.0f);
-        OnPanelClose?.Invoke();
     }
 }

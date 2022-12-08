@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0026984399, g: 0.04309552, b: 0.12475796, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027385866, g: 0.043092005, b: 0.12472519, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2832,8 +2832,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727870829}
-  m_LocalRotation: {x: 0.21846896, y: -0.39807943, z: 0.09821042, w: 0.88552743}
-  m_LocalPosition: {x: 0.33188748, y: 0.100000024, z: 0.37396616}
+  m_LocalRotation: {x: 0.047238555, y: -0.35068297, z: 0.017714841, w: 0.9351343}
+  m_LocalPosition: {x: 6.31, y: 1.4899997, z: -5.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4679,7 +4679,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 47
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1139560454 stripped
 GameObject:
@@ -6321,7 +6321,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 48
+  m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1691928715
 GameObject:
@@ -7567,7 +7567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 609150047536952576, guid: fd2b5305375263a42b43ab58bfe0c8bf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 609150047536952577, guid: fd2b5305375263a42b43ab58bfe0c8bf, type: 3}
       propertyPath: m_Pivot.x
@@ -8525,7 +8525,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4275532370483411697, guid: 5e96fc2e855e79c47a057185f5e613f6, type: 3}
       propertyPath: m_RootOrder
-      value: 46
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 4275532370483411697, guid: 5e96fc2e855e79c47a057185f5e613f6, type: 3}
       propertyPath: m_LocalPosition.x
