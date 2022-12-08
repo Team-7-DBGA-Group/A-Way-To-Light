@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private float playerRunMultiplier = 1.25f;
     [SerializeField]
     private float turnSmoothTime = 0.1f;
+    [SerializeField]
+    private Transform mainCameraTransform = null;
 
     [Header("Jump settings")]
     [SerializeField]
@@ -109,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         if (direction.magnitude >= 0.1 && !playerAim.IsAiming && !playerClimb.IsClimbing)
         {
             // Calcolo rotazione player tenendo conto di dove sta guardando la camera
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCameraTransform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 

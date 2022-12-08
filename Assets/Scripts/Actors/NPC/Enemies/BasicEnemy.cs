@@ -47,24 +47,23 @@ public class BasicEnemy : Enemy
         EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
         Destroy(gameObject);
     }
-    public void StopDealingDamage()
-    {
-        GetComponentInChildren<WeaponDamageDealer>().EndDealDamage();
-    }
 
-    public void DealDamage()
-    {
-        GetComponentInChildren<WeaponDamageDealer>().StartDealDamage();
-    }
 
     protected override void Awake()
     {
         base.Awake();
 
-        //_target = FindObjectOfType<Player>().transform;
+        _target = FindObjectOfType<Player>().transform;
         _agent = GetComponent<NavMeshAgent>();
 
         _agent.enabled = false;
+
+        FSM = new FSMSystem();
+        _followingTargetState = new FollowingTargetState(_target, _agent);
+        _enemyAttackingState = new EnemyAttackingState(this);
+        
+        FSM.AddState(_followingTargetState);
+        FSM.AddState(_enemyAttackingState);
     }
 
     protected override void Start()
@@ -72,26 +71,10 @@ public class BasicEnemy : Enemy
         base.Start();
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        SpawnManager.OnPlayerSpawn += SetupFSM;
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        SpawnManager.OnPlayerSpawn -= SetupFSM;
-    }
-
     protected override void Update()
     {
         base.Update();
-
         if (!IsAlive)
-            return;
-
-        if (_target == null)
             return;
 
         // Stop Movement if stunned
@@ -119,15 +102,13 @@ public class BasicEnemy : Enemy
         FSM.CurrentState.OnUpdate();
     }
 
-    private void SetupFSM(GameObject playerObj)
+    public void StopDealingDamage()
     {
-        _target = playerObj.transform;
+        GetComponentInChildren<WeaponDamageDealer>().EndDealDamage();
+    }
 
-        FSM = new FSMSystem();
-        _followingTargetState = new FollowingTargetState(_target, _agent);
-        _enemyAttackingState = new EnemyAttackingState(this);
-
-        FSM.AddState(_followingTargetState);
-        FSM.AddState(_enemyAttackingState);
+    public void DealDamage()
+    {
+        GetComponentInChildren<WeaponDamageDealer>().StartDealDamage();
     }
 }
