@@ -15,6 +15,11 @@ public class UIGameOverPanelController : MonoBehaviour
         gameOverPanel.Close();
     }
 
+    public void QuitGame()
+    {
+        GameManager.Instance.QuitGame();
+    }
+
     private void OnEnable()
     {
         Player.OnPlayerDie += ShowGameOverPanel;

@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene("ProgrammersTest");
     }
 
-    public void ExitGame()
+    public void QuitGame()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Quit called");
         Application.Quit();
