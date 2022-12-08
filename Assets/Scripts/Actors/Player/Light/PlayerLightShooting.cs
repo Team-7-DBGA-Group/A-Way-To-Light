@@ -15,8 +15,6 @@ public class PlayerLightShooting : MonoBehaviour
     [SerializeField]
     private PlayerAim playerAim;
     [SerializeField]
-    private Camera mainCamera;
-    [SerializeField]
     private Transform shotSpawnPostion;
 
     [Header("Shot Settings")]
@@ -45,7 +43,7 @@ public class PlayerLightShooting : MonoBehaviour
 
     private void Update()
     {
-        if (InputManager.Instance.GetFirePressed() && playerAim.IsAiming && Charges > 0 && _canShoot)
+        if (playerAim.IsAiming && Charges > 0 && _canShoot && InputManager.Instance.GetFirePressed())
         {
             Shot();
         }
@@ -57,7 +55,7 @@ public class PlayerLightShooting : MonoBehaviour
         LightShot shot = shotObj.GetComponent<LightShot>();
 
         // Create a ray from the camera going through the middle of your screen
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         // Check if it hits something, if not get the point in "rayUnit" amount of unit on the ray
