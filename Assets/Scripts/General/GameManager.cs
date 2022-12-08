@@ -6,10 +6,14 @@ using Utils;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Settings")]
+    [SerializeField]
+    private string gameSceneName = "Prototype";
+
     public void ResetGameScene()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
-        SceneManager.LoadScene("ProgrammersTest");
+        SceneManager.LoadScene(gameSceneName);
     }
 
     public void QuitGame()
