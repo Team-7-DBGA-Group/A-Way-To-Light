@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Utils;
+using System;
 
 public class Player : Actor
 {
+    public static event Action OnPlayerDie;
     public bool IsWeaponEquip { get => _currentEquipWeapon != null; }
 
     [Header("Player Settings")]
@@ -73,6 +75,7 @@ public class Player : Actor
     public override void Die()
     {
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Game Over!");
+        OnPlayerDie?.Invoke();
         Destroy(gameObject);
     }
 
