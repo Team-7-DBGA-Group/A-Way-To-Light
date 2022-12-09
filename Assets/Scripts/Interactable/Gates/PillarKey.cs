@@ -7,6 +7,8 @@ public class PillarKey : GateKey
     [Header("References")]
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private string animationName = "";
 
     [Header("Materials settings")]
     [SerializeField]
@@ -25,6 +27,6 @@ public class PillarKey : GateKey
     protected override void CustomInteraction()
     {
         _meshRenderer.material = OnMaterial;
-        animator.SetTrigger("Rotate");
+        animator.SetTrigger(animationName);
     }
 }
