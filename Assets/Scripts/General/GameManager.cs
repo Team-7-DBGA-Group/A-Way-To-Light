@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utils;
 
 public class GameManager : Singleton<GameManager>
@@ -13,12 +12,12 @@ public class GameManager : Singleton<GameManager>
     public void ResetGameScene()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
-        SceneManager.LoadScene(gameSceneName);
+        NavigationManager.Instance.ChangeScene(gameSceneName);
     }
 
     public void QuitGame()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Quit called");
-        Application.Quit();
+        NavigationManager.Instance.QuitGame();
     }
 }

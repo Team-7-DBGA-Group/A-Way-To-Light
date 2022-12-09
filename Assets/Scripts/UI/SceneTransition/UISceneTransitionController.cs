@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UISceneTransitionController : MonoBehaviour
+public class UISceneTransitionController : Singleton<UISceneTransitionController>
 {
+    public UISceneTransition Transition { get => transition; }
+
     [Header("View References")]
     [SerializeField]
     private UISceneTransition transition;
@@ -15,15 +17,18 @@ public class UISceneTransitionController : MonoBehaviour
     [SerializeField]
     private UnityEvent OnCloseTransitionEnded;
 
+    public void OpenTransition() => transition.Open();
+
     private void OnEnable()
     {
        transition.OnOpenTransitionEnded += CallOpenEvents;
        transition.OnCloseTransitionEnded += CallCloseEvents;
-       
     }
 
     private void OnDisable()
     {
+        if (!this.gameObject.scene.isLoaded)
+            return;
         transition.OnOpenTransitionEnded -= CallOpenEvents;
         transition.OnCloseTransitionEnded -= CallCloseEvents;
     }

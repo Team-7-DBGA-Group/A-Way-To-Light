@@ -17,6 +17,6 @@ public class InitManager : Singleton<InitManager>
 
     private void LoadGame()
     {
-        SceneManager.LoadScene("Prototype");
+        NavigationManager.Instance.ChangeScene("Prototype");
     }
 }
