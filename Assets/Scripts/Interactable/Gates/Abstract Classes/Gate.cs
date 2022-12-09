@@ -8,15 +8,15 @@ public abstract class Gate : MonoBehaviour
     [SerializeField]
     private List<GateKey> gateKeys = new List<GateKey>();
 
+    private int _keyNum = 0;
+    private int _currentKeyNum = 0;
     protected abstract void GateOpenedAction();
 
     public void OpenCheck()
     {
-        foreach(GateKey gateKey in gateKeys)
-        {
-            if (gateKey != null && !gateKey.IsKeyActive)
-                return;
-        }
+        _currentKeyNum++;
+        if (_currentKeyNum != _keyNum)
+            return;
         GateOpenedAction();
     }
 
@@ -25,7 +25,10 @@ public abstract class Gate : MonoBehaviour
         foreach (GateKey key in gateKeys)
         {
             if(key != null)
+            {
                 key.SetGate(this);
+                _keyNum++;
+            }
         }
     }
 }
