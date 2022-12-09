@@ -44,7 +44,6 @@ public class NavigationManager : Singleton<NavigationManager>
     private IEnumerator COLoadSceneAsync(string sceneName)
     {
         IsLoadingScene = true;
-        yield return new WaitForSeconds(1.0f);
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         _sceneNameToBeLoaded = "";
         yield return async;
