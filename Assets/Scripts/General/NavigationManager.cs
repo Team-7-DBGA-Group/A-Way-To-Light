@@ -10,6 +10,8 @@ public class NavigationManager : Singleton<NavigationManager>
     private string _sceneNameToBeLoaded = "";
 
     public void QuitGame() => Application.Quit();
+    
+    public void OpenSurvey() => Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdZsJ465OSGwVLCUJm4jvJIVWhfzw4nso7EGf0JpCkrwWdTzQ/viewform");
 
     public void ChangeScene(string sceneName)
     {
