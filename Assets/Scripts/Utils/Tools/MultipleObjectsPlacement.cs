@@ -12,7 +12,7 @@ public class MultipleObjectsPlacement : EditorWindow
 
     private Vector3 _direction = Vector3.zero;
     private Vector3 _position = Vector3.zero;
-    private Vector3 _rotation = Vector3.one;
+    private Vector3 _rotation = Vector3.zero;
 
     [MenuItem("Tools/Multiple Objects Placement")]
     public static void StartEditor()
