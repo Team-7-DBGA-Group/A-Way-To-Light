@@ -102,18 +102,12 @@ public partial class DevControlEditorTool : EditorWindow
             return;
         }
 
-        UICutscenePanel panel = null;
-        if (!cutsceneAnimator.TryGetComponent(out panel))
-        {
-            TakeScreenshot(_screenshotPath);
-            return;
-        }
-
-        if (panel.IsOpen)
-        {
-            TakeScreenshot(_screenshotPath);
-            return;
-        }
+        // TO-DO:
+        // if(CutsceneManager.Instance.IsInCinematic)
+        // {
+        //      TakeScreenshot(_screenshotPath);
+        //      return;
+        // }
 
         object coroutineObject = new object();
         EditorCoroutineUtility.StartCoroutine(COCutsceneScreenshot(), coroutineObject);
