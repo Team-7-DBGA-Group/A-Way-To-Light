@@ -12,20 +12,30 @@ public class DeathZone : MonoBehaviour
     [SerializeField]
     private float waterJumpHeight = 0.4f;
 
+    private bool _isDying = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        Actor actor = null;
-        if(other.gameObject.TryGetComponent(out actor))
-        {
-            PlayerMovement playerMovement = actor.GetComponent<PlayerMovement>();
-            playerMovement.PlayerSpeed = waterPlayerSpeed;
-            playerMovement.JumpHeight = waterJumpHeight;
+        if (_isDying)
+            return;
 
+        Actor actor = null;
+        actor = other.GetComponentInParent<Actor>();
+        if(actor != null || other.gameObject.TryGetComponent(out actor))
+        {
+            if (actor is Player)
+            {
+                PlayerMovement playerMovement = actor.GetComponent<PlayerMovement>();
+                playerMovement.PlayerSpeed = waterPlayerSpeed;
+                playerMovement.JumpHeight = waterJumpHeight;
+            }
+            
             StartCoroutine(COLateDie(actor));
         }
     }
     private IEnumerator COLateDie(Actor actor)
     {
+        _isDying = true;
         yield return new WaitForSeconds(deathDelay);
         actor.Die();
     }
