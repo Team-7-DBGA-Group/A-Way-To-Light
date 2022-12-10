@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using Utils;
+using Unity.EditorCoroutines.Editor;
 
 public partial class DevControlEditorTool : EditorWindow
 {
+    [SerializeField]
+    private Animator cutsceneAnimator = null;
+
+    private SerializedProperty _cutsceneAnimatorSerialized  = null;
     private string _screenshotPath = "";
+
+    private bool _isCutscene = false;
+    private bool _isTakingCutsceneScreenshot = false;
 
     private void DrawScreenshotTool()
     {
@@ -19,10 +27,27 @@ public partial class DevControlEditorTool : EditorWindow
         _screenshotPath = EditorGUILayout.TextField(_screenshotPath);
         EditorGUILayout.EndHorizontal();
 
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Cutscene borders: ");
+        _isCutscene = EditorGUILayout.Toggle(_isCutscene);
+        EditorGUILayout.EndHorizontal();
+
+        if (_isCutscene)
+        {
+            _serializedObject.Update();
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PropertyField(_cutsceneAnimatorSerialized, true);
+            EditorGUILayout.EndHorizontal();
+        }    
+
         EditorGUILayout.Separator();
         if (GUILayout.Button("Take Screenshot"))
         {
-            TakeScreenshot(_screenshotPath);
+            if (_isCutscene)
+                TakeScreenshotCutscene(_screenshotPath);
+            else
+                TakeScreenshot(_screenshotPath);
         }
         EditorGUILayout.EndVertical();
     }
@@ -64,5 +89,44 @@ public partial class DevControlEditorTool : EditorWindow
 
             CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Screenshot taken and saved at the current path: " + fileName);
         }
+    }
+    
+    private void TakeScreenshotCutscene(string path)
+    {
+        if (_isTakingCutsceneScreenshot)
+            return;
+
+        if (!Application.isPlaying)
+        {
+            TakeScreenshot(_screenshotPath);
+            return;
+        }
+
+        UICutscenePanel panel = null;
+        if (!cutsceneAnimator.TryGetComponent(out panel))
+        {
+            TakeScreenshot(_screenshotPath);
+            return;
+        }
+
+        if (panel.IsOpen)
+        {
+            TakeScreenshot(_screenshotPath);
+            return;
+        }
+
+        object coroutineObject = new object();
+        EditorCoroutineUtility.StartCoroutine(COCutsceneScreenshot(), coroutineObject);
+    }
+
+    private IEnumerator COCutsceneScreenshot()
+    {
+        cutsceneAnimator.SetTrigger("Open");
+        _isTakingCutsceneScreenshot = true;
+        yield return new EditorWaitForSeconds(1.5f);
+        TakeScreenshot(_screenshotPath);
+        yield return new EditorWaitForSeconds(0.5f);
+        cutsceneAnimator.SetTrigger("Close");
+        _isTakingCutsceneScreenshot = false;
     }
 }

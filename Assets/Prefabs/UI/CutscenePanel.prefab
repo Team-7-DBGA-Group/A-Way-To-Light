@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4233197454931073274}
   - component: {fileID: 4233197454931073221}
+  - component: {fileID: 8989512047878636605}
   m_Layer: 5
   m_Name: CutscenePanel
   m_TagString: Untagged
@@ -59,6 +60,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8989512047878636605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4233197454931073275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4063725effd52554b9395aa7354ad322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4233197454931073221}
 --- !u!1 &4233197455219019532
 GameObject:
   m_ObjectHideFlags: 0

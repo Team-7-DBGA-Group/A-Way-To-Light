@@ -5,6 +5,8 @@ using UnityEditor;
 
 public partial class DevControlEditorTool : EditorWindow
 {
+    private SerializedObject _serializedObject;
+
     [MenuItem("Tools/Dev Control Editor")]
     public static void StartEditor()
     {
@@ -15,10 +17,16 @@ public partial class DevControlEditorTool : EditorWindow
     private void OnGUI()
     {
         DrawScreenshotTool();
+
+        _serializedObject.ApplyModifiedProperties();
     }
 
     private void OnEnable()
     {
+        // Serialization
+        _serializedObject = new SerializedObject(this);
+        _cutsceneAnimatorSerialized = _serializedObject.FindProperty("cutsceneAnimator");
+
         _screenshotPath = EditorPrefs.GetString("ScreenshotPath");
     }
 
