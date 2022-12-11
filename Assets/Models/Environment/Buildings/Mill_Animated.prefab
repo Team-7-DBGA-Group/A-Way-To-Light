@@ -237,6 +237,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5077392614035095884}
   - component: {fileID: 5960328202539823561}
+  - component: {fileID: 5177133563505721964}
+  - component: {fileID: 5333776428054946422}
   m_Layer: 0
   m_Name: Mill_Animated
   m_TagString: Untagged
@@ -272,5 +274,31 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.661042, y: 2.2206473, z: 1.6973135}
-  m_Center: {x: 0.03707295, y: 1.027621, z: 0.07652769}
+  m_Size: {x: 1.5084156, y: 2.2206476, z: 1.6973135}
+  m_Center: {x: -0.026432537, y: 1.0276212, z: 0.07652769}
+--- !u!65 &5177133563505721964
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565698185645612022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.090995885, y: 1.3065451, z: 1.8152593}
+  m_Center: {x: -1.3081325, y: 0.62788343, z: 0.032494865}
+--- !u!65 &5333776428054946422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565698185645612022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0920579, y: 1.3065451, z: 1.8152593}
+  m_Center: {x: 1.283376, y: 0.62788343, z: 0.032495778}
