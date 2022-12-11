@@ -22,6 +22,10 @@ public partial class DevControlEditorTool : EditorWindow
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Save path: ");
         _screenshotPath = EditorGUILayout.TextField(_screenshotPath);
+        if (GUILayout.Button("Path"))
+        {
+            _screenshotPath = EditorUtility.OpenFolderPanel("Save Screenshots Path",System.IO.Directory.GetCurrentDirectory(),"");
+        }
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
@@ -84,7 +88,7 @@ public partial class DevControlEditorTool : EditorWindow
         if (_isTakingCutsceneScreenshot)
             return;
 
-        if (!Application.isPlaying)
+        if (!UnityEngine.Application.isPlaying)
         {
             TakeScreenshot(_screenshotPath);
             return;
@@ -112,4 +116,5 @@ public partial class DevControlEditorTool : EditorWindow
         _cutsceneAnimator.SetTrigger("Close");
         _isTakingCutsceneScreenshot = false;
     }
+
 }
