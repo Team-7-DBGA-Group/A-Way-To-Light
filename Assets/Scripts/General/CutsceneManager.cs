@@ -5,35 +5,65 @@ using UnityEngine.Playables;
 
 public class CutsceneManager : Singleton<CutsceneManager>
 {
+    public bool IsPlayingCutscene { get; private set; }
+
     [Header("References")]
     [SerializeField]
-    private List<GameObject> Cutscenes;
+    private PlayableDirector director;
+
+    [SerializeField]
+    private List<PlayableAsset> cutscenes;
 
     public void PlayCutscene(int index)
     {
-        if (Cutscenes.Count < index)
+        if (index >= cutscenes.Count)
             return;
-        Cutscenes[index].SetActive(false);
-        Cutscenes[index].SetActive(true);
+
+        director.Play(cutscenes[index]);
     }
 
     public void PlayCutscene(string cutsceneName)
     {
-        foreach(GameObject cutscene in Cutscenes)
+        foreach(PlayableAsset cutscene in cutscenes)
         {
-            if (cutscene.gameObject.name.Equals(cutsceneName))
+            if (cutscene.name.Equals(cutsceneName))
             {
-                cutscene.SetActive(false);
-                cutscene.SetActive(true);
+                director.Play(cutscene);
             }
         }
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+        IsPlayingCutscene = false;
+    }
+
     private void OnEnable()
     {
-        foreach(GameObject cutscene in Cutscenes)
-        {
-            cutscene.SetActive(false);
-        }
+        director.played += OnPlayableDirectorPlayed;
+        director.stopped += OnPlayableDirectorStopped;
+    }
+
+    private void OnDisable()
+    {
+        director.played -= OnPlayableDirectorPlayed;
+        director.stopped -= OnPlayableDirectorStopped;
+    }
+
+    private void OnPlayableDirectorPlayed(PlayableDirector director)
+    {
+        if (this.director != director)
+            return;
+
+        IsPlayingCutscene = true;
+    }
+
+    private void OnPlayableDirectorStopped(PlayableDirector director)
+    {
+        if (this.director != director)
+            return;
+
+        IsPlayingCutscene = false;
     }
 }
