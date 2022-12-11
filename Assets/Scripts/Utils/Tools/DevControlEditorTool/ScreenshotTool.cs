@@ -7,10 +7,7 @@ using Unity.EditorCoroutines.Editor;
 
 public partial class DevControlEditorTool : EditorWindow
 {
-    [SerializeField]
-    private Animator cutsceneAnimator = null;
-
-    private SerializedProperty _cutsceneAnimatorSerialized  = null;
+    private Animator _cutsceneAnimator = null;
     private string _screenshotPath = "";
 
     private bool _isCutscene = false;
@@ -31,15 +28,6 @@ public partial class DevControlEditorTool : EditorWindow
         EditorGUILayout.LabelField("Cutscene borders: ");
         _isCutscene = EditorGUILayout.Toggle(_isCutscene);
         EditorGUILayout.EndHorizontal();
-
-        if (_isCutscene)
-        {
-            _serializedObject.Update();
-
-            EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.PropertyField(_cutsceneAnimatorSerialized, true);
-            EditorGUILayout.EndHorizontal();
-        }    
 
         EditorGUILayout.Separator();
         if (GUILayout.Button("Take Screenshot"))
@@ -109,18 +97,19 @@ public partial class DevControlEditorTool : EditorWindow
             return;
         }
 
+        _cutsceneAnimator = FindObjectOfType<UICutscenePanel>().GetComponent<Animator>();
         object coroutineObject = new object();
         EditorCoroutineUtility.StartCoroutine(COCutsceneScreenshot(), coroutineObject);
     }
 
     private IEnumerator COCutsceneScreenshot()
     {
-        cutsceneAnimator.SetTrigger("Open");
+        _cutsceneAnimator.SetTrigger("Open");
         _isTakingCutsceneScreenshot = true;
         yield return new EditorWaitForSeconds(1.5f);
         TakeScreenshot(_screenshotPath);
         yield return new EditorWaitForSeconds(0.5f);
-        cutsceneAnimator.SetTrigger("Close");
+        _cutsceneAnimator.SetTrigger("Close");
         _isTakingCutsceneScreenshot = false;
     }
 }

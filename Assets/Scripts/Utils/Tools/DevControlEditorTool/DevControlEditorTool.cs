@@ -25,7 +25,6 @@ public partial class DevControlEditorTool : EditorWindow
     {
         // Serialization
         _serializedObject = new SerializedObject(this);
-        _cutsceneAnimatorSerialized = _serializedObject.FindProperty("cutsceneAnimator");
 
         _screenshotPath = EditorPrefs.GetString("ScreenshotPath");
     }
