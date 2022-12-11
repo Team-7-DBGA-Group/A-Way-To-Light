@@ -134,6 +134,7 @@ public class Outline : MonoBehaviour {
       needsUpdate = false;
 
       UpdateMaterialProperties();
+            
             this.enabled = false;
     }
   }
