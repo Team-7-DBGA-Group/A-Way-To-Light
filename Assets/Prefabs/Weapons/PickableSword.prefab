@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7097840711809986501}
   - component: {fileID: 7097840711809986500}
   - component: {fileID: 4451645446259527104}
+  - component: {fileID: 6290003415406692746}
   m_Layer: 0
   m_Name: PickableSword
   m_TagString: Untagged
@@ -410,3 +411,16 @@ MonoBehaviour:
     - {x: -0.00011512277, y: -0.00062973856, z: -0.9999998}
     - {x: 0.113740034, y: -0.00045017648, z: -0.9935105}
     - {x: -0.113952674, y: -0.00047289964, z: -0.99348605}
+--- !u!114 &6290003415406692746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801723775701367512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fa4dc19cd77da4fb5b2a587940638e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineRadius: 5
