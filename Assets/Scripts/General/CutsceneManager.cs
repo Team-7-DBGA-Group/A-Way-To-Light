@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class CutsceneManager : Singleton<CutsceneManager>
 {
+    
     public bool IsPlayingCutscene { get; private set; }
 
     [Header("References")]
@@ -13,6 +15,10 @@ public class CutsceneManager : Singleton<CutsceneManager>
 
     [SerializeField]
     private List<PlayableAsset> cutscenes;
+
+    [Header("Settings")]
+    [SerializeField]
+    private string startingCutsceneName = "";
 
     public void PlayCutscene(int index)
     {
@@ -43,12 +49,15 @@ public class CutsceneManager : Singleton<CutsceneManager>
     {
         director.played += OnPlayableDirectorPlayed;
         director.stopped += OnPlayableDirectorStopped;
+        SpawnManager.OnPlayerSpawn += OnPlayerSpawnBindings;
+
     }
 
     private void OnDisable()
     {
         director.played -= OnPlayableDirectorPlayed;
         director.stopped -= OnPlayableDirectorStopped;
+        SpawnManager.OnPlayerSpawn -= OnPlayerSpawnBindings;
     }
 
     private void OnPlayableDirectorPlayed(PlayableDirector director)
@@ -65,5 +74,17 @@ public class CutsceneManager : Singleton<CutsceneManager>
             return;
 
         IsPlayingCutscene = false;
+    }
+
+    private void OnPlayerSpawnBindings(GameObject playerObj)
+    {
+        TimelineAsset timelineAsset = director.playableAsset as TimelineAsset;
+        TrackAsset track1 = (TrackAsset)timelineAsset.GetOutputTrack(2);
+        TrackAsset track2 = (TrackAsset)timelineAsset.GetOutputTrack(3);
+
+        director.SetGenericBinding(track1, playerObj.GetComponent<Animator>());
+        director.SetGenericBinding(track2, playerObj.GetComponent<Animator>());
+
+        PlayCutscene(startingCutsceneName);
     }
 }

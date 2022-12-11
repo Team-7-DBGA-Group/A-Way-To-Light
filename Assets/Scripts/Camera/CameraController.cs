@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class CameraController : MonoBehaviour
     private GameObject playerCombatCamera;
 
     private bool _onCombat = false;
+    private float _maxSpeedX = 0;
+    private float _maxSpeedY = 0;
 
     private void Start()
     {
@@ -107,5 +110,22 @@ public class CameraController : MonoBehaviour
         playerClimbCamera.SetActive(false);
         if (!_onCombat)
             playerMovementCamera.SetActive(true);
+    }
+
+    public void StopPlayerCameraMovement()
+    {
+        CinemachineFreeLook cinemachineFreeLook = playerMovementCamera.GetComponent<CinemachineFreeLook>();
+        _maxSpeedX = cinemachineFreeLook.m_XAxis.m_MaxSpeed;
+        _maxSpeedY = cinemachineFreeLook.m_YAxis.m_MaxSpeed;
+        cinemachineFreeLook.m_XAxis.m_MaxSpeed = 0;
+        cinemachineFreeLook.m_YAxis.m_MaxSpeed = 0;
+
+    }
+
+    public void RestorePlayerCameraMovement()
+    {
+        CinemachineFreeLook cinemachineFreeLook = playerMovementCamera.GetComponent<CinemachineFreeLook>();
+        cinemachineFreeLook.m_XAxis.m_MaxSpeed = _maxSpeedX;
+        cinemachineFreeLook.m_YAxis.m_MaxSpeed = _maxSpeedY;
     }
 }
