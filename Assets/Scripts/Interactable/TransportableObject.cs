@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using System;
 
 public class TransportableObject : MonoBehaviour, IInteractable
 {
     public bool IsTransporting { get; private set; }
+    public event Action OnStopTransport;
 
     [SerializeField]
     private List<Transform> waypoints = new List<Transform>();
@@ -44,6 +46,7 @@ public class TransportableObject : MonoBehaviour, IInteractable
     {
         _playerRef = null;
         IsTransporting = false;
+        
     }
     private void Start()
     {
@@ -62,6 +65,7 @@ public class TransportableObject : MonoBehaviour, IInteractable
         
         if(Vector3.Distance(transform.position, waypoints[_waypointIndex].position) < 0.1f)
         {
+            OnStopTransport?.Invoke();
             if (_playerRef != null)
             {
                 _playerRef.GetComponent<PlayerMovement>().CanMove = true;

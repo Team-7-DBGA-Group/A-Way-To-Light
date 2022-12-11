@@ -898,6 +898,8 @@ GameObject:
   m_Component:
   - component: {fileID: 971278855674054988}
   - component: {fileID: 971278855674054989}
+  - component: {fileID: 913696464247433709}
+  - component: {fileID: 8256518718936588346}
   m_Layer: 6
   m_Name: Prop_Cart_1
   m_TagString: Untagged
@@ -938,6 +940,40 @@ MonoBehaviour:
   - {fileID: 380205869622948363}
   objectSpeed: 2
   lookAtWaypoints: 0
+--- !u!114 &913696464247433709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446274545704014838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a818a1486619e409315a3bc5f61ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8256518718936588346}
+  transportableObject: {fileID: 971278855674054989}
+--- !u!95 &8256518718936588346
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446274545704014838}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52fdb9569a250fa4f976ed965d054550, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &988855250637205646
 GameObject:
   m_ObjectHideFlags: 0
