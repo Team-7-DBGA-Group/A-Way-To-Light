@@ -1,5 +1,5 @@
 ->Area_9_Gianluca
 
 ===Area_9_Gianluca===
-Insert phrase :)
-           ->END
+I'm Waiting GTA VI..
+->END
