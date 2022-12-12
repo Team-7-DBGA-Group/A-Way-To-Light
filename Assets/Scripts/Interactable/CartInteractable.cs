@@ -36,5 +36,4 @@ public class CartInteractable : MonoBehaviour, IInteractable
     {
         transportableObject.OnStopTransport -= StopMoving;
     }
-
 }
