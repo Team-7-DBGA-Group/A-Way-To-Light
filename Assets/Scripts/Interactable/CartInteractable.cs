@@ -23,6 +23,7 @@ public class CartInteractable : MonoBehaviour, IInteractable
     private void OnEnable()
     {
         transportableObject.OnStopTransport += StopMoving;
+        //animator.SetTrigger("Stop");
     }
 
     private void OnDisable()
