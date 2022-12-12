@@ -38,5 +38,6 @@ public class DeathZone : MonoBehaviour
         _isDying = true;
         yield return new WaitForSeconds(deathDelay);
         actor.Die();
+        _isDying = false;
     }
 }
