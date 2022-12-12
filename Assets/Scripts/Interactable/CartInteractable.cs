@@ -10,14 +10,20 @@ public class CartInteractable : MonoBehaviour, IInteractable
     [SerializeField]
     private TransportableObject transportableObject;
 
+    private bool isPlayingAnim = false;
     public void Interact()
     {
+        if(isPlayingAnim)
+            return;
+
         animator.SetTrigger("Move");
+        isPlayingAnim = true;
     }
 
     public void StopMoving()
     {
         animator.SetTrigger("Stop");
+        isPlayingAnim = false;
     }
 
     private void OnEnable()
