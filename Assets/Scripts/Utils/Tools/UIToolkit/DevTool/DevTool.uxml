@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Dev Tool" name="title" style="overflow: hidden; align-items: auto; font-size: 22px; -unity-font-style: bold; -unity-font: url(&apos;project://database/Assets/Fonts/Jicama%20Days.otf?fileID=12800000&amp;guid=44e9858e78bcaf245bb65bb7cca40d6c&amp;type=3#Jicama Days&apos;); -unity-font-definition: url(&apos;project://database/Assets/Fonts/Jicama%20Days%20SDF-font.asset?fileID=11400000&amp;guid=9f513db6dbcc7804fabb8c415bde3cf9&amp;type=2#Jicama Days SDF-font&apos;); -unity-text-align: middle-center;" />
+    <ui:VisualElement name="devPanelElement">
+        <ui:Foldout text="General Tools" name="generalToolFoldOut" style="padding-right: 10px; font-size: 13px;">
+            <ui:Button text="Screenshot Tool" display-tooltip-when-elided="true" name="screenshotBtn" style="border-left-color: rgb(62, 190, 64); border-right-color: rgb(62, 190, 64); border-top-color: rgb(62, 190, 64); border-bottom-color: rgb(62, 190, 64); height: 24px; border-bottom-width: 1px; border-top-width: 1px; padding-top: 3px; padding-bottom: 3px; margin-bottom: 3px; margin-top: 3px; font-size: 15px;" />
+            <ui:Button text="VFX Activator Tool" display-tooltip-when-elided="true" name="vfxActivatorBtn" style="border-left-color: rgb(62, 160, 190); border-right-color: rgb(62, 160, 190); border-top-color: rgb(62, 160, 190); border-bottom-color: rgb(62, 160, 190); height: 25px; padding-top: 3px; padding-bottom: 3px; margin-top: 3px; margin-bottom: 3px; font-size: 15px;" />
+        </ui:Foldout>
+    </ui:VisualElement>
+</ui:UXML>

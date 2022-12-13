@@ -13,8 +13,7 @@ public class ScreenshotTool : EditorWindow
     private bool _isTakingCutsceneScreenshot = false;
     private Animator _cutsceneAnimator;
 
-    [MenuItem("Tools/Screenshot Tool")]
-    public static void ShowExample()
+    public static void ShowEditor()
     {
         ScreenshotTool wnd = GetWindow<ScreenshotTool>();
         wnd.titleContent = new GUIContent("ScreenshotTool");

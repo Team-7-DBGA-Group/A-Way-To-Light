@@ -8,8 +8,7 @@ using Utils;
 
 public class VFXActivatorTool : EditorWindow
 {
-    [MenuItem("Tools/VFX Activator Tool")]
-    public static void ShowExample()
+    public static void ShowEditor()
     {
         VFXActivatorTool wnd = GetWindow<VFXActivatorTool>();
         wnd.titleContent = new GUIContent("VFXActivatorTool");
