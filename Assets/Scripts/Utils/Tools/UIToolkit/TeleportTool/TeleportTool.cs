@@ -6,13 +6,13 @@ using UnityEditor.UIElements;
 
 public class TeleportTool : EditorWindow
 {
-
     private GameObject _player;
+    private PlayerMovement _playerMovement;
+    private CharacterController _characterController;
     private bool _canTeleport = false;
 
-    [MenuItem("Tools/Teleport Tool")]
     [ExecuteInEditMode]
-    public static void ShowExample()
+    public static void ShowEditor()
     {
         TeleportTool wnd = GetWindow<TeleportTool>();
         wnd.titleContent = new GUIContent("TeleportTool");
@@ -41,6 +41,10 @@ public class TeleportTool : EditorWindow
     private void ClickedTeleport(ClickEvent click)
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        _playerMovement = _player.GetComponent<PlayerMovement>();
+        _characterController = _player.GetComponent<CharacterController>();
+        _characterController.enabled = false;
+        _playerMovement.enabled = false;
         if (_player)
             _canTeleport = true;
     }
@@ -75,12 +79,22 @@ public class TeleportTool : EditorWindow
         if (e.type == EventType.MouseDown && e.button == 0)
         {
             if (Physics.Raycast(ray, out hit))
+            {
                 _player.transform.position = hit.point;
+                _playerMovement.enabled = true;
+                _characterController.enabled = true;
+            }
+                
             e.Use();
             _canTeleport = false;
         }
 
         if (e.type == EventType.MouseDown && e.button == 1)
+        {
             _canTeleport = false;
+            _playerMovement.enabled = true;
+            _characterController.enabled = true;
+        }
+            
     }
 }
