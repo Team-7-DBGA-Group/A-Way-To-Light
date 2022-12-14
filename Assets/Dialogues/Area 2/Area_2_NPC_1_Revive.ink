@@ -58,12 +58,12 @@ but I'm here now thanks to you and your power.
 Maybe, if you reanimate other skeletons like me 
 you can better understand what's going on!
 But be wary, not all are friendly.
-   +[WHAT DO YOU MEAN??]
+   +[WHAT DO YOU MEAN?]
            ->WDYM
 
 ===WDYM===
 Not everyone who lived here before were friendly
 so be careful!
 GOOD LUCK!
-     +[Ehm..Thanks!]
+     +[Ehm... Thanks!]
 ->END
