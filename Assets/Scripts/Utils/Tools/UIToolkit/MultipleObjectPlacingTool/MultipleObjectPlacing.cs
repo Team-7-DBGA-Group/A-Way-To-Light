@@ -16,6 +16,8 @@ public class MultipleObjectPlacing : EditorWindow
     private Vector3 _firstPosition;
     private Vector3 _secondPosition;
 
+    private Vector3 _meshSize;
+
     [MenuItem("Window/UI Toolkit/MultipleObjectPlacing")]
     public static void ShowExample()
     {
@@ -43,12 +45,13 @@ public class MultipleObjectPlacing : EditorWindow
     }
 
     private void ClickedPlace(ClickEvent click)
-    {
+    { 
         //_prefab = rootVisualElement.Q<ObjectField>("GameObjectField").;
         ObjectField objField = rootVisualElement.Q<ObjectField>("gameObjectField");
         _prefab = objField.value as GameObject;
-        FloatField floatField = rootVisualElement.Q<FloatField>("distFloatField");
-        _distanceBetweenObjects = floatField.value;
+
+        _meshSize = _prefab.GetComponentInChildren<MeshRenderer>().bounds.size;
+
         if (_prefab)
         {
             _isFirstClick = true;
@@ -100,7 +103,7 @@ public class MultipleObjectPlacing : EditorWindow
             {
                 _secondPosition = hit.point;
                 float distance = Vector3.Distance(_firstPosition, _secondPosition);
-                float distanceBetweenObjects = _distanceBetweenObjects;
+
                 Vector3 direction = (_secondPosition - _firstPosition).normalized;
                 Vector3 directionNN = _secondPosition - _firstPosition;
                 if (_directionLocked)
@@ -108,17 +111,17 @@ public class MultipleObjectPlacing : EditorWindow
                     direction.x = Mathf.RoundToInt(direction.x);
                     direction.y = Mathf.RoundToInt(direction.y);
                     direction.z = Mathf.RoundToInt(direction.z);
-
-                    Vector3 newSecondPosition = Vector3.zero;
-                    newSecondPosition = Vector3.Project(_secondPosition, direction);
-                    distance = Vector3.Distance(_firstPosition, newSecondPosition);
-                    Debug.Log(_firstPosition);
-                    Debug.Log(_secondPosition);
-                    Debug.Log(newSecondPosition);
-                    Debug.Log(distance);
                 }
 
-                Debug.Log(direction);
+                // Calculate distance based on direction
+                float distanceBetweenObjects = _meshSize.x;
+                if(_directionLocked && direction != Vector3.forward && direction != Vector3.right && direction != Vector3.left && direction != Vector3.back)
+                {
+                    // Diagonal
+                   distanceBetweenObjects = (Mathf.Sqrt(Mathf.Pow(_meshSize.x, 2) * 2))/ 2;
+                }
+                _distanceBetweenObjects = distanceBetweenObjects;
+
                 while (distanceBetweenObjects < distance)
                 {
                     Vector3 pos = _firstPosition + direction * distanceBetweenObjects;
