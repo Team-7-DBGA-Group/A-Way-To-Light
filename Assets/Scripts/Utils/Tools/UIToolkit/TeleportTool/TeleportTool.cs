@@ -1,8 +1,8 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-
 
 public class TeleportTool : EditorWindow
 {
@@ -98,3 +98,4 @@ public class TeleportTool : EditorWindow
             
     }
 }
+#endif

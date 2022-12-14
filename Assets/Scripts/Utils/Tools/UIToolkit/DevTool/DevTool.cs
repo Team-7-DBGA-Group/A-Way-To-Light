@@ -1,8 +1,8 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
-
 
 public class DevTool : EditorWindow
 {
@@ -37,3 +37,4 @@ public class DevTool : EditorWindow
         teleportBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { TeleportTool.ShowEditor(); });
     }
 }
+#endif

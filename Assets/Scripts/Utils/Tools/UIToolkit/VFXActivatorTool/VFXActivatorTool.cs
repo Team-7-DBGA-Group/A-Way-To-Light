@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -55,3 +56,4 @@ public class VFXActivatorTool : EditorWindow
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "VFX are now " + (active ? "ON" : "OFF"));
     }
 }
+#endif
