@@ -1,2 +1,2 @@
 Wait! 
-You should try your light on skeletons
+You should try to use your light on skeletons.

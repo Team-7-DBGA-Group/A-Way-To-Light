@@ -2,18 +2,18 @@
 
 ===Area_5_NPC_4_Red===
 RED IS MY FAVORITE COLOR!
-     +[WHAT?]
+     +[What?]
        ->WHAT
-     +ALSO MINE!
-    ->ALSO
+     +[It's also mine!]
+       ->ALSO
 
 ===WHAT===
 RED IS MY FAVORITE COLOR!!!
-     +[..ok]
+     +[...ok]
      ->END
      
 ===ALSO===
-Great! then use your light 
-to illuminate this totem in red!
+Great! Then use your light 
+to light up this totem in red!
      +[Thanks!]
      ->END

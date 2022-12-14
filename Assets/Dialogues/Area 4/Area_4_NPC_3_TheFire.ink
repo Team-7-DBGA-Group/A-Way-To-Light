@@ -1,6 +1,6 @@
 ->Area_4_NPC_3_TheFire
 
 ===Area_4_NPC_3_TheFire===
-this is a great place to rest 
-and save your progress!
+This is a nice place to rest 
+and to save your progress!
 ->END

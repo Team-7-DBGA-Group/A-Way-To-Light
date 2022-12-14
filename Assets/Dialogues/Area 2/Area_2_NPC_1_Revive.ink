@@ -1,35 +1,34 @@
 ->Area_1_NPC_1_Revive
 
 ===Area_1_NPC_1_Revive===
-Thank you for reviving me!
+Thank you for bringing me back to life!
 
-Light has disappeared all over the world
-and with it the life, until now though! 
-How did you get me back here?
-      +[I DON'T KNOW]
+Light has disappeared all over the world and the life with it. 
+until now, though!
+But... How did you bring me back here?
+      +[I don't know]
           ->IDK
-      +[WHAT HAPPENED?]
+      +[What happened]
           ->WHATHAPP
           
 ===IDK===
-I think to know, I see within you a light
-maybe you are..
-...
-..the one who will save us!
+I think I know, I see a light within you
+could you be...
+the one who will save us!
    +[FROM WHAT?]
           ->FROM
 ===FROM===
-from the one who make this place dark and lifeless
-the light as chosen you to face this dark entity
-and bring life back into this world.
+from the one who made this place dark and lifeless
+the light has chosen you to face this dark entity
+and to bring life back into this world.
    +[WHAT SHOULD I DO?]
            ->WSID
 
 ===WSID===
-Try to use this power to interact with your surroundings
-revive other skeletons like me
-they will surely know how to help you on your travel
-even though it can be dangerous.
+Try to use this power to interact with your surroundings.
+Revive other skeletons like me,
+they will surely know how to help you on your journey
+even though it could be dangerous for you.
    +[DANGEROUS?]
             ->DNGR
 
@@ -37,29 +36,28 @@ even though it can be dangerous.
 Yes, not everyone who lived here before were friendly
 so be careful!
 GOOD LUCK!
-     +[Ehm..Thanks!]
+     +[Ehm, Thanks!]
      ->END
 
 ===WHATHAPP===
-You used the light in your possession to bring me back to life! 
-after darkness took over the world
-life ceased to exist
-but perhaps you are the solution..
+You used the light inside you to bring me back to life! 
+After the darkness took over the world, life ceased to exist
+but perhaps you are the solution...
      +[SOLUTION?]
           ->SOL
 ===SOL===
 Yes, you are the only one who has this power
 you are the chosen one.
-Try to use this power to interact with enviroment
-that way you can find who stole the light in the world.
-   +[THE CHOSEN ONE..]
+Try to use this power to interact with the enviroment.
+In that way, you can find who stole the light in the world.
+   +[THE CHOSEN ONE?]
           ->THECHOSEN
 ===THECHOSEN===
 I know, it all sounds unbelievable
-but I'm here now because of you and your power
-maybe if you reanimate other skeletons like me 
-you can understand more of what's going on!
-Be wary, not all are friendly
+but I'm here now thanks to you and your power.
+Maybe, if you reanimate other skeletons like me 
+you can better understand what's going on!
+But be wary, not all are friendly.
    +[WHAT DO YOU MEAN??]
            ->WDYM
 

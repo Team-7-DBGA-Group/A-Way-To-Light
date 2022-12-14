@@ -10,11 +10,11 @@ What are you doing here?
           ->AWAY
 
 ===IDK===
-Okay, thanks for bringing me back alive!
+Okay, thanks for bringing me back to life!
       +[...]
       ->END
       
 ===AWAY===
 Okay, so pay attention to the colors!
-      +[Oh..THANKS!]
+      +[Oh... THANKS!]
       ->END
