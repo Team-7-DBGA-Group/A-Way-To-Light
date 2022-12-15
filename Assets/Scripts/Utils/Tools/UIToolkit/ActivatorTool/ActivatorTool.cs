@@ -11,6 +11,9 @@ public class VFXActivatorTool : EditorWindow
 {
     public static void ShowEditor()
     {
+        if (!Application.isPlaying)
+            return;
+
         VFXActivatorTool wnd = GetWindow<VFXActivatorTool>();
         wnd.titleContent = new GUIContent("VFXActivatorTool");
     }

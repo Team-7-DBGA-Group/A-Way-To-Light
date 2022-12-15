@@ -16,6 +16,9 @@ public class ScreenshotTool : EditorWindow
 
     public static void ShowEditor()
     {
+        if (!Application.isPlaying)
+            return;
+
         ScreenshotTool wnd = GetWindow<ScreenshotTool>();
         wnd.titleContent = new GUIContent("ScreenshotTool");
     }
@@ -120,13 +123,6 @@ public class ScreenshotTool : EditorWindow
     {
         if (_isTakingCutsceneScreenshot)
             return;
-
-        if (!UnityEngine.Application.isPlaying)
-        {
-            TakeScreenshot(path);
-            return;
-        }
-
 
         if (CutsceneManager.Instance.IsPlayingCutscene)
         {

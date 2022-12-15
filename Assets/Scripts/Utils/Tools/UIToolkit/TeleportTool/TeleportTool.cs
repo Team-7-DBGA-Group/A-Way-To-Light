@@ -14,6 +14,9 @@ public class TeleportTool : EditorWindow
     [ExecuteInEditMode]
     public static void ShowEditor()
     {
+        if (!Application.isPlaying)
+            return;
+
         TeleportTool wnd = GetWindow<TeleportTool>();
         wnd.titleContent = new GUIContent("TeleportTool");
     }

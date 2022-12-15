@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -184,3 +185,4 @@ public class MultipleObjectPlacing : EditorWindow
             Handles.DrawWireDisc(hit.point, hit.normal, 1f);
     }
 }
+#endif
