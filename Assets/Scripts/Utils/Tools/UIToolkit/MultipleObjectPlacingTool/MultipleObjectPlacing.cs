@@ -8,6 +8,7 @@ public class MultipleObjectPlacing : EditorWindow
 {
     private GameObject _prefab;
     private float _distanceBetweenObjects;
+    private float _scale;
 
     private bool _canPlaceObjects = false;
     private bool _isFirstClick = true;
@@ -51,6 +52,16 @@ public class MultipleObjectPlacing : EditorWindow
         _prefab = objField.value as GameObject;
 
         _meshSize = _prefab.GetComponentInChildren<MeshRenderer>().bounds.size;
+
+        FloatField scaleField = rootVisualElement.Q<FloatField>("scaleField");
+        _scale = scaleField.value;
+        if (_scale < 1)
+        {
+            _scale = 1;
+            scaleField.SetValueWithoutNotify(_scale);
+        }
+
+        _meshSize *= _scale;
 
         if (_prefab)
         {
@@ -136,7 +147,8 @@ public class MultipleObjectPlacing : EditorWindow
 
                     lookPos.y = 0;
                     Quaternion rotation = Quaternion.LookRotation(lookPos);
-                    Instantiate(_prefab, pos, rotation * Quaternion.Euler(0f, -90f, 0f));
+                    GameObject obj = Instantiate(_prefab, pos, rotation * Quaternion.Euler(0f, -90f, 0f));
+                    obj.transform.localScale = new Vector3(_scale,_scale, _scale);
                     distanceBetweenObjects += _distanceBetweenObjects;
                 }
                 _firstPosition = _secondPosition;
