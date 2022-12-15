@@ -8,8 +8,9 @@ using System.Collections.Generic;
 public class DevTool : EditorWindow
 {
     private List<RadioButton> _radios = new List<RadioButton>();
-    private List<RadioButton> _runtimeRadios = new List<RadioButton>();
-    private List<RadioButton> _editorRadios = new List<RadioButton>();
+    private List<RadioButton> _runtimeOnlyRadios = new List<RadioButton>();
+    private List<RadioButton> _editorOnlyRadios = new List<RadioButton>();
+    private List<RadioButton> _generalRadios = new List<RadioButton>();
 
     [MenuItem("Tools/Dev Tool")]
     public static void ShowExample()
@@ -29,6 +30,8 @@ public class DevTool : EditorWindow
         root.Add(treeFromUXML);
 
         SetupButtonsHandlers();
+
+        SetActiveGeneralRadios(true);
         
         if (Application.isPlaying)
         {
@@ -69,11 +72,15 @@ public class DevTool : EditorWindow
         {
             if (radio.name.Contains("runtime"))
             {
-                _runtimeRadios.Add(radio);
+                _runtimeOnlyRadios.Add(radio);
             }
             else if (radio.name.Contains("editor"))
             {
-                _editorRadios.Add(radio);
+                _editorOnlyRadios.Add(radio);
+            }
+            else
+            {
+                _generalRadios.Add(radio);
             }
         }
 
@@ -100,7 +107,7 @@ public class DevTool : EditorWindow
 
     private void SetActiveRunTimeRadios(bool active)
     {
-        foreach (RadioButton radio in _runtimeRadios)
+        foreach (RadioButton radio in _runtimeOnlyRadios)
         {
             radio.value = active;
         }
@@ -108,7 +115,15 @@ public class DevTool : EditorWindow
 
     private void SetActiveEditorRadios(bool active)
     {
-        foreach (RadioButton radio in _editorRadios)
+        foreach (RadioButton radio in _editorOnlyRadios)
+        {
+            radio.value = active;
+        }
+    }
+
+    private void SetActiveGeneralRadios(bool active)
+    {
+        foreach (RadioButton radio in _generalRadios)
         {
             radio.value = active;
         }
