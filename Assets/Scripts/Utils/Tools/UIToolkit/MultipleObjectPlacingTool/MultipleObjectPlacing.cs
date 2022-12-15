@@ -16,8 +16,9 @@ public class MultipleObjectPlacing : EditorWindow
 
     private Vector3 _firstPosition;
     private Vector3 _secondPosition;
-
     private Vector3 _meshSize;
+
+    private Color _handlesColor;
 
     [MenuItem("Window/UI Toolkit/MultipleObjectPlacing")]
     public static void ShowExample()
@@ -41,6 +42,11 @@ public class MultipleObjectPlacing : EditorWindow
         var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/Utils/Tools/UIToolkit/MultipleObjectPlacingTool/MultipleObjectPlacing.uxml");
         VisualElement labelFromUXML = visualTree.Instantiate();
         root.Add(labelFromUXML);
+
+        if (!_directionLocked)
+            _handlesColor = Color.blue;
+        else
+            _handlesColor = Color.cyan;
 
         SetupButtonsHandler();
     }
@@ -89,25 +95,29 @@ public class MultipleObjectPlacing : EditorWindow
         // Check where mouse raycast is colliding and draw circle
         Ray ray = scene.camera.ScreenPointToRay(mousePos);
         RaycastHit hit;
-        
-        if(_isFirstClick)
-            ShowIndicatorOnScene(ray, out hit, Color.cyan);
-        else
-        {
-            ShowIndicatorOnScene(ray, out hit, Color.green);
-            Handles.DrawLine(_firstPosition, hit.point);
-        }
 
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.LeftShift)
         {
             _directionLocked = true;
             SceneView.focusedWindow.ShowNotification(new GUIContent("Direction Locked"),2);
+            _handlesColor = Color.cyan;
         }
 
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.LeftControl)
         {
             _directionLocked = false;
             SceneView.focusedWindow.ShowNotification(new GUIContent("Direction Unlocked"),2);
+            _handlesColor = Color.blue;
+        }
+
+        if (_isFirstClick)
+            ShowIndicatorOnScene(ray, out hit, _handlesColor);
+        else
+        {
+            ShowIndicatorOnScene(ray, out hit, _handlesColor);
+            Handles.color = Color.green;
+            Handles.DrawLine(_firstPosition, hit.point);
+            Handles.color = _handlesColor;
         }
 
         if (e.type == EventType.MouseDown && e.button == 0)
