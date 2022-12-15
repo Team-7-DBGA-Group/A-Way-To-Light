@@ -90,11 +90,13 @@ public class MultipleObjectPlacing : EditorWindow
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.LeftShift)
         {
             _directionLocked = true;
+            SceneView.focusedWindow.ShowNotification(new GUIContent("Direction Locked"),2);
         }
 
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.LeftControl)
         {
             _directionLocked = false;
+            SceneView.focusedWindow.ShowNotification(new GUIContent("Direction Unlocked"),2);
         }
 
         if (e.type == EventType.MouseDown && e.button == 0)
@@ -144,7 +146,7 @@ public class MultipleObjectPlacing : EditorWindow
             _isFirstClick = false;
         }
 
-        if (e.type == EventType.MouseDown && e.button == 2)
+        if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Escape)
             _canPlaceObjects = false;
     }
 
