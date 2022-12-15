@@ -20,6 +20,7 @@ public class AutoDialogueTrigger : MonoBehaviour
     public void EnableTriggerDialogue() => _canTriggerDialogue = true;
     public void DisableTriggerDialogue() => _canTriggerDialogue = false;
 
+
     private void Awake()
     {
         _playerInRange = false;

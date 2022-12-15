@@ -29,13 +29,16 @@ public class VFXActivatorTool : EditorWindow
     }
 
     private void SetupButtonHandler()
-    {
+    { 
         Button applyBtn = rootVisualElement.Q<Button>("applyBtn");
         applyBtn.RegisterCallback<ClickEvent>(ApplyChanges);
     }
 
     private void ApplyChanges(ClickEvent evt)
     {
+        if (!Application.isPlaying)
+            return;
+
         Toggle toggleVFXActive = rootVisualElement.Q<Toggle>("activeVFXToggle");
         Toggle toggleAutoDialogueActive = rootVisualElement.Q<Toggle>("activeAutoDialogueToggle");
 
@@ -44,10 +47,7 @@ public class VFXActivatorTool : EditorWindow
     }
 
     private void SetVFXActive(bool active)
-    {
-        if (!Application.isPlaying)
-            return;
-
+    { 
         foreach (CFXR_Effect vfx in Resources.FindObjectsOfTypeAll(typeof(CFXR_Effect)) as CFXR_Effect[])
         {
             if (!EditorUtility.IsPersistent(vfx.transform.root.gameObject) && !(vfx.hideFlags == HideFlags.NotEditable || vfx.hideFlags == HideFlags.HideAndDontSave))
@@ -64,7 +64,10 @@ public class VFXActivatorTool : EditorWindow
         {
             if (!EditorUtility.IsPersistent(trigger.transform.root.gameObject) && !(trigger.hideFlags == HideFlags.NotEditable || trigger.hideFlags == HideFlags.HideAndDontSave))
             {
-                trigger.gameObject.SetActive(active);
+                if (active)
+                    trigger.EnableTriggerDialogue();
+                else
+                    trigger.DisableTriggerDialogue();
             }
         }
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "AutoDialogues are now " + (active ? "ON" : "OFF"));
