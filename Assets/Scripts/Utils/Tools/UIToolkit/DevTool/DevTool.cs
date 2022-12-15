@@ -3,9 +3,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
+using System.Collections.Generic;
 
 public class DevTool : EditorWindow
 {
+    private List<RadioButton> _radios = new List<RadioButton>();
+    private List<RadioButton> _runtimeRadios = new List<RadioButton>();
+    private List<RadioButton> _editorRadios = new List<RadioButton>();
+
     [MenuItem("Tools/Dev Tool")]
     public static void ShowExample()
     {
@@ -24,6 +29,24 @@ public class DevTool : EditorWindow
         root.Add(treeFromUXML);
 
         SetupButtonsHandlers();
+
+        SetActiveEditorRadios(true);
+
+        if (Application.isPlaying)
+        {
+            SetActiveRunTimeRadios(true);
+        }
+        else
+        {
+            SetActiveRunTimeRadios(false);
+        }
+        
+        EditorApplication.playModeStateChanged += CheckStatesOnExit;
+    }
+
+    private void OnDisable()
+    {
+        EditorApplication.playModeStateChanged -= CheckStatesOnExit;
     }
 
     private void SetupButtonsHandlers()
@@ -37,6 +60,57 @@ public class DevTool : EditorWindow
         vfxActivatorBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { VFXActivatorTool.ShowEditor(); });
         teleportBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { TeleportTool.ShowEditor(); });
         multiPlacingBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { MultipleObjectPlacing.ShowEditor(); });
+        
+        UQueryBuilder<RadioButton> radios = rootVisualElement.Query<RadioButton>();
+
+        _radios = radios.ToList();
+
+        foreach(RadioButton radio in _radios)
+        {
+            if (radio.name.Contains("runtime"))
+            {
+                _runtimeRadios.Add(radio);
+            }
+            else if (radio.name.Contains("editor"))
+            {
+                _editorRadios.Add(radio);
+            }
+        }
+
+        SetRadios(Color.green);
+    }
+
+    private void CheckStatesOnExit(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingPlayMode)
+        {
+            SetActiveRunTimeRadios(false);
+        }
+    }
+
+    private void SetRadios(Color color)
+    {
+        foreach (RadioButton radio in _radios)
+        {
+            radio.Q<VisualElement>("unity-checkmark").style.backgroundColor = color;
+            radio.SetEnabled(false);
+        }
+    }
+
+    private void SetActiveRunTimeRadios(bool active)
+    {
+        foreach (RadioButton radio in _runtimeRadios)
+        {
+            radio.value = active;
+        }
+    }
+
+    private void SetActiveEditorRadios(bool active)
+    {
+        foreach (RadioButton radio in _editorRadios)
+        {
+            radio.value = active;
+        }
     }
 }
 #endif
