@@ -19,7 +19,7 @@
             </ui:Button>
             <ui:Button text="MultiPlacing Tool" display-tooltip-when-elided="true" name="multiPlacingBtn" style="border-left-color: rgb(190, 62, 181); border-right-color: rgb(190, 62, 181); border-top-color: rgb(190, 62, 181); border-bottom-color: rgb(190, 62, 181); height: 25px; padding-top: 3px; padding-bottom: 3px; margin-top: 3px; margin-bottom: 3px; font-size: 15px; align-items: auto;">
                 <ui:RadioButtonGroup value="3" style="align-items: auto;">
-                    <ui:RadioButton value="false" name="runtimeRadioMultiplacing" focusable="false" tabindex="3" picking-mode="Ignore" style="justify-content: flex-start; align-items: auto; flex-direction: row; flex-wrap: nowrap;" />
+                    <ui:RadioButton value="false" name="editorRadioMultiplacing" focusable="false" tabindex="3" picking-mode="Ignore" style="justify-content: flex-start; align-items: auto; flex-direction: row; flex-wrap: nowrap;" />
                 </ui:RadioButtonGroup>
             </ui:Button>
         </ui:Foldout>

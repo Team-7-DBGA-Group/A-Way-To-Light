@@ -30,15 +30,15 @@ public class DevTool : EditorWindow
 
         SetupButtonsHandlers();
 
-        SetActiveEditorRadios(true);
-
         if (Application.isPlaying)
         {
             SetActiveRunTimeRadios(true);
+            SetActiveEditorRadios(false);
         }
         else
         {
             SetActiveRunTimeRadios(false);
+            SetActiveEditorRadios(true);
         }
         
         EditorApplication.playModeStateChanged += CheckStatesOnExit;
