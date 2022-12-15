@@ -20,8 +20,7 @@ public class MultipleObjectPlacing : EditorWindow
 
     private Color _handlesColor;
 
-    [MenuItem("Window/UI Toolkit/MultipleObjectPlacing")]
-    public static void ShowExample()
+    public static void ShowEditor()
     {
         MultipleObjectPlacing wnd = GetWindow<MultipleObjectPlacing>();
         wnd.titleContent = new GUIContent("MultipleObjectPlacing");

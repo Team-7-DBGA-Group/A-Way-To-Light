@@ -31,10 +31,12 @@ public class DevTool : EditorWindow
         Button screenshotToolBtn = rootVisualElement.Q<Button>("screenshotBtn");
         Button vfxActivatorBtn = rootVisualElement.Q<Button>("vfxActivatorBtn");
         Button teleportBtn = rootVisualElement.Q<Button>("teleportBtn");
+        Button multiPlacingBtn = rootVisualElement.Q<Button>("multiPlacingBtn");
 
         screenshotToolBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { ScreenshotTool.ShowEditor();  });
         vfxActivatorBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { VFXActivatorTool.ShowEditor(); });
         teleportBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { TeleportTool.ShowEditor(); });
+        multiPlacingBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { MultipleObjectPlacing.ShowEditor(); });
     }
 }
 #endif
