@@ -29,7 +29,7 @@ public class DevTool : EditorWindow
         root.Add(treeFromUXML);
 
         SetupButtonsHandlers();
-
+        
         if (Application.isPlaying)
         {
             SetActiveRunTimeRadios(true);
@@ -85,6 +85,7 @@ public class DevTool : EditorWindow
         if (state == PlayModeStateChange.ExitingPlayMode)
         {
             SetActiveRunTimeRadios(false);
+            SetActiveEditorRadios(true);
         }
     }
 
