@@ -20,13 +20,29 @@ public class DialogueManager : Singleton<DialogueManager>
     private TextMeshProUGUI dialogueText;
     [SerializeField]
     private GameObject continueIcon;
+
     [Header("Choices UI")]
     [SerializeField]
     private GameObject[] choices;
 
+    [Header("Audio")]
+    [SerializeField]
+    private DialogueAudioInfoSO defaultAudioInfo;
+    [SerializeField]
+    private DialogueAudioInfoSO[] audioInfos;
+    [SerializeField]
+    private bool makePredictable;
+
+    private DialogueAudioInfoSO _currentAudioInfo;
+    private Dictionary<string,DialogueAudioInfoSO> _audioInfoDictionary;
+    private AudioSource _audioSource;
+
     private Story _currentStory;
     private bool _canShowNextLine;
     private TextMeshProUGUI[] _choicesText;
+
+    // TAGS Section
+    private const string AUDIO_TAG = "audio";
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
@@ -49,6 +65,14 @@ public class DialogueManager : Singleton<DialogueManager>
         ContinueStory();
     }
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _audioSource = this.gameObject.AddComponent<AudioSource>();
+        _currentAudioInfo = defaultAudioInfo;
+    }
+
     private void Start()
     {
         IsDialoguePlaying = false;
@@ -63,6 +87,8 @@ public class DialogueManager : Singleton<DialogueManager>
             _choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
+
+        InitializeAudioInfoDictionary();
     }
 
     private void Update()
@@ -75,7 +101,6 @@ public class DialogueManager : Singleton<DialogueManager>
             if (_canShowNextLine)
                 ContinueStory();
         }
-
     }
 
     public void ExitDialogueMode()
@@ -92,6 +117,8 @@ public class DialogueManager : Singleton<DialogueManager>
             choice.SetActive(false);
         }
 
+        SetCurrentAudioInfo(defaultAudioInfo.ID);
+
         OnDialogueExit?.Invoke();
     }
 
@@ -100,7 +127,12 @@ public class DialogueManager : Singleton<DialogueManager>
         if (_currentStory.canContinue)
         {
             //dialogueText.text = _currentStory.Continue(); // Next line
-            StartCoroutine(ShowAnimationText(_currentStory.Continue(), 0.06f, () => {
+            
+            string nextLine = _currentStory.Continue();
+            HandleTags(_currentStory.currentTags); 
+
+            StartCoroutine(ShowAnimationText(nextLine, 0.06f, () => {
+
                 if (_currentStory.currentChoices.Count > 0)
                     continueIcon.SetActive(false);
                 else
@@ -148,6 +180,7 @@ public class DialogueManager : Singleton<DialogueManager>
         string currentText = "";
         for (int i = 0; i < text.Length; i++)
         {
+            PlayDialogueSound(currentText.Length, text[i]);
             currentText = text.Substring(0, i);
             dialogueText.text = currentText;
             yield return new WaitForSeconds(delay);
@@ -162,5 +195,112 @@ public class DialogueManager : Singleton<DialogueManager>
         EventSystem.current.SetSelectedGameObject(null); // prima pulisci
         yield return new WaitForEndOfFrame(); // aspetta la fine del frame
         EventSystem.current.SetSelectedGameObject(choices[0]); // setta
+    }
+
+    private void PlayDialogueSound(int currentDisplayedCharacterCount, char currentCharacter)
+    {
+        // Set variables for the below based on our config
+        AudioClip[] dialogueTypingSoundClips = _currentAudioInfo.DialogueTypingSoundClips;
+        int frequencyLevel = _currentAudioInfo.FrequencyLevel;
+        float minPitch = _currentAudioInfo.MinPitch;
+        float maxPitch = _currentAudioInfo.MaxPitch;
+        bool stopAudioSource = _currentAudioInfo.StopAudioSource;
+
+        // Play sound based on config
+        if (currentDisplayedCharacterCount % frequencyLevel == 0)
+        {
+            if (stopAudioSource)
+            {
+                _audioSource.Stop();
+            }
+            
+            AudioClip soundClip = null;
+
+            if (makePredictable)
+            {
+                // Make predictable through hashing
+                int hashCode = currentCharacter.GetHashCode();
+                // Get sound clip
+                int predictIndex = hashCode % dialogueTypingSoundClips.Length;
+                soundClip = dialogueTypingSoundClips[predictIndex];
+                // Pitch
+                int minPitchInt = (int)(minPitch * 100);
+                int maxPitchInt = (int)(maxPitch * 100);
+                int pitchRangeInt = maxPitchInt - minPitchInt;
+                // Cannot divide by 0, so if there is no range then skip the selection
+                if(pitchRangeInt != 0)
+                {
+                    int preditPitchInt = (hashCode % pitchRangeInt) + minPitchInt;
+                    float predictPitch = preditPitchInt / 100f;
+                    _audioSource.pitch = predictPitch;
+                }
+                else
+                {
+                    _audioSource.pitch = minPitch;
+                }
+            }
+            else
+            {
+                // Get sound clip
+                int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length);
+                soundClip = dialogueTypingSoundClips[randomIndex];
+                // Pitch
+                _audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+            }
+          
+            // Play sound
+            _audioSource.PlayOneShot(soundClip);
+        }
+    }
+
+    private void InitializeAudioInfoDictionary()
+    {
+        _audioInfoDictionary = new Dictionary<string, DialogueAudioInfoSO>();
+        // Default
+        _audioInfoDictionary.Add(defaultAudioInfo.ID, defaultAudioInfo);
+        // Others
+        foreach(DialogueAudioInfoSO audioInfo in audioInfos)
+        {
+            _audioInfoDictionary.Add(audioInfo.ID, audioInfo);
+        }
+    }
+
+    private void SetCurrentAudioInfo(string ID)
+    {
+        DialogueAudioInfoSO audioInfo = null;
+        _audioInfoDictionary.TryGetValue(ID, out audioInfo);
+
+        if (audioInfo == null)
+            return;
+
+        _currentAudioInfo = audioInfo;
+    }
+
+    private void HandleTags(List<string> currentTags)
+    {
+        // loop through each tag and handle it accordingly
+        foreach (string tag in currentTags)
+        {
+            // parse the tag
+            string[] splitTag = tag.Split(':');
+            if (splitTag.Length != 2)
+            {
+                Debug.LogError("Tag could not be appropriately parsed: " + tag);
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+
+            // handle the tag
+            switch (tagKey)
+            {
+                // Add Other tags to handle here
+                case AUDIO_TAG:
+                    SetCurrentAudioInfo(tagValue);
+                    break;
+                default:
+                    Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
+                    break;
+            }
+        }
     }
 }

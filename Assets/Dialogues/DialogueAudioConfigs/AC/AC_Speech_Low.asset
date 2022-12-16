@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83df517d44eb0f84aa03c9a0542a1e0c, type: 3}
+  m_Name: AC_Speech_Low
+  m_EditorClassIdentifier: 
+  ID: ac-mid
+  DialogueTypingSoundClips:
+  - {fileID: 8300000, guid: cbf5756bc8bf5414384ede565004418a, type: 3}
+  - {fileID: 8300000, guid: 67cc9fa461fbc39489135f44c2c5fec3, type: 3}
+  - {fileID: 8300000, guid: 40d92c846f9e23d419923afae816f31b, type: 3}
+  - {fileID: 8300000, guid: b11c901a124d53b439ac27b00f47cc77, type: 3}
+  - {fileID: 8300000, guid: 7b9df12bac2596c49ad0c103deb1789f, type: 3}
+  - {fileID: 8300000, guid: 95121a7f28abcd84fb1eed4d20a73e1b, type: 3}
+  FrequencyLevel: 2
+  MinPitch: 0.3
+  MaxPitch: 0.5
+  StopAudioSource: 0
