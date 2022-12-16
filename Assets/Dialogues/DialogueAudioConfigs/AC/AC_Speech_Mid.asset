@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83df517d44eb0f84aa03c9a0542a1e0c, type: 3}
-  m_Name: AC_Speech_Low
+  m_Name: AC_Speech_Mid
   m_EditorClassIdentifier: 
-  ID: ac-low
+  ID: ac-mid
   DialogueTypingSoundClips:
   - {fileID: 8300000, guid: cbf5756bc8bf5414384ede565004418a, type: 3}
   - {fileID: 8300000, guid: 67cc9fa461fbc39489135f44c2c5fec3, type: 3}
@@ -21,6 +21,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7b9df12bac2596c49ad0c103deb1789f, type: 3}
   - {fileID: 8300000, guid: 95121a7f28abcd84fb1eed4d20a73e1b, type: 3}
   FrequencyLevel: 2
-  MinPitch: 0.3
-  MaxPitch: 0.5
+  MinPitch: 0.5
+  MaxPitch: 1
   StopAudioSource: 1
