@@ -7,16 +7,17 @@ using CartoonFX;
 using System.Collections.Generic;
 using Utils;
 
-public class VFXActivatorTool : EditorWindow
+public class ActivatorTool : EditorWindow
 {
     public static void ShowEditor()
     {
         if (!Application.isPlaying)
             return;
 
-        VFXActivatorTool wnd = GetWindow<VFXActivatorTool>();
+        ActivatorTool wnd = GetWindow<ActivatorTool>();
         wnd.titleContent = new GUIContent("VFXActivatorTool");
     }
+
 
     public void CreateGUI()
     {

@@ -60,7 +60,7 @@ public class DevTool : EditorWindow
         Button multiPlacingBtn = rootVisualElement.Q<Button>("multiPlacingBtn");
 
         screenshotToolBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { ScreenshotTool.ShowEditor();  });
-        vfxActivatorBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { VFXActivatorTool.ShowEditor(); });
+        vfxActivatorBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { ActivatorTool.ShowEditor(); });
         teleportBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { TeleportTool.ShowEditor(); });
         multiPlacingBtn.RegisterCallback<ClickEvent>((ClickEvent evt) => { MultipleObjectPlacing.ShowEditor(); });
         
