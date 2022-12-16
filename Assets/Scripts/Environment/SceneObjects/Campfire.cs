@@ -31,8 +31,8 @@ public class Campfire : MonoBehaviour
 
     private void DialogueTriggered(GameObject playerObj)
     {
-
         _playerObj = playerObj;
+        HealPlayer();
         DialogueManager.OnChoiceChosen += HandleChoice;
     }
     private void DialogueExit()
@@ -45,7 +45,6 @@ public class Campfire : MonoBehaviour
     {
         if (index == saveChoiceIndex)
         {
-            HealPlayer();
             SaveGame();
         }
         else
