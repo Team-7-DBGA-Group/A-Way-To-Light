@@ -56,6 +56,8 @@ public class ActivatorTool : EditorWindow
         {
             if (!EditorUtility.IsPersistent(vfx.transform.root.gameObject) && !(vfx.hideFlags == HideFlags.NotEditable || vfx.hideFlags == HideFlags.HideAndDontSave))
             {
+                if (vfx.GetComponent<LightVFX>() || vfx.gameObject.name.Contains("Wind")) // Add other elements to be ignored
+                    continue;
                 vfx.gameObject.SetActive(active);
             }
         }
