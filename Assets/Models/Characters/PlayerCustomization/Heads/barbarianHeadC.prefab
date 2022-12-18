@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5141864014390535053}
   - component: {fileID: 8139211246224518184}
   - component: {fileID: 6273724049831188706}
+  - component: {fileID: -600076571421950308}
   m_Layer: 0
   m_Name: barbarianHeadC
   m_TagString: Untagged
@@ -85,3 +86,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-600076571421950308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480954107096004919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c14beab494bda47ad6b0f9c084a19c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

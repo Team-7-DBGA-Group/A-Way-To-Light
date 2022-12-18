@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3304132192097297017}
   - component: {fileID: 1906563248336629212}
   - component: {fileID: 4436483675281660182}
+  - component: {fileID: -8883071793841451938}
   m_Layer: 0
   m_Name: mageHeadB
   m_TagString: Untagged
@@ -85,3 +86,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8883071793841451938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2779127882173397187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c14beab494bda47ad6b0f9c084a19c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hair: 0
