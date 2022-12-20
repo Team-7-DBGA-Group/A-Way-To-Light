@@ -1559,7 +1559,6 @@ MonoBehaviour:
   leftArmReference: {fileID: 1273526336}
   rightArmReference: {fileID: 1637260708}
   playerRefPrefab: {fileID: 6375194756810046015, guid: f1e6d50a5c0ce604d98a129890835d06, type: 3}
-  customisationData: {fileID: 11400000, guid: 9d2a4e578a056e9478d0da7d7badcae3, type: 2}
 --- !u!4 &496819784
 Transform:
   m_ObjectHideFlags: 0
@@ -4083,6 +4082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CustomPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7203261204149094570, guid: f1e6d50a5c0ce604d98a129890835d06, type: 3}
+      propertyPath: customisationData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d2a4e578a056e9478d0da7d7badcae3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1e6d50a5c0ce604d98a129890835d06, type: 3}
 --- !u!1 &1904108350 stripped
