@@ -15,8 +15,8 @@ public class GameManager : Singleton<GameManager>
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
 
-        //StartCoroutine(ResetSequence());
-        NavigationManager.Instance.ChangeScene(gameSceneName);
+        StartCoroutine(ResetSequence());
+        //NavigationManager.Instance.ChangeScene(gameSceneName);
     }
 
     public void QuitGame()
@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
         UISceneTransitionController.Instance.OpenTransition();
         yield return new WaitForSeconds(2.0f);
         UISceneTransitionController.Instance.CloseTransition();
+        PickablesManager.Instance.ResetPickables();
         SpawnManager.Instance.SpawnPlayer();
     }
 }

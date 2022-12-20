@@ -70,7 +70,10 @@ public class LightShot : MonoBehaviour
 
             Destroy(this.gameObject);
         }
-        else if (other != null && !other.gameObject.tag.Equals("Player") && other != this.gameObject.GetComponent<Collider>() && !other.gameObject.tag.Equals("DialogueTrigger"))
+        else if (other != null && !other.gameObject.tag.Equals("Player") 
+            && other != this.gameObject.GetComponent<Collider>() 
+            && !other.gameObject.tag.Equals("DialogueTrigger")
+            && !other.gameObject.tag.Equals("AutoCheckpoint"))
         {
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
