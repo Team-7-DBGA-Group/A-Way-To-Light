@@ -4,7 +4,20 @@ using UnityEngine;
 
 public class PickablesManager : Singleton<PickablesManager>
 {
+    [Header("References")]
+    [SerializeField]
+    private List<PickableWeapon> weapons = new List<PickableWeapon>();
+
     private Dictionary<Vector3,GameObject> _pickables = new Dictionary<Vector3,GameObject>();
+
+    public void InitPickables()
+    {
+        foreach(PickableWeapon weapon in weapons)
+        {
+            AddPickable(weapon.transform.position, weapon.WieldablePrefab.GetComponent<Weapon>().PickablePrefab);
+        }
+    }
+
     public void ResetPickables()
     {
         foreach (Vector3 position in _pickables.Keys)
@@ -12,17 +25,11 @@ public class PickablesManager : Singleton<PickablesManager>
             GameObject obj = Instantiate(_pickables[position], position, Quaternion.identity);
             obj.transform.localRotation = _pickables[position].transform.localRotation;
         }
-        _pickables.Clear();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        PickableWeapon.OnWeaponPick += AddPickable;
-    }
-
-    private void OnDisable()
-    {
-        PickableWeapon.OnWeaponPick -= AddPickable;
+        InitPickables();
     }
 
     private void AddPickable(Vector3 position, GameObject prefab)

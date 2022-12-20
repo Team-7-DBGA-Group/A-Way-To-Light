@@ -5,8 +5,7 @@ using System;
 
 public class PickableWeapon : MonoBehaviour
 {
-    public static event Action<Vector3, GameObject> OnWeaponPick;
-
+    public GameObject WieldablePrefab { get => wieldableWeaponPrefab; }
     public int Damage { get => damage; }
     public int Durability { get => durability; }
 
@@ -37,7 +36,6 @@ public class PickableWeapon : MonoBehaviour
             weaponObj.transform.localRotation = wieldableWeaponPrefab.transform.localRotation;
             
             Weapon weapon = weaponObj.GetComponent<Weapon>();
-            OnWeaponPick?.Invoke(transform.position, weapon.PickablePrefab);
             weapon.PassData(this);
 
             Player p = collision.gameObject.GetComponent<Player>();
