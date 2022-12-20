@@ -16,10 +16,18 @@ public class AutoDialogueTrigger : MonoBehaviour
 
     private bool _canTriggerDialogue = true;
     private bool _playOnce = false;
+    private bool _canEnableDialogue = true;
+    public void EnableTriggerDialogue()
+    {
+        if (!_canEnableDialogue)
+            return;
 
-    public void EnableTriggerDialogue() => _canTriggerDialogue = true;
+        _canTriggerDialogue = true;
+    }
+   
     public void DisableTriggerDialogue() => _canTriggerDialogue = false;
-
+    
+    public void SetCanEnableDialogue(bool active) => _canEnableDialogue = active;
 
     private void Awake()
     {

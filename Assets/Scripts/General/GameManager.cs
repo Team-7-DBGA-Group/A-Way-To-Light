@@ -9,9 +9,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private string gameSceneName = "Prototype";
 
+    private Player _player = null;
+
     public void ResetGameScene()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
+        //SpawnManager.Instance.SpawnPlayer();
         NavigationManager.Instance.ChangeScene(gameSceneName);
     }
 
@@ -19,5 +22,22 @@ public class GameManager : Singleton<GameManager>
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Quit called");
         NavigationManager.Instance.QuitGame();
+    }
+
+    private void OnEnable()
+    {
+        SpawnManager.OnPlayerSpawn += ResetPlayer;
+    }
+
+    private void OnDisable()
+    {
+        SpawnManager.OnPlayerSpawn -= ResetPlayer;
+    }
+
+    private void ResetPlayer(GameObject playerObj)
+    {
+        _player = playerObj.GetComponent<Player>();
+        _player.Heal(999);
+        _player.gameObject.GetComponent<PlayerLightShooting>().ResetLightCharges();
     }
 }

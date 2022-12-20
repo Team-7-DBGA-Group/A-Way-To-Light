@@ -21,15 +21,15 @@ public class SpawnManager : Singleton<SpawnManager>
         _currentSpawnPoint = position;
     }
 
+    public void SpawnPlayer()
+    {
+        _playerObj = Instantiate(playerPrefab, _currentSpawnPoint, Quaternion.identity);
+        OnPlayerSpawn?.Invoke(_playerObj);
+    }
+
     private void Start()
     {
         _currentSpawnPoint = startSpawnPoint.transform.position;
         SpawnPlayer();
-    }
-
-    private void SpawnPlayer()
-    {
-        _playerObj = Instantiate(playerPrefab, _currentSpawnPoint, Quaternion.identity);
-        OnPlayerSpawn?.Invoke(_playerObj);
     }
 }

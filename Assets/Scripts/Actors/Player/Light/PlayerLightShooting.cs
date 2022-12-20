@@ -31,6 +31,15 @@ public class PlayerLightShooting : MonoBehaviour
 
     private bool _canShoot = true;
 
+    public void ResetLightCharges()
+    {
+        Charges = maxLightCharges;
+        for(int i =0; i < maxLightCharges; i++)
+        {
+            OnChargeCooldownFinished?.Invoke();
+        }
+    }
+
     private void Awake()
     {
         Charges = maxLightCharges;

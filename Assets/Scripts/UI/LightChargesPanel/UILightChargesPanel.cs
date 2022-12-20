@@ -43,6 +43,10 @@ public class UILightChargesPanel : MonoBehaviour
     {
         if (!_isInit)
             return;
+
+        if (_activeCharges.Count == 0)
+            return;
+
         UILightCharge charge = _activeCharges.Pop();
         charge.Off();
         _cooldownCharges.Push(charge);
@@ -51,6 +55,9 @@ public class UILightChargesPanel : MonoBehaviour
     public void ActiveCharge()
     {
         if (!_isInit)
+            return;
+
+        if (_cooldownCharges.Count == 0)
             return;
 
         UILightCharge charge = _cooldownCharges.Pop();

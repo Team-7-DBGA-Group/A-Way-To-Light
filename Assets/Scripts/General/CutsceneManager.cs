@@ -6,7 +6,6 @@ using UnityEngine.Timeline;
 
 public class CutsceneManager : Singleton<CutsceneManager>
 {
-    
     public bool IsPlayingCutscene { get; private set; }
 
     [Header("References")]
@@ -19,6 +18,8 @@ public class CutsceneManager : Singleton<CutsceneManager>
     [Header("Settings")]
     [SerializeField]
     private string startingCutsceneName = "";
+
+    private bool _isStartingCutsecenePlayed = false;
 
     public void PlayCutscene(int index)
     {
@@ -85,6 +86,10 @@ public class CutsceneManager : Singleton<CutsceneManager>
         director.SetGenericBinding(track1, playerObj.GetComponent<Animator>());
         director.SetGenericBinding(track2, playerObj.GetComponent<Animator>());
 
-        PlayCutscene(startingCutsceneName);
+        if (!_isStartingCutsecenePlayed)
+        {
+            PlayCutscene(startingCutsceneName);
+            _isStartingCutsecenePlayed = true;
+        }
     }
 }

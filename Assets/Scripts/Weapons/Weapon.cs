@@ -8,11 +8,15 @@ public class Weapon : MonoBehaviour
     public int Durability { get => durability; }
     public GameObject PickablePrefab { get => pickablePrefab; }
 
+    [Header("Weapon Settings")]
     [SerializeField]
     private int damage = 1;
     [SerializeField]
     private int durability = 3;
+    [SerializeField]
+    private bool canBeDestroyed = true;
 
+    [Header("References")]
     [SerializeField]
     private GameObject pickablePrefab;
 
@@ -24,6 +28,9 @@ public class Weapon : MonoBehaviour
 
     public void RemoveDurability(int amount)
     {
+        if (!canBeDestroyed)
+            return;
+
         if (amount <= 0)
             return;
 

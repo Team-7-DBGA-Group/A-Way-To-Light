@@ -18,7 +18,6 @@ public class ActivatorTool : EditorWindow
         wnd.titleContent = new GUIContent("VFXActivatorTool");
     }
 
-
     public void CreateGUI()
     {
         // Each editor window contains a root VisualElement object
@@ -71,9 +70,16 @@ public class ActivatorTool : EditorWindow
             if (!EditorUtility.IsPersistent(trigger.transform.root.gameObject) && !(trigger.hideFlags == HideFlags.NotEditable || trigger.hideFlags == HideFlags.HideAndDontSave))
             {
                 if (active)
+                {
+                    trigger.SetCanEnableDialogue(true);
                     trigger.EnableTriggerDialogue();
+                }
                 else
+                {
+                    trigger.SetCanEnableDialogue(false);
                     trigger.DisableTriggerDialogue();
+                }
+                    
             }
         }
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "AutoDialogues are now " + (active ? "ON" : "OFF"));

@@ -61,7 +61,6 @@ public class BasicEnemy : Enemy
     {
         base.Awake();
 
-        //_target = FindObjectOfType<Player>().transform;
         _agent = GetComponent<NavMeshAgent>();
 
         _agent.enabled = false;
@@ -76,12 +75,14 @@ public class BasicEnemy : Enemy
     {
         base.OnEnable();
         SpawnManager.OnPlayerSpawn += SetupFSM;
+        Player.OnPlayerDie += OutOfCombat;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
         SpawnManager.OnPlayerSpawn -= SetupFSM;
+        Player.OnPlayerDie -= OutOfCombat;
     }
 
     protected override void Update()
@@ -93,6 +94,14 @@ public class BasicEnemy : Enemy
 
         if (_target == null)
             return;
+        
+        // If not in combat
+        Enemy enemy = null;
+        if(!EnemyManager.Instance.InCombatEnemies.TryGetValue(this.GetHashCode(), out enemy))
+        {
+            CheckBackInCombat();
+            return;
+        }
 
         // Stop Movement if stunned
         if (FSM.CurrentState == _followingTargetState)
@@ -129,5 +138,18 @@ public class BasicEnemy : Enemy
 
         FSM.AddState(_followingTargetState);
         FSM.AddState(_enemyAttackingState);
+    }
+
+    private void OutOfCombat()
+    {
+        EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
+    }
+
+    private void CheckBackInCombat()
+    {
+        if(Vector3.Distance(_target.position, this.transform.position) <= CombatRange)
+        {
+            EnemyManager.Instance.RegisterInCombatEnemy(this.GetHashCode(), this);
+        }
     }
 }

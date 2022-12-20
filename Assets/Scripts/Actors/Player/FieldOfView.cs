@@ -45,7 +45,8 @@ public class FieldOfView : MonoBehaviour
 
     private void OnStopAim()
     {
-        StopCoroutine(_COAim);
+        if(_COAim != null)
+            StopCoroutine(_COAim);
     }
 
     private void Start()

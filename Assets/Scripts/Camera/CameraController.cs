@@ -7,27 +7,44 @@ public class CameraController : MonoBehaviour
 {
     [Header("Cameras References")]
     [SerializeField]
-    private GameObject playerAimCamera;
+    private CinemachineFreeLook playerAimCamera;
     [SerializeField]
-    private GameObject playerClimbCamera;
+    private CinemachineClearShot playerClimbCamera;
     [SerializeField]
-    private GameObject playerMovementCamera;
+    private CinemachineFreeLook playerMovementCamera;
     [SerializeField]
-    private GameObject playerDialogueCamera;
+    private CinemachineVirtualCamera playerDialogueCamera;
     [SerializeField]
-    private GameObject playerCombatCamera;
+    private CinemachineFreeLook playerCombatCamera;
 
+    [Header("Settings")]
+    [SerializeField]
+    private int highPriority = 11;
+    [SerializeField]
+    private int lowPriority = 0;
+    
     private bool _onCombat = false;
     private float _maxSpeedX = 0;
     private float _maxSpeedY = 0;
 
+    public void StopPlayerCameraMovement()
+    {
+        _maxSpeedX = playerMovementCamera.m_XAxis.m_MaxSpeed;
+        _maxSpeedY = playerMovementCamera.m_YAxis.m_MaxSpeed;
+        playerMovementCamera.m_XAxis.m_MaxSpeed = 0;
+        playerMovementCamera.m_YAxis.m_MaxSpeed = 0;
+
+    }
+
+    public void RestorePlayerCameraMovement()
+    {
+        playerMovementCamera.m_XAxis.m_MaxSpeed = _maxSpeedX;
+        playerMovementCamera.m_YAxis.m_MaxSpeed = _maxSpeedY;
+    }
+
     private void Start()
     {
-        playerAimCamera.SetActive(false);
-        playerClimbCamera.SetActive(false);
-        playerMovementCamera.SetActive(true);
-        playerCombatCamera.SetActive(false);
-        playerDialogueCamera.SetActive(false);
+        InitalCameraSetup();
     }
 
     private void OnEnable()
@@ -40,6 +57,8 @@ public class CameraController : MonoBehaviour
         PlayerClimb.OnClimbingExit += ClimbingExitCameras;
         EnemyManager.OnCombatEnter += CombatEnterCameras;
         EnemyManager.OnCombatExit += CombatExitCameras;
+        SpawnManager.OnPlayerSpawn += PlayerSpawnCameraSetup;
+        Player.OnPlayerDie += PlayerDeathCameraSetup;
     }
 
     private void OnDisable()
@@ -52,80 +71,98 @@ public class CameraController : MonoBehaviour
         PlayerClimb.OnClimbingExit -= ClimbingExitCameras;
         EnemyManager.OnCombatEnter -= CombatEnterCameras;
         EnemyManager.OnCombatExit -= CombatExitCameras;
+        SpawnManager.OnPlayerSpawn -= PlayerSpawnCameraSetup;
+        Player.OnPlayerDie -= PlayerDeathCameraSetup;
     }
 
     private void CombatEnterCameras()
     {
         _onCombat = true;
-        playerCombatCamera.SetActive(true);
-        playerAimCamera.SetActive(false);
-        playerClimbCamera.SetActive(false);
-        playerMovementCamera.SetActive(false);
+        playerCombatCamera.Priority = highPriority;
+      
+        playerAimCamera.Priority = lowPriority;
+        playerClimbCamera.Priority = lowPriority;
+        playerMovementCamera.Priority = lowPriority;
     }
 
     private void CombatExitCameras()
     {
         _onCombat = false;
-        playerCombatCamera.SetActive(false);
-        playerMovementCamera.SetActive(true);
-        playerClimbCamera.SetActive(false);
-        playerAimCamera.SetActive(false);
+
+        playerMovementCamera.Priority = highPriority;
+
+        playerCombatCamera.Priority = lowPriority;
+        playerClimbCamera.Priority = lowPriority;
+        playerAimCamera.Priority = lowPriority;
     }
 
     private void DialogueEnterCameras()
     {
-        playerDialogueCamera.SetActive(true);
-        playerMovementCamera.SetActive(false);
+        playerDialogueCamera.Priority = highPriority;
+
+        playerMovementCamera.Priority = lowPriority;
     }
 
     private void DialogueExitCameras()
     {
-        playerDialogueCamera.SetActive(false);
-        playerMovementCamera.SetActive(true);
+        playerMovementCamera.Priority = highPriority;
+
+        playerDialogueCamera.Priority = lowPriority;
     }
 
     private void AimActiveCameras()
     {
-        playerAimCamera.SetActive(true);
-        playerClimbCamera.SetActive(false);
-        playerMovementCamera.SetActive(false);
+        playerAimCamera.Priority = highPriority;
+
+        playerClimbCamera.Priority = lowPriority;
+        playerMovementCamera.Priority = lowPriority;
     }
 
     private void AimInactiveCameras()
     {
-        playerAimCamera.SetActive(false);
-        if(!_onCombat)
-            playerMovementCamera.SetActive(true);
+        playerAimCamera.Priority = lowPriority;
+        if (!_onCombat)
+        {
+            playerMovementCamera.Priority = highPriority;
+        }
+          
     }
 
     private void ClimbingEnterCameras()
     {
-        playerAimCamera.SetActive(false);
-        playerClimbCamera.SetActive(true);
-        playerMovementCamera.SetActive(false);
+        playerClimbCamera.Priority = highPriority;
+
+        playerAimCamera.Priority = lowPriority;
+        playerMovementCamera.Priority = lowPriority;
     }
 
     private void ClimbingExitCameras()
     {
-        playerClimbCamera.SetActive(false);
+        playerClimbCamera.Priority = lowPriority;
         if (!_onCombat)
-            playerMovementCamera.SetActive(true);
+        {
+            playerMovementCamera.Priority = highPriority;
+        }
+           
     }
 
-    public void StopPlayerCameraMovement()
+    private void PlayerDeathCameraSetup()
     {
-        CinemachineFreeLook cinemachineFreeLook = playerMovementCamera.GetComponent<CinemachineFreeLook>();
-        _maxSpeedX = cinemachineFreeLook.m_XAxis.m_MaxSpeed;
-        _maxSpeedY = cinemachineFreeLook.m_YAxis.m_MaxSpeed;
-        cinemachineFreeLook.m_XAxis.m_MaxSpeed = 0;
-        cinemachineFreeLook.m_YAxis.m_MaxSpeed = 0;
-
+        playerAimCamera.Priority = lowPriority;
+        playerClimbCamera.Priority = lowPriority;
+        playerMovementCamera.Priority = lowPriority;
+        playerCombatCamera.Priority = lowPriority;
+        playerDialogueCamera.Priority = lowPriority;
     }
 
-    public void RestorePlayerCameraMovement()
+    private void InitalCameraSetup()
     {
-        CinemachineFreeLook cinemachineFreeLook = playerMovementCamera.GetComponent<CinemachineFreeLook>();
-        cinemachineFreeLook.m_XAxis.m_MaxSpeed = _maxSpeedX;
-        cinemachineFreeLook.m_YAxis.m_MaxSpeed = _maxSpeedY;
+        playerAimCamera.Priority = lowPriority;
+        playerClimbCamera.Priority = lowPriority;
+        playerMovementCamera.Priority = highPriority;
+        playerCombatCamera.Priority = lowPriority;
+        playerDialogueCamera.Priority = lowPriority;
     }
+
+    private void PlayerSpawnCameraSetup(GameObject playerObj) => InitalCameraSetup();
 }
