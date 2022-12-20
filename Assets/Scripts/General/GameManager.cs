@@ -38,7 +38,6 @@ public class GameManager : Singleton<GameManager>
     private void ResetPlayer(GameObject playerObj)
     {
         _player = playerObj.GetComponent<Player>();
-        _player.Heal(999);
         _player.gameObject.GetComponent<PlayerLightShooting>().ResetLightCharges();
     }
 

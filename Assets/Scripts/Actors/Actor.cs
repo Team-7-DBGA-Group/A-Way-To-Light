@@ -47,7 +47,7 @@ public abstract class Actor : MonoBehaviour
     public void ResetHealth()
     {
         CurrentHealth = MaxHealth;
-        OnHealthHealed(MaxHealth);
+        OnHealthHealed?.Invoke(MaxHealth);
     }
 
     public void Heal(int healAmount)
