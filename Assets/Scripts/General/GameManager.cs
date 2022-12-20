@@ -14,8 +14,8 @@ public class GameManager : Singleton<GameManager>
     public void ResetGameScene()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
-        UISceneTransitionController.Instance.CloseTransition();
-        //SpawnManager.Instance.SpawnPlayer();
+        //UISceneTransitionController.Instance.OpenTransition();
+        //StartCoroutine(TransitionReset());
         NavigationManager.Instance.ChangeScene(gameSceneName);
     }
 
@@ -40,5 +40,12 @@ public class GameManager : Singleton<GameManager>
         _player = playerObj.GetComponent<Player>();
         _player.Heal(999);
         _player.gameObject.GetComponent<PlayerLightShooting>().ResetLightCharges();
+    }
+
+    private IEnumerator TransitionReset()
+    {
+        yield return new WaitForSeconds(2.0f);
+        UISceneTransitionController.Instance.CloseTransition();
+        SpawnManager.Instance.SpawnPlayer();
     }
 }
