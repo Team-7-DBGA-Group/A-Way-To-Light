@@ -18,6 +18,7 @@ public class UISceneTransitionController : Singleton<UISceneTransitionController
     private UnityEvent OnCloseTransitionEnded;
 
     public void OpenTransition() => transition.Open();
+    public void CloseTransition() => transition.Close();
 
     private void OnEnable()
     {

@@ -15,7 +15,7 @@ public class ActivatorTool : EditorWindow
             return;
 
         ActivatorTool wnd = GetWindow<ActivatorTool>();
-        wnd.titleContent = new GUIContent("VFXActivatorTool");
+        wnd.titleContent = new GUIContent("ActivatorTool");
     }
 
     public void CreateGUI()

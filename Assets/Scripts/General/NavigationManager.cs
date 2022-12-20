@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class NavigationManager : Singleton<NavigationManager>
 {
+    
     public bool IsLoadingScene { get; private set; }
 
     private string _sceneNameToBeLoaded = "";
+    private bool _shouldLoadScene;
 
     public void QuitGame() => Application.Quit();
     
@@ -17,6 +19,8 @@ public class NavigationManager : Singleton<NavigationManager>
     {
         if (IsLoadingScene)
             return;
+       
+        _shouldLoadScene = true;
 
         _sceneNameToBeLoaded = sceneName;
         UISceneTransitionController.Instance.OpenTransition();
@@ -27,6 +31,7 @@ public class NavigationManager : Singleton<NavigationManager>
         base.Awake();
         IsLoadingScene = false;
         _sceneNameToBeLoaded = "";
+        _shouldLoadScene = false;
     }
 
     private void OnEnable()
@@ -41,7 +46,12 @@ public class NavigationManager : Singleton<NavigationManager>
         UISceneTransitionController.Instance.Transition.OnOpenTransitionEnded -= LoadScene;
     }
 
-    private void LoadScene() => StartCoroutine(COLoadSceneAsync(_sceneNameToBeLoaded));
+    private void LoadScene() 
+    {
+        if (!_shouldLoadScene)
+            return;
+        StartCoroutine(COLoadSceneAsync(_sceneNameToBeLoaded));
+    } 
 
     private IEnumerator COLoadSceneAsync(string sceneName)
     {

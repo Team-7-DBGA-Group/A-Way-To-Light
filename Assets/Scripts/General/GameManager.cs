@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     public void ResetGameScene()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
+        UISceneTransitionController.Instance.CloseTransition();
         //SpawnManager.Instance.SpawnPlayer();
         NavigationManager.Instance.ChangeScene(gameSceneName);
     }
