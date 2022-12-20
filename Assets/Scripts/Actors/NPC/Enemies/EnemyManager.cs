@@ -15,6 +15,8 @@ public class EnemyManager : Singleton<EnemyManager>
     public Dictionary<int, Enemy> InCombatEnemies { get=> _inCombatEnemies; }
 
     private Dictionary<int, Enemy> _inCombatEnemies = new Dictionary<int, Enemy>();
+    private Dictionary<int, Vector3> _initPositions = new Dictionary<int, Vector3>();
+
     public void RegisterInCombatEnemy(int hash, Enemy enemy)
     {
         if (_inCombatEnemies.ContainsKey(hash))
@@ -24,6 +26,7 @@ public class EnemyManager : Singleton<EnemyManager>
             OnCombatEnter?.Invoke();
 
         _inCombatEnemies.Add(hash, enemy);
+        _initPositions.Add(hash, enemy.gameObject.transform.position);
         OnEnemyInCombatRegistered?.Invoke(hash);
 
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "New enemy register as InCombat with hash" + hash);
@@ -31,7 +34,16 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void DeregisterInCombatEnemy(int hash)
     {
+        Enemy enemy = null;
+        if (!_inCombatEnemies.TryGetValue(hash, out enemy))
+            return;
+
+        // Adjust position for reset
+        enemy.transform.position = _initPositions[hash];
+
         _inCombatEnemies.Remove(hash);
+        _initPositions.Remove(hash);
+
         if (CurrentEnemiesInCombat <= 0)
             OnCombatExit?.Invoke();
 
