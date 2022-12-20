@@ -15,8 +15,8 @@ public class GameManager : Singleton<GameManager>
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Scene resetted");
 
-        StartCoroutine(ResetSequence());
-        //NavigationManager.Instance.ChangeScene(gameSceneName);
+        //StartCoroutine(ResetSequence());
+        NavigationManager.Instance.ChangeScene(gameSceneName);
     }
 
     public void QuitGame()
