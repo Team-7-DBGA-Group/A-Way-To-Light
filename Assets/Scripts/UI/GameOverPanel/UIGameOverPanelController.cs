@@ -8,7 +8,7 @@ public class UIGameOverPanelController : MonoBehaviour
     [SerializeField]
     private UIGameOverPanel gameOverPanel;
    
-    public void HidGameOverPanel()
+    public void HideGameOverPanel()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
