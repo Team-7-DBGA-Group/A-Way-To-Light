@@ -143,7 +143,6 @@ public class CameraController : MonoBehaviour
         {
             playerMovementCamera.Priority = highPriority;
         }
-           
     }
 
     private void PlayerDeathCameraSetup()

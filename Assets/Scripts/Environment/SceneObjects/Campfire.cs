@@ -8,6 +8,8 @@ public class Campfire : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private DialogueTrigger dialogueTrigger;
+    [SerializeField]
+    private GameObject spawnPoint;
 
     [Header("General Settings")]
     [SerializeField]
@@ -32,7 +34,10 @@ public class Campfire : MonoBehaviour
     private void DialogueTriggered(GameObject playerObj)
     {
         _playerObj = playerObj;
+        
         HealPlayer();
+        SpawnManager.Instance.SetNewSpawnPoint(spawnPoint.transform.position);
+
         DialogueManager.OnChoiceChosen += HandleChoice;
     }
     private void DialogueExit()
