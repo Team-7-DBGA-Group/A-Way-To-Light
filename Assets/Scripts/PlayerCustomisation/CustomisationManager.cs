@@ -32,6 +32,8 @@ public class CustomisationManager : Singleton<CustomisationManager>
 
     [SerializeField]
     private GameObject playerRefPrefab;
+    
+    PlayerCustomisation _playerCustom;
 
     private GameObject _currentBody;
     private GameObject _currentHair;
@@ -46,14 +48,16 @@ public class CustomisationManager : Singleton<CustomisationManager>
     private int _armsIndex = 0;
     private int _hatIndex = 0;
 
-    //public void LoadCharacter(int headIndex, int hairIndex, int bodyIndex, int armsIndex, int hatIndex)
-    //{
-    //    _currentHead = heads[headIndex];
-    //    _currentHair = hair[hairIndex];
-    //    _currentBody = bodies[bodyIndex];
-    //    _currentLeftArm = leftArms[headIndex];
-    //    _currentBody = heads[headIndex];
-    //}
+    public void LoadCharacter(int headIndex, int hairIndex, int bodyIndex, int armsIndex, int hatIndex)
+    {
+        _currentHead = heads[headIndex];
+        _currentHair = hair[hairIndex];
+        _currentBody = bodies[bodyIndex];
+        _currentLeftArm = leftArms[armsIndex];
+        _currentRightArm = rightArms[armsIndex];
+        _currentHat = hats[hatIndex];
+        CreateCharacter();
+    }
 
     public void SetPlayerReferences(GameObject bodyRef, GameObject hairRef, GameObject headRef, GameObject lArmRef, GameObject rArmRef)
     {
@@ -110,25 +114,26 @@ public class CustomisationManager : Singleton<CustomisationManager>
 
     private void Start()
     {
-        _currentBody = bodies[0];
-        _currentHair = hair[0];
-        _currentHat = hats[0];
-        _currentHead = heads[0];
-        _currentLeftArm = leftArms[0];
-        _currentRightArm = rightArms[0];
+        _playerCustom = playerRefPrefab.GetComponent<PlayerCustomisation>();
+        _currentBody = bodies[_playerCustom.BodyIndex];
+        _currentHair = hair[_playerCustom.HairIndex];
+        _currentHat = hats[_playerCustom.HatIndex];
+        _currentHead = heads[_playerCustom.HeadIndex];
+        _currentLeftArm = leftArms[_playerCustom.ArmsIndex];
+        _currentRightArm = rightArms[_playerCustom.ArmsIndex];
         CreateCharacter();
     }
 
     private void RandomCharacter()
     {
-        _currentBody = bodies[Random.Range(0, bodies.Count)];
-        _currentHair = hair[Random.Range(0, hair.Count)];
+        _currentBody = bodies[_bodyIndex = Random.Range(0, bodies.Count)];
+        _currentHair = hair[_hairIndex = Random.Range(0, hair.Count)];
         _currentHat.SetActive(false);
-        _currentHat = hats[Random.Range(0, hats.Count)];
-        _currentHead = heads[Random.Range(0, heads.Count)];
-        int armsIndex = Random.Range(0, leftArms.Count);
-        _currentLeftArm = leftArms[armsIndex];
-        _currentRightArm = rightArms[armsIndex];
+        _currentHat = hats[_hatIndex = Random.Range(0, hats.Count)];
+        _currentHead = heads[_headIndex = Random.Range(0, heads.Count)];
+        _armsIndex = Random.Range(0, leftArms.Count);
+        _currentLeftArm = leftArms[_armsIndex];
+        _currentRightArm = rightArms[_armsIndex];
     }
 
     private void CreateCharacter()
@@ -156,6 +161,8 @@ public class CustomisationManager : Singleton<CustomisationManager>
         leftArmReference.GetComponent<MeshFilter>().sharedMesh = _currentLeftArm.GetComponent<MeshFilter>().sharedMesh; 
         rightArmReference.GetComponent<MeshRenderer>().sharedMaterials = _currentRightArm.GetComponent<MeshRenderer>().sharedMaterials;
         rightArmReference.GetComponent<MeshFilter>().sharedMesh = _currentRightArm.GetComponent<MeshFilter>().sharedMesh;
+
+        _playerCustom.SetData(_headIndex, _hairIndex, _bodyIndex, _armsIndex, _hatIndex);
     }
 
     private void Update()
