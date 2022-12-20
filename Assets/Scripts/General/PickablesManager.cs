@@ -9,6 +9,7 @@ public class PickablesManager : Singleton<PickablesManager>
     private List<PickableWeapon> weapons = new List<PickableWeapon>();
 
     private Dictionary<Vector3,GameObject> _pickables = new Dictionary<Vector3,GameObject>();
+    private Dictionary<Vector3, GameObject> _pickablesToSpawn = new Dictionary<Vector3, GameObject>();
 
     public void InitPickables()
     {
@@ -20,11 +21,12 @@ public class PickablesManager : Singleton<PickablesManager>
 
     public void ResetPickables()
     {
-        foreach (Vector3 position in _pickables.Keys)
+        foreach (Vector3 position in _pickablesToSpawn.Keys)
         {
-            GameObject obj = Instantiate(_pickables[position], position, Quaternion.identity);
-            obj.transform.localRotation = _pickables[position].transform.localRotation;
+            GameObject obj = Instantiate(_pickablesToSpawn[position], position, Quaternion.identity);
+            obj.transform.localRotation = _pickablesToSpawn[position].transform.localRotation;
         }
+        _pickablesToSpawn.Clear();
     }
 
     private void Start()
@@ -32,8 +34,30 @@ public class PickablesManager : Singleton<PickablesManager>
         InitPickables();
     }
 
+    private void OnEnable()
+    {
+        PickableWeapon.OnWeaponPick += CheckToSpawn;
+    }
+
+    private void OnDisable()
+    {
+        PickableWeapon.OnWeaponPick -= CheckToSpawn;
+    }
+
     private void AddPickable(Vector3 position, GameObject prefab)
     {
         _pickables.Add(position, prefab);
+    }
+
+    private void CheckToSpawn(Vector3 position)
+    {
+        foreach (Vector3 pos in _pickables.Keys)
+        {
+            if (pos.Equals(position))
+            {
+                _pickablesToSpawn.Add(pos, _pickables[pos]);
+                break;
+            }
+        }
     }
 }
