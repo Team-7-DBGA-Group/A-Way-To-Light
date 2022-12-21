@@ -7,6 +7,7 @@ using System;
 
 public class Player : Actor
 {
+    public static event Action<GameObject> OnPlayerDieTarget;
     public static event Action OnPlayerDie;
     public bool IsWeaponEquip { get => _currentEquipWeapon != null; }
 
@@ -75,6 +76,12 @@ public class Player : Actor
     public override void Die()
     {
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Game Over!");
+
+        GameObject target = GetComponentInChildren<PlayerCameraTarget>().gameObject;
+        target.transform.parent = null;
+
+        OnPlayerDieTarget?.Invoke(target);
+
         OnPlayerDie?.Invoke();
         Destroy(gameObject);
     }

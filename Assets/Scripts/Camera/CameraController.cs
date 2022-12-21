@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
         EnemyManager.OnCombatEnter += CombatEnterCameras;
         EnemyManager.OnCombatExit += CombatExitCameras;
         SpawnManager.OnPlayerSpawn += PlayerSpawnCameraSetup;
-        Player.OnPlayerDie += PlayerDeathCameraSetup;
+        Player.OnPlayerDieTarget += PlayerDeathCameraSetup;
     }
 
     private void OnDisable()
@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour
         EnemyManager.OnCombatEnter -= CombatEnterCameras;
         EnemyManager.OnCombatExit -= CombatExitCameras;
         SpawnManager.OnPlayerSpawn -= PlayerSpawnCameraSetup;
-        Player.OnPlayerDie -= PlayerDeathCameraSetup;
+        Player.OnPlayerDieTarget -= PlayerDeathCameraSetup;
     }
 
     private void CombatEnterCameras()
@@ -145,12 +145,16 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void PlayerDeathCameraSetup()
+    private void PlayerDeathCameraSetup(GameObject target)
     {
         playerAimCamera.Priority = lowPriority;
         playerClimbCamera.Priority = lowPriority;
+
         playerMovementCamera.Priority = lowPriority;
+        playerMovementCamera.Follow = target.transform;
         playerCombatCamera.Priority = lowPriority;
+        playerCombatCamera.Follow = target.transform;
+
         playerDialogueCamera.Priority = lowPriority;
     }
 
