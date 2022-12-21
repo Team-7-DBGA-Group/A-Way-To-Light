@@ -2,7 +2,7 @@
 
 === main ===
 That's it for our demo game!
-I hope you've had fun!
+I hope you had fun!
 We will be glad if you could take some seconds to complete our survey, it would help a lot!
 Choose what you want do:
     +[Play Again]
