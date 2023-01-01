@@ -62,7 +62,6 @@ public class Campfire : MonoBehaviour
     private void SaveGame()
     {
         // Call Save Game from Manager here ...
-        CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Saved! ");
     }
 
     private void HealPlayer()
