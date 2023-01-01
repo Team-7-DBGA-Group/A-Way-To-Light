@@ -53,11 +53,12 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Saved");
     }
 
+    // Execution Order -10, it will be one of the first Start() to be executed
     private void Start()
     {
         _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         _dataPersistenceObjects = FindAllDataPersistenceObjects();
-        // I dunno, maybe problems which Start() begins first
+
         LoadGame(); 
     }
 

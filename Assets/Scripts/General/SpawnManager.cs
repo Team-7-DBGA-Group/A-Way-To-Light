@@ -7,6 +7,8 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
 {
     public static event Action<GameObject> OnPlayerSpawn;
 
+    public Vector3 StartingSpawnPoint { get => startSpawnPoint.transform.position; }
+
     [Header("References")]
     [SerializeField]
     private GameObject playerPrefab;
@@ -38,8 +40,7 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
     }
 
     private void Start()
-    {
-        _currentSpawnPoint = startSpawnPoint.transform.position;
+    {  
         SpawnPlayer();
     }
 }
