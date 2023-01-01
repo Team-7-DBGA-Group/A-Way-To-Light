@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableObject : MonoBehaviour, IInteractable
-{
-    public void Interact()
+public class DestroyableObject : InteractableObject 
+{ 
+    public override void Interact()
     {
+        base.Interact();
         DestroyThis();
     }
 

@@ -18,7 +18,7 @@ public class PillarKey : GateKey
 
     private MeshRenderer _meshRenderer;
 
-    private void Start()
+    private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
         _meshRenderer.material = OffMaterial;

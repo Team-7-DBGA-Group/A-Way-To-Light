@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GateKey : MonoBehaviour, IInteractable
+public abstract class GateKey : InteractableObject
 {
     public bool IsKeyActive { get; private set; }
     private Gate _gateReference = null;
@@ -14,10 +14,11 @@ public abstract class GateKey : MonoBehaviour, IInteractable
         _gateReference = gate;
     }
 
-    public void Interact()
+    public override void Interact()
     {
         CustomInteraction();
         ActiveKey();
+        base.Interact();
     }
 
     private void ActiveKey()

@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using System;
 
-public class TransportableObject : MonoBehaviour, IInteractable
+public class TransportableObject : InteractableObject
 {
     public bool IsTransporting { get; private set; }
     public event Action OnStopTransport;
@@ -21,11 +21,12 @@ public class TransportableObject : MonoBehaviour, IInteractable
     private int _waypointIndex;
     private bool _canObjectMove = false;
 
-    public void Interact()
+    public override void Interact()
     {
-
         if (_canObjectMove)
             return;
+
+        base.Interact();
 
         if (_playerRef != null)
         {

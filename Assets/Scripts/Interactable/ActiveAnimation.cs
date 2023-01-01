@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class ActiveAnimation : MonoBehaviour, IInteractable
+public class ActiveAnimation : InteractableObject
 {
-
     [Header("Animations Settings")]
     [Tooltip("Stato Animazione con Maiuscole!")]
     [SerializeField]
@@ -10,8 +9,9 @@ public class ActiveAnimation : MonoBehaviour, IInteractable
     [SerializeField]
     private Animator animator;
 
-    public void Interact()
+    public override void Interact()
     {
+        base.Interact();
         PlayThis();
     }
 

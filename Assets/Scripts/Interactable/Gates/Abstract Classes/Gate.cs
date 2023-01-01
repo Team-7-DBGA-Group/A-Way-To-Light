@@ -20,7 +20,7 @@ public abstract class Gate : MonoBehaviour
         GateOpenedAction();
     }
 
-    void Start()
+    void Awake()
     {
         foreach (GateKey key in gateKeys)
         {
