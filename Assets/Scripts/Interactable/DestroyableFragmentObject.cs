@@ -23,15 +23,6 @@ public class DestroyableFragmentObject : InteractableObject
         GameObject fragObj = Instantiate(fragmentedObject, this.transform.position + fragmentedObject.transform.position, this.transform.rotation);
         
         Destroy(fragObj, clearTime);
-        SetFullObjectActive(false);
-    }
-
-    private void SetFullObjectActive(bool active)
-    {
-        Collider collider = GetComponent<Collider>();
-        collider.enabled = active;
-        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer renderer in meshRenderers)
-            renderer.enabled = active;
+        this.gameObject.SetActive(false);
     }
 }
