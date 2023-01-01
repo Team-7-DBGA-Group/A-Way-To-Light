@@ -62,7 +62,8 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         LoadGame(); 
     }
 
-    private void OnApplicationQuit() => SaveGame();
+    // If you want to SaveGame on Quit
+    // private void OnApplicationQuit() => SaveGame();
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
