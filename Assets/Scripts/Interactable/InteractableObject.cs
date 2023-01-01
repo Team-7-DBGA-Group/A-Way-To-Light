@@ -6,7 +6,7 @@ public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
 {
     public bool IsInteractionActive { get; set; }
 
-    [Header("InteractableObject")]
+    [Header("Save System")]
     [SerializeField]
     protected string ID;
     [ContextMenu("Generate GUID for ID")]
@@ -20,16 +20,16 @@ public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
     public void LoadData(GameData data)
     {
         bool isActive = false;
-        data.interactablesActivated.TryGetValue(ID, out isActive);
+        data.InteractablesActivated.TryGetValue(ID, out isActive);
         if(isActive)
             Interact();
     }
 
     public void SaveData(GameData data)
     {
-        if(data.interactablesActivated.ContainsKey(ID))
-            data.interactablesActivated.Remove(ID);
+        if(data.InteractablesActivated.ContainsKey(ID))
+            data.InteractablesActivated.Remove(ID);
 
-        data.interactablesActivated.Add(ID, IsInteractionActive);
+        data.InteractablesActivated.Add(ID, IsInteractionActive);
     }
 }
