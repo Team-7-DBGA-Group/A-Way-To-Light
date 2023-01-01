@@ -61,7 +61,7 @@ public class Campfire : MonoBehaviour
 
     private void SaveGame()
     {
-        // Call Save Game from Manager here ...
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     private void HealPlayer()

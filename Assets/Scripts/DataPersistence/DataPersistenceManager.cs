@@ -19,7 +19,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
     public void NewGame()
     {
-        _gameData = new GameData();
+        _gameData = new GameData(SpawnManager.Instance.StartingSpawnPoint);
     }
 
     public void LoadGame()

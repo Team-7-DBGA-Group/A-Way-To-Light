@@ -10,9 +10,9 @@ public class GameData
     public bool IsStartingCutscenePlayed;
 
     // Default values when the game start
-    public GameData()
+    public GameData(Vector3 playerStartingPosition)
     {
-        this.PlayerSpawnPosition = SpawnManager.Instance.StartingSpawnPoint;
+        this.PlayerSpawnPosition = playerStartingPosition;
         this.IsStartingCutscenePlayed = false;
     }
 }
