@@ -10,10 +10,14 @@ public class FileDataHandler
     private string _dataDirPath = "";
     private string _dataFileName = "";
 
-    public FileDataHandler(string dataDirPath, string dataFileName)
+    private bool _useEncryption = false;
+    private readonly string _encryptionCodeWord = "-Light-The-Way-Through-Encrypted-Data-";
+
+    public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption = true)
     {
         _dataDirPath = dataDirPath;
         _dataFileName = dataFileName;
+        _useEncryption = useEncryption;
     }
 
     public GameData Load()
@@ -34,6 +38,9 @@ public class FileDataHandler
                         dataToLoad = reader.ReadToEnd();
                     }
                 }
+
+                if(_useEncryption)
+                    dataToLoad = EncryptDecrypt(dataToLoad);
 
                 // Deserialization
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
@@ -60,6 +67,10 @@ public class FileDataHandler
             string dataToStore = JsonUtility.ToJson(data, true);
             CustomLog.Log(CustomLog.CustomLogType.SERIALISATION, "Serialization successful");
 
+            // Encrypt
+            if (_useEncryption)
+                dataToStore = EncryptDecrypt(dataToStore);
+
             // Write the serialize data to the file
             // "using" to ensure stream is closed
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
@@ -74,5 +85,16 @@ public class FileDataHandler
         {
             Debug.LogError("Error occured when trying to save data to file: " + fullPath + "\n" + e);
         }
+    }
+
+    // Simple XOR encryption
+    private string EncryptDecrypt(string data)
+    {
+        string modifiedData = "";
+        for(int i=0; i<data.Length; i++)
+        {
+            modifiedData += (char)(data[i] ^ _encryptionCodeWord[i % _encryptionCodeWord.Length]);
+        }
+        return modifiedData;
     }
 }

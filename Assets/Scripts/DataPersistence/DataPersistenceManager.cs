@@ -9,6 +9,8 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     [Header("File Storage Config")]
     [SerializeField]
     private string fileName = "data.light";
+    [SerializeField]
+    private bool useEncryption = true;
 
     private GameData _gameData;
     private List<IDataPersistence> _dataPersistenceObjects;
@@ -56,7 +58,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     // Execution Order -10, it will be one of the first Start() to be executed
     private void Start()
     {
-        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         _dataPersistenceObjects = FindAllDataPersistenceObjects();
 
         LoadGame(); 
