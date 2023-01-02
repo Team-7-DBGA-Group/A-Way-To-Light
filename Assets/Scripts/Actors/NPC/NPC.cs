@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class NPC : Actor, IInteractable
+public abstract class NPC : Actor, IInteractable, IDataPersistence
 {
     public bool IsAlive { get; protected set; }
 
@@ -15,6 +15,15 @@ public abstract class NPC : Actor, IInteractable
     protected Material GlowMat = null;
     [SerializeField]
     protected Material BlackMat = null;
+
+    [Header("Save System")]
+    [SerializeField]
+    protected string ID;
+    [ContextMenu("Generate GUID for ID")]
+    private void GenerateGuid() => ID = System.Guid.NewGuid().ToString();
+
+    public abstract void LoadData(GameData data);
+    public abstract void SaveData(GameData data);
 
     public abstract void Interact();
 

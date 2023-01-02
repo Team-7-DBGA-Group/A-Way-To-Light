@@ -12,6 +12,7 @@ public class GameData
     public SerializableDictionary<string, bool> AutoDialoguesActivated;
     public SerializableDictionary<string, bool> BasicEnemiesAlive;
     public SerializableDictionary<string, bool> BasicEnemiesDead;
+    public SerializableDictionary<string, bool> AlliesAlive;
 
     // Default values when the game start
     public GameData(Vector3 playerStartingPosition)
@@ -22,5 +23,6 @@ public class GameData
         AutoDialoguesActivated = new SerializableDictionary<string, bool>();
         BasicEnemiesAlive = new SerializableDictionary<string, bool>();
         BasicEnemiesDead = new SerializableDictionary<string, bool>();
+        AlliesAlive = new SerializableDictionary<string, bool>();
     }
 }

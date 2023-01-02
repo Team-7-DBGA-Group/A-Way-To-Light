@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : NPC, IDataPersistence
+public abstract class Enemy : NPC
 {
     public float AttackRange { get => attackRange; }
     public float CombatRange { get => combatRange; }
@@ -32,12 +32,6 @@ public abstract class Enemy : NPC, IDataPersistence
     [SerializeField]
     private LayerMask playerLayer = new LayerMask();
 
-    [Header("Save System")]
-    [SerializeField]
-    protected string ID;
-    [ContextMenu("Generate GUID for ID")]
-    private void GenerateGuid() => ID = System.Guid.NewGuid().ToString();
-
     protected bool CanAttack = true;
     protected bool IsStunned = false;
 
@@ -45,9 +39,6 @@ public abstract class Enemy : NPC, IDataPersistence
 
     // State Machine
     protected FSMSystem FSM;
-
-    public abstract void LoadData(GameData data);
-    public abstract void SaveData(GameData data);
 
     public abstract void Attack();
     public override void Interact()
