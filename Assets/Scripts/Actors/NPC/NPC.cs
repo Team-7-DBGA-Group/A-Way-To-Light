@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class NPC : Actor, IInteractable, IDataPersistence
 {
@@ -20,7 +22,11 @@ public abstract class NPC : Actor, IInteractable, IDataPersistence
     [SerializeField]
     protected string ID;
     [ContextMenu("Generate GUID for ID")]
-    private void GenerateGuid() => ID = System.Guid.NewGuid().ToString();
+    private void GenerateGuid() 
+    { 
+        ID = System.Guid.NewGuid().ToString(); 
+        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene()); 
+    }
 
     public abstract void LoadData(GameData data);
     public abstract void SaveData(GameData data);

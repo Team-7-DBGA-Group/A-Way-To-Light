@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class AutoDialogueTrigger : MonoBehaviour, IDataPersistence
 {
@@ -11,7 +13,11 @@ public class AutoDialogueTrigger : MonoBehaviour, IDataPersistence
     [SerializeField]
     protected string ID;
     [ContextMenu("Generate GUID for ID")]
-    private void GenerateGuid() => ID = System.Guid.NewGuid().ToString();
+    private void GenerateGuid()
+    {
+        ID = System.Guid.NewGuid().ToString();
+        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+    }
 
     [Header("Ink JSON")]
     [SerializeField]

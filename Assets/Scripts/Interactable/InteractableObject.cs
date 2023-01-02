@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
 {
@@ -10,7 +12,11 @@ public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
     [SerializeField]
     protected string ID;
     [ContextMenu("Generate GUID for ID")]
-    private void GenerateGuid() => ID = System.Guid.NewGuid().ToString();
+    private void GenerateGuid()
+    {
+        ID = System.Guid.NewGuid().ToString();
+        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+    }
 
     public virtual void Interact()
     {
