@@ -13,6 +13,38 @@ public class BasicEnemy : Enemy
     private FollowingTargetState _followingTargetState;
     private EnemyAttackingState _enemyAttackingState;
 
+    public override void LoadData(GameData data)
+    {
+        bool isAlive = false;
+        bool isDead = false;
+        data.BasicEnemiesAlive.TryGetValue(ID, out isAlive);
+        data.BasicEnemiesDead.TryGetValue(ID, out isDead);
+
+        if (isDead)
+        {
+            this.gameObject.SetActive(false);
+            return;
+        }
+
+        if (isAlive)
+        {
+            Interact();
+            OutOfCombat();
+        }       
+    }
+
+    public override void SaveData(GameData data)
+    {
+        if (data.BasicEnemiesAlive.ContainsKey(ID))
+            data.BasicEnemiesAlive.Remove(ID);
+
+        if(data.BasicEnemiesDead.ContainsKey(ID))
+            data.BasicEnemiesDead.Remove(ID);
+
+        data.BasicEnemiesAlive.Add(ID, IsAlive);
+        data.BasicEnemiesDead.Add(ID, IsDead);
+    }
+
     public override void Rise()
     {
         base.Rise();
@@ -45,7 +77,8 @@ public class BasicEnemy : Enemy
         base.Die();
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
         EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
     public void StopDealingDamage()
     {
