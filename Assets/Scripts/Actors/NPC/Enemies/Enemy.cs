@@ -6,6 +6,7 @@ public abstract class Enemy : NPC
 {
     public float AttackRange { get => attackRange; }
     public float CombatRange { get => combatRange; }
+    public bool IsDead { get; protected set; }
 
     [Header("Enemy References")]
     [SerializeField]
@@ -57,6 +58,8 @@ public abstract class Enemy : NPC
 
     public override void Die()
     {
+        IsDead = true;
+        IsAlive = false;
         DropWeapon();
     }
 
@@ -70,7 +73,7 @@ public abstract class Enemy : NPC
     protected override void Awake()
     {
         base.Awake();
-        // ...
+        IsDead = false;
     }
 
     protected override void Start()

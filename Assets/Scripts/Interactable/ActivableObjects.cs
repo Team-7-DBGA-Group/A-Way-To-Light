@@ -2,21 +2,16 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ActivableObjects : MonoBehaviour, IInteractable
+public class ActivableObjects : InteractableObject
 {
     [Header("Objects References")]
     [SerializeField]
     private List<GameObject> objects = new List<GameObject>();
 
-    public void Interact()
+    public override void Interact()
     {
+        base.Interact();
         ActiveObjects();
-    }
-
-    private void Start()
-    {
-        foreach (GameObject obj in objects)
-            obj.SetActive(false);
     }
 
     private void ActiveObjects()

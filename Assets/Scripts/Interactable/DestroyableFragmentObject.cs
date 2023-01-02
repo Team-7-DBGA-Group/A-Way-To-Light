@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyableFragmentObject : MonoBehaviour, IInteractable
+public class DestroyableFragmentObject : InteractableObject
 {
     [Header("References")]
     [SerializeField]
@@ -12,8 +12,9 @@ public class DestroyableFragmentObject : MonoBehaviour, IInteractable
     [SerializeField]
     private float clearTime = 4.0f;
 
-    public void Interact()
+    public override void Interact()
     {
+        base.Interact();
         Explode();
     }
 
@@ -22,6 +23,6 @@ public class DestroyableFragmentObject : MonoBehaviour, IInteractable
         GameObject fragObj = Instantiate(fragmentedObject, this.transform.position + fragmentedObject.transform.position, this.transform.rotation);
         
         Destroy(fragObj, clearTime);
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 }

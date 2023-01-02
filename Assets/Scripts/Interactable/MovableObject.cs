@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovableObject : MonoBehaviour, IInteractable
+public class MovableObject : InteractableObject
 {
     [Header("Object Movement Settings")]
     [SerializeField]
@@ -15,11 +15,12 @@ public class MovableObject : MonoBehaviour, IInteractable
 
     private bool _doOnce = false;
 
-    public void Interact()
+    public override void Interact()
     {
         if (_doOnce)
             return;
 
+        base.Interact();
         if (waypoints.Count > 0)
             _canMoveMiddle = true;
     }

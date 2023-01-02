@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CartInteractable : MonoBehaviour, IInteractable
+public class CartInteractable : InteractableObject
 {
     [Header("References")]
     [SerializeField]
@@ -11,11 +11,12 @@ public class CartInteractable : MonoBehaviour, IInteractable
     private TransportableObject transportableObject;
 
     private bool isPlayingAnim = false;
-    public void Interact()
+    public override void Interact()
     {
         if(isPlayingAnim)
             return;
 
+        base.Interact();
         animator.SetTrigger("Move");
         isPlayingAnim = true;
     }

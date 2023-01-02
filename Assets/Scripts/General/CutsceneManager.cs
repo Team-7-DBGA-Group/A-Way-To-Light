@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-public class CutsceneManager : Singleton<CutsceneManager>
+public class CutsceneManager : Singleton<CutsceneManager>, IDataPersistence
 {
     public bool IsPlayingCutscene { get; private set; }
 
@@ -20,6 +20,16 @@ public class CutsceneManager : Singleton<CutsceneManager>
     private string startingCutsceneName = "";
 
     private bool _isStartingCutsecenePlayed = false;
+
+    public void LoadData(GameData data)
+    {
+        _isStartingCutsecenePlayed = data.IsStartingCutscenePlayed;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.IsStartingCutscenePlayed = _isStartingCutsecenePlayed;
+    }
 
     public void PlayCutscene(int index)
     {

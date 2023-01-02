@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnOnLight : MonoBehaviour, IInteractable
+public class TurnOnLight : InteractableObject
 {
     [Header("Light Settings")]
     [Tooltip("Valore della luce che si vuole avere")]
@@ -24,8 +24,9 @@ public class TurnOnLight : MonoBehaviour, IInteractable
         _gameLight.intensity = _lightIntensity;
     }
 
-    public void Interact()
+    public override void Interact()
     {
+        base.Interact();
         TurnOn();
     }
 

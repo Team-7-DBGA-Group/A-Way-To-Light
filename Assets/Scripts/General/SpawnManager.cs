@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class SpawnManager : Singleton<SpawnManager>
+public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
 {
     public static event Action<GameObject> OnPlayerSpawn;
+
+    public Vector3 StartingSpawnPoint { get => startSpawnPoint.transform.position; }
 
     [Header("References")]
     [SerializeField]
@@ -15,6 +17,16 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private Vector3 _currentSpawnPoint = Vector3.zero;
     private GameObject _playerObj = null;
+
+    public void LoadData(GameData data)
+    {
+        _currentSpawnPoint = data.PlayerSpawnPosition;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.PlayerSpawnPosition = _currentSpawnPoint;
+    }
 
     public void SetNewSpawnPoint(Vector3 position)
     {
@@ -28,8 +40,7 @@ public class SpawnManager : Singleton<SpawnManager>
     }
 
     private void Start()
-    {
-        _currentSpawnPoint = startSpawnPoint.transform.position;
+    {  
         SpawnPlayer();
     }
 }

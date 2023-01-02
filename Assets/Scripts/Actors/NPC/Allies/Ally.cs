@@ -22,6 +22,22 @@ public class Ally : NPC
         dialogueTrigger.enabled = true;
     }
 
+    public override void LoadData(GameData data)
+    {
+        bool isAlive = false;
+        data.AlliesAlive.TryGetValue(ID, out isAlive);
+        if (isAlive)
+            Interact();
+    }
+
+    public override void SaveData(GameData data)
+    {
+        if (data.AlliesAlive.ContainsKey(ID))
+            data.AlliesAlive.Remove(ID);
+
+        data.AlliesAlive.Add(ID, IsAlive);
+    }
+
     protected override void Awake()
     {
         base.Awake();

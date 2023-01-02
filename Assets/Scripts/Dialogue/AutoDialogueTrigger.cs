@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AutoDialogueTrigger : MonoBehaviour
+public class AutoDialogueTrigger : MonoBehaviour, IDataPersistence
 {
     public event Action<GameObject> OnDialogueTriggered;
+
+    [Header("Save System")]
+    [SerializeField]
+    protected string ID;
+    [ContextMenu("Generate GUID for ID")]
+    private void GenerateGuid() => ID = System.Guid.NewGuid().ToString();
 
     [Header("Ink JSON")]
     [SerializeField]
@@ -17,6 +23,22 @@ public class AutoDialogueTrigger : MonoBehaviour
     private bool _canTriggerDialogue = true;
     private bool _playOnce = false;
     private bool _canEnableDialogue = true;
+
+    public void LoadData(GameData data)
+    {
+        bool canPlay = false;
+        data.AutoDialoguesActivated.TryGetValue(ID, out canPlay);
+        _playOnce = canPlay;
+    }
+
+    public void SaveData(GameData data)
+    {
+        if (data.AutoDialoguesActivated.ContainsKey(ID))
+            data.AutoDialoguesActivated.Remove(ID);
+
+        data.AutoDialoguesActivated.Add(ID, _playOnce);
+    }
+
     public void EnableTriggerDialogue()
     {
         if (!_canEnableDialogue)
