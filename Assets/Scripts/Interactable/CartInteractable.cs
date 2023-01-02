@@ -10,21 +10,21 @@ public class CartInteractable : InteractableObject
     [SerializeField]
     private TransportableObject transportableObject;
 
-    private bool isPlayingAnim = false;
+    private bool _isPlayingAnim = false;
     public override void Interact()
     {
-        if(isPlayingAnim)
+        if(_isPlayingAnim)
             return;
 
         base.Interact();
         animator.SetTrigger("Move");
-        isPlayingAnim = true;
+        _isPlayingAnim = true;
     }
 
     public void StopMoving()
     {
         animator.SetTrigger("Stop");
-        isPlayingAnim = false;
+        _isPlayingAnim = false;
     }
 
     private void OnEnable()
