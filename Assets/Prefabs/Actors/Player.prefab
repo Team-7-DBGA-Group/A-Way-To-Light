@@ -609,7 +609,6 @@ MonoBehaviour:
   knockbackDuration: 0.5
   knockbackSpeed: 2
   knockbackRaycastLength: 1.5
-  deathTarget: {fileID: 0}
   dropRayDistance: 1.6
 --- !u!114 &6375194756810046011
 MonoBehaviour:
@@ -668,7 +667,8 @@ MonoBehaviour:
   playerAim: {fileID: 6375194756810046012}
   shotSpawnPostion: {fileID: 6375194758102725383}
   maxLightCharges: 3
-  chargesCooldown: 10
+  chargesCooldownNotInCombat: 2
+  chargesCooldownInCombat: 10
   betweenShotCooldown: 0.5
   rayUnity: 1000
   rayLayer:

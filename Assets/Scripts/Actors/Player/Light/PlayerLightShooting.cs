@@ -21,7 +21,9 @@ public class PlayerLightShooting : MonoBehaviour
     [SerializeField]
     private int maxLightCharges = 3;
     [SerializeField]
-    private float chargesCooldown = 2.0f;
+    private float chargesCooldownNotInCombat = 2.0f;
+    [SerializeField]
+    private float chargesCooldownInCombat = 10.0f;
     [SerializeField]
     private float betweenShotCooldown = 0.5f;
     [SerializeField]
@@ -30,6 +32,7 @@ public class PlayerLightShooting : MonoBehaviour
     private LayerMask rayLayer;
 
     private bool _canShoot = true;
+    private float _chargesCooldown = 2.0f;
 
     public void ResetLightCharges()
     {
@@ -43,11 +46,24 @@ public class PlayerLightShooting : MonoBehaviour
     private void Awake()
     {
         Charges = maxLightCharges;
+        _chargesCooldown = chargesCooldownNotInCombat;
     }
 
     private void Start()
     {
         OnChargesInitialized(Charges);
+    }
+
+    private void OnEnable()
+    {
+        EnemyManager.OnCombatEnter += ApplyCombatLightCD;
+        EnemyManager.OnCombatExit += ApplyOutOfCombatLightCD;
+    }
+
+    private void OnDisable()
+    {
+        EnemyManager.OnCombatEnter -= ApplyCombatLightCD;
+        EnemyManager.OnCombatExit -= ApplyOutOfCombatLightCD;
     }
 
     private void Update()
@@ -89,7 +105,7 @@ public class PlayerLightShooting : MonoBehaviour
     private IEnumerator COStartChargesCooldownTimer()
     {
         Charges--;
-        yield return new WaitForSeconds(chargesCooldown);
+        yield return new WaitForSeconds(_chargesCooldown);
         Charges++;
         OnChargeCooldownFinished?.Invoke();
         if (Charges > maxLightCharges)
@@ -101,5 +117,15 @@ public class PlayerLightShooting : MonoBehaviour
         _canShoot = false;
         yield return new WaitForSeconds(betweenShotCooldown);
         _canShoot = true;
+    }
+
+    private void ApplyCombatLightCD()
+    {
+        _chargesCooldown = chargesCooldownInCombat;
+    }
+
+    private void ApplyOutOfCombatLightCD()
+    {
+        _chargesCooldown = chargesCooldownNotInCombat;
     }
 }
