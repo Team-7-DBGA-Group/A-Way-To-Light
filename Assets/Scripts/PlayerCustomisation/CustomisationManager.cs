@@ -119,7 +119,7 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
             _currentHat.transform.parent = null;
             Destroy(_currentHat.gameObject);
         }
-        _currentHat = Instantiate(hats[_playerCustom.HatIndex], _hatReference.transform);
+        _currentHat = Instantiate(hats[_hatIndex], _hatReference.transform);
         CreateCharacter();
     }
 
