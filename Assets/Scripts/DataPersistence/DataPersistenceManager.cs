@@ -69,6 +69,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
+        Debug.Log("Finding");
         IEnumerable<IDataPersistence> dataPersistenceObjects = FindObjectsOfType<MonoBehaviour>(true)
             .OfType<IDataPersistence>();
 

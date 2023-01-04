@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomisationManager : Singleton<CustomisationManager>
+public class CustomisationManager : Singleton<CustomisationManager>, IDataPersistence
 {
     [Header("Parts")]
     [SerializeField]
@@ -17,9 +17,6 @@ public class CustomisationManager : Singleton<CustomisationManager>
     private List<GameObject> leftArms;
     [SerializeField]
     private List<GameObject> rightArms;
-
-    [SerializeField]
-    private GameObject playerRefPrefab;
     
     PlayerCustomisation _playerCustom;
 
@@ -43,6 +40,25 @@ public class CustomisationManager : Singleton<CustomisationManager>
     private int _armsIndex = 0;
     private int _hatIndex = 0;
 
+    public void LoadData(GameData data)
+    {
+        List<int> indexes = data.CustomizationIndexes;
+        _headIndex = indexes[0];
+        _hairIndex = indexes[1];
+        _bodyIndex = indexes[2];
+        _armsIndex = indexes[3];
+        _hatIndex = indexes[4];
+    }
+
+    public void SaveData(GameData data)
+    {
+        List<int> indexes = new List<int>() { _headIndex, _hairIndex, _bodyIndex, _armsIndex, _hatIndex };
+        foreach (int index in indexes)
+            Debug.Log(index);
+
+        data.CustomizationIndexes = indexes;
+    }
+
     public void LoadCharacter(int headIndex, int hairIndex, int bodyIndex, int armsIndex, int hatIndex)
     {
         _currentHead = heads[headIndex];
@@ -50,7 +66,9 @@ public class CustomisationManager : Singleton<CustomisationManager>
         _currentBody = bodies[bodyIndex];
         _currentLeftArm = leftArms[armsIndex];
         _currentRightArm = rightArms[armsIndex];
-        _currentHat = hats[hatIndex];
+        if (_currentHat != null)
+            Destroy(_currentHat);
+        _currentHat = Instantiate(hats[hatIndex], _hatReference.transform);//hats[hatIndex];
         CreateCharacter();
     }
 
@@ -105,13 +123,24 @@ public class CustomisationManager : Singleton<CustomisationManager>
         CreateCharacter();
     }
 
-    protected override void Awake()
+    private void OnEnable()
     {
-        base.Awake();
-        _playerCustom = playerRefPrefab.GetComponent<PlayerCustomisation>();
+        SpawnManager.OnPlayerSpawn += GetPlayerReference;
     }
 
-    private void Start()
+    private void OnDisable()
+    {
+        SpawnManager.OnPlayerSpawn -= GetPlayerReference;
+    }
+
+    private void GetPlayerReference(GameObject playerObj)
+    {
+        _playerCustom = playerObj.GetComponent<PlayerCustomisation>();
+        _playerCustom.SetData(_headIndex, _hairIndex, _bodyIndex, _armsIndex, _hatIndex);
+        InitializePlayer();
+    }
+
+    private void InitializePlayer()
     {
         _currentBody = bodies[_playerCustom.BodyIndex];
         _currentHair = hair[_playerCustom.HairIndex];
