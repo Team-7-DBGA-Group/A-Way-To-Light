@@ -13,6 +13,7 @@ public class GameData
     public SerializableDictionary<string, bool> BasicEnemiesAlive;
     public SerializableDictionary<string, bool> BasicEnemiesDead;
     public SerializableDictionary<string, bool> AlliesAlive;
+    public List<int> CustomizationIndixes;
 
     // Default values when the game start
     public GameData(Vector3 playerStartingPosition)
@@ -24,5 +25,6 @@ public class GameData
         BasicEnemiesAlive = new SerializableDictionary<string, bool>();
         BasicEnemiesDead = new SerializableDictionary<string, bool>();
         AlliesAlive = new SerializableDictionary<string, bool>();
+        CustomizationIndixes = new List<int>() { 0, 0, 0, 0, 0};
     }
 }
