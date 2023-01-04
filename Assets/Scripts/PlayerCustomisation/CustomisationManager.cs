@@ -18,18 +18,6 @@ public class CustomisationManager : Singleton<CustomisationManager>
     [SerializeField]
     private List<GameObject> rightArms;
 
-    [Header("References")]
-    [SerializeField]
-    private GameObject bodyReference;
-    [SerializeField]
-    private GameObject hairReference;
-    [SerializeField]
-    private GameObject headReference;
-    [SerializeField]
-    private GameObject leftArmReference;
-    [SerializeField]
-    private GameObject rightArmReference;
-
     [SerializeField]
     private GameObject playerRefPrefab;
     
@@ -41,6 +29,12 @@ public class CustomisationManager : Singleton<CustomisationManager>
     private GameObject _currentHead;
     private GameObject _currentLeftArm;
     private GameObject _currentRightArm;
+
+    private GameObject _bodyReference;
+    private GameObject _hairReference;
+    private GameObject _headReference;
+    private GameObject _leftArmReference;
+    private GameObject _rightArmReference;
 
     private int _headIndex = 0;
     private int _hairIndex = 0;
@@ -61,11 +55,11 @@ public class CustomisationManager : Singleton<CustomisationManager>
 
     public void SetPlayerReferences(GameObject bodyRef, GameObject hairRef, GameObject headRef, GameObject lArmRef, GameObject rArmRef)
     {
-        bodyReference = bodyRef;
-        hairReference = hairRef;
-        headReference = headRef;
-        leftArmReference = lArmRef;
-        rightArmReference = rArmRef;
+        _bodyReference = bodyRef;
+        _hairReference = hairRef;
+        _headReference = headRef;
+        _leftArmReference = lArmRef;
+        _rightArmReference = rArmRef;
     }
 
     public void NextHead()
@@ -138,29 +132,29 @@ public class CustomisationManager : Singleton<CustomisationManager>
 
     private void CreateCharacter()
     {
-        bodyReference.GetComponent<MeshRenderer>().sharedMaterials = _currentBody.GetComponent<MeshRenderer>().sharedMaterials;
-        bodyReference.GetComponent<MeshFilter>().sharedMesh = _currentBody.GetComponent<MeshFilter>().sharedMesh;
+        _bodyReference.GetComponent<MeshRenderer>().sharedMaterials = _currentBody.GetComponent<MeshRenderer>().sharedMaterials;
+        _bodyReference.GetComponent<MeshFilter>().sharedMesh = _currentBody.GetComponent<MeshFilter>().sharedMesh;
 
-        headReference.GetComponent<MeshRenderer>().sharedMaterials = _currentHead.GetComponent<MeshRenderer>().sharedMaterials;
-        headReference.GetComponent<MeshFilter>().sharedMesh = _currentHead.GetComponent<MeshFilter>().sharedMesh;
+        _headReference.GetComponent<MeshRenderer>().sharedMaterials = _currentHead.GetComponent<MeshRenderer>().sharedMaterials;
+        _headReference.GetComponent<MeshFilter>().sharedMesh = _currentHead.GetComponent<MeshFilter>().sharedMesh;
 
         _currentHat.SetActive(true);
 
         if (_currentHat.GetComponent<CustomHat>().canHair)
         {
-            hairReference.GetComponent<MeshRenderer>().sharedMaterials = _currentHair.GetComponent<MeshRenderer>().sharedMaterials;
-            hairReference.GetComponent<MeshFilter>().sharedMesh = _currentHair.GetComponent<MeshFilter>().sharedMesh;
+            _hairReference.GetComponent<MeshRenderer>().sharedMaterials = _currentHair.GetComponent<MeshRenderer>().sharedMaterials;
+            _hairReference.GetComponent<MeshFilter>().sharedMesh = _currentHair.GetComponent<MeshFilter>().sharedMesh;
         }
         else
         {
-            hairReference.GetComponent<MeshRenderer>().sharedMaterials = hair[hair.Count - 1].GetComponent<MeshRenderer>().sharedMaterials;
-            hairReference.GetComponent<MeshFilter>().sharedMesh = hair[hair.Count - 1].GetComponent<MeshFilter>().sharedMesh;
+            _hairReference.GetComponent<MeshRenderer>().sharedMaterials = hair[hair.Count - 1].GetComponent<MeshRenderer>().sharedMaterials;
+            _hairReference.GetComponent<MeshFilter>().sharedMesh = hair[hair.Count - 1].GetComponent<MeshFilter>().sharedMesh;
         }
 
-        leftArmReference.GetComponent<MeshRenderer>().sharedMaterials = _currentLeftArm.GetComponent<MeshRenderer>().sharedMaterials;
-        leftArmReference.GetComponent<MeshFilter>().sharedMesh = _currentLeftArm.GetComponent<MeshFilter>().sharedMesh; 
-        rightArmReference.GetComponent<MeshRenderer>().sharedMaterials = _currentRightArm.GetComponent<MeshRenderer>().sharedMaterials;
-        rightArmReference.GetComponent<MeshFilter>().sharedMesh = _currentRightArm.GetComponent<MeshFilter>().sharedMesh;
+        _leftArmReference.GetComponent<MeshRenderer>().sharedMaterials = _currentLeftArm.GetComponent<MeshRenderer>().sharedMaterials;
+        _leftArmReference.GetComponent<MeshFilter>().sharedMesh = _currentLeftArm.GetComponent<MeshFilter>().sharedMesh; 
+        _rightArmReference.GetComponent<MeshRenderer>().sharedMaterials = _currentRightArm.GetComponent<MeshRenderer>().sharedMaterials;
+        _rightArmReference.GetComponent<MeshFilter>().sharedMesh = _currentRightArm.GetComponent<MeshFilter>().sharedMesh;
 
         _playerCustom.SetData(_headIndex, _hairIndex, _bodyIndex, _armsIndex, _hatIndex);
     }
