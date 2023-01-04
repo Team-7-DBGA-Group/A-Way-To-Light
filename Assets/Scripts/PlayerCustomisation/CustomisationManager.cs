@@ -89,9 +89,22 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
         CreateCharacter();
     }
 
+    public void PreviousHead()
+    {
+        _headIndex = (_headIndex - 1 + heads.Count) % heads.Count;
+        _currentHead = heads[_headIndex];
+        CreateCharacter();
+    }
+
     public void NextHair()
     {
         _hairIndex = (_hairIndex + 1) % hair.Count;
+        _currentHair = hair[_hairIndex];
+        CreateCharacter();
+    }
+    public void PreviousHair()
+    {
+        _hairIndex = (_hairIndex - 1 + hair.Count) % hair.Count;
         _currentHair = hair[_hairIndex];
         CreateCharacter();
     }
@@ -99,6 +112,13 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
     public void NextBody()
     {
         _bodyIndex = (_bodyIndex + 1) % bodies.Count;
+        _currentBody = bodies[_bodyIndex];
+        CreateCharacter();
+    }
+
+    public void PreviousBody()
+    {
+        _bodyIndex = (_bodyIndex - 1 + bodies.Count) % bodies.Count;
         _currentBody = bodies[_bodyIndex];
         CreateCharacter();
     }
@@ -111,10 +131,29 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
         CreateCharacter();
     }
 
+    public void PreviousArms()
+    {
+        _armsIndex = (_armsIndex - 1 + leftArms.Count) % leftArms.Count;
+        _currentLeftArm = leftArms[_armsIndex];
+        _currentRightArm = rightArms[_armsIndex];
+        CreateCharacter();
+    }
+
     public void NextHat()
     {
         _hatIndex = (_hatIndex + 1) % hats.Count;
         if(_currentHat != null)
+        {
+            _currentHat.transform.parent = null;
+            Destroy(_currentHat.gameObject);
+        }
+        _currentHat = Instantiate(hats[_hatIndex], _hatReference.transform);
+        CreateCharacter();
+    }
+    public void PreviousHat()
+    {
+        _hatIndex = (_hatIndex - 1 + hats.Count) % hats.Count;
+        if (_currentHat != null)
         {
             _currentHat.transform.parent = null;
             Destroy(_currentHat.gameObject);
@@ -151,7 +190,7 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
         CreateCharacter();
     }
 
-    private void RandomCharacter()
+    public void RandomCharacter()
     {
         _currentBody = bodies[_bodyIndex = Random.Range(0, bodies.Count)];
         _currentHair = hair[_hairIndex = Random.Range(0, hair.Count)];
@@ -167,6 +206,7 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
         _armsIndex = Random.Range(0, leftArms.Count);
         _currentLeftArm = leftArms[_armsIndex];
         _currentRightArm = rightArms[_armsIndex];
+        CreateCharacter();
     }
 
     private void CreateCharacter()
@@ -197,14 +237,4 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
 
         _playerCustom.SetData(_headIndex, _hairIndex, _bodyIndex, _armsIndex, _hatIndex);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RandomCharacter();
-            CreateCharacter();
-        }
-    }
-
 }
