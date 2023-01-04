@@ -21,6 +21,8 @@ public class PlayerCustomisation : MonoBehaviour, IDataPersistence
     private GameObject leftArmReference;
     [SerializeField]
     private GameObject rightArmReference;
+    [SerializeField]
+    private GameObject hatReference;
 
     public void LoadData(GameData data)
     {
@@ -54,7 +56,7 @@ public class PlayerCustomisation : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        CustomisationManager.Instance.SetPlayerReferences(bodyReference, hairReference, headReference, leftArmReference, rightArmReference);
+        CustomisationManager.Instance.SetPlayerReferences(bodyReference, hairReference, headReference, leftArmReference, rightArmReference, hatReference);
         LoadCustomisation();
     }
 }

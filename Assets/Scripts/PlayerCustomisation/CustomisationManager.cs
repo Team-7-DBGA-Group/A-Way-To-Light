@@ -35,6 +35,7 @@ public class CustomisationManager : Singleton<CustomisationManager>
     private GameObject _headReference;
     private GameObject _leftArmReference;
     private GameObject _rightArmReference;
+    private GameObject _hatReference;
 
     private int _headIndex = 0;
     private int _hairIndex = 0;
@@ -53,13 +54,14 @@ public class CustomisationManager : Singleton<CustomisationManager>
         CreateCharacter();
     }
 
-    public void SetPlayerReferences(GameObject bodyRef, GameObject hairRef, GameObject headRef, GameObject lArmRef, GameObject rArmRef)
+    public void SetPlayerReferences(GameObject bodyRef, GameObject hairRef, GameObject headRef, GameObject lArmRef, GameObject rArmRef, GameObject hatRef)
     {
         _bodyReference = bodyRef;
         _hairReference = hairRef;
         _headReference = headRef;
         _leftArmReference = lArmRef;
         _rightArmReference = rArmRef;
+        _hatReference = hatRef; 
     }
 
     public void NextHead()
@@ -94,24 +96,26 @@ public class CustomisationManager : Singleton<CustomisationManager>
     public void NextHat()
     {
         _hatIndex = (_hatIndex + 1) % hats.Count;
-        _currentHat.SetActive(false);
-        _currentHat = hats[_hatIndex];
+        if(_currentHat != null)
+        {
+            _currentHat.transform.parent = null;
+            Destroy(_currentHat.gameObject);
+        }
+        _currentHat = Instantiate(hats[_playerCustom.HatIndex], _hatReference.transform);
         CreateCharacter();
     }
 
-    public void PreviousHead()
+    protected override void Awake()
     {
-        _headIndex = (_headIndex - 1) % heads.Count;
-        _currentHead = heads[_headIndex];
-        CreateCharacter();
+        base.Awake();
+        _playerCustom = playerRefPrefab.GetComponent<PlayerCustomisation>();
     }
 
     private void Start()
     {
-        _playerCustom = playerRefPrefab.GetComponent<PlayerCustomisation>();
         _currentBody = bodies[_playerCustom.BodyIndex];
         _currentHair = hair[_playerCustom.HairIndex];
-        _currentHat = hats[_playerCustom.HatIndex];
+        _currentHat = Instantiate(hats[_playerCustom.HatIndex], _hatReference.transform);
         _currentHead = heads[_playerCustom.HeadIndex];
         _currentLeftArm = leftArms[_playerCustom.ArmsIndex];
         _currentRightArm = rightArms[_playerCustom.ArmsIndex];
@@ -122,8 +126,14 @@ public class CustomisationManager : Singleton<CustomisationManager>
     {
         _currentBody = bodies[_bodyIndex = Random.Range(0, bodies.Count)];
         _currentHair = hair[_hairIndex = Random.Range(0, hair.Count)];
-        _currentHat.SetActive(false);
-        _currentHat = hats[_hatIndex = Random.Range(0, hats.Count)];
+
+        if (_currentHat != null)
+        {
+            _currentHat.transform.parent = null;
+            Destroy(_currentHat.gameObject);
+        }
+        _currentHat = Instantiate(hats[_hatIndex = Random.Range(0, hats.Count)], _hatReference.transform);
+
         _currentHead = heads[_headIndex = Random.Range(0, heads.Count)];
         _armsIndex = Random.Range(0, leftArms.Count);
         _currentLeftArm = leftArms[_armsIndex];
@@ -138,7 +148,7 @@ public class CustomisationManager : Singleton<CustomisationManager>
         _headReference.GetComponent<MeshRenderer>().sharedMaterials = _currentHead.GetComponent<MeshRenderer>().sharedMaterials;
         _headReference.GetComponent<MeshFilter>().sharedMesh = _currentHead.GetComponent<MeshFilter>().sharedMesh;
 
-        _currentHat.SetActive(true);
+            
 
         if (_currentHat.GetComponent<CustomHat>().canHair)
         {
