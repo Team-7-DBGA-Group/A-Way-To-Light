@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0027057251, g: 0.04313569, b: 0.12477043, a: 1}
+  m_IndirectSpecularColor: {r: 0.002740225, g: 0.043049842, b: 0.1246918, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5518,6 +5518,10 @@ PrefabInstance:
     - target: {fileID: 4280373371231833824, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
       propertyPath: m_Name
       value: CFXR3 Dark Aura A (Runic)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833824, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
