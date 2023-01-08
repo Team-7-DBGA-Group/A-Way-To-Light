@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0027886068, g: 0.04337321, b: 0.12515858, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027057251, g: 0.04313569, b: 0.12477043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5460,6 +5460,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 34.627, y: 178.648, z: 5.912}
+--- !u!1001 &388352886813778293
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4280373371222897188, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_RootOrder
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.087128
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.881035
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833823, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280373371231833824, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
+      propertyPath: m_Name
+      value: CFXR3 Dark Aura A (Runic)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b2eceb6a7f71f8345a74ea5454dabe2e, type: 3}
 --- !u!33 &1176910141262477131
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7598,7 +7659,7 @@ Transform:
   - {fileID: 1543216752123907626}
   - {fileID: 1543216752123907694}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &1543216752123907694
 Transform:
