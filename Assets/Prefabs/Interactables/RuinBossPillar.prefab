@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3624051440659494166}
+  - component: {fileID: 6583821969733719769}
   m_Layer: 0
   m_Name: RuinBossPillar
   m_TagString: Untagged
@@ -33,6 +34,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6583821969733719769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107537092344557484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9f59b0bb89be548b065974f2e0b2d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gem: {fileID: 4397322872364367077}
+  smokeParticle: {fileID: 2789104193988677898, guid: 23dde1e2e498d56419af70eee60b3902, type: 3}
+  targetPillarHeight: 2.5
+  targetSmokeHeight: 4
+  spawnSpeed: 2
 --- !u!1 &4397322872364367077
 GameObject:
   m_ObjectHideFlags: 0
