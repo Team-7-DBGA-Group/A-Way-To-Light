@@ -20,6 +20,13 @@ public abstract class Gate : MonoBehaviour
         GateOpenedAction();
     }
 
+    public void ResetGate()
+    {
+        foreach (GateKey gateKey in gateKeys)
+            gateKey.ResetKey();
+        _currentKeyNum = 0;
+    }
+
     void Awake()
     {
         foreach (GateKey key in gateKeys)

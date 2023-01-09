@@ -9,6 +9,11 @@ public abstract class GateKey : InteractableObject
 
     protected abstract void CustomInteraction();
 
+    public void ResetKey()
+    {
+        IsKeyActive = false;
+    }
+
     public void SetGate(Gate gate)
     {
         _gateReference = gate;
