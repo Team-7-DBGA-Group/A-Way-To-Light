@@ -59,8 +59,6 @@ public class AdvancedTransportableObject : InteractableObject
         if (waypoints[_waypointIndex].DoOnce)
             _canRemove = true;
 
-        Debug.Log(_waypointIndex + " " + waypoints[_waypointIndex].DoOnce);
-
         CheckNextIndex();
 
         _canObjectMove = true;
@@ -97,7 +95,6 @@ public class AdvancedTransportableObject : InteractableObject
         {
             if (_canRemove) 
             {
-                Debug.Log("remove" + " " + checkPreviousIndex());
                 waypoints[checkPreviousIndex()].SetDone(true);
                 _canRemove = false;
             }
