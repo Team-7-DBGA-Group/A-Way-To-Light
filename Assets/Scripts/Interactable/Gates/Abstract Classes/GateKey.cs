@@ -32,6 +32,8 @@ public abstract class GateKey : InteractableObject
             return;
 
         IsKeyActive = true;
-        _gateReference.OpenCheck();
+
+        if(_gateReference != null)
+            _gateReference.OpenCheck();
     }
 }
