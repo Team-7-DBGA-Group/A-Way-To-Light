@@ -7,6 +7,8 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
 {
     public static event Action<GameObject> OnPlayerSpawn;
 
+    public GameObject PlayerObj { get => _playerObj; }
+
     public Vector3 StartingSpawnPoint { get => startSpawnPoint.transform.position; }
 
     [Header("References")]
