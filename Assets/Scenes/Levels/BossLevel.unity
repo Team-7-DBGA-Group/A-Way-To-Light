@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0027449504, g: 0.043030776, b: 0.124584675, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027118612, g: 0.04320631, b: 0.12495018, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7870,6 +7870,9 @@ MonoBehaviour:
   - {fileID: 51538850}
   barrier: {fileID: 4469052987063988139}
   animator: {fileID: 1543216752116228558}
+  darkShotPrefab: {fileID: 5112999233522043581, guid: 9d9b20bf91508e340a6577ec843dcd20, type: 3}
+  darkShotSpawnPos: {fileID: 1543216752123907680}
+  fireRate: 2
 --- !u!4 &1543216752123907694
 Transform:
   m_ObjectHideFlags: 0
