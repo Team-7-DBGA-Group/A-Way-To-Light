@@ -5,6 +5,13 @@ using Utils;
 
 public class Boss : MonoBehaviour
 {
+    public enum Phase
+    {
+        FirstPhase,
+        SecondPhase,
+        ThirdPhase,
+    }
+
     [Header("References")]
     [SerializeField]
     private List<BossPillar> pillars = new List<BossPillar>();
@@ -22,8 +29,10 @@ public class Boss : MonoBehaviour
     private float fireRate = 2.0f;
 
     private FSMSystem FSM;
+    private ActivateBarrier _activateBarrierState;
 
     private bool _canShoot = true;
+    private Phase _currentPhase = Phase.FirstPhase;
 
     public void SpawnPillars()
     {
@@ -51,6 +60,14 @@ public class Boss : MonoBehaviour
         StartCoroutine(COWaitForFireRate());
     }
 
+    public void GoToNextPhase()
+    {
+        if (_currentPhase == Phase.ThirdPhase)
+            return;
+
+        _currentPhase += 1;
+    }
+
     private void Awake()
     {
         SetupFSM();
@@ -58,14 +75,17 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        // TO-DO: Delete
-        Shoot();
+        FSM.Update();
     }
 
     private void SetupFSM()
     {
         FSM = new FSMSystem();
-        // TO-DO: Add States here ...
+        _activateBarrierState = new ActivateBarrier(this, animator);
+        
+        FSM.AddState(_activateBarrierState);
+
+        FSM.GoToState(_activateBarrierState);
     }
 
     private IEnumerator COWaitForFireRate()
