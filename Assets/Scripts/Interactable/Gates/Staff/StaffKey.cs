@@ -21,12 +21,14 @@ public class StaffKey : GateKey
     protected override void CustomInteraction()
     {
         GameObject destroyObject = deactivatingObject;
+        _meshRenderer.material = onMaterial;
         Destroy(destroyObject);
     }
 
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer.material = offMaterial;
     }
 
 }

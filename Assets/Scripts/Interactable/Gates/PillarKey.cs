@@ -12,21 +12,21 @@ public class PillarKey : GateKey
 
     [Header("Materials settings")]
     [SerializeField]
-    private Material OffMaterial;
+    private Material offMaterial;
     [SerializeField]
-    private Material OnMaterial;
+    private Material onMaterial;
 
     private MeshRenderer _meshRenderer;
 
     private void Awake()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
-        _meshRenderer.material = OffMaterial;
+        _meshRenderer.material = offMaterial;
     }
 
     protected override void CustomInteraction()
     {
-        _meshRenderer.material = OnMaterial;
+        _meshRenderer.material = onMaterial;
         animator.SetTrigger(animationName);
     }
 }
