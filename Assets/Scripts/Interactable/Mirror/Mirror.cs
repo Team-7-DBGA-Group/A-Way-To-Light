@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mirror : MonoBehaviour, IInteractable
+public class Mirror : InteractableObject
 {
     [Header("References")]
     [SerializeField]
@@ -19,7 +19,7 @@ public class Mirror : MonoBehaviour, IInteractable
     private float _currentRotation = 0;
     private bool _canInteract = false;
 
-    public void Interact()
+    public override void Interact()
     {
         StartCoroutine(COReflectShot());
     }

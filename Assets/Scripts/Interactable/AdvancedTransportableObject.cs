@@ -107,8 +107,6 @@ public class AdvancedTransportableObject : InteractableObject
                 _playerRef = null;
             }
 
-            Debug.Log(checkNextLookAt());
-
             if (lookAtWaypoints && checkNextLookAt() > -1)
             {
                 transform.LookAt(waypoints[checkNextLookAt()].wTransform.position);
