@@ -40,9 +40,6 @@ public class AdvancedTransportableObject : InteractableObject
     private bool _canObjectMove = false;
     private bool _canRemove = false;
 
-
-    
-
     public override void Interact()
     {
         if (_canObjectMove)
