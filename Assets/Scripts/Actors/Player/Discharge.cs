@@ -13,12 +13,12 @@ public class Discharge : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Discharge();
+            DischargeMove();
         }
        
 
     }
-    private void Discharge()
+    private void DischargeMove()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var item in colliders)
