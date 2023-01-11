@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c418d60b8bcea3b4bb6f3bd41ef7befe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 
   objects:
   - {fileID: 5190997838195517550}
 --- !u!114 &6793310847690261742
@@ -74,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3eba25c12691340bd6af0ff52ddf6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 
 --- !u!1 &1524794790712180305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,8 +1251,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2929108077603217766, guid: 4a493fb93a33e6446931bb4157a26c2c, type: 3}
+      propertyPath: m_Range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929108077603217766, guid: 4a493fb93a33e6446931bb4157a26c2c, type: 3}
       propertyPath: m_Intensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381763400323289410, guid: 4a493fb93a33e6446931bb4157a26c2c, type: 3}
+      propertyPath: animatedLights.Array.data[0].intensityEnd
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381763400323289410, guid: 4a493fb93a33e6446931bb4157a26c2c, type: 3}
+      propertyPath: animatedLights.Array.data[0].intensityStart
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a493fb93a33e6446931bb4157a26c2c, type: 3}
