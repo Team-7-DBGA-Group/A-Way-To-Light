@@ -29,10 +29,21 @@ public class Boss : MonoBehaviour
     private float fireRate = 2.0f;
 
     private FSMSystem FSM;
-    private ActivateBarrier _activateBarrierState;
+    private ActivateBarrierState _activateBarrierState;
+    private ShootingState _singleShootingState;
 
     private bool _canShoot = true;
     private Phase _currentPhase = Phase.FirstPhase;
+    private GameObject _playerObj = null;
+
+    // Activated from animation end (ActivateBarrierState end)
+    public void GoToSingleShooting() 
+    {
+        if (_currentPhase == Phase.ThirdPhase || _currentPhase == Phase.SecondPhase)
+            return;
+
+        FSM.GoToState(_singleShootingState);
+    }
 
     public void SpawnPillars()
     {
@@ -73,17 +84,30 @@ public class Boss : MonoBehaviour
         SetupFSM();
     }
 
+    private void OnEnable()
+    {
+        SpawnManager.OnPlayerSpawn += SetPlayerTarget;
+    }
+
+    private void OnDisable()
+    {
+        SpawnManager.OnPlayerSpawn -= SetPlayerTarget;
+    }
+
     private void Update()
     {
         FSM.Update();
+        LookPlayer();
     }
 
     private void SetupFSM()
     {
         FSM = new FSMSystem();
-        _activateBarrierState = new ActivateBarrier(this, animator);
-        
+        _activateBarrierState = new ActivateBarrierState(this, animator);
+        _singleShootingState = new ShootingState(this, animator, false);
+
         FSM.AddState(_activateBarrierState);
+        FSM.AddState(_singleShootingState);
 
         FSM.GoToState(_activateBarrierState);
     }
@@ -92,5 +116,20 @@ public class Boss : MonoBehaviour
     {
         yield return new WaitForSeconds(fireRate);
         _canShoot = true;
+    }
+
+    private void LookPlayer()
+    {
+        if (_playerObj == null)
+            return;
+
+        float rotX = transform.rotation.x;
+        transform.LookAt(_playerObj.transform, Vector3.up);
+        transform.rotation = new Quaternion(rotX, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+    }
+
+    private void SetPlayerTarget(GameObject playerObj)
+    {
+        _playerObj = playerObj;
     }
 }

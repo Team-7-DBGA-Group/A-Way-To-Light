@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActivateBarrier : FSMState
+public class ActivateBarrierState : FSMState
 {
     private Animator _animator;
     private Boss _boss;
 
-    public ActivateBarrier(Boss boss, Animator animator)
+    public ActivateBarrierState(Boss boss, Animator animator)
     {
         _boss = boss;
         _animator = animator;

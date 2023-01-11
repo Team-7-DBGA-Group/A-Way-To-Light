@@ -75,6 +75,9 @@ public class BossDarkShot : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            return;
+
         Player player = null;
         if(other.gameObject.TryGetComponent(out player))
         {
