@@ -17,11 +17,17 @@ public class BossDarkShot : MonoBehaviour, IInteractable
     private GameObject _target = null;
     private bool _isFollowingTarget = true;
     private Vector3 _lastTargetPos = Vector3.zero;
+    private float _zOffset = 0.0f;
 
     public void DestroyShot() => Destroy(this.gameObject);
     public void Interact()
     {
         DestroyShot();
+    }
+
+    public void SetForwardOffset(float offset)
+    {
+        _zOffset = offset;
     }
 
     private void Start()
@@ -51,7 +57,7 @@ public class BossDarkShot : MonoBehaviour, IInteractable
         if (_target == null || !_isFollowingTarget)
             return;
 
-        transform.position = Vector3.MoveTowards(this.transform.position, _target.transform.position + new Vector3(0.0f, yOffset, 0.0f), Time.deltaTime * followSpeed);
+        transform.position = Vector3.MoveTowards(this.transform.position, _target.transform.position + new Vector3(0.0f, yOffset, _zOffset), Time.deltaTime * followSpeed);
 
         SwitchTarget();
     }
@@ -62,7 +68,7 @@ public class BossDarkShot : MonoBehaviour, IInteractable
             return;
 
         _isFollowingTarget = false;
-        _lastTargetPos = _target.transform.position + new Vector3(0.0f, yOffset, 0.0f);
+        _lastTargetPos = _target.transform.position + new Vector3(0.0f, yOffset, _zOffset);
     }
 
     private void FollowDirection()

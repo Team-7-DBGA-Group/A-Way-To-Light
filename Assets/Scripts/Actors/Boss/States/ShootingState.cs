@@ -18,13 +18,20 @@ public class ShootingState : FSMState
     public override void OnUpdate()
     {
         base.OnUpdate();
-
+        if (!_boss.CanShoot)
+        {
+            _animator.ResetTrigger("SingleShoot");
+            _animator.ResetTrigger("DoubleShoot");
+            return;
+        }
+        // Shots are triggered based on animation
         if (!_isMultipleShot)
         {
-            _animator.SetTrigger("Shoot");
-            _boss.Shoot();
+            _animator.SetTrigger("SingleShoot");
         }
-            
-        // If it is, handle somehow multiple shot
+        else
+        {
+            _animator.SetTrigger("DoubleShoot");
+        }
     }
 }

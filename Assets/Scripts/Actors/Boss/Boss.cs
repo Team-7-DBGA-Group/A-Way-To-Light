@@ -5,6 +5,8 @@ using Utils;
 
 public class Boss : MonoBehaviour
 {
+    public bool CanShoot { get => _canShoot; }
+
     public enum Phase
     {
         FirstPhase,
@@ -22,7 +24,9 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private GameObject darkShotPrefab;
     [SerializeField]
-    private Transform darkShotSpawnPos;
+    private Transform darkShotSpawnPosRight;
+    [SerializeField]
+    private Transform darkShotSpawnPosLeft;
 
     [Header("Boss Settings")]
     [SerializeField]
@@ -31,6 +35,7 @@ public class Boss : MonoBehaviour
     private FSMSystem FSM;
     private ActivateBarrierState _activateBarrierState;
     private ShootingState _singleShootingState;
+    private ShootingState _doubleShootingState;
 
     private bool _canShoot = true;
     private Phase _currentPhase = Phase.FirstPhase;
@@ -43,6 +48,15 @@ public class Boss : MonoBehaviour
             return;
 
         FSM.GoToState(_singleShootingState);
+    }
+
+    // Activated from animation end (ActivateBarrierState end)
+    public void GoToDoubleShooting()
+    {
+        if (_currentPhase == Phase.FirstPhase)
+            return;
+
+        FSM.GoToState(_doubleShootingState);
     }
 
     public void SpawnPillars()
@@ -67,7 +81,19 @@ public class Boss : MonoBehaviour
             return;
 
         _canShoot = false;
-        Instantiate(darkShotPrefab, darkShotSpawnPos.position, Quaternion.identity);
+        Instantiate(darkShotPrefab, darkShotSpawnPosRight.position, Quaternion.identity);
+        StartCoroutine(COWaitForFireRate());
+    }
+
+    public void DoubleShoot()
+    {
+        if (!_canShoot)
+            return;
+
+        _canShoot = false;
+        GameObject shot = Instantiate(darkShotPrefab, darkShotSpawnPosRight.position, Quaternion.identity);
+        Instantiate(darkShotPrefab, darkShotSpawnPosLeft.position, Quaternion.identity);
+        shot.gameObject.GetComponent<BossDarkShot>().SetForwardOffset(3.0f);
         StartCoroutine(COWaitForFireRate());
     }
 
@@ -105,9 +131,11 @@ public class Boss : MonoBehaviour
         FSM = new FSMSystem();
         _activateBarrierState = new ActivateBarrierState(this, animator);
         _singleShootingState = new ShootingState(this, animator, false);
+        _doubleShootingState = new ShootingState(this, animator, true);
 
         FSM.AddState(_activateBarrierState);
         FSM.AddState(_singleShootingState);
+        FSM.AddState(_doubleShootingState);
 
         FSM.GoToState(_activateBarrierState);
     }
