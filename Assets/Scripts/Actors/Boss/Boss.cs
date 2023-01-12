@@ -12,6 +12,7 @@ public class Boss : MonoBehaviour
         FirstPhase,
         SecondPhase,
         ThirdPhase,
+        Dead
     }
 
     [Header("References")]
@@ -106,9 +107,20 @@ public class Boss : MonoBehaviour
     public void GoToNextPhase()
     {
         if (_currentPhase == Phase.ThirdPhase)
+        {
+            Die();
             return;
+        }
 
         _currentPhase += 1;
+    }
+
+    public void Die()
+    {
+        // Do something for when boss dies.
+        // Cinematic starts ecc.
+        _currentPhase = Phase.Dead;
+        Destroy(this.gameObject);
     }
 
     private void Awake()
@@ -183,12 +195,19 @@ public class Boss : MonoBehaviour
     private void PhaseEnd()
     {
         GoToNextPhase();
+
+        animator.ResetTrigger("SingleShoot");
+        animator.ResetTrigger("DoubleShoot");
         _canLookPlayer = true;
+        StopAllCoroutines();
+
         FSM.GoToState(_activateBarrierState);
     }
 
     private void ContinuePhase()
     {
+        animator.ResetTrigger("SingleShoot");
+        animator.ResetTrigger("DoubleShoot");
         _canLookPlayer = true;
         FSM.GoToState(_activateBarrierState);
     }
