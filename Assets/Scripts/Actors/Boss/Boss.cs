@@ -20,6 +20,8 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private BossBarrier barrier;
     [SerializeField]
+    private BossLantern lantern;
+    [SerializeField]
     private Animator animator;
     [SerializeField]
     private GameObject darkShotPrefab;
@@ -31,6 +33,8 @@ public class Boss : MonoBehaviour
     [Header("Boss Settings")]
     [SerializeField]
     private float fireRate = 2.0f;
+    [SerializeField]
+    private float waitTimeLanternHit = 10.0f;
 
     private FSMSystem FSM;
     private ActivateBarrierState _activateBarrierState;
@@ -116,12 +120,14 @@ public class Boss : MonoBehaviour
     {
         SpawnManager.OnPlayerSpawn += SetPlayerTarget;
         barrier.OnBarrierDeactivated += GoToStunState;
+        lantern.OnLanternInteraction += PhaseEnd;
     }
 
     private void OnDisable()
     {
         SpawnManager.OnPlayerSpawn -= SetPlayerTarget;
         barrier.OnBarrierDeactivated -= GoToStunState;
+        lantern.OnLanternInteraction -= PhaseEnd;
     }
 
     private void Update()
@@ -171,5 +177,25 @@ public class Boss : MonoBehaviour
     {
         _canLookPlayer = false;
         FSM.GoToState(_stunState);
+        StartCoroutine(COWaitForPhaseContinue());
+    }
+
+    private void PhaseEnd()
+    {
+        GoToNextPhase();
+        _canLookPlayer = true;
+        FSM.GoToState(_activateBarrierState);
+    }
+
+    private void ContinuePhase()
+    {
+        _canLookPlayer = true;
+        FSM.GoToState(_activateBarrierState);
+    }
+
+    private IEnumerator COWaitForPhaseContinue()
+    {
+        yield return new WaitForSeconds(waitTimeLanternHit);
+        ContinuePhase();
     }
 }
