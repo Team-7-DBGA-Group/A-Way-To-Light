@@ -19,6 +19,8 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private List<BossPillar> pillars = new List<BossPillar>();
     [SerializeField]
+    private List<BossEnemy> enemies = new List<BossEnemy>();
+    [SerializeField]
     private BossBarrier barrier;
     [SerializeField]
     private BossLantern lantern;
@@ -78,6 +80,9 @@ public class Boss : MonoBehaviour
             pillar.ResetPillar();
 
         barrier.ActivateBarrier();
+
+        if (_currentPhase == Phase.ThirdPhase)
+            SpawnEnemies();
     }
 
     public void DeactivateBarrier() => barrier.DeactivateBarrier();
@@ -210,6 +215,12 @@ public class Boss : MonoBehaviour
         animator.ResetTrigger("DoubleShoot");
         _canLookPlayer = true;
         FSM.GoToState(_activateBarrierState);
+    }
+
+    private void SpawnEnemies()
+    {
+        foreach(BossEnemy enemy in enemies)
+            enemy.Spawn();
     }
 
     private IEnumerator COWaitForPhaseContinue()

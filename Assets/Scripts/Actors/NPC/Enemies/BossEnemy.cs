@@ -32,7 +32,6 @@ public class BossEnemy : BasicEnemy
     protected override void Start()
     {
         base.Start();
-        Spawn();
     }
 
     protected override void Update()
