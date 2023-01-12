@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0027357335, g: 0.043014023, b: 0.12466777, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027602264, g: 0.04312671, b: 0.12476433, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7062,6 +7062,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bridge_wood_01
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -8210,6 +8214,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bridge_wood_01
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -8832,7 +8840,8 @@ GameObject:
   - component: {fileID: 4620253280830619006}
   - component: {fileID: 4917953747888357139}
   - component: {fileID: 7863328148497384880}
-  m_Layer: 0
+  - component: {fileID: 7863328148497384881}
+  m_Layer: 6
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9493,13 +9502,28 @@ GameObject:
   - component: {fileID: 523949742084831463}
   - component: {fileID: 6332299354811430444}
   - component: {fileID: 6347883222581342469}
-  m_Layer: 0
+  - component: {fileID: 6774195463748774174}
+  m_Layer: 6
   m_Name: Stairs_Large
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &6774195463748774174
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774195463748774173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1144019213991828928, guid: 27fd774de71475c49b0e548878748d09, type: 3}
 --- !u!4 &7052979353680483081
 Transform:
   m_ObjectHideFlags: 0
@@ -9715,6 +9739,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7863328148497384881
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139508380941950294}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1277366460620338370, guid: 1950173d0375c124f8b4a6384e0ff05b, type: 3}
 --- !u!1 &7877480367592062157
 GameObject:
   m_ObjectHideFlags: 0
