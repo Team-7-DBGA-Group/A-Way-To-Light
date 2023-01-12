@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class BossBarrier : Gate
 {
+    public Action OnBarrierDeactivated;
+    public Action OnBarrierActivated;
+
     [Header("References")]
     [SerializeField]
     private ParticleSystem barrierParticle;
@@ -14,6 +18,7 @@ public class BossBarrier : Gate
     {
         barrierParticle.Stop();
         barrierCollider.enabled = false;
+        OnBarrierDeactivated?.Invoke();
     }
 
     public void ActivateBarrier()
@@ -21,6 +26,7 @@ public class BossBarrier : Gate
         ResetGate();
         barrierParticle.Play();
         barrierCollider.enabled = true;
+        OnBarrierActivated?.Invoke();
     }
 
     protected override void GateOpenedAction()

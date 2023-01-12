@@ -36,8 +36,10 @@ public class Boss : MonoBehaviour
     private ActivateBarrierState _activateBarrierState;
     private ShootingState _singleShootingState;
     private ShootingState _doubleShootingState;
+    private StunState _stunState;
 
     private bool _canShoot = true;
+    private bool _canLookPlayer = true;
     private Phase _currentPhase = Phase.FirstPhase;
     private GameObject _playerObj = null;
 
@@ -113,11 +115,13 @@ public class Boss : MonoBehaviour
     private void OnEnable()
     {
         SpawnManager.OnPlayerSpawn += SetPlayerTarget;
+        barrier.OnBarrierDeactivated += GoToStunState;
     }
 
     private void OnDisable()
     {
         SpawnManager.OnPlayerSpawn -= SetPlayerTarget;
+        barrier.OnBarrierDeactivated -= GoToStunState;
     }
 
     private void Update()
@@ -132,10 +136,12 @@ public class Boss : MonoBehaviour
         _activateBarrierState = new ActivateBarrierState(this, animator);
         _singleShootingState = new ShootingState(this, animator, false);
         _doubleShootingState = new ShootingState(this, animator, true);
+        _stunState = new StunState(this, animator);
 
         FSM.AddState(_activateBarrierState);
         FSM.AddState(_singleShootingState);
         FSM.AddState(_doubleShootingState);
+        FSM.AddState(_stunState);
 
         FSM.GoToState(_activateBarrierState);
     }
@@ -148,7 +154,7 @@ public class Boss : MonoBehaviour
 
     private void LookPlayer()
     {
-        if (_playerObj == null)
+        if (_playerObj == null || !_canLookPlayer)
             return;
 
         float rotX = transform.rotation.x;
@@ -159,5 +165,11 @@ public class Boss : MonoBehaviour
     private void SetPlayerTarget(GameObject playerObj)
     {
         _playerObj = playerObj;
+    }
+
+    private void GoToStunState()
+    {
+        _canLookPlayer = false;
+        FSM.GoToState(_stunState);
     }
 }
