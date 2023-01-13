@@ -12,7 +12,8 @@ public class Boss : MonoBehaviour
         FirstPhase,
         SecondPhase,
         ThirdPhase,
-        Dead
+        Dead,
+        Stop
     }
 
     [Header("References")]
@@ -44,6 +45,7 @@ public class Boss : MonoBehaviour
     private ShootingState _singleShootingState;
     private ShootingState _doubleShootingState;
     private StunState _stunState;
+    private IdleBossState _idleBossState;
 
     private bool _canShoot = true;
     private bool _canLookPlayer = true;
@@ -51,7 +53,7 @@ public class Boss : MonoBehaviour
     private GameObject _playerObj = null;
 
     // Activated from animation end (ActivateBarrierState end)
-    public void GoToSingleShooting() 
+    public void GoToSingleShooting()
     {
         if (_currentPhase == Phase.ThirdPhase || _currentPhase == Phase.SecondPhase)
             return;
@@ -76,7 +78,7 @@ public class Boss : MonoBehaviour
 
     public void ActivateBarrier()
     {
-        foreach(BossPillar pillar in pillars)
+        foreach (BossPillar pillar in pillars)
             pillar.ResetPillar();
 
         barrier.ActivateBarrier();
@@ -131,20 +133,23 @@ public class Boss : MonoBehaviour
     private void Awake()
     {
         SetupFSM();
+        _currentPhase = Phase.Stop;
     }
 
     private void OnEnable()
     {
-        SpawnManager.OnPlayerSpawn += SetPlayerTarget;
+        SpawnManager.OnPlayerSpawn += InitBoss;
         barrier.OnBarrierDeactivated += GoToStunState;
         lantern.OnLanternInteraction += PhaseEnd;
+        Player.OnPlayerDie += ResetBoss;
     }
 
     private void OnDisable()
     {
-        SpawnManager.OnPlayerSpawn -= SetPlayerTarget;
+        SpawnManager.OnPlayerSpawn -= InitBoss;
         barrier.OnBarrierDeactivated -= GoToStunState;
         lantern.OnLanternInteraction -= PhaseEnd;
+        Player.OnPlayerDie -= ResetBoss;
     }
 
     private void Update()
@@ -159,14 +164,16 @@ public class Boss : MonoBehaviour
         _activateBarrierState = new ActivateBarrierState(this, animator);
         _singleShootingState = new ShootingState(this, animator, false);
         _doubleShootingState = new ShootingState(this, animator, true);
+        _idleBossState = new IdleBossState();
         _stunState = new StunState(this, animator);
 
         FSM.AddState(_activateBarrierState);
         FSM.AddState(_singleShootingState);
         FSM.AddState(_doubleShootingState);
         FSM.AddState(_stunState);
+        FSM.AddState(_idleBossState);
 
-        FSM.GoToState(_activateBarrierState);
+        FSM.GoToState(_idleBossState);
     }
 
     private IEnumerator COWaitForFireRate()
@@ -185,9 +192,27 @@ public class Boss : MonoBehaviour
         transform.rotation = new Quaternion(rotX, transform.rotation.y, transform.rotation.z, transform.rotation.w);
     }
 
-    private void SetPlayerTarget(GameObject playerObj)
+    private void ResetBoss()
+    {
+        _currentPhase = Phase.Stop;
+        FSM.GoToState(_idleBossState);
+        
+        foreach(BossPillar pillar in pillars)
+            pillar.ResetPillar();
+
+        barrier.ActivateBarrier();
+    }
+
+    private void InitBoss(GameObject playerObj)
     {
         _playerObj = playerObj;
+
+        if (_currentPhase == Phase.Stop)
+        {
+            _currentPhase = Phase.FirstPhase;
+            FSM.GoToState(_activateBarrierState);
+        }
+          
     }
 
     private void GoToStunState()
