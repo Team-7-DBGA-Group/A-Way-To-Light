@@ -34,7 +34,7 @@ public class Mirror : InteractableObject
         if (!_canInteract)
             return;
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (InputManager.Instance.GetInteractPressed())
             NextRotation();
     }
 
