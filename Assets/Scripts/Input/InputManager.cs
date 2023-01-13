@@ -6,38 +6,20 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : Singleton<InputManager>
 {
-    [SerializeField]
-    private UIPausePanelController PausePanelController;
     // Attributes for long press
     public Vector2 MoveDirectionPlayer { get; private set; }
     public bool IsMovingPlayer { get; private set; }
     public bool IsAimPressedDown { get; private set; }
     public bool IsAimPressedUp { get; private set; }
     public bool IsRunningPressed { get; private set; }
-    public bool IsPausedGame { get; private set; }
 
     // Attributes for single press
     private bool _isFirePressed = false;
     private bool _isJumpPressed = false;
     private bool _isContinueDialoguePressed = false;
     private bool _isInteractPressed = false;
-    private bool _IsPausedGame = false;
 
     // Methods for InputAction Events
-    public void PausePressed(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-                PausePanelController.PauseGame();
-                IsPausedGame = true;
-        }
-        if (context.canceled)
-        {
-            PausePanelController.ResumeGame();
-            IsPausedGame = false;
-        }
-
-    }
     public void MovePressed(InputAction.CallbackContext context)
     {
         if (context.performed)
