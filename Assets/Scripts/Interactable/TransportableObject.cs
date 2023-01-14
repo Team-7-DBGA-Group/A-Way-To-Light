@@ -8,6 +8,7 @@ public class TransportableObject : InteractableObject
 {
     public bool IsTransporting { get; private set; }
     public event Action OnStopTransport;
+    public bool CanMove { get => _canObjectMove; }
 
     [SerializeField]
     private List<Transform> waypoints = new List<Transform>();

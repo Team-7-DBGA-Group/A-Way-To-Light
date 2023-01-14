@@ -21,6 +21,9 @@ public class TrapDoorGate : TransportableObject
     public override void Interact()
     {
         base.Interact();
+        if(!CanMove)
+            return;
+
         if (_trapdoorOpen)
         {
             _trapdoorAnimation["TrapDoorAnimation"].speed = -1;
