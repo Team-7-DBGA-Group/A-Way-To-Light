@@ -219,6 +219,12 @@ public class Boss : MonoBehaviour
 
     private void ResetBoss()
     {
+        if(_currentPhase == Phase.ThirdPhase)
+        {
+            foreach (BossEnemy enemy in enemies)
+                enemy.Die();
+        }
+
         _currentPhase = Phase.Stop;
         FSM.GoToState(_idleBossState);
         _startFightFlag = false;
