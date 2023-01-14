@@ -6,6 +6,7 @@ using Utils;
 public class Boss : MonoBehaviour
 {
     public bool CanShoot { get => _canShoot; }
+    public float BossRange { get => bossRange; }
 
     public enum Phase
     {
@@ -39,6 +40,8 @@ public class Boss : MonoBehaviour
     private float fireRate = 2.0f;
     [SerializeField]
     private float waitTimeLanternHit = 10.0f;
+    [SerializeField]
+    private float bossRange = 25.0f;
 
     private FSMSystem FSM;
     private ActivateBarrierState _activateBarrierState;
@@ -51,6 +54,9 @@ public class Boss : MonoBehaviour
     private bool _canLookPlayer = true;
     private Phase _currentPhase = Phase.FirstPhase;
     private GameObject _playerObj = null;
+    private bool _isPlayerInRange = false;
+    private bool _startFightFlag = false;
+    private bool _areEnemiesSpawned = false;
 
     // Activated from animation end (ActivateBarrierState end)
     public void GoToSingleShooting()
@@ -134,6 +140,7 @@ public class Boss : MonoBehaviour
     {
         SetupFSM();
         _currentPhase = Phase.Stop;
+        _isPlayerInRange = false;
     }
 
     private void OnEnable()
@@ -154,8 +161,26 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
-        FSM.Update();
-        LookPlayer();
+        _isPlayerInRange = CheckPlayerInRange();
+        if (_isPlayerInRange)
+        {
+            if (!_startFightFlag)
+                StartFight();
+
+            FSM.Update();
+            LookPlayer();
+        }
+    }
+
+    private bool CheckPlayerInRange()
+    {
+        if (_playerObj == null)
+            return false;
+
+        if (Vector3.Distance(_playerObj.transform.position, this.transform.position) <= bossRange)
+            return true;
+
+        return false;
     }
 
     private void SetupFSM()
@@ -196,6 +221,7 @@ public class Boss : MonoBehaviour
     {
         _currentPhase = Phase.Stop;
         FSM.GoToState(_idleBossState);
+        _startFightFlag = false;
         
         foreach(BossPillar pillar in pillars)
             pillar.ResetPillar();
@@ -207,12 +233,23 @@ public class Boss : MonoBehaviour
     {
         _playerObj = playerObj;
 
-        if (_currentPhase == Phase.Stop)
+        /*
+        if (_currentPhase == Phase.Stop && _isPlayerInRange)
         {
             _currentPhase = Phase.FirstPhase;
             FSM.GoToState(_activateBarrierState);
         }
-          
+        */
+    }
+
+    private void StartFight()
+    {
+        if (!_isPlayerInRange)
+            return;
+
+        _startFightFlag = true;
+        _currentPhase = Phase.FirstPhase;
+        FSM.GoToState(_activateBarrierState);
     }
 
     private void GoToStunState()
@@ -244,8 +281,13 @@ public class Boss : MonoBehaviour
 
     private void SpawnEnemies()
     {
+        if (_areEnemiesSpawned)
+            return;
+
         foreach(BossEnemy enemy in enemies)
             enemy.Spawn();
+
+        _areEnemiesSpawned = true;
     }
 
     private IEnumerator COWaitForPhaseContinue()
