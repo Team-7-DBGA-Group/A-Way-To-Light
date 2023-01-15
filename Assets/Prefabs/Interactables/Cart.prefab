@@ -773,7 +773,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380205869622948362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.86, y: 0, z: 4.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -935,6 +935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9a9b28813681f4da14bf59b30f6c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 
   waypoints:
   - {fileID: 380205870079165619}
   - {fileID: 380205869622948363}
@@ -952,9 +953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a818a1486619e409315a3bc5f61ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 
   animator: {fileID: 8256518718936588346}
   transportableObject: {fileID: 971278855674054989}
-  animationWheel: {fileID: 9070684504095519845}
 --- !u!95 &8256518718936588346
 Animator:
   serializedVersion: 4
