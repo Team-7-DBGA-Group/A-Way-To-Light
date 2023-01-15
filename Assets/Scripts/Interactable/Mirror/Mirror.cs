@@ -34,7 +34,7 @@ public class Mirror : InteractableObject
         if (!_canInteract)
             return;
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (InputManager.Instance.GetInteractPressed())
             NextRotation();
     }
 
@@ -49,16 +49,13 @@ public class Mirror : InteractableObject
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
-        {
             _canInteract = true;
-        }
     }
+
     private void OnTriggerExit(Collider collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            _canInteract = false;
-        }
+            _canInteract = false; 
     }
 
     IEnumerator COReflectShot()

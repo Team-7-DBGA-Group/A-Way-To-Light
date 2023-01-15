@@ -11,6 +11,7 @@ public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
     [Header("Save System")]
     [SerializeField]
     protected string ID;
+
     [ContextMenu("Generate GUID for ID")]
     private void GenerateGuid()
     {
