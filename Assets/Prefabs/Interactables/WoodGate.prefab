@@ -422,6 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 682559577654951960}
   - component: {fileID: 682559577654951963}
+  - component: {fileID: 1670728841794231145}
   m_Layer: 0
   m_Name: MovableWoods
   m_TagString: Untagged
@@ -458,6 +459,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.27244377, y: 1.2340863, z: 1}
   m_Center: {x: 0.5046625, y: 0.58827126, z: 0}
+--- !u!208 &1670728841794231145
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682559577654951961}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.1362219, y: 0.617043, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.5046625, y: 0.5882713, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &682559577833191857
 GameObject:
   m_ObjectHideFlags: 0

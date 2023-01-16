@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8005980770052240625}
   - component: {fileID: 3178522517823551402}
   - component: {fileID: 3110208630226501884}
+  - component: {fileID: 961766904119842431}
   m_Layer: 0
   m_Name: trapdoor
   m_TagString: Untagged
@@ -97,8 +98,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9411201, y: 0.2875226, z: 1.9411197}
-  m_Center: {x: -0.0012554228, y: 0.1437613, z: -0.9985695}
+  m_Size: {x: 1.9411201, y: 0.19382599, z: 1.9411197}
+  m_Center: {x: -0.001255393, y: 0.096912995, z: -0.9985695}
 --- !u!111 &3110208630226501884
 Animation:
   m_ObjectHideFlags: 0
@@ -115,3 +116,19 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!208 &961766904119842431
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8366009599861314852}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.97056, y: 0.096913, z: 0.97056}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.001255393, y: 0.09691299, z: -0.9985695}
+  m_TimeToStationary: 0.5
