@@ -25,8 +25,6 @@ public class CrateTrap : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
             GetComponent<BoxCollider>().isTrigger = false;
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-            GetComponent<BoxCollider>().isTrigger = false;
     }
 
 }
