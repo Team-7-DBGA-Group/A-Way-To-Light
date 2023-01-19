@@ -27,7 +27,7 @@ public abstract class Gate : MonoBehaviour
         _currentKeyNum = 0;
     }
 
-    private void Start()
+    private void Awake()
     {
         foreach (GateKey key in gateKeys)
         {

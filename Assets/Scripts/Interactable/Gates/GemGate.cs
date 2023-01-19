@@ -9,7 +9,7 @@ public class GemGate : Gate
 
     private SphereCollider _collider;
 
-    private void Awake()
+    private void Start()
     {
         _collider = GetComponent<SphereCollider>();
         _collider.enabled = false;
