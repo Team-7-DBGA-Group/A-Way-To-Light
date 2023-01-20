@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,7 @@ public class InputManager : Singleton<InputManager>
     private bool _isJumpPressed = false;
     private bool _isContinueDialoguePressed = false;
     private bool _isInteractPressed = false;
+    private bool _isPausePressed = false;
 
     // Methods for InputAction Events
     public void MovePressed(InputAction.CallbackContext context)
@@ -33,7 +35,17 @@ public class InputManager : Singleton<InputManager>
             MoveDirectionPlayer = context.ReadValue<Vector2>();
         }
     }
-
+    public void PausePressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _isPausePressed = true;
+        }
+        else if (context.canceled)
+        {
+            _isPausePressed = false;
+        }
+    }
     public void FirePressed(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -133,6 +145,12 @@ public class InputManager : Singleton<InputManager>
     {
         bool result = _isInteractPressed;
         _isInteractPressed = false;
+        return result;
+    }
+    public bool GetPausePressed()
+    {
+        bool result = _isPausePressed;
+        _isPausePressed = false;
         return result;
     }
 
