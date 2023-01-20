@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class UIPausePanel : MonoBehaviour
 {
-    
+    public bool IsOpen { get; private set; }
+
+    [Header("References")]
     [SerializeField]
     private Animator animator;
-    public bool IsOpen { get; private set; }
+
     public void Open()
     {
         if (IsOpen)

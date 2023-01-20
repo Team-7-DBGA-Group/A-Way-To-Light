@@ -6,32 +6,26 @@ using UnityEngine.PlayerLoop;
 
 public class UIPausePanelController : MonoBehaviour
 {
+    [Header("View References")]
     [SerializeField]
     private UIPausePanel pausePanel;
     
     private void OnEnable()
     {
-
         GameManager.OnPause += UpdateUI;
     }
 
     private void OnDisable()
     {
         GameManager.OnPause -= UpdateUI;
-
     }
 
     private void UpdateUI(bool isShow)
     {
-        
         if (isShow)
             ShowPausePanel();
         else
             HidePausePanel();
-    }
-    public void ResumeGame()
-    {
-        Time.timeScale = 1.0f;
     }
 
     public void QuitGame()
@@ -47,6 +41,7 @@ public class UIPausePanelController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         pausePanel.Open();
     }
+
     public void HidePausePanel()
     {
         if (pausePanel == null)

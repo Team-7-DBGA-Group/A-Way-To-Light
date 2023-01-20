@@ -6,29 +6,23 @@ using Utils;
 
 public class GameManager : Singleton<GameManager>
 {
-    
+    public static event Action<bool> OnPause;
+
     [Header("Settings")]
     [SerializeField]
     private string gameSceneName = "Prototype";
 
     private Player _player = null;
-    public static event Action<bool> OnPause;
-    private bool inPause = false;
+    private bool _inPause = false;
+
     public void Update()
     {
         if(InputManager.Instance.GetPausePressed())
         {
-            
-            if(inPause)
-            {
+            if(_inPause)
                 UnpauseGame();
-            }
-            
             else
-            {
                 PauseGame();
-                
-            }
         }
     }
 
@@ -44,14 +38,16 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 0.0f;
         OnPause?.Invoke(true);
-        inPause = true;
+        _inPause = true;
     }
 
     public void UnpauseGame()
     {
+        Time.timeScale = 1.0f;
         OnPause?.Invoke(false);
-        inPause = false;
+        _inPause = false;
     }
+
     public void QuitGame()
     {
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Quit called");
