@@ -18,6 +18,7 @@ public class BossDarkShot : MonoBehaviour, IInteractable
     private bool _isFollowingTarget = true;
     private Vector3 _lastTargetPos = Vector3.zero;
     private float _zOffset = 0.0f;
+    private bool _stop = false;
 
     public void DestroyShot() => Destroy(this.gameObject);
     public void Interact()
@@ -38,16 +39,21 @@ public class BossDarkShot : MonoBehaviour, IInteractable
 
     private void OnEnable()
     {
+        GameManager.OnPause += HandlePause;
         Player.OnPlayerDie += DestroyShot;
     }
 
     private void OnDisable()
     {
         Player.OnPlayerDie -= DestroyShot;
+        GameManager.OnPause -= HandlePause;
     }
 
     private void Update()
     {
+        if (_stop)
+            return;
+
         FollowTarget();
         FollowDirection();
     }
@@ -77,6 +83,11 @@ public class BossDarkShot : MonoBehaviour, IInteractable
             return;
 
         transform.position += Time.deltaTime * followSpeed * (_lastTargetPos - transform.position).normalized;
+    }
+
+    private void HandlePause(bool isPause)
+    {
+        _stop = isPause;
     }
 
     private void OnTriggerEnter(Collider other)

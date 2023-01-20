@@ -57,7 +57,7 @@ public class Boss : MonoBehaviour
     private bool _isPlayerInRange = false;
     private bool _startFightFlag = false;
     private bool _areEnemiesSpawned = false;
-
+    private bool _stopBoss = false;
     // Activated from animation end (ActivateBarrierState end)
     public void GoToSingleShooting()
     {
@@ -150,6 +150,7 @@ public class Boss : MonoBehaviour
         barrier.OnBarrierDeactivated += GoToStunState;
         lantern.OnLanternInteraction += PhaseEnd;
         Player.OnPlayerDie += ResetBoss;
+        GameManager.OnPause += HandlePause;
     }
 
     private void OnDisable()
@@ -158,10 +159,14 @@ public class Boss : MonoBehaviour
         barrier.OnBarrierDeactivated -= GoToStunState;
         lantern.OnLanternInteraction -= PhaseEnd;
         Player.OnPlayerDie -= ResetBoss;
+        GameManager.OnPause -= HandlePause;
     }
 
     private void Update()
     {
+        if (_stopBoss)
+            return;
+
         _isPlayerInRange = CheckPlayerInRange();
         if (_isPlayerInRange)
         {
@@ -239,14 +244,6 @@ public class Boss : MonoBehaviour
     private void InitBoss(GameObject playerObj)
     {
         _playerObj = playerObj;
-
-        /*
-        if (_currentPhase == Phase.Stop && _isPlayerInRange)
-        {
-            _currentPhase = Phase.FirstPhase;
-            FSM.GoToState(_activateBarrierState);
-        }
-        */
     }
 
     private void StartFight()
@@ -302,5 +299,19 @@ public class Boss : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTimeLanternHit);
         ContinuePhase();
+    }
+
+    private void HandlePause(bool isPause)
+    {
+        if (isPause)
+        {
+            _stopBoss = true;
+            animator.ResetTrigger("SingleShoot");
+            animator.ResetTrigger("DoubleShoot");
+        }
+        else
+        {
+            _stopBoss = false;
+        }
     }
 }
