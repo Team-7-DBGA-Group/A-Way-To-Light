@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00273458, g: 0.04307147, b: 0.124723315, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027416514, g: 0.042839687, b: 0.12444359, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -20813,6 +20813,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1094181541}
     m_Modifications:
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 669783307}
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969256147952886546, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 669783307}
+    - target: {fileID: 5969256147952886546, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnpauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969256147952886546, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7565742910373555410, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
