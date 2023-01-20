@@ -58,12 +58,16 @@ public class PlayerLightShooting : MonoBehaviour
     {
         EnemyManager.OnCombatEnter += ApplyCombatLightCD;
         EnemyManager.OnCombatExit += ApplyOutOfCombatLightCD;
+        EnemyManager.OnBossCombatEnter += ApplyCombatLightCD;
+        EnemyManager.OnBossCombatExit += ApplyOutOfCombatLightCD;
     }
 
     private void OnDisable()
     {
         EnemyManager.OnCombatEnter -= ApplyCombatLightCD;
         EnemyManager.OnCombatExit -= ApplyOutOfCombatLightCD;
+        EnemyManager.OnBossCombatEnter -= ApplyCombatLightCD;
+        EnemyManager.OnBossCombatExit -= ApplyOutOfCombatLightCD;
     }
 
     private void Update()

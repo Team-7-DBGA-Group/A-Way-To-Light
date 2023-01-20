@@ -133,6 +133,7 @@ public class Boss : MonoBehaviour
         // Do something for when boss dies.
         // Cinematic starts ecc.
         _currentPhase = Phase.Dead;
+        EnemyManager.Instance.BossExited();
         Destroy(this.gameObject);
     }
 
@@ -253,6 +254,7 @@ public class Boss : MonoBehaviour
         if (!_isPlayerInRange)
             return;
 
+        EnemyManager.Instance.BossEntered();
         _startFightFlag = true;
         _currentPhase = Phase.FirstPhase;
         FSM.GoToState(_activateBarrierState);

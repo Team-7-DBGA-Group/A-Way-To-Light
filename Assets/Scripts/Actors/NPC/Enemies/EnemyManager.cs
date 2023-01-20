@@ -8,6 +8,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     public static event Action OnCombatEnter;
     public static event Action OnCombatExit;
+    public static event Action OnBossCombatEnter;
+    public static event Action OnBossCombatExit;
     public static event Action<int> OnEnemyInCombatRegistered;
     public static event Action<int> OnEnemyInCombatDeregistered;
 
@@ -16,6 +18,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private Dictionary<int, Enemy> _inCombatEnemies = new Dictionary<int, Enemy>();
     private Dictionary<int, Vector3> _initPositions = new Dictionary<int, Vector3>();
+
+    public void BossEntered() => OnBossCombatEnter?.Invoke();
+    public void BossExited() => OnBossCombatExit?.Invoke();
 
     public void RegisterInCombatEnemy(int hash, Enemy enemy)
     {
