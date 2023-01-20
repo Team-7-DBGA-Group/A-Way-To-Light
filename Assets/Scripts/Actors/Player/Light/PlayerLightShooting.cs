@@ -51,7 +51,7 @@ public class PlayerLightShooting : MonoBehaviour
 
     private void Start()
     {
-        OnChargesInitialized(Charges);
+        OnChargesInitialized?.Invoke(Charges);
     }
 
     private void OnEnable()
