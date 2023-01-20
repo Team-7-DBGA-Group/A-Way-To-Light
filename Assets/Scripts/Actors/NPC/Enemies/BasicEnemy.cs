@@ -13,6 +13,21 @@ public class BasicEnemy : Enemy
     private FollowingTargetState _followingTargetState;
     private EnemyAttackingState _enemyAttackingState;
 
+    private bool _isStop = false;
+
+    public void StopEnemy()
+    {
+        Animator.ResetTrigger("Attack");
+        Animator.SetFloat("MovementVelocity",0);
+        _agent.enabled = false;
+        _isStop = true;
+    }
+    public void ResumeEnemey()
+    {
+        _agent.enabled = true;
+        _isStop = false;
+    }
+
     public override void LoadData(GameData data)
     {
         bool isAlive = false;
@@ -50,11 +65,6 @@ public class BasicEnemy : Enemy
         base.Rise();
         _agent.enabled = true;
         EnemyManager.Instance.RegisterInCombatEnemy(this.GetHashCode(), this);
-    }
-
-    public void StopMovement()
-    {
-        _agent.isStopped = true;
     }
 
     public override void Attack()
@@ -109,6 +119,7 @@ public class BasicEnemy : Enemy
         base.OnEnable();
         SpawnManager.OnPlayerSpawn += SetupFSM;
         Player.OnPlayerDie += OutOfCombat;
+        GameManager.OnPause += HandlePause;
     }
 
     protected override void OnDisable()
@@ -116,6 +127,7 @@ public class BasicEnemy : Enemy
         base.OnDisable();
         SpawnManager.OnPlayerSpawn -= SetupFSM;
         Player.OnPlayerDie -= OutOfCombat;
+        GameManager.OnPause -= HandlePause;
     }
 
     protected override void Update()
@@ -126,6 +138,9 @@ public class BasicEnemy : Enemy
             return;
 
         if (_target == null)
+            return;
+
+        if (_isStop)
             return;
         
         // If not in combat
@@ -184,5 +199,13 @@ public class BasicEnemy : Enemy
         {
             EnemyManager.Instance.RegisterInCombatEnemy(this.GetHashCode(), this);
         }
+    }
+
+    private void HandlePause(bool isPause)
+    {
+        if (isPause)
+            StopEnemy();
+        else
+            ResumeEnemey();
     }
 }

@@ -37,6 +37,7 @@ public class UIPausePanelController : MonoBehaviour
     {
         if (pausePanel == null)
             return;
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         pausePanel.Open();
@@ -46,6 +47,7 @@ public class UIPausePanelController : MonoBehaviour
     {
         if (pausePanel == null)
             return;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         pausePanel.Close();

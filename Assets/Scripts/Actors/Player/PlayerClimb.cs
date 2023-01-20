@@ -44,6 +44,16 @@ public class PlayerClimb : MonoBehaviour
         _mustFloat = false;
     }
 
+    private void OnEnable()
+    {
+        GameManager.OnPause += HandlePause;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnPause -= HandlePause;
+    }
+
     void Update()
     {
         _isTouchingClimbableWall = Physics.CheckSphere(climbCheck.position, climbDistance, climbableGroundCheck);
@@ -116,5 +126,13 @@ public class PlayerClimb : MonoBehaviour
                 _canClimb = true;
             }
         }
+    }
+
+    private void HandlePause(bool isPause)
+    {
+        if (isPause)
+            _canClimb = false;
+        else
+            _canClimb = true;
     }
 }

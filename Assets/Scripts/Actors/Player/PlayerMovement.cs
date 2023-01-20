@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         DialogueManager.OnDialogueExit += BeginMovement;
         player.OnKnockbackEnter += StopMovement;
         player.OnKnockbackExit += BeginMovement;
+        GameManager.OnPause += HandlePause;
     }
 
     private void OnDisable()
@@ -76,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         DialogueManager.OnDialogueExit -= BeginMovement;
         player.OnKnockbackEnter -= StopMovement;
         player.OnKnockbackExit -= BeginMovement;
+        GameManager.OnPause -= HandlePause;
     }
 
     private void Update()
@@ -127,4 +129,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void BeginMovement() => CanMove = true;
     
+    private void HandlePause(bool isPause)
+    {
+        if (isPause)
+            StopMovement();
+        else
+            BeginMovement();
+    }
 }

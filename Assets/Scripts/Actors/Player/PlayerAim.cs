@@ -24,6 +24,8 @@ public class PlayerAim : MonoBehaviour
 
         DialogueManager.OnDialogueEnter += DisableAim;
         DialogueManager.OnDialogueExit += EnableAim;
+
+        GameManager.OnPause += HandlePause;
     }
 
     private void OnDisable()
@@ -33,6 +35,8 @@ public class PlayerAim : MonoBehaviour
 
         DialogueManager.OnDialogueEnter -= DisableAim;
         DialogueManager.OnDialogueExit -= EnableAim;
+
+        GameManager.OnPause -= HandlePause;
     }
 
     private void Update()
@@ -63,4 +67,12 @@ public class PlayerAim : MonoBehaviour
 
     private void DisableAim() => _canAim = false;
     private void EnableAim() => _canAim = true;
+
+    private void HandlePause(bool isPause)
+    {
+        if(isPause)
+            DisableAim();
+        else
+            EnableAim();
+    }
 }

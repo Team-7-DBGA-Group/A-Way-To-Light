@@ -30,6 +30,16 @@ public class PlayerCombat : MonoBehaviour
         playerMovement.CanMove = true;
     }
 
+    private void OnEnable()
+    {
+        GameManager.OnPause += HandlePause;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnPause -= HandlePause;
+    }
+
     private void Update()
     {
         if (!playerAim.IsAiming &&
@@ -58,5 +68,13 @@ public class PlayerCombat : MonoBehaviour
         _canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         _canAttack = true;
+    }
+
+    private void HandlePause(bool isPause)
+    {
+        if (isPause)
+            _canAttack = false;
+        else
+            _canAttack = true;
     }
 }
