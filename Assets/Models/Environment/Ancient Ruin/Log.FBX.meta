@@ -3,7 +3,12 @@ guid: e7734fb843832b4488beb4540e412926
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Log_stump_mushrooms
+    second: {fileID: 2100000, guid: 4a0d209ce984d684d8a90bd2e1ca4f7d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
