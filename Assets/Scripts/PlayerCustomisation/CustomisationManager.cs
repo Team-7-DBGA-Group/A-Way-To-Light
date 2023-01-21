@@ -53,8 +53,6 @@ public class CustomisationManager : Singleton<CustomisationManager>, IDataPersis
     public void SaveData(GameData data)
     {
         List<int> indexes = new List<int>() { _headIndex, _hairIndex, _bodyIndex, _armsIndex, _hatIndex };
-        foreach (int index in indexes)
-            Debug.Log(index);
 
         data.CustomizationIndexes = indexes;
     }

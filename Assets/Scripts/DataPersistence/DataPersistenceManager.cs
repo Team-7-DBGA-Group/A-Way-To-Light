@@ -23,6 +23,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
     public void NewGame()
     {
+        PlayerPrefs.DeleteAll();
         _fileDataHandler.Delete();
         _gameData = new GameData(SpawnManager.Instance.StartingSpawnPoint);
         HasData = false;

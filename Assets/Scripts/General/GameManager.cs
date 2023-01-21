@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -27,6 +28,11 @@ public class GameManager : Singleton<GameManager>
             else
                 PauseGame();
         }
+    }
+
+    public void OnApplicationQuit()
+    {
+        PlayerPrefs.SetString("GameScene", SceneManager.GetActiveScene().name);
     }
 
     public void ResetGameScene()

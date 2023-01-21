@@ -17,6 +17,10 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
     [SerializeField]
     private Transform startSpawnPoint;
 
+    [Header("Settings")]
+    [SerializeField]
+    private bool forceSpawnPosition = false;
+
     private Vector3 _currentSpawnPoint = Vector3.zero;
     private GameObject _playerObj = null;
     private bool _shouldUseStartingPos = true;
@@ -24,6 +28,13 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
     public void LoadData(GameData data)
     {
         _shouldUseStartingPos = data.ShouldUseStartingPos;
+
+        if (forceSpawnPosition)
+        {
+            _currentSpawnPoint = StartingSpawnPoint;
+            return;
+        }
+       
         if (_shouldUseStartingPos)
         {
             _currentSpawnPoint = StartingSpawnPoint;
@@ -32,6 +43,8 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
         {
             _currentSpawnPoint = data.PlayerSpawnPosition;
         }
+        Debug.Log("should spawn start: " + _shouldUseStartingPos);
+        Debug.Log("SpawnPoint: " + _currentSpawnPoint);
     }
 
     public void SaveData(GameData data)
@@ -42,6 +55,7 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
 
     public void SetNewSpawnPoint(Vector3 position)
     {
+        Debug.Log("SpawnPoint set to " + position);
         _currentSpawnPoint = position;
         _shouldUseStartingPos = false;
     }

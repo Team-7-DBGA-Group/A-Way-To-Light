@@ -10,6 +10,15 @@ public class NavigationManager : Singleton<NavigationManager>
     private string _sceneNameToBeLoaded = "";
     private bool _shouldLoadScene;
 
+    public void LoadGameScene()
+    {
+        string sceneName = PlayerPrefs.GetString("GameScene");
+        if (string.IsNullOrEmpty(sceneName))
+            return;
+
+        ChangeScene(sceneName,false);
+    }
+
     public void QuitGame() => Application.Quit();
     
     public void OpenSurvey() => Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdZsJ465OSGwVLCUJm4jvJIVWhfzw4nso7EGf0JpCkrwWdTzQ/viewform");
@@ -24,6 +33,22 @@ public class NavigationManager : Singleton<NavigationManager>
         _sceneNameToBeLoaded = sceneName;
         SpawnManager.Instance.ResetManager();
         DataPersistenceManager.Instance.SaveGame();
+        UISceneTransitionController.Instance.OpenTransition();
+    }
+
+    public void ChangeScene(string sceneName, bool resetManager)
+    {
+        if (IsLoadingScene)
+            return;
+
+        _shouldLoadScene = true;
+
+        _sceneNameToBeLoaded = sceneName;
+        if (resetManager)
+        {
+            SpawnManager.Instance.ResetManager();
+            DataPersistenceManager.Instance.SaveGame();
+        }
         UISceneTransitionController.Instance.OpenTransition();
     }
 

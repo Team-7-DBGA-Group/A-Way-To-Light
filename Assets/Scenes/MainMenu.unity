@@ -1319,7 +1319,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 797893862}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 715935074}
+        m_TargetAssemblyTypeName: NavigationManager, Assembly-CSharp
+        m_MethodName: LoadGameScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &856305214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,7 +2493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5408019112373669018, guid: 3f57b9c8bde633e4b849f0e0bae0893f, type: 3}
   startSpawnPoint: {fileID: 1331298830}
-  spawnOnStart: 0
+  forceSpawnPosition: 1
 --- !u!4 &1608263337
 Transform:
   m_ObjectHideFlags: 0
