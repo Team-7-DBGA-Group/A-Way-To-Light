@@ -20,6 +20,7 @@ public class InputManager : Singleton<InputManager>
     private bool _isContinueDialoguePressed = false;
     private bool _isInteractPressed = false;
     private bool _isPausePressed = false;
+    private bool _isEnterPressed = false;
 
     // Methods for InputAction Events
     public void MovePressed(InputAction.CallbackContext context)
@@ -46,6 +47,19 @@ public class InputManager : Singleton<InputManager>
             _isPausePressed = false;
         }
     }
+
+    public void EnterPressed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _isEnterPressed = true;
+        }
+        else if (context.canceled)
+        {
+            _isEnterPressed = false;
+        }
+    }
+
     public void FirePressed(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -124,6 +138,13 @@ public class InputManager : Singleton<InputManager>
     {
         bool result = _isFirePressed;
         _isFirePressed = false;
+        return result;
+    }
+
+    public bool GetEnterPressed()
+    {
+        bool result = _isEnterPressed;
+        _isEnterPressed = false;
         return result;
     }
 
