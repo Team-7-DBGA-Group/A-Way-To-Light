@@ -20,6 +20,15 @@ public class FileDataHandler
         _useEncryption = useEncryption;
     }
 
+    public void Delete()
+    {
+        string fullPath = Path.Combine(_dataDirPath, _dataFileName);
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+    }
+
     public GameData Load()
     {
         // Use Path.Combine to account for differnt OS's having different parh separators

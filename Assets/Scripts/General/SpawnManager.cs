@@ -58,7 +58,8 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
     }
 
     private void Start()
-    {  
-        SpawnPlayer();
+    {
+        if (DataPersistenceManager.Instance.HasData)
+            SpawnPlayer();
     }
 }

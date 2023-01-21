@@ -6,6 +6,8 @@ using System.Linq;
 
 public class DataPersistenceManager : Singleton<DataPersistenceManager>
 {
+    public bool HasData { get; private set; }
+
     [Header("File Storage Config")]
     [SerializeField]
     private string fileName = "data.light";
@@ -21,7 +23,9 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
     public void NewGame()
     {
+        _fileDataHandler.Delete();
         _gameData = new GameData(SpawnManager.Instance.StartingSpawnPoint);
+        HasData = false;
     }
 
     public void LoadGame()
@@ -32,9 +36,14 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         // If no data can be loaded, initialize to a new game
         if(_gameData == null)
         {
-            CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "No data was found. Initializing data to defaults.");
+            CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "No data was found. Initializing data to defaults."); 
             NewGame();
         }
+        else
+        {
+            HasData = true;
+        }
+            
         
         // Push the loaded data to all other scripts that need it
         foreach(IDataPersistence dataPersistenceObj in _dataPersistenceObjects)
@@ -52,6 +61,8 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         // Save that data to a file using the data handler
         _fileDataHandler.Save(_gameData);
 
+        HasData = true;
+
         CustomLog.Log(CustomLog.CustomLogType.SYSTEM, "Game Saved");
     }
 
@@ -61,7 +72,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         _fileDataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         _dataPersistenceObjects = FindAllDataPersistenceObjects();
 
-        LoadGame(); 
+        LoadGame();
     }
 
     // If you want to SaveGame on Quit
