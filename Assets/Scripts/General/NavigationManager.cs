@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class NavigationManager : Singleton<NavigationManager>
 {
-    
     public bool IsLoadingScene { get; private set; }
 
     private string _sceneNameToBeLoaded = "";
@@ -23,6 +22,8 @@ public class NavigationManager : Singleton<NavigationManager>
         _shouldLoadScene = true;
 
         _sceneNameToBeLoaded = sceneName;
+        SpawnManager.Instance.ResetManager();
+        DataPersistenceManager.Instance.SaveGame();
         UISceneTransitionController.Instance.OpenTransition();
     }
 

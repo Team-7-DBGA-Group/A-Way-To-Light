@@ -15,6 +15,7 @@ public class GameData
     public SerializableDictionary<string, bool> AlliesAlive;
     public List<int> CustomizationIndexes;
     public float SoundVolume, MusicVolume, EffectsVolume, MasterVolume;
+    public bool ShouldUseStartingPos;
 
     // Default values when the game start
     public GameData(Vector3 playerStartingPosition)
@@ -31,5 +32,6 @@ public class GameData
         MusicVolume = 1f;
         EffectsVolume = 1f;
         MasterVolume = 1f;
+        ShouldUseStartingPos = true;
     }
 }

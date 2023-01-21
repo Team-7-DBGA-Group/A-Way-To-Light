@@ -19,20 +19,36 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
 
     private Vector3 _currentSpawnPoint = Vector3.zero;
     private GameObject _playerObj = null;
+    private bool _shouldUseStartingPos = true;
 
     public void LoadData(GameData data)
     {
-        _currentSpawnPoint = data.PlayerSpawnPosition;
+        _shouldUseStartingPos = data.ShouldUseStartingPos;
+        if (_shouldUseStartingPos)
+        {
+            _currentSpawnPoint = StartingSpawnPoint;
+        }
+        else
+        {
+            _currentSpawnPoint = data.PlayerSpawnPosition;
+        }
     }
 
     public void SaveData(GameData data)
     {
         data.PlayerSpawnPosition = _currentSpawnPoint;
+        data.ShouldUseStartingPos = _shouldUseStartingPos;
     }
 
     public void SetNewSpawnPoint(Vector3 position)
     {
         _currentSpawnPoint = position;
+        _shouldUseStartingPos = false;
+    }
+
+    public void ResetManager()
+    {
+        _shouldUseStartingPos = true;
     }
 
     public void SpawnPlayer()
