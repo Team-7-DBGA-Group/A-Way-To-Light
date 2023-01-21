@@ -10,8 +10,6 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Settings")]
     [SerializeField]
-    private string gameSceneName = "Prototype";
-    [SerializeField]
     private float pauseCooldown = 3.0f;
 
     private Player _player = null;
