@@ -25,11 +25,43 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
         {
             if (!source.isPlaying)
             {
+                source.clip = audioClip;
                 source.PlayOneShot(audioClip);
                 return;
             }
         }
     }
+    public void PlaySound(AudioClip audioClip, bool isLooped)
+    {
+        foreach (AudioSource source in soundSources)
+        {
+            if (!source.isPlaying)
+            {
+                source.loop = isLooped;
+                source.clip = audioClip;
+                source.Play();
+                return;
+            }
+        }
+    }
+
+    public void StopSound(AudioClip audioClip)
+    {
+        foreach (AudioSource source in soundSources)
+        {
+            if (source.isPlaying && source.clip == audioClip)
+            {
+                source.clip = null;
+
+                if (source.loop == true)
+                    source.loop = false;
+
+                source.Stop();
+                return;
+            }
+        }
+    }
+
     public void PauseSounds()
     {
         foreach(AudioSource source in soundSources)
@@ -41,6 +73,8 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     {
         foreach (AudioSource source in soundSources)
         {
+            source.loop = false;
+            source.clip = null;
             source.Stop();
         }
     }
@@ -67,6 +101,7 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
         {
             if (!source.isPlaying)
             {
+                source.clip = audioClip;
                 source.PlayOneShot(audioClip);
                 return;
             }
@@ -87,30 +122,50 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void PauseMusic()
     {
-        foreach (AudioSource sources in musicSource)
+        foreach (AudioSource source in musicSource)
         {
-            sources.Pause();
+            source.Pause();
         }
     }
     public void StopMusic()
     {
-        foreach (AudioSource sources in musicSource)
+        foreach (AudioSource source in musicSource)
         {
-            sources.Stop();
+            source.loop = false;
+            source.clip = null;
+            source.Stop();
         }
     }
+
+    public void StopMusic(AudioClip audioClip)
+    {
+        foreach (AudioSource source in musicSource)
+        {
+            if (source.isPlaying && source.clip == audioClip)
+            {
+                source.clip = null;
+
+                if (source.loop == true)
+                    source.loop = false;
+
+                source.Stop();
+                return;
+            }
+        }
+    }
+
     public void MuteMusic(bool muteValue) 
     {
-        foreach (AudioSource sources in musicSource)
+        foreach (AudioSource source in musicSource)
         {
-            sources.mute = muteValue;
+            source.mute = muteValue;
         }
     }
     public void SetMusicVolume(float amount) 
     {
-        foreach(AudioSource sources in musicSource)
+        foreach(AudioSource source in musicSource)
         {
-            sources.volume = amount;
+            source.volume = amount;
             _musicVolume = amount;
         }
     }
