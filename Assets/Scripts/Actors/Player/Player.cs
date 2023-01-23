@@ -14,11 +14,16 @@ public class Player : Actor
     [Header("Player Settings")]
     [SerializeField]
     private float dropRayDistance = 1.6f;
+    [SerializeField]
+    private float healthRegenCooldown = 2.0f;
 
     private Weapon _currentEquipWeapon = null;
 
     private Vector3[] _directions = new Vector3[4];
-
+    
+    private bool _canHeal = true;
+    private Coroutine _healthRegenCoroutine = null;
+    
     public void Equip(Weapon w)
     {
         _currentEquipWeapon = w;
@@ -33,8 +38,7 @@ public class Player : Actor
         foreach (Vector3 direction in _directions)
         {
             if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), direction, out hit, dropRayDistance))
-            {
-                Debug.Log("Hit with " + hit.collider.gameObject.name);
+            { 
                 continue;
             }
             if (Physics.Raycast(transform.position + (-gameObject.transform.forward * dropRayDistance) + new Vector3(0, 1f, 0), Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
@@ -98,11 +102,56 @@ public class Player : Actor
         
     }
 
+    private void OnEnable()
+    {
+        EnemyManager.OnCombatEnter += StopHealthRegenOutOfCombat;
+        EnemyManager.OnCombatExit += StartHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatEnter += StopHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatExit += StartHealthRegenOutOfCombat;
+    }
+
+    private void OnDisable()
+    {
+        EnemyManager.OnCombatEnter -= StopHealthRegenOutOfCombat;
+        EnemyManager.OnCombatExit -= StartHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatEnter -= StopHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatExit -= StartHealthRegenOutOfCombat;
+    }
+
     private void UpdateRaysDirections()
     {
         _directions[0] = -transform.forward;
         _directions[1] = -transform.right;
         _directions[2] = transform.right;
         _directions[3] = transform.forward;
+    }
+
+    private void StartHealthRegenOutOfCombat()
+    {
+        if (CurrentHealth >= MaxHealth)
+            return;
+
+        if(_healthRegenCoroutine != null)
+        {
+            StopCoroutine(_healthRegenCoroutine);
+        }
+
+        _healthRegenCoroutine = StartCoroutine(COWaitForHealthRegenCD());
+    }
+
+    private void StopHealthRegenOutOfCombat()
+    {
+        if (_healthRegenCoroutine == null)
+            return;
+        StopCoroutine(_healthRegenCoroutine);
+    }
+
+    private IEnumerator COWaitForHealthRegenCD()
+    {
+        while(CurrentHealth < MaxHealth)
+        {
+            yield return new WaitForSeconds(healthRegenCooldown);
+            Heal(1);
+        }
     }
 }
