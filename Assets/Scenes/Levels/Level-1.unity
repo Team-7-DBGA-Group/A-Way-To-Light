@@ -2432,7 +2432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5530846191095245771, guid: 44e819bd75e316d4ab814febe41ef39c, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5530846191095245771, guid: 44e819bd75e316d4ab814febe41ef39c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -31573,6 +31573,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1094181541}
     m_Modifications:
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 669783307}
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506606345549280609, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206673355974988520, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 669783307}
+    - target: {fileID: 5206673355974988520, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206673355974988520, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206673356887695469, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206673356887695469, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 458322370}
+    - target: {fileID: 5206673356887695469, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206673356887695469, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NavigationManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5206673356887695469, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969256147952886546, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 669783307}
+    - target: {fileID: 5969256147952886546, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnpauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5969256147952886546, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7565742910373555410, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -31583,7 +31643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7565742910373555410, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7565742910373555410, guid: b85829a1e0f604a4b9706c0f8a57b111, type: 3}
       propertyPath: m_AnchorMax.x
@@ -38926,9 +38986,9 @@ RectTransform:
   - {fileID: 818853317}
   - {fileID: 38770686}
   - {fileID: 1558607152}
-  - {fileID: 64111067}
   - {fileID: 1928862050}
   - {fileID: 821369343}
+  - {fileID: 64111067}
   m_Father: {fileID: 0}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -67515,7 +67575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 609150047536952577, guid: fd2b5305375263a42b43ab58bfe0c8bf, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 609150047536952577, guid: fd2b5305375263a42b43ab58bfe0c8bf, type: 3}
       propertyPath: m_AnchorMax.x
