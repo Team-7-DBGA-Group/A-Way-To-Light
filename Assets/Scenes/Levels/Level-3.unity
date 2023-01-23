@@ -10091,6 +10091,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015707065}
   m_Mesh: {fileID: -6692743545704626728, guid: f54e0c548fac13444bb780d5eeafc83c, type: 3}
+--- !u!114 &1029801915 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7097840711809986500, guid: 7c882a106b8edca46a999b835f173cdb, type: 3}
+  m_PrefabInstance: {fileID: 133202833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858926858481743499026c3ec046a0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1035782508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14846,7 +14857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b591b0606907342b24f2a10b516db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  weapons:
+  - {fileID: 1029801915}
+  - {fileID: 1937340129}
 --- !u!4 &1434738295
 Transform:
   m_ObjectHideFlags: 0
@@ -19136,7 +19149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.577464
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20171,6 +20184,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 609150047536952577, guid: fd2b5305375263a42b43ab58bfe0c8bf, type: 3}
   m_PrefabInstance: {fileID: 1928862049}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1937340129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1635132164812591962, guid: 5b12ebf4198d65d4fb9e438cc8c9a0cb, type: 3}
+  m_PrefabInstance: {fileID: 1088444292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858926858481743499026c3ec046a0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1947712057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21509,7 +21533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.95
+      value: 2.62
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 790be2b326b28dc40bbdc381676bd6c1, type: 3}
       propertyPath: m_LocalPosition.z
