@@ -19374,7 +19374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4242778111734471243}
-  - {fileID: 4242778112680701706}
+  - {fileID: 4242778111308271214}
   - {fileID: 4242778112545945938}
   - {fileID: 4242778111454667148}
   - {fileID: 4242778113144249654}
@@ -20745,12 +20745,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4242778111308271215}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.07, y: 0, z: -2.9}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_LocalPosition: {x: 2.2834034, y: -1.3818688, z: -12.239999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4242778112680701706}
-  m_RootOrder: 0
+  m_Father: {fileID: 219160435328512735}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4242778111308271215
 GameObject:
@@ -20763,6 +20763,7 @@ GameObject:
   - component: {fileID: 4242778111308271214}
   - component: {fileID: 4242778111308271212}
   - component: {fileID: 4242778111308271213}
+  - component: {fileID: 4242778111308271216}
   m_Layer: 0
   m_Name: Pillar
   m_TagString: Untagged
@@ -20770,6 +20771,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &4242778111308271216
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242778111308271215}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5525, y: 1.5525004, z: 4.67332}
+  m_Center: {x: 0, y: -0.00000047683713, z: 2.3366601}
 --- !u!65 &4242778111454667139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21055,52 +21069,6 @@ GameObject:
   - component: {fileID: 4242778112545945938}
   m_Layer: 0
   m_Name: Pillar (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &4242778112680701705
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4242778112680701707}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 5.3571105, z: 1.8564014}
-  m_Center: {x: 0, y: 2.1785553, z: 0.0463953}
---- !u!4 &4242778112680701706
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4242778112680701707}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2134037, y: -1.3818688, z: -9.339998}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4242778111308271214}
-  m_Father: {fileID: 219160435328512735}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4242778112680701707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4242778112680701706}
-  - component: {fileID: 4242778112680701705}
-  m_Layer: 0
-  m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
