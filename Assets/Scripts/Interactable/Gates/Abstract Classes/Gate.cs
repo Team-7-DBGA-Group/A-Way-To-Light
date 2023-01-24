@@ -27,8 +27,9 @@ public abstract class Gate : MonoBehaviour
         _currentKeyNum = 0;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
+        Debug.Log("Awake Gate");
         foreach (GateKey key in gateKeys)
         {
             if(key != null)

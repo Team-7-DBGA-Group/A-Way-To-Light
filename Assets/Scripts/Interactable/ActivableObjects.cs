@@ -8,10 +8,44 @@ public class ActivableObjects : InteractableObject
     [SerializeField]
     private List<GameObject> objects = new List<GameObject>();
 
+    [Header("Audio Reference")]
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [Header("Sound")]
+    [SerializeField]
+    private AudioClip soundToPlayOnActivation;
+
+    [Header("Sound settings")]
+    [SerializeField]
+    private bool looped;
+
+    private void Awake()
+    {
+        if(audioSource != null)
+        {
+            audioSource.clip = soundToPlayOnActivation;
+            audioSource.loop = looped;
+        }
+        
+    }
+
+    private void OnEnable()
+    {
+        AudioManager.OnChangedSoundVolume += ChangeSoundVolume;
+    }
+
+    private void OnDisable()
+    {
+        AudioManager.OnChangedSoundVolume -= ChangeSoundVolume;
+    }
+
     public override void Interact()
     {
         base.Interact();
         ActiveObjects();
+        if(audioSource != null && !audioSource.isPlaying)
+            audioSource.Play();
     }
 
     private void ActiveObjects()
@@ -21,5 +55,11 @@ public class ActivableObjects : InteractableObject
 
         foreach(GameObject obj in objects)
             obj.SetActive(true);
+    }
+
+    private void ChangeSoundVolume()
+    {
+        if (audioSource != null)
+            audioSource.volume = AudioManager.Instance.GetSoundVolume();
     }
 }

@@ -11,17 +11,41 @@ public class Mirror : InteractableObject
     private GameObject lightShotPrefab;
     [SerializeField]
     private GameObject rotatingPoint;
+    [SerializeField]
+    private AudioSource audioSource;
 
     [Header("Settings")]
     [SerializeField]
     private float reflactionDelay = 0.1f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip mirrorRotation;
+    [SerializeField]
+    private AudioClip mirrorBouncingLight;
+
     private float _currentRotation = 0;
     private bool _canInteract = false;
+
+    private void OnEnable()
+    {
+        AudioManager.OnChangedSoundVolume += ChangeSoundVolume;
+    }
+
+    private void OnDisable()
+    {
+        AudioManager.OnChangedSoundVolume -= ChangeSoundVolume;
+    }
 
     public override void Interact()
     {
         StartCoroutine(COReflectShot());
+    }
+
+    private void Awake()
+    {
+        audioSource.clip = mirrorBouncingLight;
+        audioSource.volume = AudioManager.Instance.GetSoundVolume();
     }
 
     private void Start()
@@ -40,6 +64,7 @@ public class Mirror : InteractableObject
 
     private void NextRotation()
     {
+        AudioManager.Instance.PlaySound(mirrorRotation);
         _currentRotation += 90;
         if (_currentRotation > 360)
             _currentRotation = 0;
@@ -61,8 +86,14 @@ public class Mirror : InteractableObject
     IEnumerator COReflectShot()
     {
         yield return new WaitForSeconds(reflactionDelay);
-
+        audioSource.Play();
         GameObject shot = Instantiate(lightShotPrefab, shotPoint.position, Quaternion.identity);
         shot.GetComponent<LightShot>().StartMovingToDirection(shotPoint.forward);
+    }
+
+    private void ChangeSoundVolume()
+    {
+        if (audioSource != null)
+            audioSource.volume = AudioManager.Instance.GetSoundVolume();
     }
 }

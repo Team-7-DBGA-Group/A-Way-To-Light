@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractableChain : InteractableObject
 {
+    [Header("References")]
     [SerializeField]
     private GameObject rope;
 

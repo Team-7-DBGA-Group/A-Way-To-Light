@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AudioManager : Singleton<AudioManager>, IDataPersistence 
 {
+    public static event Action OnChangedSoundVolume;
+
     [Header("Sources")]
     [SerializeField]
     private List<AudioSource> soundSources;
@@ -92,6 +95,12 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
             source.volume = amount;
             _soundVolume = amount;
         }
+
+        OnChangedSoundVolume?.Invoke();
+    }
+    public float GetSoundVolume()
+    {
+        return _soundVolume;
     }
 
     // Music controls
@@ -182,6 +191,7 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
             }
         }
     }
+
     public void PauseEffects()
     {
         foreach (AudioSource source in effectsSource)
@@ -189,6 +199,7 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
             source.Pause();
         }
     }
+
     public void StopEffects()
     {
         foreach (AudioSource source in effectsSource)
@@ -234,7 +245,6 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     // Save system
     public void LoadData(GameData data)
     {
-        Debug.Log(data.MasterVolume);
         _masterVolume = data.MasterVolume;
         SetMasterVolume(_masterVolume);
         _soundVolume = data.SoundVolume * _masterVolume;

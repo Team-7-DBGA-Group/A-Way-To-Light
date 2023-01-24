@@ -15,6 +15,12 @@ public class LightShot : MonoBehaviour
     [SerializeField]
     private float secondsToDestroy = 10.0f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip onDestroySound;
+    [SerializeField]
+    private AudioClip interactableHitSound;
+
     private Vector3 _moveDirection;
     private bool _canMove = false;
 
@@ -44,6 +50,7 @@ public class LightShot : MonoBehaviour
             IInteractable[] interactables = other.gameObject.GetComponents<IInteractable>();
 
             CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Light Shot interacted with " + other.gameObject.name);
+            AudioManager.Instance.PlaySound(interactableHitSound);
 
             foreach (IInteractable interactable in interactables)
                 interactable.Interact();
@@ -61,13 +68,13 @@ public class LightShot : MonoBehaviour
             IInteractable[] interactables = other.gameObject.GetComponentsInParent<IInteractable>();
 
             CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Light Shot interacted with " + other.gameObject.name);
+            AudioManager.Instance.PlaySound(interactableHitSound);
 
             foreach (IInteractable interactable in interactables)
                 interactable.Interact();
 
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
-
             Destroy(this.gameObject);
         }
         else if (other != null && !other.gameObject.tag.Equals("Player") 
@@ -77,7 +84,7 @@ public class LightShot : MonoBehaviour
         {
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Instantiate(lightHitPrefab, hitPoint, Quaternion.identity);
-            
+            AudioManager.Instance.PlaySound(onDestroySound);
             Destroy(this.gameObject);
         }
     }

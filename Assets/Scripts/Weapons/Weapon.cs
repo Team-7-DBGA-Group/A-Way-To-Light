@@ -20,6 +20,10 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private GameObject pickablePrefab;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip onBreakSound;
+
     public void PassData(PickableWeapon p)
     {
         damage = p.Damage;
@@ -37,6 +41,9 @@ public class Weapon : MonoBehaviour
         durability -= amount;
 
         if (durability <= 0)
+        {
+            AudioManager.Instance.PlaySound(onBreakSound);
             Destroy(gameObject);
+        }
     }
 }

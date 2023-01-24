@@ -2551,6 +2551,7 @@ MonoBehaviour:
   EyesRenderer: {fileID: 4568071582151024562}
   GlowMat: {fileID: 2100000, guid: 861b49b3bb1165448a2d36b95f10c152, type: 2}
   BlackMat: {fileID: -1580535799172915004, guid: e12400ac28b661e49aaf55ee2cb5c936, type: 3}
+  ID: 
   enemyUI: {fileID: 4046261832137500544}
   canDropWeapon: 0
   dropRayDistance: 1.6
@@ -2562,6 +2563,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
+  enemyStunSound: {fileID: 8300000, guid: df4326d29daf06f4aa472794c696dc07, type: 3}
 --- !u!95 &3694171508558729255
 Animator:
   serializedVersion: 4

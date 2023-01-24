@@ -32,6 +32,10 @@ public abstract class Enemy : NPC
     [SerializeField]
     private LayerMask playerLayer = new LayerMask();
 
+    [Header("Enemy Sounds")]
+    [SerializeField]
+    private AudioClip enemyStunSound;
+
     protected bool CanAttack = true;
     protected bool IsStunned = false;
 
@@ -120,6 +124,7 @@ public abstract class Enemy : NPC
     protected IEnumerator COWaitStun()
     {
         IsStunned = true;
+        AudioManager.Instance.PlaySound(enemyStunSound);
         yield return new WaitForSeconds(StunDuration);
         IsStunned = false;
     }

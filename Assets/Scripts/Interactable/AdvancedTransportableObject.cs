@@ -35,10 +35,26 @@ public class AdvancedTransportableObject : InteractableObject
     [SerializeField]
     private bool lookAtWaypoints = true;
 
+    [Header("Transportable sounds")]
+    [SerializeField]
+    private AudioClip onMovingSound;
+
     private GameObject _playerRef;
     private int _waypointIndex;
     private bool _canObjectMove = false;
     private bool _canRemove = false;
+    private bool _soundFlag = true;
+    private AudioSource _audioSource;
+
+    private void OnEnable()
+    {
+        AudioManager.OnChangedSoundVolume += ChangeSoundVolume;
+    }
+
+    private void OnDisable()
+    {
+        AudioManager.OnChangedSoundVolume -= ChangeSoundVolume;
+    }
 
     public override void Interact()
     {
@@ -73,6 +89,17 @@ public class AdvancedTransportableObject : InteractableObject
         IsTransporting = false;
 
     }
+
+    private void Awake()
+    {
+        if (GetComponent<AudioSource>())
+        {
+            _audioSource = GetComponent<AudioSource>();
+            _audioSource.clip = onMovingSound;
+            _audioSource.loop = true;
+        }
+    }
+
     private void Start()
     {
         _waypointIndex = 0;
@@ -87,6 +114,12 @@ public class AdvancedTransportableObject : InteractableObject
             return;
 
         transform.position = Vector3.MoveTowards(transform.position, waypoints[_waypointIndex].wTransform.position, objectSpeed * Time.deltaTime);
+
+        if (_soundFlag && onMovingSound != null && _audioSource != null)
+        {
+            _audioSource.Play();
+            _soundFlag = false;
+        }
 
         if (Vector3.Distance(transform.position, waypoints[_waypointIndex].wTransform.position) < 0.1f)
         {
@@ -110,6 +143,8 @@ public class AdvancedTransportableObject : InteractableObject
             }
 
             _canObjectMove = false;
+            _audioSource.Stop();
+            _soundFlag = true;
         }
     }
 
@@ -147,5 +182,11 @@ public class AdvancedTransportableObject : InteractableObject
             index = (index - 1 + waypoints.Count) % waypoints.Count;
         }
         return -1;
+    }
+
+    private void ChangeSoundVolume()
+    {
+        if(_audioSource != null)
+            _audioSource.volume = AudioManager.Instance.GetSoundVolume();
     }
 }

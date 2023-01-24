@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip waterCollisionSound;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Water"))
+            AudioManager.Instance.PlaySound(waterCollisionSound);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.transform.CompareTag("Transport"))

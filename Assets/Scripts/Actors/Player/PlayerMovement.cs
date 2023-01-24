@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,6 +38,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float jumpHeight = 2.0f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private List<AudioClip> walkSounds;
+    [SerializeField]
+    private AudioClip jumpSound;
+    [SerializeField]
+    private AudioClip landSound;
+
     private CharacterController _characterController;
 
     private float _horizontalInput;
@@ -48,6 +57,22 @@ public class PlayerMovement : MonoBehaviour
     {
         CanMove = false;
         _characterController.Move(Vector3.zero);
+    }
+
+    public void PlayWalkSound()
+    {
+        if(walkSounds.Count > 0)
+            AudioManager.Instance.PlaySound(walkSounds[Random.Range(0, walkSounds.Count)]);
+    } 
+    
+    public void PlayJumpSound()
+    {
+        AudioManager.Instance.PlaySound(jumpSound);
+    }
+
+    public void PlayLandSound()
+    {
+        AudioManager.Instance.PlaySound(landSound);
     }
 
     private void Start()

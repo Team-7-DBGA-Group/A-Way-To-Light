@@ -21,6 +21,11 @@ public abstract class NPC : Actor, IInteractable, IDataPersistence
     [Header("Save System")]
     [SerializeField]
     protected string ID;
+
+    [Header("NPC Sound")]
+    [SerializeField]
+    private AudioClip reviveSound;
+
     [ContextMenu("Generate GUID for ID")]
     private void GenerateGuid() 
     { 
@@ -40,6 +45,7 @@ public abstract class NPC : Actor, IInteractable, IDataPersistence
         
         IsAlive = true;
         Animator.SetTrigger("Rise");
+        AudioManager.Instance.PlaySound(reviveSound);
         EyesRenderer.material = GlowMat;
     }
 

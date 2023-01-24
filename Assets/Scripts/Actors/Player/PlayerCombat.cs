@@ -23,11 +23,20 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField]
     private float attackCooldown = 3f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip attackSound;
+
     private bool _canAttack = true;
 
     public void AnimationFinished()
     {
         playerMovement.CanMove = true;
+    }
+
+    public void PlayAudioOnAttack()
+    {
+        AudioManager.Instance.PlaySound(attackSound);
     }
 
     private void OnEnable()
@@ -77,4 +86,6 @@ public class PlayerCombat : MonoBehaviour
         else
             _canAttack = true;
     }
+
+    
 }

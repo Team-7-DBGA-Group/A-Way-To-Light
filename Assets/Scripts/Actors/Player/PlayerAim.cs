@@ -14,8 +14,13 @@ public class PlayerAim : MonoBehaviour
     [SerializeField]
     private float turnSmoothTime = 0.1f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip chargingAimSound;
+
     private float _turnSmoothVelocity;
     private bool _canAim = true;
+    private bool _wasAiming = false;
 
     private void OnEnable()
     {
@@ -48,12 +53,22 @@ public class PlayerAim : MonoBehaviour
         {
             IsAiming = true;
             OnAimActive?.Invoke();
+            if (!_wasAiming)
+            {
+                AudioManager.Instance.PlaySound(chargingAimSound, true);
+                _wasAiming = true;
+            }
         }
 
         if (InputManager.Instance.IsAimPressedUp)
         {
             IsAiming = false;
-            OnAimInactive?.Invoke();
+            OnAimInactive?.Invoke(); 
+            if (_wasAiming)
+            {
+                AudioManager.Instance.StopSound(chargingAimSound);
+                _wasAiming = false;
+            }
         }
 
         if(IsAiming)

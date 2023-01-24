@@ -14,6 +14,18 @@ public class BossDarkShot : MonoBehaviour, IInteractable
     [SerializeField]
     private float destroyTime = 10.0f;
 
+    [Header("AudioSource reference")]
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip throwAttackSound;
+    [SerializeField]
+    private AudioClip floatingAttackSound;
+    [SerializeField]
+    private AudioClip avoidAttackSound;
+
     private GameObject _target = null;
     private bool _isFollowingTarget = true;
     private Vector3 _lastTargetPos = Vector3.zero;
@@ -34,6 +46,9 @@ public class BossDarkShot : MonoBehaviour, IInteractable
     private void Start()
     {
         _target = SpawnManager.Instance.PlayerObj;
+        audioSource.PlayOneShot(throwAttackSound);
+        audioSource.clip = floatingAttackSound;
+        audioSource.Play();
         Destroy(this.gameObject, destroyTime);
     }
 
@@ -41,12 +56,14 @@ public class BossDarkShot : MonoBehaviour, IInteractable
     {
         GameManager.OnPause += HandlePause;
         Player.OnPlayerDie += DestroyShot;
+        AudioManager.OnChangedSoundVolume += ChangeSoundVolume;
     }
 
     private void OnDisable()
     {
         Player.OnPlayerDie -= DestroyShot;
         GameManager.OnPause -= HandlePause;
+        AudioManager.OnChangedSoundVolume -= ChangeSoundVolume;
     }
 
     private void Update()
@@ -102,5 +119,16 @@ public class BossDarkShot : MonoBehaviour, IInteractable
         }
 
         DestroyShot();
+    }
+
+    private void ChangeSoundVolume()
+    {
+        if (audioSource != null)
+            audioSource.volume = AudioManager.Instance.GetSoundVolume();
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.Instance.PlaySound(avoidAttackSound);
     }
 }

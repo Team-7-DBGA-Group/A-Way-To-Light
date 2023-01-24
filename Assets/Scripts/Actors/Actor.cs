@@ -40,9 +40,12 @@ public abstract class Actor : MonoBehaviour
         OnHealthDamaged?.Invoke(damage);
         _lastAttacker =  attacker;
         Knockback();
+        CustomDamageInteract();
         if (CurrentHealth <= 0)
             Die();
     }
+
+    public virtual void CustomDamageInteract(){}
 
     public void ResetHealth()
     {

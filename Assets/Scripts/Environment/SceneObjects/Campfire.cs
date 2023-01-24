@@ -19,6 +19,7 @@ public class Campfire : MonoBehaviour
 
     private GameObject _playerObj = null;
 
+
     private void OnEnable()
     {
         dialogueTrigger.OnDialogueTriggered += DialogueTriggered;
@@ -34,12 +35,13 @@ public class Campfire : MonoBehaviour
     private void DialogueTriggered(GameObject playerObj)
     {
         _playerObj = playerObj;
-        
+
         HealPlayer();
         SpawnManager.Instance.SetNewSpawnPoint(spawnPoint.transform.position);
 
         DialogueManager.OnChoiceChosen += HandleChoice;
     }
+
     private void DialogueExit()
     {
         _playerObj = null;
@@ -56,7 +58,7 @@ public class Campfire : MonoBehaviour
         {
             DialogueManager.Instance.ExitDialogueMode();
         }
-            
+
     }
 
     private void SaveGame()

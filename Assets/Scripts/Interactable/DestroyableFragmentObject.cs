@@ -15,6 +15,7 @@ public class DestroyableFragmentObject : InteractableObject
     public override void Interact()
     {
         base.Interact();
+
         Explode();
     }
 
@@ -25,4 +26,6 @@ public class DestroyableFragmentObject : InteractableObject
         Destroy(fragObj, clearTime);
         this.gameObject.SetActive(false);
     }
+
+    
 }

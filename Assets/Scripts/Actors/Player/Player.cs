@@ -17,13 +17,25 @@ public class Player : Actor
     [SerializeField]
     private float healthRegenCooldown = 2.0f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip deathSound;
+    [SerializeField]
+    private AudioClip takeDamageSound;
+
     private Weapon _currentEquipWeapon = null;
 
     private Vector3[] _directions = new Vector3[4];
     
     private bool _canHeal = true;
     private Coroutine _healthRegenCoroutine = null;
-    
+
+    public override void CustomDamageInteract()
+    {
+        base.CustomDamageInteract();
+        AudioManager.Instance.PlaySound(takeDamageSound);
+    }
+
     public void Equip(Weapon w)
     {
         _currentEquipWeapon = w;
@@ -85,7 +97,7 @@ public class Player : Actor
         target.transform.parent = null;
 
         OnPlayerDieTarget?.Invoke(target);
-
+        AudioManager.Instance.PlaySound(deathSound);
         OnPlayerDie?.Invoke();
         Destroy(gameObject);
     }

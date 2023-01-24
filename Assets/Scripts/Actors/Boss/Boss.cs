@@ -43,6 +43,18 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private float bossRange = 25.0f;
 
+    [Header("AudioSource reference")]
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip deathSound;
+    [SerializeField]
+    private AudioClip pillarSpawnSound;
+    [SerializeField]
+    private AudioClip takeDamageSound;
+
     private FSMSystem FSM;
     private ActivateBarrierState _activateBarrierState;
     private ShootingState _singleShootingState;
@@ -78,6 +90,7 @@ public class Boss : MonoBehaviour
 
     public void SpawnPillars()
     {
+        AudioManager.Instance.PlaySound(pillarSpawnSound);
         foreach (BossPillar pillar in pillars)
             pillar.Spawn();
     }
@@ -132,6 +145,7 @@ public class Boss : MonoBehaviour
     {
         // Do something for when boss dies.
         // Cinematic starts ecc.
+        audioSource.PlayOneShot(deathSound);
         _currentPhase = Phase.Dead;
         EnemyManager.Instance.BossExited();
         Destroy(this.gameObject);
@@ -151,6 +165,7 @@ public class Boss : MonoBehaviour
         lantern.OnLanternInteraction += PhaseEnd;
         Player.OnPlayerDie += ResetBoss;
         GameManager.OnPause += HandlePause;
+        AudioManager.OnChangedSoundVolume += ChangeSoundVolume;
     }
 
     private void OnDisable()
@@ -160,6 +175,7 @@ public class Boss : MonoBehaviour
         lantern.OnLanternInteraction -= PhaseEnd;
         Player.OnPlayerDie -= ResetBoss;
         GameManager.OnPause -= HandlePause;
+        AudioManager.OnChangedSoundVolume -= ChangeSoundVolume;
     }
 
     private void Update()
@@ -267,7 +283,7 @@ public class Boss : MonoBehaviour
     private void PhaseEnd()
     {
         GoToNextPhase();
-
+        audioSource.PlayOneShot(takeDamageSound);
         animator.ResetTrigger("SingleShoot");
         animator.ResetTrigger("DoubleShoot");
         _canLookPlayer = true;
@@ -313,5 +329,10 @@ public class Boss : MonoBehaviour
         {
             _stopBoss = false;
         }
+    }
+    private void ChangeSoundVolume()
+    {
+        if (audioSource != null)
+            audioSource.volume = AudioManager.Instance.GetSoundVolume();
     }
 }

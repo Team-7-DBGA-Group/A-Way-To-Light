@@ -15,13 +15,22 @@ public class StaffKey : GateKey
     [SerializeField]
     private Material onMaterial;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip onDeactivatingSound;
+    
     private MeshRenderer _meshRenderer;
-    private Material[] _mats;
+    private bool _soundPlayed = false;
 
     protected override void CustomInteraction()
     {
         GameObject destroyObject = deactivatingObject;
         _meshRenderer.material = onMaterial;
+        if (!_soundPlayed)
+        {
+            AudioManager.Instance.PlaySound(onDeactivatingSound);
+            _soundPlayed = true;
+        }
         Destroy(destroyObject);
     }
 

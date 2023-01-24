@@ -19,6 +19,10 @@ public class PickableWeapon : MonoBehaviour
     [SerializeField]
     private GameObject wieldableWeaponPrefab = null;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip onPickSound;
+
     public void PassData(Weapon w)
     {
         damage = w.Damage;
@@ -48,6 +52,8 @@ public class PickableWeapon : MonoBehaviour
                 p.Unequip();
             }
             p.Equip(weapon);
+
+            AudioManager.Instance.PlaySound(onPickSound);
 
             Destroy(gameObject);
         }

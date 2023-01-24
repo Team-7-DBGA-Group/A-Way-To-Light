@@ -6,6 +6,16 @@ using Utils;
 
 public class BasicEnemy : Enemy
 {
+    [Header("BasicEnemy Sounds")]
+    [SerializeField]
+    private List<AudioClip> enemyWalkSounds;
+    [SerializeField]
+    private AudioClip enemyTakeDamageSound;
+    [SerializeField]
+    private AudioClip attackSound;
+    [SerializeField]
+    private AudioClip onDeathSound;
+
     private Transform _target;
     private NavMeshAgent _agent = null;
 
@@ -14,6 +24,23 @@ public class BasicEnemy : Enemy
     private EnemyAttackingState _enemyAttackingState;
 
     private bool _isStop = false;
+
+    public void PlayEnemyWalkSound()
+    {
+        if(enemyWalkSounds.Count > 0)
+            AudioManager.Instance.PlaySound(enemyWalkSounds[Random.Range(0, enemyWalkSounds.Count)]);        
+    }
+
+    public void PlayEnemyAttackSound()
+    {
+        AudioManager.Instance.PlaySound(attackSound);
+    }
+
+    public override void CustomDamageInteract()
+    {
+        base.CustomDamageInteract();
+        AudioManager.Instance.PlaySound(enemyTakeDamageSound);
+    }
 
     public void StopEnemy()
     {
@@ -77,7 +104,6 @@ public class BasicEnemy : Enemy
             return;
 
         CustomLog.Log(CustomLog.CustomLogType.AI, "Attacking");
-
         Animator.SetTrigger("Attack");
         StartCoroutine(COStartAttackCooldown());
     }
@@ -88,6 +114,7 @@ public class BasicEnemy : Enemy
         CustomLog.Log(CustomLog.CustomLogType.GAMEPLAY, "Enemy " + this.gameObject.name + " Killed!");
         EnemyManager.Instance.DeregisterInCombatEnemy(this.GetHashCode());
         //Destroy(gameObject);
+        AudioManager.Instance.PlaySound(onDeathSound);
         this.gameObject.SetActive(false);
     }
     public void StopDealingDamage()

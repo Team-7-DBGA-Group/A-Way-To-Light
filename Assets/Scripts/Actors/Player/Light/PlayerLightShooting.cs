@@ -31,8 +31,17 @@ public class PlayerLightShooting : MonoBehaviour
     [SerializeField]
     private LayerMask rayLayer;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private AudioClip shotSound;
+
     private bool _canShoot = true;
     private float _chargesCooldown = 2.0f;
+
+    public void PlayShotSound()
+    {
+        AudioManager.Instance.PlaySound(shotSound);
+    }
 
     public void ResetLightCharges()
     {

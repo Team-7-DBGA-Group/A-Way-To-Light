@@ -26,6 +26,10 @@ public class PlayerClimb : MonoBehaviour
     [SerializeField]
     private float climbingSpeed = 2f;
 
+    [Header("Sounds")]
+    [SerializeField]
+    private List<AudioClip> climbSounds;
+
     private bool _isTouchingClimbableWall;
 
     private bool _canClimb;
@@ -35,6 +39,12 @@ public class PlayerClimb : MonoBehaviour
 
     private bool _eventFlag = false;
     private Vector3 _lastNormal;
+
+    public void PlayClimbSound()
+    {
+        if(climbSounds.Count > 0)
+            AudioManager.Instance.PlaySound(climbSounds[UnityEngine.Random.Range(0, climbSounds.Count)]);
+    }
 
     private void Start()
     {
