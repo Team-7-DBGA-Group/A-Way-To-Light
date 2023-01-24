@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
 {
@@ -16,7 +14,6 @@ public class InteractableObject : MonoBehaviour, IInteractable, IDataPersistence
     private void GenerateGuid()
     {
         ID = System.Guid.NewGuid().ToString();
-        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
     }
 
     public virtual void Interact()

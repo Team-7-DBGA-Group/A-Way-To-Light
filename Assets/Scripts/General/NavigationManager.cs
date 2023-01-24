@@ -19,6 +19,11 @@ public class NavigationManager : Singleton<NavigationManager>
         ChangeScene(sceneName,false);
     }
 
+    public void BackToTitle()
+    {
+        ChangeScene("MainMenu", false);
+    }
+
     public void QuitGame() => Application.Quit();
     
     public void OpenSurvey() => Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSdZsJ465OSGwVLCUJm4jvJIVWhfzw4nso7EGf0JpCkrwWdTzQ/viewform");
@@ -29,6 +34,11 @@ public class NavigationManager : Singleton<NavigationManager>
             return;
        
         _shouldLoadScene = true;
+
+        if (sceneName.Contains("Level"))
+        {
+            PlayerPrefs.SetString("GameScene", sceneName);
+        }
 
         _sceneNameToBeLoaded = sceneName;
         SpawnManager.Instance.ResetManager();

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public abstract class NPC : Actor, IInteractable, IDataPersistence
 {
@@ -30,7 +28,6 @@ public abstract class NPC : Actor, IInteractable, IDataPersistence
     private void GenerateGuid() 
     { 
         ID = System.Guid.NewGuid().ToString(); 
-        EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene()); 
     }
 
     public abstract void LoadData(GameData data);
