@@ -13,12 +13,24 @@ public class UISceneTransitionController : Singleton<UISceneTransitionController
 
     [Header("Events")]
     [SerializeField]
+    private UnityEvent OnOpenTransitionStarted;
+    [SerializeField]
     private UnityEvent OnOpenTransitionEnded;
+    [SerializeField]
+    private UnityEvent OnCloseTransitionStarted;
     [SerializeField]
     private UnityEvent OnCloseTransitionEnded;
 
-    public void OpenTransition() => transition.Open();
-    public void CloseTransition() => transition.Close();
+    public void OpenTransition()
+    {
+        OnOpenTransitionStarted?.Invoke();
+        transition.Open();
+    }
+    public void CloseTransition()
+    {
+        OnCloseTransitionStarted?.Invoke();
+        transition.Close();
+    }
 
     private void OnEnable()
     {
