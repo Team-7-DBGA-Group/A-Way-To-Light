@@ -9,11 +9,11 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     [Header("Sources")]
     [SerializeField]
-    private List<AudioSource> soundSources;
+    private List<AudioSource> soundSources = new List<AudioSource>();
     [SerializeField]
-    private List<AudioSource> musicSource;
+    private List<AudioSource> musicSource = new List<AudioSource>();
     [SerializeField]
-    private List<AudioSource> effectsSource;
+    private List<AudioSource> effectsSource = new List<AudioSource>();
 
     // Values to save
     private float _soundVolume = 1f;
@@ -24,6 +24,11 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     // Sounds controls
     public void PlaySound(AudioClip audioClip)
     {
+        if (audioClip == null)
+            return;
+        if (soundSources.Count <= 0)
+            return;
+
         foreach(AudioSource source in soundSources)
         {
             if (!source.isPlaying)
@@ -36,6 +41,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void PlaySound(AudioClip audioClip, bool isLooped)
     {
+        if (soundSources.Count <= 0)
+            return;
+
         foreach (AudioSource source in soundSources)
         {
             if (!source.isPlaying)
@@ -50,6 +58,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     public void StopSound(AudioClip audioClip)
     {
+        if (soundSources.Count <= 0)
+            return;
+
         foreach (AudioSource source in soundSources)
         {
             if (source.isPlaying && source.clip == audioClip)
@@ -67,6 +78,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     public void PauseSounds()
     {
+        if (soundSources.Count <= 0)
+            return;
+
         foreach(AudioSource source in soundSources)
         {
             source.Pause();
@@ -74,6 +88,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void StopSounds()
     {
+        if (soundSources.Count <= 0)
+            return;
+
         foreach (AudioSource source in soundSources)
         {
             source.loop = false;
@@ -83,6 +100,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void MuteSounds(bool muteValue)
     {
+        if (soundSources.Count <= 0)
+            return;
+
         foreach (AudioSource source in soundSources)
         {
             source.mute = muteValue;
@@ -90,6 +110,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void SetSoundVolume(float amount)
     {
+        if (soundSources.Count <= 0)
+            return;
+
         foreach (AudioSource source in soundSources)
         {
             source.volume = amount;
@@ -106,6 +129,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     // Music controls
     public void PlayMusic(AudioClip audioClip)
     {
+        if (musicSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in musicSource)
         {
             if (!source.isPlaying)
@@ -118,6 +144,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void PlayMusic(AudioClip audioClip, bool isLooped)
     {
+        if (musicSource.Count <= 0)
+            return;
+
         foreach (AudioSource sources in musicSource)
         {
             if (!sources.isPlaying)
@@ -131,6 +160,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void PauseMusic()
     {
+        if (musicSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in musicSource)
         {
             source.Pause();
@@ -138,6 +170,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void StopMusic()
     {
+        if (musicSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in musicSource)
         {
             source.loop = false;
@@ -148,6 +183,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     public void StopMusic(AudioClip audioClip)
     {
+        if (musicSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in musicSource)
         {
             if (source.isPlaying && source.clip == audioClip)
@@ -165,14 +203,20 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     public void MuteMusic(bool muteValue) 
     {
+        if (musicSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in musicSource)
         {
             source.mute = muteValue;
         }
     }
-    public void SetMusicVolume(float amount) 
+    public void SetMusicVolume(float amount)
     {
-        foreach(AudioSource source in musicSource)
+        if (musicSource.Count <= 0)
+            return;
+
+        foreach (AudioSource source in musicSource)
         {
             source.volume = amount;
             _musicVolume = amount;
@@ -182,6 +226,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     // Effect controls
     public void PlayEffect(AudioClip audioClip)
     {
+        if (effectsSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in effectsSource)
         {
             if (!source.isPlaying)
@@ -194,6 +241,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     public void PauseEffects()
     {
+        if (effectsSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in effectsSource)
         {
             source.Pause();
@@ -202,6 +252,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
 
     public void StopEffects()
     {
+        if (effectsSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in effectsSource)
         {
             source.Stop();
@@ -209,6 +262,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void MuteEffects(bool muteValue)
     {
+        if (effectsSource.Count <= 0)
+            return;
+
         foreach (AudioSource source in effectsSource)
         {
             source.mute = muteValue;
@@ -216,6 +272,9 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     }
     public void SetEffectsVolume(float amount)
     {
+        if (effectsSource.Count <= 0)
+            return;
+
         foreach (AudioSource sources in effectsSource)
         {
             sources.volume = amount;
