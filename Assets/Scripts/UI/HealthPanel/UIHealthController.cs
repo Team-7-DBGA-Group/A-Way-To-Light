@@ -11,7 +11,7 @@ public class UIHealthController : MonoBehaviour
 
     [Header("Model Reference")]
     [SerializeField]
-    private Actor actor; // if null is the player actor
+    private Actor actor;
 
     private void OnEnable()
     {
@@ -23,13 +23,10 @@ public class UIHealthController : MonoBehaviour
             DialogueManager.OnDialogueEnter += HidePanel;
             DialogueManager.OnDialogueExit += ShowPanel;
         }
-        else
-            SpawnManager.OnPlayerSpawn += InitializeActorsEvents;
     }
 
     private void OnDisable()
     {
-        SpawnManager.OnPlayerSpawn -= InitializeActorsEvents;
         actor.OnHealthInitialized -= healthPanel.InitializePanel;
         actor.OnHealthDamaged -= UpdateDamageHealth;
         actor.OnHealthHealed -= UpdateHealHealth;
@@ -54,20 +51,5 @@ public class UIHealthController : MonoBehaviour
         {
             healthPanel.EmptyHeart();
         }
-    }
-
-    private void InitializeActorsEvents(GameObject playerObj)
-    {
-        if (actor != null)
-            return;
-        actor = playerObj.GetComponent<Actor>();
-
-        actor.OnHealthInitialized += healthPanel.InitializePanel;
-        actor.OnHealthDamaged += UpdateDamageHealth;
-        actor.OnHealthHealed += UpdateHealHealth;
-        DialogueManager.OnDialogueEnter += HidePanel;
-        DialogueManager.OnDialogueExit += ShowPanel;
-
-        actor.ResetHealth();
     }
 }
