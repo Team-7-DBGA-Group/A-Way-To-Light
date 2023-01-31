@@ -16,11 +16,11 @@ public class UICharge : MonoBehaviour
     [SerializeField]
     private Color32 blinkColor = Color.yellow;
     [SerializeField]
+    private Color32 defaultColor = Color.white;
+    [SerializeField]
     private float blinkSpeed = 0.2f;
     [SerializeField]
     private int blinkNumber = 2;
-
-    private Color32 _defaultColor = Color.white;
 
     public void SetEnable(bool enable) => iconImage.enabled = enable;
 
@@ -45,22 +45,22 @@ public class UICharge : MonoBehaviour
 
     private void Start()
     {
-        iconImage.color = _defaultColor;
+        iconImage.color = defaultColor;
         IsOn = true;
     }
 
     private IEnumerator COBlinkAnimation()
     {
-        iconImage.color = _defaultColor;
+        iconImage.color = defaultColor;
 
         for(int i = 0; i < blinkNumber; ++i)
         {
-            iconImage.color = _defaultColor;
+            iconImage.color = defaultColor;
             yield return new WaitForSeconds(blinkSpeed);
             iconImage.color = blinkColor;
             yield return new WaitForSeconds(blinkSpeed);
         }
 
-        iconImage.color = _defaultColor;
+        iconImage.color = defaultColor;
     }
 }

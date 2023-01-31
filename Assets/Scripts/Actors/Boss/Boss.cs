@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+using System;
 
 public class Boss : MonoBehaviour
 {
+    public static event Action OnPhaseChanged;
+
     public bool CanShoot { get => _canShoot; }
     public float BossRange { get => bossRange; }
 
@@ -132,12 +135,12 @@ public class Boss : MonoBehaviour
 
     public void GoToNextPhase()
     {
+        OnPhaseChanged?.Invoke();
         if (_currentPhase == Phase.ThirdPhase)
         {
             Die();
             return;
         }
-
         _currentPhase += 1;
     }
 
