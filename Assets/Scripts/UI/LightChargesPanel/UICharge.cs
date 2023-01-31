@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class UILightCharge : MonoBehaviour
+public class UICharge : MonoBehaviour
 {
     public bool IsOn { get; private set; }
 

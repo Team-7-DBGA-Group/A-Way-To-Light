@@ -6,7 +6,7 @@ public class UILightChargesController : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField]
-    private UILightChargesPanel uiLightChargesPanel = null;
+    private UIChargesPanel uiLightChargesPanel = null;
 
     private void OnEnable()
     {

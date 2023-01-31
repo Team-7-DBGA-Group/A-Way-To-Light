@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UILightChargesPanel : MonoBehaviour
+public class UIChargesPanel : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
-    private GameObject uiLightChargePrefab = null;
+    private GameObject uiChargePrefab = null;
 
     private bool _isInit = false;
 
-    private Stack<UILightCharge> _activeCharges = new Stack<UILightCharge>();
-    private Stack<UILightCharge> _cooldownCharges = new Stack<UILightCharge>();
+    private Stack<UICharge> _activeCharges = new Stack<UICharge>();
+    private Stack<UICharge> _cooldownCharges = new Stack<UICharge>();
 
     public void SetEnable(bool enable)
     {
         if (!_isInit)
             return;
 
-        foreach (UILightCharge charge in _activeCharges)
+        foreach (UICharge charge in _activeCharges)
             charge.SetEnable(enable);
-        foreach (UILightCharge charge in _cooldownCharges)
+        foreach (UICharge charge in _cooldownCharges)
             charge.SetEnable(enable);
     }
 
@@ -32,8 +32,8 @@ public class UILightChargesPanel : MonoBehaviour
 
         for(int i= 0; i < amount; i++)
         {
-            GameObject lightObj = Instantiate(uiLightChargePrefab, this.transform);
-            _activeCharges.Push(lightObj.GetComponent<UILightCharge>());
+            GameObject chargeObj = Instantiate(uiChargePrefab, this.transform);
+            _activeCharges.Push(chargeObj.GetComponent<UICharge>());
         }
 
         _isInit = true;
@@ -47,7 +47,7 @@ public class UILightChargesPanel : MonoBehaviour
         if (_activeCharges.Count == 0)
             return;
 
-        UILightCharge charge = _activeCharges.Pop();
+        UICharge charge = _activeCharges.Pop();
         charge.Off();
         _cooldownCharges.Push(charge);
     }
@@ -60,7 +60,7 @@ public class UILightChargesPanel : MonoBehaviour
         if (_cooldownCharges.Count == 0)
             return;
 
-        UILightCharge charge = _cooldownCharges.Pop();
+        UICharge charge = _cooldownCharges.Pop();
         charge.On();
         _activeCharges.Push(charge);
     }

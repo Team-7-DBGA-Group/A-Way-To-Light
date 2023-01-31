@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Weapon : MonoBehaviour
 {
+    public static event Action<int> OnWeaponDurabilityChanged;
+
     public int Damage { get => damage; }
     public int Durability { get => durability; }
     public GameObject PickablePrefab { get => pickablePrefab; }
+    public Sprite Icon { get => icon; }
 
     [Header("Weapon Settings")]
+    [SerializeField]
+    private Sprite icon = null;
     [SerializeField]
     private int damage = 1;
     [SerializeField]
@@ -39,6 +45,7 @@ public class Weapon : MonoBehaviour
             return;
 
         durability -= amount;
+        OnWeaponDurabilityChanged?.Invoke(durability);
 
         if (durability <= 0)
         {

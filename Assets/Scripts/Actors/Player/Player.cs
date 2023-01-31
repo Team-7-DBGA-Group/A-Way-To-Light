@@ -9,6 +9,8 @@ public class Player : Actor
 {
     public static event Action<GameObject> OnPlayerDieTarget;
     public static event Action OnPlayerDie;
+    public static event Action<Weapon> OnWeaponEquip;
+    public static event Action OnWeaponUnequip;
     public bool IsWeaponEquip { get => _currentEquipWeapon != null; }
 
     [Header("Player Settings")]
@@ -39,6 +41,7 @@ public class Player : Actor
     public void Equip(Weapon w)
     {
         _currentEquipWeapon = w;
+        OnWeaponEquip?.Invoke(w);
     }
 
     public void Unequip()
@@ -65,6 +68,7 @@ public class Player : Actor
 
         Destroy(_currentEquipWeapon.gameObject);
         _currentEquipWeapon = null;
+        OnWeaponUnequip?.Invoke();
     }
 
     public void DealDamage()

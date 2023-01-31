@@ -100,10 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ca359f27def844e9343dd7a1af5abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 39b79b36213bd55499cd68b4bf35aa20, type: 3}
   damage: 1
   durability: 999
   canBeDestroyed: 1
   pickablePrefab: {fileID: 4740091204611308759, guid: 4902335207461584080db8be46ed15b5, type: 3}
+  onBreakSound: {fileID: 0}
 --- !u!1001 &3109831957581261876
 PrefabInstance:
   m_ObjectHideFlags: 0
