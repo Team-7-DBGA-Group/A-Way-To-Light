@@ -915,6 +915,7 @@ GameObject:
   - component: {fileID: 2149042645227596134}
   - component: {fileID: 725286571352790663}
   - component: {fileID: 8289597385684669957}
+  - component: {fileID: -5618617031222073683}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1001,8 +1002,8 @@ MonoBehaviour:
   knockbackRaycastLength: 1.5
   dropRayDistance: 1.6
   healthRegenCooldown: 2
-  deathSound: {fileID: 8300000, guid: c28c279efa3d60149b82e853b582e25f, type: 3}
-  takeDamageSound: {fileID: 8300000, guid: 34df26619ddd50a4bbe41ff657806a1d, type: 3}
+  deathSound: {fileID: 8300000, guid: 9d224029d295f9a4bbfe5907e38e03f0, type: 3}
+  takeDamageSound: {fileID: 8300000, guid: 1da451387a579ce4a83a306c677d300e, type: 3}
 --- !u!114 &6375194756810046011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,12 +1033,12 @@ MonoBehaviour:
   groundDistance: 0.2
   jumpHeight: 1
   walkSounds:
-  - {fileID: 8300000, guid: 0c2229d2b05295745a09c70a3901d968, type: 3}
-  - {fileID: 8300000, guid: f284b0c6ed40b3541a39d8c77f9fc986, type: 3}
-  - {fileID: 8300000, guid: bfe389aec1c482b4c90fc49052a42cb4, type: 3}
-  - {fileID: 8300000, guid: 0ef111169f1a3c642b416f637b68a376, type: 3}
-  jumpSound: {fileID: 8300000, guid: 71da643fecc72454b86bc95ece50951e, type: 3}
-  landSound: {fileID: 8300000, guid: a98f63b72d6843c438e1150ca61efd34, type: 3}
+  - {fileID: 8300000, guid: b1f3d9f94b750a347a742311ae4273ae, type: 3}
+  - {fileID: 8300000, guid: 0ffe86798c6f0044b84422a1814ba6e6, type: 3}
+  - {fileID: 8300000, guid: 44f42af5cc4ba3042a9a2a2d248793d3, type: 3}
+  - {fileID: 8300000, guid: 77095624faa3d504ca3a3d0b6c5c69a5, type: 3}
+  jumpSound: {fileID: 8300000, guid: 8d4c7bfeddb67364bb101bbd7391e934, type: 3}
+  landSound: {fileID: 8300000, guid: 4d19e93937a8c674bab66b832772cadd, type: 3}
 --- !u!114 &6375194756810046012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnSmoothTime: 0.1
-  chargingAimSound: {fileID: 0}
+  chargingAimSound: {fileID: 8300000, guid: 8d82573cf7144ba46b741c60072802aa, type: 3}
 --- !u!114 &6375194756810046013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,7 +1076,7 @@ MonoBehaviour:
   rayLayer:
     serializedVersion: 2
     m_Bits: 1011
-  shotSound: {fileID: 8300000, guid: 0a4a06eb852b17741b79c2cd0a387e8b, type: 3}
+  shotSound: {fileID: 8300000, guid: 32d26af886a69a7408fbb3384c28a601, type: 3}
 --- !u!114 &6375194756810046014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,11 +1098,11 @@ MonoBehaviour:
   climbDistance: 0.2
   climbingSpeed: 3
   climbSounds:
-  - {fileID: 8300000, guid: 4f5f8bcfff5a1304d91deae45cd75d36, type: 3}
-  - {fileID: 8300000, guid: 4bbdffff976bb5e448dd86ed9a3206b4, type: 3}
-  - {fileID: 8300000, guid: 196ca28427f10a54aab82891d3e02a43, type: 3}
-  - {fileID: 8300000, guid: 768fbfb632d546947862dba186454e80, type: 3}
-  - {fileID: 8300000, guid: 449f1a15dc22b8b4fbbe2e35b9cdca52, type: 3}
+  - {fileID: 8300000, guid: 9769788a7d26d0d4d95da9940f3e79bd, type: 3}
+  - {fileID: 8300000, guid: 7d30c76fd1fb0354c877cd9757b1599b, type: 3}
+  - {fileID: 8300000, guid: 96efcb1063e07c24893305c90c13240f, type: 3}
+  - {fileID: 8300000, guid: a30e949352a82ff4a8c2f714a5a44fa2, type: 3}
+  - {fileID: 8300000, guid: 0f5d36931dff25b40916fa869c04eb10, type: 3}
 --- !u!114 &6375194756810045958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1137,7 @@ MonoBehaviour:
   fov: {fileID: 5101727051301602241}
   player: {fileID: 6375194756810046010}
   attackCooldown: 1
-  attackSound: {fileID: 8300000, guid: 0a4f29ddc58081b4bb3b33ddbfd20ef8, type: 3}
+  attackSound: {fileID: 8300000, guid: 6f7bda5fb4a0cb14c814ac3443a0e247, type: 3}
 --- !u!114 &30312622175964921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,7 +1187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9a31f93269bcf44a5e1e8e54b7adf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterCollisionSound: {fileID: 8300000, guid: d263aa5d4330db246bffaba2a20a6f1b, type: 3}
+  waterCollisionSound: {fileID: 8300000, guid: dd7baa7dab8dc904284b1d992c4bb487, type: 3}
 --- !u!114 &725286571352790663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1219,6 +1220,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualCue: {fileID: 1914885839252785786}
   textGui: {fileID: 1914885837689315797}
+--- !u!81 &-5618617031222073683
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375194756810046015}
+  m_Enabled: 1
 --- !u!1 &6375194757075762582
 GameObject:
   m_ObjectHideFlags: 0

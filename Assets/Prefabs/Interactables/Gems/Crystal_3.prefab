@@ -812,14 +812,14 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -854,7 +854,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1660,7 +1660,7 @@ MonoBehaviour:
   - {fileID: 104382405}
   - {fileID: 4959364229139975093}
   audioSource: {fileID: 4517052816023160063}
-  soundToPlayOnActivation: {fileID: 0}
+  soundToPlayOnActivation: {fileID: 8300000, guid: 206d488ced083b7499711619a22a34c4, type: 3}
   looped: 1
 --- !u!1 &8067352695746901166
 GameObject:

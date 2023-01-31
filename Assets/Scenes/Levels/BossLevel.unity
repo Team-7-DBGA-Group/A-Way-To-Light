@@ -7183,6 +7183,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935173702}
   m_Mesh: {fileID: -3868628113853532650, guid: d7866490ec2ab7e42a6750468b626abc, type: 3}
+--- !u!82 &941645113 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3485476003381256196, guid: cbe68fcfdf5fc2043b9dc196a8abbcd5, type: 3}
+  m_PrefabInstance: {fileID: 141759771319799472}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &947571977
 GameObject:
   m_ObjectHideFlags: 3
@@ -16390,7 +16395,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2131332455}
   - component: {fileID: 2131332454}
-  - component: {fileID: 2131332453}
   - component: {fileID: 2131332452}
   - component: {fileID: 2131332451}
   - component: {fileID: 2131332450}
@@ -16499,14 +16503,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &2131332453
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2131332448}
-  m_Enabled: 1
 --- !u!20 &2131332454
 Camera:
   m_ObjectHideFlags: 0
@@ -16983,6 +16979,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7479830385255396493, guid: cbe68fcfdf5fc2043b9dc196a8abbcd5, type: 3}
+      propertyPath: barrierUpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 883d7838de8ec534f8614b2dadcd6a7e, type: 3}
+    - target: {fileID: 7479830385255396493, guid: cbe68fcfdf5fc2043b9dc196a8abbcd5, type: 3}
+      propertyPath: barrierDownSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 155f614747da54d47b6de7d02ecc4153, type: 3}
+    - target: {fileID: 7479830385255396493, guid: cbe68fcfdf5fc2043b9dc196a8abbcd5, type: 3}
+      propertyPath: barrierAudioSource
+      value: 
+      objectReference: {fileID: 941645113}
     - target: {fileID: 7479830385255396493, guid: cbe68fcfdf5fc2043b9dc196a8abbcd5, type: 3}
       propertyPath: gateKeys.Array.size
       value: 3
@@ -19601,9 +19609,9 @@ MonoBehaviour:
   waitTimeLanternHit: 10
   bossRange: 46.6
   audioSource: {fileID: 263893448}
-  deathSound: {fileID: 0}
-  pillarSpawnSound: {fileID: 0}
-  takeDamageSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 296efacceea6f1a43b4971c18f3347b5, type: 3}
+  pillarSpawnSound: {fileID: 8300000, guid: c9b0d136ec34c2343be17a34ccceddfa, type: 3}
+  takeDamageSound: {fileID: 8300000, guid: e041329d962c22740966275769b475e7, type: 3}
 --- !u!4 &1543216752123907694
 Transform:
   m_ObjectHideFlags: 0

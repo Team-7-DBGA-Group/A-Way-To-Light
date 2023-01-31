@@ -2552,6 +2552,7 @@ MonoBehaviour:
   GlowMat: {fileID: 2100000, guid: 861b49b3bb1165448a2d36b95f10c152, type: 2}
   BlackMat: {fileID: -1580535799172915004, guid: e12400ac28b661e49aaf55ee2cb5c936, type: 3}
   ID: 
+  reviveSound: {fileID: 8300000, guid: cc069adc43cf32d4db50e49341bb2a03, type: 3}
   enemyUI: {fileID: 4046261832137500544}
   canDropWeapon: 0
   dropRayDistance: 1.6
@@ -2563,7 +2564,15 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
-  enemyStunSound: {fileID: 8300000, guid: df4326d29daf06f4aa472794c696dc07, type: 3}
+  enemyStunSound: {fileID: 8300000, guid: 219d77b1576dccf479e26e2589933ac2, type: 3}
+  enemyWalkSounds:
+  - {fileID: 8300000, guid: a64e45a7c06a57740b36c72fdfaf69e1, type: 3}
+  - {fileID: 8300000, guid: 99f5b3eb3140a1e4eb152b093ddafbc2, type: 3}
+  - {fileID: 8300000, guid: e9cafe25148b19941b43f147216dfa96, type: 3}
+  - {fileID: 8300000, guid: 0bc95184696e7094f8a7fcf305e4a135, type: 3}
+  enemyTakeDamageSound: {fileID: 8300000, guid: 423e176f5954cbd4eb565702b43be01b, type: 3}
+  attackSound: {fileID: 8300000, guid: 120ffcbae54008c428a00bac39c11b9f, type: 3}
+  onDeathSound: {fileID: 8300000, guid: ab3bc720b0c1b9a4cad406380e2470f1, type: 3}
 --- !u!95 &3694171508558729255
 Animator:
   serializedVersion: 4

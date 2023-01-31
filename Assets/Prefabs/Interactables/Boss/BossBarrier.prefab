@@ -4928,7 +4928,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4970,7 +4970,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -14888,10 +14888,10 @@ MonoBehaviour:
   gateKeys: []
   barrierParticle: {fileID: 4607997987131351332}
   barrierCollider: {fileID: 7366221966629878332}
-  barrierAudioSource: {fileID: 0}
-  barrierUpSound: {fileID: 0}
-  barrierDownSound: {fileID: 0}
-  magicCircleSound: {fileID: 0}
+  barrierAudioSource: {fileID: 3485476003381256196}
+  barrierUpSound: {fileID: 8300000, guid: 883d7838de8ec534f8614b2dadcd6a7e, type: 3}
+  barrierDownSound: {fileID: 8300000, guid: 155f614747da54d47b6de7d02ecc4153, type: 3}
+  magicCircleSound: {fileID: 8300000, guid: eab9cfa137730dc4eaf595ff1f377d6f, type: 3}
 --- !u!1 &4607997987173785058
 GameObject:
   m_ObjectHideFlags: 0

@@ -4745,7 +4745,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 15
   Pan2D: 0
@@ -4834,6 +4834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a47d32140504e248b41a8d10086c379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundToPlay: {fileID: 8300000, guid: 1d6640ef1281e44418fee3d754531f17, type: 3}
 --- !u!1 &1710730037030248621
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,7 +7324,7 @@ MonoBehaviour:
   - {fileID: 1710730036972986494}
   objectSpeed: 2
   lookAtWaypoints: 0
-  onMovingSound: {fileID: 0}
+  onMovingSound: {fileID: 8300000, guid: ad0e5d72fa124fb46858c47a435d7cb6, type: 3}
   gate: {fileID: 1710730037292217726}
   trapdoor: {fileID: 1710730037016782657}
 --- !u!114 &1710730037292217724
@@ -7363,7 +7364,7 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
+  DopplerLevel: 0
   MinDistance: 1
   MaxDistance: 25
   Pan2D: 0

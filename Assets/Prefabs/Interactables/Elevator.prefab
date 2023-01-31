@@ -598,7 +598,7 @@ MonoBehaviour:
   - {fileID: 0}
   objectSpeed: 2
   lookAtWaypoints: 0
-  onMovingSound: {fileID: 0}
+  onMovingSound: {fileID: 8300000, guid: dee32485a2af43c4f9eaaf376cd725b7, type: 3}
 --- !u!54 &6618144509451671309
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -718,7 +718,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 25
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

@@ -63,6 +63,8 @@ MonoBehaviour:
   lightHitPrefab: {fileID: 8771972552311404799, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
   moveSpeed: 30
   secondsToDestroy: 40.5
+  onDestroySound: {fileID: 8300000, guid: bddede8241a9b604c980be264b14d85d, type: 3}
+  interactableHitSound: {fileID: 8300000, guid: 22ab835dfdb49bc46b89dad1d6a17858, type: 3}
 --- !u!54 &4008325035787397869
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,8 +13,9 @@ public class TrapDoorGate : TransportableObject
     private bool _trapdoorOpen = false;
     private Animation _trapdoorAnimation;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _trapdoorAnimation = trapdoor.GetComponent<Animation>();
     }
 

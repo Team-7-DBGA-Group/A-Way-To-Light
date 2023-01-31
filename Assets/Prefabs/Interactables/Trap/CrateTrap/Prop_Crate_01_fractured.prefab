@@ -3828,7 +3828,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f8921832d33d142848f14783d9dd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDestroySound: {fileID: 0}
+  looped: 0
+  soundToPlay: {fileID: 8300000, guid: dc3954411ba8a71428333dbb004cfd3d, type: 3}
 --- !u!82 &3719405241107609241
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3850,7 +3851,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

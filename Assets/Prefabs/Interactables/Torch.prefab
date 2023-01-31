@@ -53,7 +53,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 8
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -780,7 +780,7 @@ MonoBehaviour:
   objects:
   - {fileID: 3239961731135242759}
   audioSource: {fileID: 6237258011407218560}
-  soundToPlayOnActivation: {fileID: 8300000, guid: b840c9b549d294b46a8850c65e5bdba1, type: 3}
+  soundToPlayOnActivation: {fileID: 8300000, guid: 0ebf64ca5105c47459c7c117f0179dd9, type: 3}
   looped: 1
 --- !u!1001 &8911565620841055979
 PrefabInstance:

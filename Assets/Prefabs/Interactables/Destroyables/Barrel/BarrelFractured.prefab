@@ -1957,7 +1957,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f8921832d33d142848f14783d9dd89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDestroySound: {fileID: 0}
+  looped: 0
+  soundToPlay: {fileID: 8300000, guid: 556bafd42a767c2469d96e7aa36a7081, type: 3}
 --- !u!82 &-7722815210219506487
 AudioSource:
   m_ObjectHideFlags: 0

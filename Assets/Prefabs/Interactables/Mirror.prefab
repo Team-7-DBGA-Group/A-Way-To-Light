@@ -156,7 +156,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 25
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -628,8 +628,8 @@ MonoBehaviour:
   rotatingPoint: {fileID: 6839012592986214535}
   audioSource: {fileID: 1835737772025544623}
   reflactionDelay: 0.25
-  mirrorRotation: {fileID: 0}
-  mirrorBouncingLight: {fileID: 0}
+  mirrorRotation: {fileID: 8300000, guid: 23742d82fbaad004191fa46a1578b91c, type: 3}
+  mirrorBouncingLight: {fileID: 8300000, guid: fb15ec4c6eeb9474b89010bca8662c96, type: 3}
 --- !u!65 &8569469998642147934
 BoxCollider:
   m_ObjectHideFlags: 0

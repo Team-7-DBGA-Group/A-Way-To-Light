@@ -49,9 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gateKeys: []
   vfx: {fileID: 4350159681261870421}
-  audioSource: {fileID: 0}
-  portalActivatedSound: {fileID: 0}
-  portalMantainingSound: {fileID: 0}
+  audioSource: {fileID: 3274594192792441438}
+  portalActivatedSound: {fileID: 8300000, guid: 197dad1ffc2ac6f4789c72311f1f9471, type: 3}
+  portalMantainingSound: {fileID: 8300000, guid: ba63ba5885ecbfb4ca305282cf909522, type: 3}
 --- !u!135 &7821551975146886149
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

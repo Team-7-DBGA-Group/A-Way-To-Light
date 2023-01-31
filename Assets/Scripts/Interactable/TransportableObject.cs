@@ -67,7 +67,7 @@ public class TransportableObject : InteractableObject
         
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (GetComponent<AudioSource>())
         {

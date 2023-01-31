@@ -157,7 +157,7 @@ MonoBehaviour:
   objects:
   - {fileID: 3911712759637901519}
   audioSource: {fileID: 3699887411665158222}
-  soundToPlayOnActivation: {fileID: 8300000, guid: d263aa5d4330db246bffaba2a20a6f1b, type: 3}
+  soundToPlayOnActivation: {fileID: 8300000, guid: cf0f67cd01bd3134983ac1277a61bcbd, type: 3}
   looped: 1
 --- !u!136 &1097798088580175681
 CapsuleCollider:
@@ -226,7 +226,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 15
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
