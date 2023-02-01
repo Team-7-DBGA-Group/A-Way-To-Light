@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class InitManager : Singleton<InitManager>
 {
+    [Header("Settings")]
+    [SerializeField]
+    private string sceneName;
+
     private void OnEnable()
     {
         DialogueManager.OnDialogueExit += LoadGame;
@@ -17,6 +21,6 @@ public class InitManager : Singleton<InitManager>
 
     private void LoadGame()
     {
-        NavigationManager.Instance.ChangeScene("Prototype");
+        NavigationManager.Instance.ChangeScene(sceneName);
     }
 }

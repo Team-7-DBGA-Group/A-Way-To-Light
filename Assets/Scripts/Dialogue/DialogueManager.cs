@@ -11,6 +11,7 @@ public class DialogueManager : Singleton<DialogueManager>
     public static event Action OnDialogueEnter;
     public static event Action OnDialogueExit;
     public static event Action<int> OnChoiceChosen;
+    public static event Action OnDialogueContinue;
     public bool IsDialoguePlaying { get; private set; }
 
     [Header("Dialogue UI")]
@@ -27,7 +28,7 @@ public class DialogueManager : Singleton<DialogueManager>
     private Story _currentStory;
     private bool _canShowNextLine;
     private TextMeshProUGUI[] _choicesText;
-
+    private bool _invokeContinueDialogueEvent = true;
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         Cursor.visible = true;
@@ -74,6 +75,12 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             if (_canShowNextLine)
                 ContinueStory();
+            if (_invokeContinueDialogueEvent)
+            {
+                OnDialogueContinue?.Invoke();
+                _invokeContinueDialogueEvent = false;
+            }
+               
         }
 
     }
@@ -102,11 +109,17 @@ public class DialogueManager : Singleton<DialogueManager>
             //dialogueText.text = _currentStory.Continue(); // Next line
             StartCoroutine(ShowAnimationText(_currentStory.Continue(), 0.06f, () => {
                 if (_currentStory.currentChoices.Count > 0)
+                {
+                    _invokeContinueDialogueEvent = false;
                     continueIcon.SetActive(false);
+                }
                 else
+                {
                     continueIcon.SetActive(true);
+                    _invokeContinueDialogueEvent = true;
+                }
                 DisplayChoices(); // if any
-
+               
             }));
         }
         else
