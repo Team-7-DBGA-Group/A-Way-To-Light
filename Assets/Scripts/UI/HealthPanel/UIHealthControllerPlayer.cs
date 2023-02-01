@@ -25,7 +25,6 @@ public class UIHealthControllerPlayer : MonoBehaviour
             actor.OnHealthDamaged += UpdateDamageHealth;
             actor.OnHealthHealed += UpdateHealHealth;
             DialogueManager.OnDialogueEnter += HidePanel;
-            DialogueManager.OnDialogueExit += ShowPanel;
             SpawnManager.OnPlayerSpawn += ResetHealth;
 
             EnemyManager.OnCombatEnter += ShowPanel;
@@ -44,7 +43,6 @@ public class UIHealthControllerPlayer : MonoBehaviour
         actor.OnHealthDamaged -= UpdateDamageHealth;
         actor.OnHealthHealed -= UpdateHealHealth;
         DialogueManager.OnDialogueEnter -= HidePanel;
-        DialogueManager.OnDialogueExit -= ShowPanel;
 
         EnemyManager.OnCombatEnter -= ShowPanel;
         EnemyManager.OnCombatExit -= HidePanel;
