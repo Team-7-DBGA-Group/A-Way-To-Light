@@ -46,7 +46,7 @@ public class BossDarkShot : MonoBehaviour, IInteractable
     private void Start()
     {
         _target = SpawnManager.Instance.PlayerObj;
-        audioSource.PlayOneShot(throwAttackSound);
+        AudioManager.Instance.PlaySound(throwAttackSound);
         audioSource.clip = floatingAttackSound;
         audioSource.Play();
         Destroy(this.gameObject, destroyTime);

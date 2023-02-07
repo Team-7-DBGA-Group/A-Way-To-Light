@@ -148,7 +148,7 @@ public class Boss : MonoBehaviour
     {
         // Do something for when boss dies.
         // Cinematic starts ecc.
-        audioSource.PlayOneShot(deathSound);
+        AudioManager.Instance.PlaySound(deathSound);
         _currentPhase = Phase.Dead;
         EnemyManager.Instance.BossExited();
         Destroy(this.gameObject);

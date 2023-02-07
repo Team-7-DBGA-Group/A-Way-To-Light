@@ -24,14 +24,14 @@ public class BossBarrier : Gate
     [SerializeField]
     private AudioClip barrierDownSound;
     [SerializeField]
-    private AudioClip magicCircleSound;
+    private AudioClip barrierActiveSound;
 
     public void DeactivateBarrier()
     {
         barrierParticle.Stop();
         barrierCollider.enabled = false;
-        //barrierAudioSource.Stop();
-        //barrierAudioSource.PlayOneShot(barrierDownSound);
+        barrierAudioSource.Stop();
+        barrierAudioSource.PlayOneShot(barrierDownSound);
         OnBarrierDeactivated?.Invoke();
     }
 
@@ -40,8 +40,8 @@ public class BossBarrier : Gate
         ResetGate();
         barrierParticle.Play();
         barrierCollider.enabled = true;
-        //barrierAudioSource.PlayOneShot(barrierUpSound);
-        //barrierAudioSource.Play();
+        barrierAudioSource.PlayOneShot(barrierUpSound);
+        barrierAudioSource.Play();
         OnBarrierActivated?.Invoke();
     }
 
@@ -54,7 +54,7 @@ public class BossBarrier : Gate
     protected override void Awake()
     {
         base.Awake();
-        barrierAudioSource.clip = magicCircleSound;
+        barrierAudioSource.clip = barrierActiveSound;
     }
 
     private void OnEnable()
