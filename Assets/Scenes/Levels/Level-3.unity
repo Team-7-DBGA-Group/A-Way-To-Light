@@ -8291,6 +8291,18 @@ MonoBehaviour:
           m_StringArgument: BossLevel
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 953865216}
+        m_TargetAssemblyTypeName: GemGate, Assembly-CSharp
+        m_MethodName: PlayTeleportSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &771005387
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10178,6 +10190,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7821551975146886138, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
   m_PrefabInstance: {fileID: 7821551974196199429}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &953865216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7821551975146886148, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
+  m_PrefabInstance: {fileID: 7821551974196199429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2275c2a564d03a43863b5d73f8b9622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &956465166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7157702535375084675, guid: 4e9dc74c4334b9a458f53f995ccb9772, type: 3}
@@ -26263,10 +26286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7066114027638251698}
     m_Modifications:
-    - target: {fileID: 907010211042229497, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
-      propertyPath: eventsToTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 458322370}
     - target: {fileID: 7821551975146886138, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -26359,17 +26378,7 @@ PrefabInstance:
       propertyPath: gateKeys.Array.data[9]
       value: 
       objectReference: {fileID: 1116581356}
-    - target: {fileID: 7821551975146886149, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7821551975146886149, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 907010211042229497, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
-    - {fileID: 7821551975146886149, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b98834ed7a2929c49b1e24288ba26dd7, type: 3}
 --- !u!23 &7863328148497384880
 MeshRenderer:
