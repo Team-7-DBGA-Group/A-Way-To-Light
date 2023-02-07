@@ -1,6 +1,23 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
+[System.Serializable]
+public class SoundEffect
+{
+    [Header("Audio Reference")]
+    [SerializeField]
+    public AudioSource audioSource;
+
+    [Header("Sound")]
+    [SerializeField]
+    public AudioClip soundToPlayOnActivation;
+
+    [Header("Sound settings")]
+    [SerializeField]
+    public bool looped;
+}
 
 public class ActivableObjects : InteractableObject
 {
@@ -8,26 +25,19 @@ public class ActivableObjects : InteractableObject
     [SerializeField]
     private List<GameObject> objects = new List<GameObject>();
 
-    [Header("Audio Reference")]
     [SerializeField]
-    private AudioSource audioSource;
-
-    [Header("Sound")]
-    [SerializeField]
-    private AudioClip soundToPlayOnActivation;
-
-    [Header("Sound settings")]
-    [SerializeField]
-    private bool looped;
+    private List<SoundEffect> effects = new List<SoundEffect>();
 
     private void Awake()
     {
-        if(audioSource != null)
+        foreach(SoundEffect item in effects)
         {
-            audioSource.clip = soundToPlayOnActivation;
-            audioSource.loop = looped;
+            if (item.audioSource != null)
+            {
+                item.audioSource.clip = item.soundToPlayOnActivation;
+                item.audioSource.loop = item.looped;
+            }
         }
-        
     }
 
     private void OnEnable()
@@ -44,8 +54,15 @@ public class ActivableObjects : InteractableObject
     {
         base.Interact();
         ActiveObjects();
-        if(audioSource != null && !audioSource.isPlaying)
-            audioSource.Play();
+        PlayEffects();
+    }
+
+    private void PlayEffects()
+    {
+        if (effects.Count <= 0)
+            return;
+        foreach (SoundEffect item in effects)
+            item.audioSource?.Play();
     }
 
     private void ActiveObjects()
@@ -59,7 +76,10 @@ public class ActivableObjects : InteractableObject
 
     private void ChangeSoundVolume()
     {
-        if (audioSource != null)
-            audioSource.volume = AudioManager.Instance.GetSoundVolume();
+        foreach (SoundEffect item in effects)
+        {
+            if (item.audioSource != null)
+                item.audioSource.volume = AudioManager.Instance.GetSoundVolume();
+        }
     }
 }

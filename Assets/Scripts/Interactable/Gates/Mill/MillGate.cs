@@ -9,9 +9,24 @@ public class MillGate : Gate
     private Animation animationToPlay;
     [SerializeField]
     private GateElevation Gate;
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip onActivationSound;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if(audioSource != null) 
+        {
+            audioSource.clip = onActivationSound;
+        }
+    }
+
     protected override void GateOpenedAction()
     {
         animationToPlay.Play();
+        audioSource.Play();
         Gate.StartFloating();
     }
 }

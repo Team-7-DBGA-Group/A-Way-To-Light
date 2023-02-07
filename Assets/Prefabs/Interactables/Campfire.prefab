@@ -507,9 +507,10 @@ MonoBehaviour:
   objects:
   - {fileID: 5692834056404281767}
   - {fileID: 1436606877953914172}
-  audioSource: {fileID: 4535138030414363716}
-  soundToPlayOnActivation: {fileID: 8300000, guid: d2535a3e0b990d54184789a0c5dfe715, type: 3}
-  looped: 1
+  effects:
+  - audioSource: {fileID: 4535138030414363716}
+    soundToPlayOnActivation: {fileID: 8300000, guid: d2535a3e0b990d54184789a0c5dfe715, type: 3}
+    looped: 1
 --- !u!114 &7004161137994559421
 MonoBehaviour:
   m_ObjectHideFlags: 0
