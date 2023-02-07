@@ -156,9 +156,10 @@ MonoBehaviour:
   ID: 
   objects:
   - {fileID: 3911712759637901519}
-  audioSource: {fileID: 3699887411665158222}
-  soundToPlayOnActivation: {fileID: 8300000, guid: cf0f67cd01bd3134983ac1277a61bcbd, type: 3}
-  looped: 1
+  effects:
+  - audioSource: {fileID: 3699887411665158222}
+    soundToPlayOnActivation: {fileID: 8300000, guid: cf0f67cd01bd3134983ac1277a61bcbd, type: 3}
+    looped: 1
 --- !u!136 &1097798088580175681
 CapsuleCollider:
   m_ObjectHideFlags: 0
