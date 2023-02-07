@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7821551975146886138}
   - component: {fileID: 7821551975146886148}
-  - component: {fileID: 7821551975146886149}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Untagged
@@ -52,19 +51,8 @@ MonoBehaviour:
   audioSource: {fileID: 3274594192792441438}
   portalActivatedSound: {fileID: 8300000, guid: 197dad1ffc2ac6f4789c72311f1f9471, type: 3}
   portalMantainingSound: {fileID: 8300000, guid: ba63ba5885ecbfb4ca305282cf909522, type: 3}
---- !u!135 &7821551975146886149
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7821551975146886139}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  teleportingSound: {fileID: 8300000, guid: 9e98fedae5ccaf949919336ba5d0ddd6, type: 3}
+  isOpen: 0
 --- !u!1 &8074047031617987979
 GameObject:
   m_ObjectHideFlags: 0

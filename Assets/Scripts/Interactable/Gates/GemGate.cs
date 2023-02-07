@@ -18,6 +18,10 @@ public class GemGate : Gate
     private AudioClip portalActivatedSound;
     [SerializeField]
     private AudioClip portalMantainingSound;
+    [SerializeField]
+    private AudioClip teleportingSound;
+    [SerializeField, HideInInspector]
+    private bool isOpen = false;
 
     private void OnEnable()
     {
@@ -35,16 +39,9 @@ public class GemGate : Gate
         audioSource.clip = portalMantainingSound;
     }
 
-    private void Start()
-    {
-        _collider = GetComponent<SphereCollider>();
-        _collider.enabled = false;
-    }
-
     protected override void GateOpenedAction()
     {
         vfx.SetActive(true);
-        _collider.enabled = true;
         AudioManager.Instance.PlaySound(portalActivatedSound);
         audioSource.Play();
     }
@@ -53,5 +50,10 @@ public class GemGate : Gate
     {
         if (audioSource != null)
             audioSource.volume = AudioManager.Instance.GetSoundVolume();
+    }
+
+    public void PlayTeleportSound()
+    {
+        AudioManager.Instance.PlaySound(teleportingSound);
     }
 }

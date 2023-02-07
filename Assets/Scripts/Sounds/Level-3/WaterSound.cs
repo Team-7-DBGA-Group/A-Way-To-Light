@@ -22,7 +22,13 @@ public class WaterSound : MonoBehaviour
 
     public void PlayWaterSound()
     {
-        audioSource.PlayOneShot(waterFlowSound);
+        audioSource.clip = waterFlowSound;
+        audioSource.Play();
+    }
+
+    public void StopWaterSound()
+    {
+        audioSource.Stop();
     }
 
     private void OnEnable()

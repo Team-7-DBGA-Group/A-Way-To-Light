@@ -14,20 +14,7 @@ public class RubbleInteractable : GateKey
     [SerializeField]
     private RubbleInteractable previousRubble;
 
-    [Header("Sounds references")]
-    [SerializeField]
-    private AudioSource audioSource;
-
-    [Header("Sounds")]
-    [SerializeField]
-    private AudioClip onBreakSound;
-
     private bool _alreadyPlayed = false;
-    
-    private void Awake()
-    {
-        audioSource.clip = onBreakSound;    
-    }
 
     private void Start()
     {
