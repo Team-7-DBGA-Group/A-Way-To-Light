@@ -55,7 +55,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 15
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -192,9 +192,10 @@ MonoBehaviour:
   ID: 
   objects:
   - {fileID: 2819240730599428206}
-  audioSource: {fileID: 1781917276215680041}
-  soundToPlayOnActivation: {fileID: 8300000, guid: 0ebf64ca5105c47459c7c117f0179dd9, type: 3}
-  looped: 1
+  effects:
+  - audioSource: {fileID: 1781917276215680041}
+    soundToPlayOnActivation: {fileID: 8300000, guid: 0ebf64ca5105c47459c7c117f0179dd9, type: 3}
+    looped: 1
 --- !u!1 &8972306116636979389
 GameObject:
   m_ObjectHideFlags: 0
