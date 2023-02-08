@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 using System;
+using UnityEngine.AI;
 
 public class Boss : MonoBehaviour
 {
@@ -247,7 +248,15 @@ public class Boss : MonoBehaviour
         if(_currentPhase == Phase.ThirdPhase)
         {
             foreach (BossEnemy enemy in enemies)
+            {
                 enemy.Die();
+                enemy.gameObject.SetActive(true);
+                enemy.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                enemy.transform.position = new Vector3(enemy.transform.position.x, -0.34f, enemy.transform.position.z);
+                
+            }
+               
+            _areEnemiesSpawned = false;
         }
 
         _currentPhase = Phase.Stop;
@@ -308,8 +317,13 @@ public class Boss : MonoBehaviour
         if (_areEnemiesSpawned)
             return;
 
+
         foreach(BossEnemy enemy in enemies)
+        {
             enemy.Spawn();
+            enemy.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+        }
+            
 
         _areEnemiesSpawned = true;
     }

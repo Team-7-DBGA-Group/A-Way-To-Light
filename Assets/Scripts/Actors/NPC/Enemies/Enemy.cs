@@ -72,6 +72,7 @@ public abstract class Enemy : NPC
     {
         base.Rise();
         SpawnWeapon();
+        IsDead = false;
     }
 
     protected override void Awake()

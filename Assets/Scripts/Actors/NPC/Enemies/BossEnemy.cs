@@ -26,6 +26,7 @@ public class BossEnemy : BasicEnemy
             return;
 
         _isSpawning = true;
+        IsAlive = false;
         _smokeInstance = Instantiate(smokeParticle, new Vector3(transform.position.x, targetSmokeHeight, transform.position.z), Quaternion.identity);
     }
 
