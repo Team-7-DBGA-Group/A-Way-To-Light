@@ -5,7 +5,13 @@ using System;
 
 public class AudioManager : Singleton<AudioManager>, IDataPersistence 
 {
+    public static event Action OnVolumeLoaded;
     public static event Action OnChangedSoundVolume;
+
+    public float SoundVolume { get => _soundVolume; }
+    public float MusicVolume { get => _musicVolume; }
+    public float EffectsVolume { get => _effectsVolume; }
+    public float MasterVolume { get => _masterVolume; }
 
     [Header("Sources")]
     [SerializeField]
@@ -312,6 +318,7 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
         SetEffectsVolume(_effectsVolume);
         _musicVolume = data.MusicVolume * _masterVolume;
         SetMusicVolume(_musicVolume);
+        OnVolumeLoaded?.Invoke();
     }
 
     public void SaveData(GameData data)
