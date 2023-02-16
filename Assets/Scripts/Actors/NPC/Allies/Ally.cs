@@ -7,6 +7,10 @@ public class Ally : NPC
     [Header("Ally References")]
     [SerializeField]
     private DialogueTrigger dialogueTrigger;
+    // Mattia changes
+    [SerializeField]
+    private bool alreadyAlive = false;
+    // End Mattia changes
 
     public override void Die()
     {
@@ -41,6 +45,14 @@ public class Ally : NPC
     protected override void Awake()
     {
         base.Awake();
-        dialogueTrigger.enabled = false;
+        // Mattia changes
+        // dialogueTrigger.enabled = false;
+        if (alreadyAlive) {            
+            Rise();
+        } else {
+            dialogueTrigger.enabled = false;
+        }
+        // End Mattia changes
+        
     }
 }
