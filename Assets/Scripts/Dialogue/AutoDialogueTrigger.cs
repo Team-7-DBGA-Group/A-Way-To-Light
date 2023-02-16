@@ -7,6 +7,14 @@ using UnityEngine.SceneManagement;
 public class AutoDialogueTrigger : MonoBehaviour, IDataPersistence
 {
     public event Action<GameObject> OnDialogueTriggered;
+    // Mattia changes
+    [Header("Dialogue Object")]
+    [Tooltip("Object for LookAt")]
+    [SerializeField]
+    private GameObject dialogueObj;
+    [SerializeField]
+    private bool shouldPlayerLookDialogueObj = false;
+    // End Mattia changes
 
     [Header("Save System")]
     [SerializeField]
@@ -50,9 +58,9 @@ public class AutoDialogueTrigger : MonoBehaviour, IDataPersistence
 
         _canTriggerDialogue = true;
     }
-   
+
     public void DisableTriggerDialogue() => _canTriggerDialogue = false;
-    
+
     public void SetCanEnableDialogue(bool active) => _canEnableDialogue = active;
 
     private void Awake()
@@ -84,6 +92,14 @@ public class AutoDialogueTrigger : MonoBehaviour, IDataPersistence
             _playOnce = true;
             OnDialogueTriggered?.Invoke(_playerObj);
             DialogueManager.Instance.EnterDialogueMode(inkJSON);
+
+            // Mattia Changes
+            if (shouldPlayerLookDialogueObj)
+                _playerObj.transform.LookAt(transform, Vector3.up);
+
+            if (dialogueObj != null)
+                dialogueObj.transform.LookAt(_playerObj.transform, Vector3.up);
+            // End Mattia Changes
         }
     }
 
