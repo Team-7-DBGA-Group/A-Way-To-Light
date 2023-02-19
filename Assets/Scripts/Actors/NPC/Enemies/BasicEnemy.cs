@@ -49,7 +49,7 @@ public class BasicEnemy : Enemy
         _agent.enabled = false;
         _isStop = true;
     }
-    public void ResumeEnemey()
+    public void ResumeEnemy()
     {
         _agent.enabled = true;
         _isStop = false;
@@ -233,6 +233,6 @@ public class BasicEnemy : Enemy
         if (isPause)
             StopEnemy();
         else
-            ResumeEnemey();
+            ResumeEnemy();
     }
 }

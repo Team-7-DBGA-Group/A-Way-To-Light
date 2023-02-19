@@ -8,6 +8,7 @@ public class TransportableObject : InteractableObject
 {
     public bool IsTransporting { get; private set; }
     public event Action OnStopTransport;
+    public bool IsMoving { get; private set; } = false;
 
     [SerializeField]
     private List<Transform> waypoints = new List<Transform>();
@@ -44,6 +45,8 @@ public class TransportableObject : InteractableObject
             return;
 
         base.Interact();
+        
+        IsMoving = true;
 
         if (_playerRef != null)
         {
@@ -109,8 +112,9 @@ public class TransportableObject : InteractableObject
             if(lookAtWaypoints)
                 transform.LookAt(waypoints[(_waypointIndex + 1) % waypoints.Count].position);
             _canObjectMove = false;
+            IsMoving = false;
 
-            if(_audioSource != null)
+            if (_audioSource != null)
                 _audioSource.Stop();
 
             _soundFlag = true;

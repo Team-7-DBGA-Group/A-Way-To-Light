@@ -47,6 +47,7 @@ public class UIEnemyIndicatorsController : MonoBehaviour
         if (!_enemyIndicators.ContainsKey(hash))
             return;
 
+        _enemyIndicators[hash].SetActive(false);
         _enemyIndicators.Remove(hash);
     }
 
