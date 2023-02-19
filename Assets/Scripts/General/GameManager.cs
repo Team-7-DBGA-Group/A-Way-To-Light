@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public static event Action<bool> OnPause;
+    public static event Action OnGameReset;
 
     [Header("Settings")]
     [SerializeField]
@@ -93,6 +94,7 @@ public class GameManager : Singleton<GameManager>
         UISceneTransitionController.Instance.CloseTransition();
         PickablesManager.Instance.ResetPickables();
         SpawnManager.Instance.SpawnPlayer();
+        OnGameReset?.Invoke();
     }
 
     private IEnumerator COWaitPauseCooldown() 

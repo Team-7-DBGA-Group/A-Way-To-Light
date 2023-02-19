@@ -352,4 +352,5 @@ public class Boss : MonoBehaviour
         if (audioSource != null)
             audioSource.volume = AudioManager.Instance.GetSoundVolume();
     }
+
 }

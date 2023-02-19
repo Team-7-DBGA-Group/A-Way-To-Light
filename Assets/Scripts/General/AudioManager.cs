@@ -151,7 +151,10 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     public void PlayMusic(AudioClip audioClip, bool isLooped)
     {
         if (musicSource.Count <= 0)
+        {
+            Debug.Log("NOMUSICSOURCE");
             return;
+        }
 
         foreach (AudioSource sources in musicSource)
         {
@@ -164,6 +167,7 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
             }
         }
     }
+
     public void PauseMusic()
     {
         if (musicSource.Count <= 0)
@@ -174,6 +178,7 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
             source.Pause();
         }
     }
+
     public void StopMusic()
     {
         if (musicSource.Count <= 0)

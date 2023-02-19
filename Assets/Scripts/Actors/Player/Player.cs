@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Utils;
 using System;
+using Unity.VisualScripting;
 
 public class Player : Actor
 {
@@ -25,13 +26,23 @@ public class Player : Actor
     [SerializeField]
     private AudioClip takeDamageSound;
 
+    [Header("Musics")]
+    [SerializeField]
+    private AudioClip gameOverMusic;
+    [SerializeField]
+    private AudioClip onCombatEnterMusic;
+    [SerializeField]
+    private AudioClip levelMusic;
+    [SerializeField]
+    private AudioClip bossMusic;
+
     private Weapon _currentEquipWeapon = null;
 
     private Vector3[] _directions = new Vector3[4];
     
     private bool _canHeal = true;
     private Coroutine _healthRegenCoroutine = null;
-
+    private bool _inBossFight = false;
     public override void CustomDamageInteract()
     {
         base.CustomDamageInteract();
@@ -103,6 +114,8 @@ public class Player : Actor
         OnPlayerDieTarget?.Invoke(target);
         AudioManager.Instance.PlaySound(deathSound);
         OnPlayerDie?.Invoke();
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(gameOverMusic);
         Destroy(gameObject);
     }
 
@@ -121,17 +134,25 @@ public class Player : Actor
     private void OnEnable()
     {
         EnemyManager.OnCombatEnter += StopHealthRegenOutOfCombat;
+        EnemyManager.OnCombatEnter += PlayCombatMusic;
         EnemyManager.OnCombatExit += StartHealthRegenOutOfCombat;
+        EnemyManager.OnCombatExit += ResumeLevelMusic;
         EnemyManager.OnBossCombatEnter += StopHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatEnter += PlayBossMusic;
         EnemyManager.OnBossCombatExit += StartHealthRegenOutOfCombat;
+        GameManager.OnGameReset += ResumeLevelMusic;
     }
 
     private void OnDisable()
     {
         EnemyManager.OnCombatEnter -= StopHealthRegenOutOfCombat;
+        EnemyManager.OnCombatEnter -= PlayCombatMusic;
         EnemyManager.OnCombatExit -= StartHealthRegenOutOfCombat;
+        EnemyManager.OnCombatExit += ResumeLevelMusic;
         EnemyManager.OnBossCombatEnter -= StopHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatEnter -= PlayBossMusic;
         EnemyManager.OnBossCombatExit -= StartHealthRegenOutOfCombat;
+        GameManager.OnGameReset -= ResumeLevelMusic;
     }
 
     private void UpdateRaysDirections()
@@ -169,5 +190,26 @@ public class Player : Actor
             yield return new WaitForSeconds(healthRegenCooldown);
             Heal(1);
         }
+    }
+
+    private void PlayCombatMusic()
+    {
+        if (_inBossFight)
+            return;
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(onCombatEnterMusic, true);
+    }
+    private void PlayBossMusic()
+    {
+        _inBossFight = true;
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(bossMusic, true);
+    }
+
+    private void ResumeLevelMusic()
+    {
+        _inBossFight = false;
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic(levelMusic, true);
     }
 }
