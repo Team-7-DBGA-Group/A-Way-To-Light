@@ -21,6 +21,6 @@ public class InitManager : Singleton<InitManager>
 
     private void LoadGame()
     {
-        NavigationManager.Instance.ChangeScene(sceneName);
+        NavigationManager.Instance.ChangeScene(sceneName, false);
     }
 }
