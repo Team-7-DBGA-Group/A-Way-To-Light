@@ -6,7 +6,7 @@ using System;
 public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
 {
     public static event Action<GameObject> OnPlayerSpawn;
-
+    public static event Action OnPlayerReady;
     public GameObject PlayerObj { get => _playerObj; }
 
     public Vector3 StartingSpawnPoint { get => startSpawnPoint.transform.position; }
@@ -69,6 +69,7 @@ public class SpawnManager : Singleton<SpawnManager>, IDataPersistence
     {
         _playerObj = Instantiate(playerPrefab, _currentSpawnPoint, Quaternion.identity);
         OnPlayerSpawn?.Invoke(_playerObj);
+        OnPlayerReady?.Invoke();
     }
 
     private void Start()

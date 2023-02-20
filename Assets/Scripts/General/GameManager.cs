@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public static event Action<bool> OnPause;
+    public static event Action OnPauseAction;
     public static event Action OnGameReset;
 
     [Header("Settings")]
@@ -47,6 +48,7 @@ public class GameManager : Singleton<GameManager>
     public void PauseGame()
     {
         OnPause?.Invoke(true);
+        OnPauseAction?.Invoke();
         _inPause = true;
     }
 
