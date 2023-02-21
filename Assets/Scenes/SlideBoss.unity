@@ -1705,6 +1705,10 @@ PrefabInstance:
       value: Slideshow
       objectReference: {fileID: 0}
     - target: {fileID: 3934813202432697818, guid: 9d7497ba3bf1c584ea842b4adbfa0eaf, type: 3}
+      propertyPath: slides.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3934813202432697818, guid: 9d7497ba3bf1c584ea842b4adbfa0eaf, type: 3}
       propertyPath: slides.Array.data[0]
       value: 
       objectReference: {fileID: 21300000, guid: e022ca72ff2992b428a62405538de156, type: 3}
@@ -1712,5 +1716,9 @@ PrefabInstance:
       propertyPath: slides.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: eb025d5adb3be5a4989d9b20262e16c2, type: 3}
+    - target: {fileID: 3934813202432697818, guid: 9d7497ba3bf1c584ea842b4adbfa0eaf, type: 3}
+      propertyPath: slides.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 76c36e15a70d3c64284a45997ded2c50, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d7497ba3bf1c584ea842b4adbfa0eaf, type: 3}
