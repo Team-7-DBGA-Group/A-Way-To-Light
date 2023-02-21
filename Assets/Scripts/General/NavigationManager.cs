@@ -16,12 +16,12 @@ public class NavigationManager : Singleton<NavigationManager>
         if (string.IsNullOrEmpty(sceneName))
             return;
 
-        ChangeScene(sceneName,false);
+        ChangeScene(sceneName,false, true);
     }
 
     public void BackToTitle()
     {
-        ChangeScene("MainMenu", false);
+        ChangeScene("MainMenu", false, false);
     }
 
     public void QuitGame() => Application.Quit();
@@ -30,6 +30,9 @@ public class NavigationManager : Singleton<NavigationManager>
 
     public void ChangeScene(string sceneName)
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         if (IsLoadingScene)
             return;
        
@@ -46,12 +49,23 @@ public class NavigationManager : Singleton<NavigationManager>
         UISceneTransitionController.Instance.OpenTransition();
     }
 
-    public void ChangeScene(string sceneName, bool resetManager)
+    public void ChangeScene(string sceneName, bool resetManager, bool cursorLocked)
     {
         if (IsLoadingScene)
             return;
 
         _shouldLoadScene = true;
+
+        if(cursorLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
 
         _sceneNameToBeLoaded = sceneName;
         if (resetManager)

@@ -33,6 +33,8 @@ public class UISlideshow : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         showImage.sprite = slides[_slideIndex];
         FadeIn();
     }

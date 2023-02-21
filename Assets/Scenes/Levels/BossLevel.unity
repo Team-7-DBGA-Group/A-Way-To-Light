@@ -2682,10 +2682,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4732340908024372249, guid: 393aae49993fb984eb5c6a8ef5a31003, type: 3}
-      propertyPath: ID
-      value: ab659483-49ed-473b-87ff-796c32d18cf3
-      objectReference: {fileID: 0}
     - target: {fileID: 5397412794467862178, guid: 393aae49993fb984eb5c6a8ef5a31003, type: 3}
       propertyPath: m_RootOrder
       value: 36
@@ -3444,8 +3440,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_ShowDebugText: 0
-  m_ChildCameras:
-  - {fileID: 1372631219}
+  m_ChildCameras: []
   m_ActivateAfter: 0
   m_MinDuration: 0
   m_RandomizeChoice: 0
@@ -17966,9 +17961,9 @@ Transform:
   - {fileID: 157307650}
   - {fileID: 1264306254}
   - {fileID: 1551782833}
-  - {fileID: 666988383}
   - {fileID: 1474902314}
   - {fileID: 1805789816}
+  - {fileID: 666988383}
   - {fileID: 953635560}
   - {fileID: 1110340883}
   - {fileID: 991625537}
@@ -33615,6 +33610,10 @@ PrefabInstance:
     - target: {fileID: 4732340908024372248, guid: 393aae49993fb984eb5c6a8ef5a31003, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4732340908024372249, guid: 393aae49993fb984eb5c6a8ef5a31003, type: 3}
+      propertyPath: ID
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5397412794467862178, guid: 393aae49993fb984eb5c6a8ef5a31003, type: 3}
       propertyPath: m_RootOrder

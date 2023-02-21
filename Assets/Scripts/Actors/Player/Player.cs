@@ -43,6 +43,7 @@ public class Player : Actor
     private bool _canHeal = true;
     private Coroutine _healthRegenCoroutine = null;
     private bool _inBossFight = false;
+
     public override void CustomDamageInteract()
     {
         base.CustomDamageInteract();
@@ -133,6 +134,7 @@ public class Player : Actor
 
     private void OnEnable()
     {
+        
         EnemyManager.OnCombatEnter += StopHealthRegenOutOfCombat;
         EnemyManager.OnCombatEnter += PlayCombatMusic;
         EnemyManager.OnCombatExit += StartHealthRegenOutOfCombat;
