@@ -3450,7 +3450,8 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_ShowDebugText: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 1372631219}
   m_ActivateAfter: 0
   m_MinDuration: 0
   m_RandomizeChoice: 0
@@ -15546,6 +15547,10 @@ PrefabInstance:
     - target: {fileID: 504328906318950198, guid: 708ab60863baf22418fa5f6bbfb47035, type: 3}
       propertyPath: m_Name
       value: BossAutoDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 504328906318950198, guid: 708ab60863baf22418fa5f6bbfb47035, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 708ab60863baf22418fa5f6bbfb47035, type: 3}

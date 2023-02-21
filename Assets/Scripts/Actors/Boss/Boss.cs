@@ -152,6 +152,7 @@ public class Boss : MonoBehaviour
         AudioManager.Instance.PlaySound(deathSound);
         _currentPhase = Phase.Dead;
         EnemyManager.Instance.BossExited();
+        NavigationManager.Instance.ChangeScene("SlideBoss");
         Destroy(this.gameObject);
     }
 
