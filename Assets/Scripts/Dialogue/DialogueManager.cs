@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -29,6 +30,8 @@ public class DialogueManager : Singleton<DialogueManager>
     private bool _canShowNextLine;
     private TextMeshProUGUI[] _choicesText;
     private bool _invokeContinueDialogueEvent = true;
+
+   
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         Cursor.visible = true;
@@ -68,6 +71,12 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private void Update()
     {
+        // TODO comment this
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    OnDialogueExit?.Invoke();
+        //}
+
         if (!IsDialoguePlaying) return;
 
         // Continue to next line

@@ -230,9 +230,9 @@ public class BasicEnemy : Enemy
 
     private void HandlePause(bool isPause)
     {
-        if (isPause)
+        if (IsAlive && isPause)
             StopEnemy();
-        else
+        else if(IsAlive && !isPause)
             ResumeEnemy();
     }
 }

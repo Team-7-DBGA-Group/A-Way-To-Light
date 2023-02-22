@@ -43,6 +43,14 @@ public class Player : Actor
     private bool _canHeal = true;
     private Coroutine _healthRegenCoroutine = null;
     private bool _inBossFight = false;
+
+    protected override void Start()
+    {
+        base.Start();
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+    }
+
     public override void CustomDamageInteract()
     {
         base.CustomDamageInteract();
@@ -133,6 +141,7 @@ public class Player : Actor
 
     private void OnEnable()
     {
+        
         EnemyManager.OnCombatEnter += StopHealthRegenOutOfCombat;
         EnemyManager.OnCombatEnter += PlayCombatMusic;
         EnemyManager.OnCombatExit += StartHealthRegenOutOfCombat;
@@ -173,7 +182,8 @@ public class Player : Actor
             StopCoroutine(_healthRegenCoroutine);
         }
 
-        _healthRegenCoroutine = StartCoroutine(COWaitForHealthRegenCD());
+        if(!_inBossFight)
+            _healthRegenCoroutine = StartCoroutine(COWaitForHealthRegenCD());
     }
 
     private void StopHealthRegenOutOfCombat()

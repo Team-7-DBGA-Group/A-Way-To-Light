@@ -8,9 +8,13 @@ public class InitManager : Singleton<InitManager>
     [Header("Settings")]
     [SerializeField]
     private string sceneName;
+    [SerializeField]
+    private bool lockCursorNextScene;
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         DialogueManager.OnDialogueExit += LoadGame;
     }
 
@@ -21,6 +25,6 @@ public class InitManager : Singleton<InitManager>
 
     private void LoadGame()
     {
-        NavigationManager.Instance.ChangeScene(sceneName, false);
+        NavigationManager.Instance.ChangeScene(sceneName, false, lockCursorNextScene);
     }
 }

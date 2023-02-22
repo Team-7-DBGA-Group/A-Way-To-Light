@@ -78,9 +78,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         CanMove = true;
-        
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
 
         _characterController = GetComponent<CharacterController>();
         float correctHeight = _characterController.center.y + _characterController.skinWidth;

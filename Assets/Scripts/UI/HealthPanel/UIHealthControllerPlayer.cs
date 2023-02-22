@@ -12,6 +12,8 @@ public class UIHealthControllerPlayer : MonoBehaviour
     [SerializeField]
     private Actor actor;
 
+    private bool _inBossFight = false;
+
     private void Start()
     {
         HidePanel();
@@ -30,8 +32,10 @@ public class UIHealthControllerPlayer : MonoBehaviour
             EnemyManager.OnCombatEnter += ShowPanel;
             EnemyManager.OnCombatExit += HidePanel;
             EnemyManager.OnBossCombatEnter += ShowPanel;
+            EnemyManager.OnBossCombatEnter += SetInBossFight;
             EnemyManager.OnBossCombatExit += HidePanel;
-
+            EnemyManager.OnBossCombatExit += SetOutBossFight;
+            
             actor.ResetHealth();
         }
     }
@@ -47,12 +51,25 @@ public class UIHealthControllerPlayer : MonoBehaviour
         EnemyManager.OnCombatEnter -= ShowPanel;
         EnemyManager.OnCombatExit -= HidePanel;
         EnemyManager.OnBossCombatEnter -= ShowPanel;
+        EnemyManager.OnBossCombatEnter -= SetInBossFight;
         EnemyManager.OnBossCombatExit -= HidePanel;
+        EnemyManager.OnBossCombatExit -= SetOutBossFight;
+
     }
 
-    private void ShowPanel() => healthPanel.SetEnable(true);
-    private void HidePanel() => healthPanel.SetEnable(false);
+    private void ShowPanel()
+    {
+        healthPanel.SetEnable(true);
+    }
 
+    private void HidePanel()
+    {
+        if(!_inBossFight)
+            healthPanel.SetEnable(false);
+    }
+
+    private void SetInBossFight() => _inBossFight = true;
+    private void SetOutBossFight() => _inBossFight = false;
     private void UpdateHealHealth(int amount)
     {
         for (int i = 0; i < amount; i++)
