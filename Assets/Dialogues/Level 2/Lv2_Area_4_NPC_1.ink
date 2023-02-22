@@ -4,7 +4,7 @@
 Life often leads to a crossroads, do you know where to go?
       +[No, I often go by instinct]
           ->No
-      +[Yes! with my intuition I always know where to go]
+      +[Yes! I always know it]
           ->Yes
           
 ===No===
