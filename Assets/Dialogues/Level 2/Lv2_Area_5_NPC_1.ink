@@ -8,7 +8,8 @@ Are you waiting for the boat?
           ->Swim
           
 ===Boat===
-Yes, it is the only way to cross without dying by drowning, try using the mirror system to bring it back here.
+Yes, it is the only way to cross without dying by drowning,
+try using the mirror system to bring it back here.
 +[Amazing, Thanks!]
      ->END
 
