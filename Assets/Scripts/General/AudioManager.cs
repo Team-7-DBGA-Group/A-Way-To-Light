@@ -22,10 +22,10 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     private List<AudioSource> effectsSource = new List<AudioSource>();
 
     // Values to save
-    private float _soundVolume = 1f;
-    private float _musicVolume = 1f;
-    private float _effectsVolume = 1f;
-    private float _masterVolume = 1f;
+    private float _soundVolume;
+    private float _musicVolume;
+    private float _effectsVolume;
+    private float _masterVolume;
 
     // Sounds controls
     public void PlaySound(AudioClip audioClip)
@@ -315,23 +315,26 @@ public class AudioManager : Singleton<AudioManager>, IDataPersistence
     // Save system
     public void LoadData(GameData data)
     {
-        _masterVolume = data.MasterVolume;
-        SetMasterVolume(_masterVolume);
-        _soundVolume = data.SoundVolume * _masterVolume;
-        SetSoundVolume(_soundVolume);
-        _effectsVolume = data.EffectsVolume * _masterVolume;
-        SetEffectsVolume(_effectsVolume);
-        _musicVolume = data.MusicVolume * _masterVolume;
-        SetMusicVolume(_musicVolume);
+        
+        //_masterVolume = data.MasterVolume;
+        //SetMasterVolume(_masterVolume);
+        _soundVolume = data.SoundVolume/* * _masterVolume*/;
+        //SetSoundVolume(_soundVolume);
+        //_effectsVolume = data.EffectsVolume/* * _masterVolume*/;
+        //SetEffectsVolume(_effectsVolume);
+        _musicVolume = data.MusicVolume/* * _masterVolume*/;
+        //SetMusicVolume(_musicVolume);
+        Debug.Log("Sound: " + _soundVolume + " Music: " + _musicVolume);
         OnVolumeLoaded?.Invoke();
     }
 
     public void SaveData(GameData data)
     {
-        data.MasterVolume = _masterVolume;
+        //data.MasterVolume = _masterVolume;
         data.SoundVolume = _soundVolume;
-        data.EffectsVolume = _effectsVolume;
+        //data.EffectsVolume = _effectsVolume;
         data.MusicVolume = _musicVolume;
+        Debug.Log("Sound: " + _soundVolume + " Music: " + _musicVolume);
     }
 
     // Audio effects

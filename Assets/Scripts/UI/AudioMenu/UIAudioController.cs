@@ -18,28 +18,32 @@ public class UIAudioController : MonoBehaviour
 
     private void OnEnable()
     {
-        UIAudio.OnAudioChange += SetSoundVolume;
         AudioManager.OnVolumeLoaded += SetSliderValues;
+        UIAudio.OnSoundChange += SetSoundVolume;
+        UIAudio.OnMusicChange += SetMusicVolume;
+        
     }
     private void OnDisable()
     {
-        UIAudio.OnAudioChange -= SetSoundVolume;
         AudioManager.OnVolumeLoaded -= SetSliderValues;
+        UIAudio.OnSoundChange -= SetSoundVolume;
+        UIAudio.OnMusicChange -= SetMusicVolume;
+        
     }
 
     public void SetSliderValues()
     {
-        masterSlider.value = AudioManager.Instance.MasterVolume;
         musicSlider.value = AudioManager.Instance.MusicVolume;
         soundSlider.value = AudioManager.Instance.SoundVolume;
     }
 
-    public void SetSoundVolume()
-    {
-        AudioManager.Instance.SetSoundVolume(soundSlider.value);
-        AudioManager.Instance.SetMusicVolume(musicSlider.value);
-        AudioManager.Instance.SetMasterVolume(masterSlider.value);
-    }
+
+    public void SetSoundVolume() => AudioManager.Instance.SetSoundVolume(soundSlider.value);
+    
+        
+    public void SetMusicVolume() => AudioManager.Instance.SetMusicVolume(musicSlider.value);
+        //AudioManager.Instance.SetMasterVolume(masterSlider.value);
+    
 
     public void ShowAudioMenuPanel()
     {

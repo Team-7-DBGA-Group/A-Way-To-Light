@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class UIAudio : MonoBehaviour
 {
-    public static event Action OnAudioChange;
+    public static event Action OnSoundChange;
+    public static event Action OnMusicChange;
 
     public bool IsOpen { get; private set; }
 
@@ -13,7 +14,8 @@ public class UIAudio : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-    public void InvokeOnAudioChange() => OnAudioChange?.Invoke();
+    public void InvokeOnSoundChange() => OnSoundChange?.Invoke();
+    public void InvokeOnMusicChange() => OnMusicChange?.Invoke();
 
     public void Open()
     {
