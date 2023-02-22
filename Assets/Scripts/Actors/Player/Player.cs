@@ -44,6 +44,13 @@ public class Player : Actor
     private Coroutine _healthRegenCoroutine = null;
     private bool _inBossFight = false;
 
+    protected override void Start()
+    {
+        base.Start();
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+    }
+
     public override void CustomDamageInteract()
     {
         base.CustomDamageInteract();
@@ -175,7 +182,8 @@ public class Player : Actor
             StopCoroutine(_healthRegenCoroutine);
         }
 
-        _healthRegenCoroutine = StartCoroutine(COWaitForHealthRegenCD());
+        if(!_inBossFight)
+            _healthRegenCoroutine = StartCoroutine(COWaitForHealthRegenCD());
     }
 
     private void StopHealthRegenOutOfCombat()

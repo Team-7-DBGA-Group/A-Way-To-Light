@@ -72,10 +72,10 @@ public class DialogueManager : Singleton<DialogueManager>
     private void Update()
     {
         // TODO comment this
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnDialogueExit?.Invoke();
-        }
+        //if(Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    OnDialogueExit?.Invoke();
+        //}
 
         if (!IsDialoguePlaying) return;
 
