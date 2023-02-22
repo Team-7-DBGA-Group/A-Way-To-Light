@@ -149,6 +149,7 @@ public class Player : Actor
         EnemyManager.OnBossCombatEnter += StopHealthRegenOutOfCombat;
         EnemyManager.OnBossCombatEnter += PlayBossMusic;
         EnemyManager.OnBossCombatExit += StartHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatExit += StopBossMusic;
         GameManager.OnGameReset += ResumeLevelMusic;
     }
 
@@ -161,6 +162,7 @@ public class Player : Actor
         EnemyManager.OnBossCombatEnter -= StopHealthRegenOutOfCombat;
         EnemyManager.OnBossCombatEnter -= PlayBossMusic;
         EnemyManager.OnBossCombatExit -= StartHealthRegenOutOfCombat;
+        EnemyManager.OnBossCombatExit -= StopBossMusic;
         GameManager.OnGameReset -= ResumeLevelMusic;
     }
 
@@ -218,8 +220,17 @@ public class Player : Actor
 
     private void ResumeLevelMusic()
     {
+        if (!_inBossFight)
+        {
+            AudioManager.Instance.StopMusic();
+            AudioManager.Instance.PlayMusic(levelMusic, true);
+        }
+    }
+
+    private void StopBossMusic()
+    {
         _inBossFight = false;
         AudioManager.Instance.StopMusic();
-        AudioManager.Instance.PlayMusic(levelMusic, true);
+        //AudioManager.Instance.PlayMusic(levelMusic, true);
     }
 }
