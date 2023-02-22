@@ -1,7 +1,8 @@
 ->Lv2_Area_2_NPC_1
 
 ===Lv2_Area_2_NPC_1===
-In that tavern I left my weapons, if you can open the door you can take them!
+In that tavern I left my weapons
+if you can open the door you can take them!
       +[BUT HOW DO I OPEN THE DOOR?]
           ->Thanks
       +[I FIGHT WITH MY BARE HANDS!]

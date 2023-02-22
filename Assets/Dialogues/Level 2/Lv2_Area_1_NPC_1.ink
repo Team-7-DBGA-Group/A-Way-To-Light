@@ -13,6 +13,7 @@ Make sure you don't get lost!
 ->DONE
 
 ===YCIL===
-Some of these trees can help you, interact with them to find out what they are hiding!
+Some of these trees can help you
+interact with them to find out what they are hiding!
 +[Ehm..Thanks!]
      ->END
