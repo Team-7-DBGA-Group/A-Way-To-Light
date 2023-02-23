@@ -3,6 +3,8 @@
 
 **A Way To Light** is an adventure puzzle game for the DBGA course!
 
+<img src="https://github.com/Team-7-DBGA-Group/A-Way-To-Light/blob/main/Screenshots/intro.jpg" width="750">
+
 ## The game
 In a medieval land where a dark entity has stolen light, a world where life has ceased to exist, grim and dominated by lifeless piles of bones, the player – revived by the last remaining fragment of light – will be the hero who has the task of facing the entity that has taken that from the world, using the power the light has given them to solve intricate puzzles in which interaction with his surroundings will be crucial to restoring the world to its former radiance.
 
