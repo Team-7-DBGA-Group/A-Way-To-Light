@@ -4,6 +4,12 @@
 **A Way To Light** is an adventure puzzle game for the DBGA course!
 
 ## The game
+In a medieval land where a dark entity has stolen light, a world where life has ceased to exist, grim and dominated by lifeless piles of bones, the player – revived by the last remaining fragment of light – will be the hero who has the task of facing the entity that has taken that from the world, using the power the light has given them to solve intricate puzzles in which interaction with his surroundings will be crucial to restoring the world to its former radiance.
+
+A WAY TO LIGHT is a 3D third-person adventure game in which the playable character will be a hero who – through an editor at the beginning of the game – will be aesthetically customisable with clothes and items from the medieval age.
+
+In the adventure, with the power of light, the player can reanimate bones into skeletons. They, once reanimated, can be hostile or allied. If they are hostile, they will attack, and at that time using the melee weapon - collectable from the ground - will be crucial to defend themselves and defeat the threat. If, on the other hand, the reanimated skeleton is friendly, it will be able to give hints about solving a specific puzzle through dialogue.
+
 
 ## Requirements
 
