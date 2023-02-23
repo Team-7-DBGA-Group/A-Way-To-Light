@@ -25,7 +25,14 @@ Follow the tutorial inside the game and have fun in your adventure!
 ## Gameplay
 
 Here are few sneak peek of our game!
-...
+
+Use the light to interact with the environment:
+
+<img src="https://github.com/Team-7-DBGA-Group/A-Way-To-Light/blob/main/Screenshots/level1gif.gif" width="750">
+
+Explore the world and bring back the light:
+
+<img src="https://github.com/Team-7-DBGA-Group/A-Way-To-Light/blob/main/Screenshots/level3GIF.gif" width="750">
 
 ## Team
 
